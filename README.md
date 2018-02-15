@@ -23,3 +23,5 @@ Import the following Existing Projects into your Language Workspace:
 
 - `/ThingML/language/thingml`
 - `/ThingML/language/thingml.ui`
+
+Once it is done, you can import the projects from the language folder.
