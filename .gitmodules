@@ -1,0 +1,3 @@
+[submodule "ThingML"]
+	path = ThingML
+	url = git@github.com:TelluIoT/ThingML.git
