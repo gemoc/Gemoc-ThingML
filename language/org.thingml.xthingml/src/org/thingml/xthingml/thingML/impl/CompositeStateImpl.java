@@ -37,6 +37,7 @@ import org.thingml.xthingml.thingML.ThingMLPackage;
  *   <li>{@link org.thingml.xthingml.thingML.impl.CompositeStateImpl#getSubstate <em>Substate</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.impl.CompositeStateImpl#getRegion <em>Region</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.impl.CompositeStateImpl#getSession <em>Session</em>}</li>
+ *   <li>{@link org.thingml.xthingml.thingML.impl.CompositeStateImpl#getCurrentState <em>Current State</em>}</li>
  * </ul>
  *
  * @generated
@@ -101,6 +102,16 @@ public class CompositeStateImpl extends StateImpl implements CompositeState {
 	 * @ordered
 	 */
 	protected EList<Session> session;
+
+	/**
+	 * The cached value of the '{@link #getCurrentState() <em>Current State</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCurrentState()
+	 * @generated
+	 * @ordered
+	 */
+	protected State currentState;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,6 +232,66 @@ public class CompositeStateImpl extends StateImpl implements CompositeState {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public State getCurrentState() {
+		if (currentState != null && currentState.eIsProxy()) {
+			InternalEObject oldCurrentState = (InternalEObject)currentState;
+			currentState = (State)eResolveProxy(oldCurrentState);
+			if (currentState != oldCurrentState) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE, oldCurrentState, currentState));
+			}
+		}
+		return currentState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public State basicGetCurrentState() {
+		return currentState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCurrentState(State newCurrentState) {
+		State oldCurrentState = currentState;
+		currentState = newCurrentState;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE, oldCurrentState, currentState));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initialize() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void run() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -253,6 +324,9 @@ public class CompositeStateImpl extends StateImpl implements CompositeState {
 				return getRegion();
 			case ThingMLPackage.COMPOSITE_STATE__SESSION:
 				return getSession();
+			case ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE:
+				if (resolve) return getCurrentState();
+				return basicGetCurrentState();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -284,6 +358,9 @@ public class CompositeStateImpl extends StateImpl implements CompositeState {
 				getSession().clear();
 				getSession().addAll((Collection<? extends Session>)newValue);
 				return;
+			case ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE:
+				setCurrentState((State)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -311,6 +388,9 @@ public class CompositeStateImpl extends StateImpl implements CompositeState {
 			case ThingMLPackage.COMPOSITE_STATE__SESSION:
 				getSession().clear();
 				return;
+			case ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE:
+				setCurrentState((State)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -333,6 +413,8 @@ public class CompositeStateImpl extends StateImpl implements CompositeState {
 				return region != null && !region.isEmpty();
 			case ThingMLPackage.COMPOSITE_STATE__SESSION:
 				return session != null && !session.isEmpty();
+			case ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE:
+				return currentState != null;
 		}
 		return super.eIsSet(featureID);
 	}

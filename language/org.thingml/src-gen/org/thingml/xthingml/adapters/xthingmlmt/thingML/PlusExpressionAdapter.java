@@ -40,6 +40,11 @@ public class PlusExpressionAdapter extends EObjectAdapter<PlusExpression> implem
   }
   
   @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getPlusExpression();
   }

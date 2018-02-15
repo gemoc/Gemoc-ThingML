@@ -119,6 +119,12 @@ public class ThingAdapter extends EObjectAdapter<Thing> implements org.thingml.x
   }
   
   @Override
+  public void initialize(final org.eclipse.emf.common.util.EList<java.lang.String> p) {
+    org.thingml.xthingml.aspects.ThingAspect.initialize(adaptee, p
+    );
+  }
+  
+  @Override
   public void main() {
     org.thingml.xthingml.aspects.ThingAspect.main(adaptee);
   }

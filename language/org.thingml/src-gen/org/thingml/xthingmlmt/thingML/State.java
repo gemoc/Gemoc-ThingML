@@ -125,4 +125,12 @@ public interface State extends NamedElement, AnnotatedElement {
 	 */
 	EList<Transition> getOutgoing();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	Transition getTransition();
+
 } // State

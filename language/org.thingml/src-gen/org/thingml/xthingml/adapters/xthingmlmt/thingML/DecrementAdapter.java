@@ -28,6 +28,11 @@ public class DecrementAdapter extends EObjectAdapter<Decrement> implements org.t
   }
   
   @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getDecrement();
   }

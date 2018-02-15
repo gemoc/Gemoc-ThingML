@@ -36,4 +36,15 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 		return ThingMLPackage.Literals.EXPRESSION;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object evaluate() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
 } //ExpressionImpl

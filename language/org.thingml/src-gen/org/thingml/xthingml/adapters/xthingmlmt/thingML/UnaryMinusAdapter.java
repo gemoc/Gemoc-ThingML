@@ -28,6 +28,11 @@ public class UnaryMinusAdapter extends EObjectAdapter<UnaryMinus> implements org
   }
   
   @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getUnaryMinus();
   }

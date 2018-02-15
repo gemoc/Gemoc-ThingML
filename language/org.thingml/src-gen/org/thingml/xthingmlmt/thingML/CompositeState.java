@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.thingml.xthingmlmt.thingML.CompositeState#getRegion <em>Region</em>}</li>
  *   <li>{@link org.thingml.xthingmlmt.thingML.CompositeState#getSession <em>Session</em>}</li>
+ *   <li>{@link org.thingml.xthingmlmt.thingML.CompositeState#getCurrentState <em>Current State</em>}</li>
  * </ul>
  *
  * @see org.thingml.xthingmlmt.thingML.ThingMLPackage#getCompositeState()
@@ -53,5 +54,47 @@ public interface CompositeState extends State, StateContainer {
 	 * @generated
 	 */
 	EList<Session> getSession();
+
+	/**
+	 * Returns the value of the '<em><b>Current State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Current State</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Current State</em>' reference.
+	 * @see #setCurrentState(State)
+	 * @see org.thingml.xthingmlmt.thingML.ThingMLPackage#getCompositeState_CurrentState()
+	 * @model
+	 * @generated
+	 */
+	State getCurrentState();
+
+	/**
+	 * Sets the value of the '{@link org.thingml.xthingmlmt.thingML.CompositeState#getCurrentState <em>Current State</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Current State</em>' reference.
+	 * @see #getCurrentState()
+	 * @generated
+	 */
+	void setCurrentState(State value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void initialize();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void run();
 
 } // CompositeState

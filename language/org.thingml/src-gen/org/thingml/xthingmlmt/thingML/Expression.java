@@ -15,4 +15,12 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Expression extends EObject {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="org.thingml.xthingmlmt.thingML.Object"
+	 * @generated
+	 */
+	Object evaluate();
+
 } // Expression

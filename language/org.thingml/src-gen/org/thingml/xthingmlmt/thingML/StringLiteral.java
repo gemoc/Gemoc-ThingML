@@ -46,4 +46,12 @@ public interface StringLiteral extends Expression {
 	 */
 	void setStringValue(String value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String evaluate();
+
 } // StringLiteral

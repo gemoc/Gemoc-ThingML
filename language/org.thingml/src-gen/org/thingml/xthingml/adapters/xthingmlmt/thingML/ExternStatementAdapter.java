@@ -36,6 +36,11 @@ public class ExternStatementAdapter extends EObjectAdapter<ExternStatement> impl
     return segments_;
   }
   
+  @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+  }
+  
   protected final static String STATEMENT_EDEFAULT = null;
   
   @Override

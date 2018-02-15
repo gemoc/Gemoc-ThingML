@@ -4,6 +4,7 @@ package org.thingml.xthingmlmt.thingML;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -1596,13 +1597,22 @@ public interface ThingMLPackage extends EPackage {
 	int COMPOSITE_STATE__SESSION = STATE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Current State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STATE__CURRENT_STATE = STATE_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Composite State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 5;
+	int COMPOSITE_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.thingml.xthingmlmt.thingML.impl.StateContainerImpl <em>State Container</em>}' class.
@@ -3866,6 +3876,16 @@ public interface ThingMLPackage extends EPackage {
 	 */
 	int ARRAY_INDEX_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
+	/**
+	 * The meta object id for the '<em>Object</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Object
+	 * @see org.thingml.xthingmlmt.thingML.impl.ThingMLPackageImpl#getObject()
+	 * @generated
+	 */
+	int OBJECT = 85;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.thingml.xthingmlmt.thingML.ThingMLModel <em>Model</em>}'.
@@ -4674,6 +4694,17 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeState_Session();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.thingml.xthingmlmt.thingML.CompositeState#getCurrentState <em>Current State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Current State</em>'.
+	 * @see org.thingml.xthingmlmt.thingML.CompositeState#getCurrentState()
+	 * @see #getCompositeState()
+	 * @generated
+	 */
+	EReference getCompositeState_CurrentState();
 
 	/**
 	 * Returns the meta object for class '{@link org.thingml.xthingmlmt.thingML.Session <em>Session</em>}'.
@@ -6313,6 +6344,17 @@ public interface ThingMLPackage extends EPackage {
 	EReference getArrayIndex_Index();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.Object <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Object</em>'.
+	 * @see java.lang.Object
+	 * @model instanceClass="java.lang.Object"
+	 * @generated
+	 */
+	EDataType getObject();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6997,6 +7039,14 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_STATE__SESSION = eINSTANCE.getCompositeState_Session();
+
+		/**
+		 * The meta object literal for the '<em><b>Current State</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_STATE__CURRENT_STATE = eINSTANCE.getCompositeState_CurrentState();
 
 		/**
 		 * The meta object literal for the '{@link org.thingml.xthingmlmt.thingML.impl.SessionImpl <em>Session</em>}' class.
@@ -8343,6 +8393,16 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ARRAY_INDEX__INDEX = eINSTANCE.getArrayIndex_Index();
+
+		/**
+		 * The meta object literal for the '<em>Object</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Object
+		 * @see org.thingml.xthingmlmt.thingML.impl.ThingMLPackageImpl#getObject()
+		 * @generated
+		 */
+		EDataType OBJECT = eINSTANCE.getObject();
 
 	}
 

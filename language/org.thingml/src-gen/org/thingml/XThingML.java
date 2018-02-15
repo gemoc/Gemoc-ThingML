@@ -28,14 +28,14 @@ public class XThingML implements IMetamodel {
     return mm ;
   }
   
-  public XThingMLMT toXThingMLMT() {
-    org.thingml.xthingml.adapters.xthingmlmt.XThingMLAdapter adaptee = new org.thingml.xthingml.adapters.xthingmlmt.XThingMLAdapter() ;
+  public ThingMLMT toThingMLMT() {
+    org.thingml.xthingml.adapters.thingmlmt.XThingMLAdapter adaptee = new org.thingml.xthingml.adapters.thingmlmt.XThingMLAdapter() ;
     adaptee.setAdaptee(resource);
     return adaptee;
   }
   
-  public ThingMLMT toThingMLMT() {
-    org.thingml.xthingml.adapters.thingmlmt.XThingMLAdapter adaptee = new org.thingml.xthingml.adapters.thingmlmt.XThingMLAdapter() ;
+  public XThingMLMT toXThingMLMT() {
+    org.thingml.xthingml.adapters.xthingmlmt.XThingMLAdapter adaptee = new org.thingml.xthingml.adapters.xthingmlmt.XThingMLAdapter() ;
     adaptee.setAdaptee(resource);
     return adaptee;
   }

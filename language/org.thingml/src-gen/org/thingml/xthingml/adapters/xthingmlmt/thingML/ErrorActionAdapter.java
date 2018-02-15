@@ -36,6 +36,11 @@ public class ErrorActionAdapter extends EObjectAdapter<ErrorAction> implements o
     return msg_;
   }
   
+  @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+  }
+  
   protected final static boolean LINE_EDEFAULT = false;
   
   @Override

@@ -179,6 +179,14 @@ public interface Thing extends Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model pMany="true"
+	 * @generated
+	 */
+	void initialize(EList<String> p);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */

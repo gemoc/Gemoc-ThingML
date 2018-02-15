@@ -4,6 +4,8 @@ package org.thingml.xthingml.thingML.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -700,6 +702,13 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	private EClass arrayIndexEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType objectEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -1098,6 +1107,15 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getThing_RootState() {
+		return (EReference)thingEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPropertyAssign() {
 		return propertyAssignEClass;
 	}
@@ -1442,6 +1460,15 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 */
 	public EReference getCompositeState_Session() {
 		return (EReference)compositeStateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeState_CurrentState() {
+		return (EReference)compositeStateEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2835,6 +2862,15 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getObject() {
+		return objectEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ThingMLFactory getThingMLFactory() {
 		return (ThingMLFactory)getEFactoryInstance();
 	}
@@ -2907,6 +2943,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		createEReference(thingEClass, THING__FUNCTIONS);
 		createEReference(thingEClass, THING__ASSIGN);
 		createEReference(thingEClass, THING__BEHAVIOUR);
+		createEReference(thingEClass, THING__ROOT_STATE);
 
 		propertyAssignEClass = createEClass(PROPERTY_ASSIGN);
 		createEReference(propertyAssignEClass, PROPERTY_ASSIGN__PROPERTY);
@@ -2961,6 +2998,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		compositeStateEClass = createEClass(COMPOSITE_STATE);
 		createEReference(compositeStateEClass, COMPOSITE_STATE__REGION);
 		createEReference(compositeStateEClass, COMPOSITE_STATE__SESSION);
+		createEReference(compositeStateEClass, COMPOSITE_STATE__CURRENT_STATE);
 
 		sessionEClass = createEClass(SESSION);
 		createEReference(sessionEClass, SESSION__MAX_INSTANCES);
@@ -3172,6 +3210,9 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		arrayIndexEClass = createEClass(ARRAY_INDEX);
 		createEReference(arrayIndexEClass, ARRAY_INDEX__ARRAY);
 		createEReference(arrayIndexEClass, ARRAY_INDEX__INDEX);
+
+		// Create data types
+		objectEDataType = createEDataType(OBJECT);
 	}
 
 	/**
@@ -3344,6 +3385,10 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getThing_Functions(), this.getFunction(), null, "functions", null, 0, -1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getThing_Assign(), this.getPropertyAssign(), null, "assign", null, 0, -1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getThing_Behaviour(), this.getCompositeState(), null, "behaviour", null, 0, 1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getThing_RootState(), this.getCompositeState(), null, "rootState", null, 0, 1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(thingEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "p", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(thingEClass, null, "main", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -3387,6 +3432,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getState_Internal(), this.getInternalTransition(), null, "internal", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_Outgoing(), this.getTransition(), null, "outgoing", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(stateEClass, this.getTransition(), "getTransition", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(handlerEClass, Handler.class, "Handler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getHandler_Event(), this.getEvent(), null, "event", null, 0, 1, Handler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getHandler_Guard(), this.getExpression(), null, "guard", null, 0, 1, Handler.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3400,6 +3447,11 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEClass(compositeStateEClass, CompositeState.class, "CompositeState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeState_Region(), this.getRegion(), null, "region", null, 0, -1, CompositeState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeState_Session(), this.getSession(), null, "session", null, 0, -1, CompositeState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeState_CurrentState(), this.getState(), null, "currentState", null, 0, 1, CompositeState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(compositeStateEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(compositeStateEClass, null, "run", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSession_MaxInstances(), this.getExpression(), null, "maxInstances", null, 0, 1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3420,6 +3472,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getReceiveMessage_Message(), this.getMessage(), null, "message", null, 0, 1, ReceiveMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(actionEClass, null, "execute", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(actionBlockEClass, ActionBlock.class, "ActionBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActionBlock_Actions(), this.getAction(), null, "actions", null, 0, -1, ActionBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3464,6 +3518,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEAttribute(getPrintAction_Line(), ecorePackage.getEBoolean(), "line", null, 0, 1, PrintAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPrintAction_Msg(), this.getExpression(), null, "msg", null, 0, -1, PrintAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(printActionEClass, null, "execute", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(errorActionEClass, ErrorAction.class, "ErrorAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getErrorAction_Line(), ecorePackage.getEBoolean(), "line", null, 0, 1, ErrorAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getErrorAction_Msg(), this.getExpression(), null, "msg", null, 0, -1, ErrorAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3476,6 +3532,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getFunctionCallStatement_Parameters(), this.getExpression(), null, "parameters", null, 0, -1, FunctionCallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(expressionEClass, this.getObject(), "evaluate", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(externExpressionEClass, ExternExpression.class, "ExternExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExternExpression_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, ExternExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3499,6 +3557,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringLiteral_StringValue(), ecorePackage.getEString(), "stringValue", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(stringLiteralEClass, ecorePackage.getEString(), "evaluate", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(doubleLiteralEClass, DoubleLiteral.class, "DoubleLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDoubleLiteral_DoubleValue(), ecorePackage.getEDouble(), "doubleValue", null, 0, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3612,6 +3672,9 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getArrayIndex_Array(), this.getExpression(), null, "array", null, 0, 1, ArrayIndex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArrayIndex_Index(), this.getExpression(), null, "index", null, 0, 1, ArrayIndex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		// Initialize data types
+		initEDataType(objectEDataType, Object.class, "Object", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -3630,6 +3693,61 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		String source = "aspect";	
 		addAnnotation
 		  (thingEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (thingEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getThing_RootState(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (stateEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (compositeStateEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (compositeStateEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getCompositeState_CurrentState(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (actionEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (printActionEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (expressionEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (stringLiteralEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (objectEDataType, 
 		   source, 
 		   new String[] {
 		   });

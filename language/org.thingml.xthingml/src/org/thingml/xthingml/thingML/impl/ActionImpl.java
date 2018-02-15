@@ -36,4 +36,15 @@ public class ActionImpl extends EObjectImpl implements Action {
 		return ThingMLPackage.Literals.ACTION;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void execute() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
 } //ActionImpl

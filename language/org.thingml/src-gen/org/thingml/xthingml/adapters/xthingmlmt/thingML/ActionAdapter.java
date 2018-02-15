@@ -15,6 +15,11 @@ public class ActionAdapter extends EObjectAdapter<Action> implements org.thingml
   }
   
   @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getAction();
   }

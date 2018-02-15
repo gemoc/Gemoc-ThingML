@@ -40,6 +40,11 @@ public class GreaterOrEqualExpressionAdapter extends EObjectAdapter<GreaterOrEqu
   }
   
   @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getGreaterOrEqualExpression();
   }

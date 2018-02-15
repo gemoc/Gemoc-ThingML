@@ -24,6 +24,11 @@ public class ByteLiteralAdapter extends EObjectAdapter<ByteLiteral> implements o
     adaptee.setByteValue(o);
   }
   
+  @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
   protected final static byte BYTE_VALUE_EDEFAULT = 0x00;
   
   @Override

@@ -24,6 +24,11 @@ public class StringLiteralAdapter extends EObjectAdapter<StringLiteral> implemen
     adaptee.setStringValue(o);
   }
   
+  @Override
+  public String evaluate() {
+    return org.thingml.xthingml.aspects.StringLiteralAspect.evaluate(adaptee);
+  }
+  
   protected final static String STRING_VALUE_EDEFAULT = null;
   
   @Override

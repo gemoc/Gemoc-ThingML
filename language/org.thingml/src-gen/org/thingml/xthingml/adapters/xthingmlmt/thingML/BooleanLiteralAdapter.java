@@ -24,6 +24,11 @@ public class BooleanLiteralAdapter extends EObjectAdapter<BooleanLiteral> implem
     adaptee.setBoolValue(o);
   }
   
+  @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
   protected final static boolean BOOL_VALUE_EDEFAULT = false;
   
   @Override

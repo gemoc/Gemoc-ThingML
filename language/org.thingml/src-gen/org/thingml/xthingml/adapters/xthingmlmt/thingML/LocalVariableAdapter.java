@@ -72,6 +72,11 @@ public class LocalVariableAdapter extends EObjectAdapter<LocalVariable> implemen
     else adaptee.setInit(null);
   }
   
+  @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   protected final static boolean READONLY_EDEFAULT = false;

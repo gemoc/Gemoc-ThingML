@@ -24,6 +24,11 @@ public class DoubleLiteralAdapter extends EObjectAdapter<DoubleLiteral> implemen
     adaptee.setDoubleValue(o);
   }
   
+  @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
   protected final static double DOUBLE_VALUE_EDEFAULT = 0.0;
   
   @Override

@@ -64,4 +64,12 @@ public interface PrintAction extends Action {
 	 */
 	EList<Expression> getMsg();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void execute();
+
 } // PrintAction

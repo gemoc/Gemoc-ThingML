@@ -3,6 +3,9 @@
   <foreignModel>platform:/resource/org.thingml/model-gen/XThingMLMT.ecore</foreignModel>
   <genPackages prefix="ThingML" basePackage="org.thingml.xthingmlmt" disposableProviderFactory="true">
     <ecorePackage href="XThingMLMT.ecore#/"/>
+    <genDataTypes>
+      <ecoreDataType href="XThingMLMT.ecore#//Object"/>
+    </genDataTypes>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//ThingMLModel"/>
       <genFeatures property="None" children="true" createChild="true">
@@ -114,6 +117,12 @@
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//Thing/behaviour"/>
       </genFeatures>
       <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Thing/initialize"/>
+        <genParameters>
+          <ecoreParameter href="XThingMLMT.ecore#//Thing/initialize/p"/>
+        </genParameters>
+      </genOperations>
+      <genOperations>
         <ecoreOperation href="XThingMLMT.ecore#//Thing/main"/>
       </genOperations>
     </genClasses>
@@ -203,6 +212,9 @@
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//State/outgoing"/>
       </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//State/getTransition"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Handler"/>
@@ -233,6 +245,15 @@
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//CompositeState/session"/>
       </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//CompositeState/currentState"/>
+      </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//CompositeState/initialize"/>
+      </genOperations>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//CompositeState/run"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Session"/>
@@ -272,6 +293,9 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Action"/>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Action/execute"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//ActionBlock"/>
@@ -368,6 +392,9 @@
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//PrintAction/msg"/>
       </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//PrintAction/execute"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//ErrorAction"/>
@@ -395,6 +422,9 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Expression"/>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Expression/evaluate"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//ExternExpression"/>
@@ -443,6 +473,9 @@
       <genFeatures createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="XThingMLMT.ecore#//StringLiteral/stringValue"/>
       </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//StringLiteral/evaluate"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//DoubleLiteral"/>

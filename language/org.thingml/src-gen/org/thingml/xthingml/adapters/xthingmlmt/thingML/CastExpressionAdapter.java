@@ -50,6 +50,11 @@ public class CastExpressionAdapter extends EObjectAdapter<CastExpression> implem
     else adaptee.setType(null);
   }
   
+  @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
   protected final static boolean IS_ARRAY_EDEFAULT = false;
   
   @Override

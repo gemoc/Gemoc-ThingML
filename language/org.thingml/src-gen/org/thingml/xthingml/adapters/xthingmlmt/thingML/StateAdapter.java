@@ -91,6 +91,11 @@ public class StateAdapter extends EObjectAdapter<State> implements org.thingml.x
     return outgoing_;
   }
   
+  @Override
+  public Transition getTransition() {
+    return (Transition) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.StateAspect.getTransition(adaptee), eResource);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   @Override

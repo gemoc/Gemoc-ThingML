@@ -28,6 +28,11 @@ public class IncrementAdapter extends EObjectAdapter<Increment> implements org.t
   }
   
   @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getIncrement();
   }

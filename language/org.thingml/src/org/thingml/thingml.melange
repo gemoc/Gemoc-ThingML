@@ -6,4 +6,10 @@ external language ThingML {
 
 language XThingML inherits ThingML {
      with org.thingml.k3.ThingAspect
+     with org.thingml.k3.StateAspect
+     with org.thingml.k3.CompositeStateAspect
+     with org.thingml.k3.ActionAspect
+     with org.thingml.k3.PrintActionAspect
+     with org.thingml.k3.ExpressionAspect
+     with org.thingml.k3.StringLiteralAspect
 }

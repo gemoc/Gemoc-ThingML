@@ -24,6 +24,11 @@ public class CharLiteralAdapter extends EObjectAdapter<CharLiteral> implements o
     adaptee.setCharValue(o);
   }
   
+  @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
   protected final static byte CHAR_VALUE_EDEFAULT = 0x00;
   
   @Override

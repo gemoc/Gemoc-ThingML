@@ -36,6 +36,11 @@ public class ExternExpressionAdapter extends EObjectAdapter<ExternExpression> im
     return segments_;
   }
   
+  @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
   protected final static String EXPRESSION_EDEFAULT = null;
   
   @Override

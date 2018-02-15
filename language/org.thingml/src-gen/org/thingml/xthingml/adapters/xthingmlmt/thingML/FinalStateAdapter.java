@@ -91,6 +91,11 @@ public class FinalStateAdapter extends EObjectAdapter<FinalState> implements org
     return outgoing_;
   }
   
+  @Override
+  public Transition getTransition() {
+    return (Transition) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.StateAspect.getTransition(adaptee), eResource);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   @Override

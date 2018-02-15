@@ -263,6 +263,17 @@ public class StateImpl extends NamedElementImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Transition getTransition() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

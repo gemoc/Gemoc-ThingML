@@ -43,6 +43,7 @@ import org.thingml.xthingml.thingML.ThingMLPackage;
  *   <li>{@link org.thingml.xthingml.thingML.impl.ThingImpl#getFunctions <em>Functions</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.impl.ThingImpl#getAssign <em>Assign</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.impl.ThingImpl#getBehaviour <em>Behaviour</em>}</li>
+ *   <li>{@link org.thingml.xthingml.thingML.impl.ThingImpl#getRootState <em>Root State</em>}</li>
  * </ul>
  *
  * @generated
@@ -137,6 +138,16 @@ public class ThingImpl extends TypeImpl implements Thing {
 	 * @ordered
 	 */
 	protected CompositeState behaviour;
+
+	/**
+	 * The cached value of the '{@link #getRootState() <em>Root State</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRootState()
+	 * @generated
+	 * @ordered
+	 */
+	protected CompositeState rootState;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -298,6 +309,55 @@ public class ThingImpl extends TypeImpl implements Thing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CompositeState getRootState() {
+		if (rootState != null && rootState.eIsProxy()) {
+			InternalEObject oldRootState = (InternalEObject)rootState;
+			rootState = (CompositeState)eResolveProxy(oldRootState);
+			if (rootState != oldRootState) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.THING__ROOT_STATE, oldRootState, rootState));
+			}
+		}
+		return rootState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeState basicGetRootState() {
+		return rootState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRootState(CompositeState newRootState) {
+		CompositeState oldRootState = rootState;
+		rootState = newRootState;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.THING__ROOT_STATE, oldRootState, rootState));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initialize(EList<String> p) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void main() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -352,6 +412,9 @@ public class ThingImpl extends TypeImpl implements Thing {
 				return getAssign();
 			case ThingMLPackage.THING__BEHAVIOUR:
 				return getBehaviour();
+			case ThingMLPackage.THING__ROOT_STATE:
+				if (resolve) return getRootState();
+				return basicGetRootState();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -395,6 +458,9 @@ public class ThingImpl extends TypeImpl implements Thing {
 			case ThingMLPackage.THING__BEHAVIOUR:
 				setBehaviour((CompositeState)newValue);
 				return;
+			case ThingMLPackage.THING__ROOT_STATE:
+				setRootState((CompositeState)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -431,6 +497,9 @@ public class ThingImpl extends TypeImpl implements Thing {
 			case ThingMLPackage.THING__BEHAVIOUR:
 				setBehaviour((CompositeState)null);
 				return;
+			case ThingMLPackage.THING__ROOT_STATE:
+				setRootState((CompositeState)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -459,6 +528,8 @@ public class ThingImpl extends TypeImpl implements Thing {
 				return assign != null && !assign.isEmpty();
 			case ThingMLPackage.THING__BEHAVIOUR:
 				return behaviour != null;
+			case ThingMLPackage.THING__ROOT_STATE:
+				return rootState != null;
 		}
 		return super.eIsSet(featureID);
 	}

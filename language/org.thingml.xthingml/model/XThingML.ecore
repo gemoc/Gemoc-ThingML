@@ -52,6 +52,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="//NamedElement //AnnotatedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="//Type">
+    <eOperations name="initialize">
+      <eAnnotations source="aspect"/>
+      <eParameters name="p" upperBound="-1">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
     <eOperations name="main">
       <eAnnotations source="aspect"/>
     </eOperations>
@@ -102,6 +108,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="ProvidedPort" eSuperTypes="//Port"/>
   <eClassifiers xsi:type="ecore:EClass" name="InternalPort" eSuperTypes="//Port"/>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="//NamedElement //AnnotatedElement">
+    <eOperations name="getTransition" eType="//Transition">
+      <eAnnotations source="aspect"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1" eType="//Property" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entry" eType="//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exit" eType="//Action" containment="true"/>
@@ -118,8 +127,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternalTransition" eSuperTypes="//Handler"/>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeState" eSuperTypes="//State //StateContainer">
+    <eOperations name="initialize">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eOperations name="run">
+      <eAnnotations source="aspect"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" upperBound="-1" eType="//Region" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="session" upperBound="-1" eType="//Session" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" unique="false" eType="//State">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="//StateContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="maxInstances" eType="//Expression" containment="true"/>
@@ -138,7 +156,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="//Port"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="//Message"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eOperations name="execute">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionBlock" eSuperTypes="//Action">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1" eType="//Action" containment="true"/>
   </eClassifiers>
@@ -183,6 +205,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrintAction" eSuperTypes="//Action">
+    <eOperations name="execute">
+      <eAnnotations source="aspect"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="line">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eStructuralFeatures>
@@ -201,7 +226,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="//Function"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression">
+    <eOperations name="evaluate" eType="//Object">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExternExpression" eSuperTypes="//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -233,6 +262,10 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="//Expression">
+    <eOperations name="evaluate">
+      <eAnnotations source="aspect"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringValue">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
@@ -351,5 +384,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="ArrayIndex" eSuperTypes="//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="array" eType="//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object">
+    <eAnnotations source="aspect"/>
   </eClassifiers>
 </ecore:EPackage>

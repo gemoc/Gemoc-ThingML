@@ -53,6 +53,11 @@ public class ConditionalActionAdapter extends EObjectAdapter<ConditionalAction> 
   }
   
   @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getConditionalAction();
   }

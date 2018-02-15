@@ -143,6 +143,32 @@ public class CompositeStateAdapter extends EObjectAdapter<CompositeState> implem
     return session_;
   }
   
+  @Override
+  public State getCurrentState() {
+    return (State) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.CompositeStateAspect.currentState(adaptee), eResource);
+  }
+  
+  @Override
+  public void setCurrentState(final State currentState) {
+    org.thingml.xthingml.aspects.CompositeStateAspect.currentState(adaptee, (org.thingml.xthingml.thingML.State)((EObjectAdapter)currentState).getAdaptee()
+    );
+  }
+  
+  @Override
+  public void initialize() {
+    org.thingml.xthingml.aspects.CompositeStateAspect.initialize(adaptee);
+  }
+  
+  @Override
+  public void run() {
+    org.thingml.xthingml.aspects.CompositeStateAspect.run(adaptee);
+  }
+  
+  @Override
+  public Transition getTransition() {
+    return (Transition) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.StateAspect.getTransition(adaptee), eResource);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   protected final static boolean HISTORY_EDEFAULT = false;
@@ -179,6 +205,8 @@ public class CompositeStateAdapter extends EObjectAdapter<CompositeState> implem
     		return getRegion();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.COMPOSITE_STATE__SESSION:
     		return getSession();
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE:
+    		return getCurrentState();
     }
     
     return super.eGet(featureID, resolve, coreType);
@@ -211,6 +239,8 @@ public class CompositeStateAdapter extends EObjectAdapter<CompositeState> implem
     		return getRegion() != null && !getRegion().isEmpty();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.COMPOSITE_STATE__SESSION:
     		return getSession() != null && !getSession().isEmpty();
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE:
+    		return getCurrentState() != null;
     }
     
     return super.eIsSet(featureID);
@@ -269,6 +299,11 @@ public class CompositeStateAdapter extends EObjectAdapter<CompositeState> implem
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.COMPOSITE_STATE__SESSION:
     		getSession().clear();
     		getSession().addAll((Collection) newValue);
+    		return;
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.COMPOSITE_STATE__CURRENT_STATE:
+    		setCurrentState(
+    		(org.thingml.xthingmlmt.thingML.State)
+    		 newValue);
     		return;
     }
     

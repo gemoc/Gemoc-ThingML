@@ -40,6 +40,11 @@ public class FunctionCallStatementAdapter extends EObjectAdapter<FunctionCallSta
   }
   
   @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getFunctionCallStatement();
   }

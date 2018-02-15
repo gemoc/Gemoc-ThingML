@@ -36,6 +36,11 @@ public class PrintActionAdapter extends EObjectAdapter<PrintAction> implements o
     return msg_;
   }
   
+  @Override
+  public void execute() {
+    org.thingml.xthingml.aspects.PrintActionAspect.execute(adaptee);
+  }
+  
   protected final static boolean LINE_EDEFAULT = false;
   
   @Override

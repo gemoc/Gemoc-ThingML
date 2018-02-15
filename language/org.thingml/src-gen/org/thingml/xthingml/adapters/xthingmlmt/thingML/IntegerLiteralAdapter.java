@@ -24,6 +24,11 @@ public class IntegerLiteralAdapter extends EObjectAdapter<IntegerLiteral> implem
     adaptee.setIntValue(o);
   }
   
+  @Override
+  public Object evaluate() {
+    return org.thingml.xthingml.aspects.ExpressionAspect.evaluate(adaptee);
+  }
+  
   protected final static long INT_VALUE_EDEFAULT = 0L;
   
   @Override
