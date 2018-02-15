@@ -1,5 +1,15 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: org.thingml; singleton:=true
+Export-Package: org.thingml.xthingmlmt.thingML.util,
+ org.thingml.xthingmlmt.thingML,
+ org.thingml.xthingmlmt.thingML.impl,
+ org.thingml,
+ org.thingml.xthingml.adapters.thingmlmt,
+ org.thingml.xthingml.adapters.thingmlmt.thingML,
+ org.thingml.xthingml.adapters.thingmlmt.thingml,
+ org.thingml.xthingml.adapters.xthingmlmt.thingML,
+ org.thingml.xthingml.adapters.xthingmlmt.thingml,
+ org.thingml.xthingml.adapters.xthingmlmt
 Bundle-Name: org.thingml
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
@@ -13,9 +23,11 @@ Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.7.0";visibility:="privat
  fr.inria.diverse.melange.lib;bundle-version="0.1.0";visibility:="reexport",
  fr.inria.diverse.melange.resource;bundle-version="0.1.0";visibility:="reexport",
  fr.inria.diverse.melange.adapters;bundle-version="0.1.0";visibility:="reexport",
- fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version=0.0.0;visibility:=reexport,
+ fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version="0.0.0";visibility:="reexport",
  thingml,
- org.thingml.k3
+ org.thingml.k3,
+ org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version="0.0.0";visibility:=reexport,
+ org.thingml.xthingml
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

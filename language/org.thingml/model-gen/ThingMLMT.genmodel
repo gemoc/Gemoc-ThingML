@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="ASCII"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.thingml/src-gen" modelPluginID="org.thingml" modelName="ThingMLMT" complianceLevel="7.0" copyrightFields="false">
+  <foreignModel>platform:/resource/org.thingml/model-gen/ThingMLMT.ecore</foreignModel>
+  <genPackages prefix="ThingML" basePackage="org.thingml.thingmlmt" disposableProviderFactory="true">
+    <ecorePackage href="ThingMLMT.ecore#/"/>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ThingMLModel"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ThingMLModel/imports"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ThingMLModel/types"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ThingMLModel/protocols"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ThingMLModel/configs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Import"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//Import/importURI"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//Import/from"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//PlatformAnnotation"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//PlatformAnnotation/name"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//PlatformAnnotation/value"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//NamedElement"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//NamedElement/name"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//AnnotatedElement"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//AnnotatedElement/annotations"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Variable"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Variable/typeRef"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//TypeRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//TypeRef/type"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//TypeRef/isArray"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//TypeRef/cardinality"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Type"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//PrimitiveType"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//PrimitiveType/ByteSize"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ObjectType"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Enumeration"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Enumeration/literals"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//EnumerationLiteral"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Thing"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//Thing/fragment"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Thing/includes"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Thing/messages"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Thing/ports"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Thing/properties"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Thing/functions"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Thing/assign"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Thing/behaviour"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//PropertyAssign"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//PropertyAssign/property"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//PropertyAssign/index"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//PropertyAssign/init"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Protocol"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Function"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Function/parameters"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Function/typeRef"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Function/body"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//Function/abstract"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Property"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//Property/readonly"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Property/init"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Message"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Message/parameters"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Parameter"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Port"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Port/sends"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Port/receives"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//RequiredPort"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//RequiredPort/optional"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ProvidedPort"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//InternalPort"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//State"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//State/properties"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//State/entry"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//State/exit"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//State/internal"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//State/outgoing"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Handler"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Handler/event"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Handler/guard"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Handler/action"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Transition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Transition/target"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//InternalTransition"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//CompositeState"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//CompositeState/region"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//CompositeState/session"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Session"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Session/maxInstances"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Region"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//FinalState"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//StateContainer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//StateContainer/initial"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//StateContainer/history"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//StateContainer/substate"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Event"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ReceiveMessage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ReceiveMessage/port"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ReceiveMessage/message"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Action"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ActionBlock"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ActionBlock/actions"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ExternStatement"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//ExternStatement/statement"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ExternStatement/segments"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//LocalVariable"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//LocalVariable/readonly"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//LocalVariable/init"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//SendAction"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//SendAction/port"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//SendAction/message"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//SendAction/parameters"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//VariableAssignment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//VariableAssignment/property"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//VariableAssignment/index"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//VariableAssignment/expression"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Increment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Increment/var"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Decrement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Decrement/var"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//LoopAction"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//LoopAction/condition"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//LoopAction/action"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ConditionalAction"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ConditionalAction/condition"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ConditionalAction/action"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ConditionalAction/elseAction"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ReturnAction"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ReturnAction/exp"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//PrintAction"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//PrintAction/line"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//PrintAction/msg"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ErrorAction"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//ErrorAction/line"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ErrorAction/msg"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//StartSession"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//StartSession/session"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//FunctionCallStatement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//FunctionCallStatement/function"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//FunctionCallStatement/parameters"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Expression"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ExternExpression"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//ExternExpression/expression"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ExternExpression/segments"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//EnumLiteralRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//EnumLiteralRef/enum"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//EnumLiteralRef/literal"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ByteLiteral"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//ByteLiteral/byteValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//CharLiteral"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//CharLiteral/charValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//IntegerLiteral"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//IntegerLiteral/intValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//BooleanLiteral"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//BooleanLiteral/boolValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//StringLiteral"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//StringLiteral/stringValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//DoubleLiteral"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//DoubleLiteral/doubleValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//PropertyReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//PropertyReference/property"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//EventReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//EventReference/receiveMsg"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//EventReference/parameter"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//FunctionCallExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//FunctionCallExpression/function"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//FunctionCallExpression/parameters"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Configuration"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Configuration/instances"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Configuration/connectors"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Configuration/propassigns"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Instance"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Instance/type"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ConfigPropertyAssign"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ConfigPropertyAssign/instance"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ConfigPropertyAssign/property"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ConfigPropertyAssign/index"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ConfigPropertyAssign/init"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ConfigPropertyAssign/annotations"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//AbstractConnector"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//Connector"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Connector/cli"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Connector/required"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Connector/srv"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//Connector/provided"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ExternalConnector"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ExternalConnector/inst"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ExternalConnector/port"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ExternalConnector/protocol"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//CastExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//CastExpression/term"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//CastExpression/type"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ThingMLMT.ecore#//CastExpression/isArray"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//OrExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//OrExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//OrExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//AndExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//AndExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//AndExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//EqualsExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//EqualsExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//EqualsExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//NotEqualsExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//NotEqualsExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//NotEqualsExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//GreaterExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//GreaterExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//GreaterExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//LowerExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//LowerExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//LowerExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//GreaterOrEqualExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//GreaterOrEqualExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//GreaterOrEqualExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//LowerOrEqualExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//LowerOrEqualExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//LowerOrEqualExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//PlusExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//PlusExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//PlusExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//MinusExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//MinusExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//MinusExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//TimesExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//TimesExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//TimesExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//DivExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//DivExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//DivExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ModExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ModExpression/lhs"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ModExpression/rhs"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ExpressionGroup"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ExpressionGroup/term"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//NotExpression"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//NotExpression/term"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//UnaryMinus"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//UnaryMinus/term"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ThingMLMT.ecore#//ArrayIndex"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ArrayIndex/array"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ThingMLMT.ecore#//ArrayIndex/index"/>
+      </genFeatures>
+    </genClasses>
+  </genPackages>
+  <usedGenPackages href="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"/>
+</genmodel:GenModel>

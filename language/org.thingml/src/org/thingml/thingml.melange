@@ -1,6 +1,9 @@
 package org.thingml
 
-language XThingML {
+external language ThingML {
      syntax "platform:/resource/thingml/model/generated/ThingML.ecore"
+}
+
+language XThingML inherits ThingML {
      with org.thingml.k3.ThingAspect
 }
