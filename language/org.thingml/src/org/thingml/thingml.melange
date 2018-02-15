@@ -1,0 +1,6 @@
+package org.thingml
+
+language XThingML {
+     syntax "platform:/resource/thingml/model/generated/ThingML.ecore"
+     with org.thingml.k3.ThingAspect
+}
