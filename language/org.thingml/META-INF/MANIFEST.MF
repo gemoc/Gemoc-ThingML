@@ -1,15 +1,5 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: org.thingml; singleton:=true
-Export-Package: org.thingml.xthingmlmt.thingML.util,
- org.thingml.xthingmlmt.thingML,
- org.thingml.xthingmlmt.thingML.impl,
- org.thingml,
- org.thingml.xthingml.adapters.thingmlmt,
- org.thingml.xthingml.adapters.thingmlmt.thingML,
- org.thingml.xthingml.adapters.thingmlmt.thingml,
- org.thingml.xthingml.adapters.xthingmlmt.thingML,
- org.thingml.xthingml.adapters.xthingmlmt.thingml,
- org.thingml.xthingml.adapters.xthingmlmt
 Bundle-Name: org.thingml
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
@@ -31,4 +21,3 @@ Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.7.0";visibility:="privat
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-

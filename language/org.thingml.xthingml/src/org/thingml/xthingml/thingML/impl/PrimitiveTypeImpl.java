@@ -33,7 +33,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long BYTE_SIZE_EDEFAULT = 0L;
+	protected static final int BYTE_SIZE_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getByteSize() <em>Byte Size</em>}' attribute.
@@ -43,7 +43,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * @generated
 	 * @ordered
 	 */
-	protected long byteSize = BYTE_SIZE_EDEFAULT;
+	protected int byteSize = BYTE_SIZE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,7 +69,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getByteSize() {
+	public int getByteSize() {
 		return byteSize;
 	}
 
@@ -78,8 +78,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setByteSize(long newByteSize) {
-		long oldByteSize = byteSize;
+	public void setByteSize(int newByteSize) {
+		int oldByteSize = byteSize;
 		byteSize = newByteSize;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.PRIMITIVE_TYPE__BYTE_SIZE, oldByteSize, byteSize));
@@ -108,7 +108,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ThingMLPackage.PRIMITIVE_TYPE__BYTE_SIZE:
-				setByteSize((Long)newValue);
+				setByteSize((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

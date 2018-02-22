@@ -8,8 +8,8 @@
     </genDataTypes>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//ThingMLModel"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//ThingMLModel/imports"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="XThingMLMT.ecore#//ThingMLModel/importURI"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//ThingMLModel/types"/>
@@ -19,15 +19,6 @@
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//ThingMLModel/configs"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="XThingMLMT.ecore#//Import"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="XThingMLMT.ecore#//Import/importURI"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="XThingMLMT.ecore#//Import/from"/>
       </genFeatures>
     </genClasses>
     <genClasses>

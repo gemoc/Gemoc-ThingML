@@ -29,12 +29,12 @@ public interface IntegerLiteral extends Expression {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Int Value</em>' attribute.
-	 * @see #setIntValue(long)
+	 * @see #setIntValue(int)
 	 * @see org.thingml.xthingml.thingML.ThingMLPackage#getIntegerLiteral_IntValue()
 	 * @model
 	 * @generated
 	 */
-	long getIntValue();
+	int getIntValue();
 
 	/**
 	 * Sets the value of the '{@link org.thingml.xthingml.thingML.IntegerLiteral#getIntValue <em>Int Value</em>}' attribute.
@@ -44,6 +44,6 @@ public interface IntegerLiteral extends Expression {
 	 * @see #getIntValue()
 	 * @generated
 	 */
-	void setIntValue(long value);
+	void setIntValue(int value);
 
 } // IntegerLiteral

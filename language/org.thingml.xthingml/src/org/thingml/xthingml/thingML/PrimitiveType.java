@@ -29,12 +29,12 @@ public interface PrimitiveType extends Type {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Byte Size</em>' attribute.
-	 * @see #setByteSize(long)
+	 * @see #setByteSize(int)
 	 * @see org.thingml.xthingml.thingML.ThingMLPackage#getPrimitiveType_ByteSize()
 	 * @model
 	 * @generated
 	 */
-	long getByteSize();
+	int getByteSize();
 
 	/**
 	 * Sets the value of the '{@link org.thingml.xthingml.thingML.PrimitiveType#getByteSize <em>Byte Size</em>}' attribute.
@@ -44,6 +44,6 @@ public interface PrimitiveType extends Type {
 	 * @see #getByteSize()
 	 * @generated
 	 */
-	void setByteSize(long value);
+	void setByteSize(int value);
 
 } // PrimitiveType

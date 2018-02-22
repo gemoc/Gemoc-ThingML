@@ -24,7 +24,7 @@ public class ThingAspect {
     };
     fr.inria.diverse.k3.al.annotationprocessor.stepmanager.IStepManager stepManager = fr.inria.diverse.k3.al.annotationprocessor.stepmanager.StepManagerRegistry.getInstance().findStepManager(_self);
     if (stepManager != null) {
-    	stepManager.executeStep(_self, new Object[] {p}, command, "Thing", "initialize");
+    	stepManager.executeStep(_self,command,"Thing","initialize");
     } else {
     	command.execute();
     }
@@ -50,7 +50,7 @@ public class ThingAspect {
     };
     fr.inria.diverse.k3.al.annotationprocessor.stepmanager.IStepManager stepManager = fr.inria.diverse.k3.al.annotationprocessor.stepmanager.StepManagerRegistry.getInstance().findStepManager(_self);
     if (stepManager != null) {
-    	stepManager.executeStep(_self, new Object[] {_self}, command, "Thing", "end");
+    	stepManager.executeStep(_self,command,"Thing","end");
     } else {
     	command.execute();
     }

@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.thingml.xthingml.thingML.Thing#getFunctions <em>Functions</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.Thing#getAssign <em>Assign</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.Thing#getBehaviour <em>Behaviour</em>}</li>
- *   <li>{@link org.thingml.xthingml.thingML.Thing#getRootState <em>Root State</em>}</li>
  * </ul>
  *
  * @see org.thingml.xthingml.thingML.ThingMLPackage#getThing()
@@ -176,32 +175,6 @@ public interface Thing extends Type {
 	 * @generated
 	 */
 	void setBehaviour(CompositeState value);
-
-	/**
-	 * Returns the value of the '<em><b>Root State</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Root State</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Root State</em>' reference.
-	 * @see #setRootState(CompositeState)
-	 * @see org.thingml.xthingml.thingML.ThingMLPackage#getThing_RootState()
-	 * @model
-	 * @generated
-	 */
-	CompositeState getRootState();
-
-	/**
-	 * Sets the value of the '{@link org.thingml.xthingml.thingML.Thing#getRootState <em>Root State</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Root State</em>' reference.
-	 * @see #getRootState()
-	 * @generated
-	 */
-	void setRootState(CompositeState value);
 
 	/**
 	 * <!-- begin-user-doc -->
