@@ -21,8 +21,6 @@
   <extension point="fr.inria.diverse.melange.language">
     <language aspects="" entryPoints="" exactType="org.thingml.ThingMLMT" id="org.thingml.ThingML" uri="http://www.thingml.org/xtext/ThingML" />
     <language aspects="Action:org.thingml.xthingml.aspects.ActionAspect;StringLiteral:org.thingml.xthingml.aspects.StringLiteralAspect;PrintAction:org.thingml.xthingml.aspects.PrintActionAspect;Expression:org.thingml.xthingml.aspects.ExpressionAspect;State:org.thingml.xthingml.aspects.StateAspect;CompositeState:org.thingml.xthingml.aspects.CompositeStateAspect;Thing:org.thingml.xthingml.aspects.ThingAspect" entryPoints="org.thingml.xthingml.aspects.ThingAspect.main(org.thingml.xthingml.thingML.Thing)" exactType="org.thingml.XThingMLMT" id="org.thingml.XThingML" uri="http://org.thingml.xthingml/thingML/">
-      <adapter class="org.thingml.xthingml.adapters.thingmlmt.XThingMLAdapter" modeltypeId="org.thingml.ThingMLMT" />
-      <adapter class="org.thingml.xthingml.adapters.xthingmlmt.XThingMLAdapter" modeltypeId="org.thingml.XThingMLMT" />
     </language>
   </extension>
 </plugin>
