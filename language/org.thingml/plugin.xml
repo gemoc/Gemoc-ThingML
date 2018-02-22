@@ -1,26 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?eclipse version="3.4"?><plugin>
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
   <extension point="org.eclipse.gemoc.gemoc_language_workbench.sequential.xdsml">
-    <XDSML_Definition modelLoader_class="org.eclipse.gemoc.executionframework.extensions.sirius.modelloader.DefaultModelLoader" name="org.thingml.XThingML" xdsmlFilePath="/org.thingml/src/org/thingml/thingml.melange"/>
+    <XDSML_Definition modelLoader_class="org.eclipse.gemoc.executionframework.extensions.sirius.modelloader.DefaultModelLoader" name="org.thingml.XThingML" xdsmlFilePath="/org.thingml/src/org/thingml/thingml.melange" />
   </extension>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <!-- @generated XThingMLMT -->
-    <package class="org.thingml.xthingmlmt.thingML.ThingMLPackage" genModel="model-gen/XThingMLMT.genmodel" uri="http://org.thingml.xthingmlmt/thingML/"/>
+    <package class="org.thingml.xthingmlmt.thingML.ThingMLPackage" genModel="model-gen/XThingMLMT.genmodel" uri="http://org.thingml.xthingmlmt/thingML/" />
   </extension>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <!-- @generated ThingMLMT -->
-    <package class="org.thingml.thingmlmt.thingML.ThingMLPackage" genModel="model-gen/ThingMLMT.genmodel" uri="http://org.thingml.thingmlmt/thingML/"/>
+    <package class="org.thingml.thingmlmt.thingML.ThingMLPackage" genModel="model-gen/ThingMLMT.genmodel" uri="http://org.thingml.thingmlmt/thingML/" />
   </extension>
-  
-<extension point="fr.inria.diverse.melange.modeltype">
-    <modeltype id="org.thingml.ThingMLMT" uri="http://org.thingml.thingmlmt/"/>
+  <extension point="fr.inria.diverse.melange.modeltype">
+    <modeltype id="org.thingml.ThingMLMT" uri="http://org.thingml.thingmlmt/" />
     <modeltype id="org.thingml.XThingMLMT" uri="http://org.thingml.xthingmlmt/">
-      <subtyping modeltypeId="org.thingml.ThingMLMT"/>
+      <subtyping modeltypeId="org.thingml.ThingMLMT" />
     </modeltype>
   </extension>
   <extension point="fr.inria.diverse.melange.language">
-    <language aspects="" entryPoints="" exactType="org.thingml.ThingMLMT" id="org.thingml.ThingML" uri="http://www.thingml.org/xtext/ThingML"/>
+    <language aspects="" entryPoints="" exactType="org.thingml.ThingMLMT" id="org.thingml.ThingML" uri="http://www.thingml.org/xtext/ThingML" />
     <language aspects="Action:org.thingml.xthingml.aspects.ActionAspect;StringLiteral:org.thingml.xthingml.aspects.StringLiteralAspect;PrintAction:org.thingml.xthingml.aspects.PrintActionAspect;Expression:org.thingml.xthingml.aspects.ExpressionAspect;State:org.thingml.xthingml.aspects.StateAspect;CompositeState:org.thingml.xthingml.aspects.CompositeStateAspect;Thing:org.thingml.xthingml.aspects.ThingAspect" entryPoints="org.thingml.xthingml.aspects.ThingAspect.main(org.thingml.xthingml.thingML.Thing)" exactType="org.thingml.XThingMLMT" id="org.thingml.XThingML" uri="http://org.thingml.xthingml/thingML/">
+      <adapter class="org.thingml.xthingml.adapters.thingmlmt.XThingMLAdapter" modeltypeId="org.thingml.ThingMLMT" />
+      <adapter class="org.thingml.xthingml.adapters.xthingmlmt.XThingMLAdapter" modeltypeId="org.thingml.XThingMLMT" />
     </language>
   </extension>
 </plugin>
