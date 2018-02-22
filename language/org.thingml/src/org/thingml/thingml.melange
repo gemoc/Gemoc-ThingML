@@ -1,7 +1,7 @@
 package org.thingml
 
 external language ThingML {
-     syntax "platform:/resource/thingml/model/generated/ThingML.ecore"
+     syntax "platform:/plugin/thingml/model/generated/ThingML.ecore"
 }
 
 language XThingML inherits ThingML {
@@ -13,3 +13,4 @@ language XThingML inherits ThingML {
      with org.thingml.k3.ExpressionAspect
      with org.thingml.k3.StringLiteralAspect
 }
+
