@@ -33,7 +33,7 @@ public class IntegerLiteralImpl extends ExpressionImpl implements IntegerLiteral
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long INT_VALUE_EDEFAULT = 0L;
+	protected static final int INT_VALUE_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getIntValue() <em>Int Value</em>}' attribute.
@@ -43,7 +43,7 @@ public class IntegerLiteralImpl extends ExpressionImpl implements IntegerLiteral
 	 * @generated
 	 * @ordered
 	 */
-	protected long intValue = INT_VALUE_EDEFAULT;
+	protected int intValue = INT_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,7 +69,7 @@ public class IntegerLiteralImpl extends ExpressionImpl implements IntegerLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getIntValue() {
+	public int getIntValue() {
 		return intValue;
 	}
 
@@ -78,8 +78,8 @@ public class IntegerLiteralImpl extends ExpressionImpl implements IntegerLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIntValue(long newIntValue) {
-		long oldIntValue = intValue;
+	public void setIntValue(int newIntValue) {
+		int oldIntValue = intValue;
 		intValue = newIntValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.INTEGER_LITERAL__INT_VALUE, oldIntValue, intValue));
@@ -108,7 +108,7 @@ public class IntegerLiteralImpl extends ExpressionImpl implements IntegerLiteral
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ThingMLPackage.INTEGER_LITERAL__INT_VALUE:
-				setIntValue((Long)newValue);
+				setIntValue((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -7,7 +7,7 @@ thing HelloThing {
 			action print "Hello World!\n"
 		}
 
-		state Bye {
+		final state Bye {
 			on entry print "Bye.\n"
 		}
 	}

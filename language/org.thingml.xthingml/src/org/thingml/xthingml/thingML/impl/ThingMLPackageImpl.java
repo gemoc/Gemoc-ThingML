@@ -48,7 +48,6 @@ import org.thingml.xthingml.thingML.FunctionCallStatement;
 import org.thingml.xthingml.thingML.GreaterExpression;
 import org.thingml.xthingml.thingML.GreaterOrEqualExpression;
 import org.thingml.xthingml.thingML.Handler;
-import org.thingml.xthingml.thingML.Import;
 import org.thingml.xthingml.thingML.Increment;
 import org.thingml.xthingml.thingML.Instance;
 import org.thingml.xthingml.thingML.IntegerLiteral;
@@ -112,13 +111,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * @generated
 	 */
 	private EClass thingMLModelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass importEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -783,8 +775,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getThingMLModel_Imports() {
-		return (EReference)thingMLModelEClass.getEStructuralFeatures().get(0);
+	public EAttribute getThingMLModel_ImportURI() {
+		return (EAttribute)thingMLModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -812,33 +804,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 */
 	public EReference getThingMLModel_Configs() {
 		return (EReference)thingMLModelEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getImport() {
-		return importEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getImport_ImportURI() {
-		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getImport_From() {
-		return (EAttribute)importEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1100,15 +1065,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 */
 	public EReference getThing_Behaviour() {
 		return (EReference)thingEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getThing_RootState() {
-		return (EReference)thingEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -2895,14 +2851,10 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		// Create classes and their features
 		thingMLModelEClass = createEClass(THING_ML_MODEL);
-		createEReference(thingMLModelEClass, THING_ML_MODEL__IMPORTS);
+		createEAttribute(thingMLModelEClass, THING_ML_MODEL__IMPORT_URI);
 		createEReference(thingMLModelEClass, THING_ML_MODEL__TYPES);
 		createEReference(thingMLModelEClass, THING_ML_MODEL__PROTOCOLS);
 		createEReference(thingMLModelEClass, THING_ML_MODEL__CONFIGS);
-
-		importEClass = createEClass(IMPORT);
-		createEAttribute(importEClass, IMPORT__IMPORT_URI);
-		createEAttribute(importEClass, IMPORT__FROM);
 
 		platformAnnotationEClass = createEClass(PLATFORM_ANNOTATION);
 		createEAttribute(platformAnnotationEClass, PLATFORM_ANNOTATION__NAME);
@@ -2943,7 +2895,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		createEReference(thingEClass, THING__FUNCTIONS);
 		createEReference(thingEClass, THING__ASSIGN);
 		createEReference(thingEClass, THING__BEHAVIOUR);
-		createEReference(thingEClass, THING__ROOT_STATE);
 
 		propertyAssignEClass = createEClass(PROPERTY_ASSIGN);
 		createEReference(propertyAssignEClass, PROPERTY_ASSIGN__PROPERTY);
@@ -3337,14 +3288,10 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(thingMLModelEClass, ThingMLModel.class, "ThingMLModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getThingMLModel_Imports(), this.getImport(), null, "imports", null, 0, -1, ThingMLModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getThingMLModel_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, -1, ThingMLModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getThingMLModel_Types(), this.getType(), null, "types", null, 0, -1, ThingMLModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getThingMLModel_Protocols(), this.getProtocol(), null, "protocols", null, 0, -1, ThingMLModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getThingMLModel_Configs(), this.getConfiguration(), null, "configs", null, 0, -1, ThingMLModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImport_From(), ecorePackage.getEString(), "from", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(platformAnnotationEClass, PlatformAnnotation.class, "PlatformAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPlatformAnnotation_Name(), ecorePackage.getEString(), "name", null, 0, 1, PlatformAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3367,7 +3314,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPrimitiveType_ByteSize(), ecorePackage.getELong(), "ByteSize", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPrimitiveType_ByteSize(), ecorePackage.getEInt(), "ByteSize", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(objectTypeEClass, ObjectType.class, "ObjectType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3385,7 +3332,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getThing_Functions(), this.getFunction(), null, "functions", null, 0, -1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getThing_Assign(), this.getPropertyAssign(), null, "assign", null, 0, -1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getThing_Behaviour(), this.getCompositeState(), null, "behaviour", null, 0, 1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getThing_RootState(), this.getCompositeState(), null, "rootState", null, 0, 1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(thingEClass, null, "initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "p", 0, -1, IS_UNIQUE, IS_ORDERED);
@@ -3550,7 +3496,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEAttribute(getCharLiteral_CharValue(), ecorePackage.getEByte(), "charValue", null, 0, 1, CharLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(integerLiteralEClass, IntegerLiteral.class, "IntegerLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIntegerLiteral_IntValue(), ecorePackage.getELong(), "intValue", null, 0, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntegerLiteral_IntValue(), ecorePackage.getEInt(), "intValue", null, 0, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanLiteral_BoolValue(), ecorePackage.getEBoolean(), "boolValue", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3698,11 +3644,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		   });	
 		addAnnotation
 		  (thingEClass.getEOperations().get(1), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (getThing_RootState(), 
 		   source, 
 		   new String[] {
 		   });	

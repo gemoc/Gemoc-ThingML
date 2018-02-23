@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.thingml.xthingml.thingML.Configuration;
-import org.thingml.xthingml.thingML.Import;
 import org.thingml.xthingml.thingML.Protocol;
 import org.thingml.xthingml.thingML.ThingMLModel;
 import org.thingml.xthingml.thingML.ThingMLPackage;
@@ -31,7 +31,7 @@ import org.thingml.xthingml.thingML.Type;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.thingml.xthingml.thingML.impl.ThingMLModelImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.thingml.xthingml.thingML.impl.ThingMLModelImpl#getImportURI <em>Import URI</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.impl.ThingMLModelImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.impl.ThingMLModelImpl#getProtocols <em>Protocols</em>}</li>
  *   <li>{@link org.thingml.xthingml.thingML.impl.ThingMLModelImpl#getConfigs <em>Configs</em>}</li>
@@ -41,14 +41,14 @@ import org.thingml.xthingml.thingML.Type;
  */
 public class ThingMLModelImpl extends EObjectImpl implements ThingMLModel {
 	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * The cached value of the '{@link #getImportURI() <em>Import URI</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImports()
+	 * @see #getImportURI()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Import> imports;
+	protected EList<String> importURI;
 
 	/**
 	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
@@ -104,11 +104,11 @@ public class ThingMLModelImpl extends EObjectImpl implements ThingMLModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Import> getImports() {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, ThingMLPackage.THING_ML_MODEL__IMPORTS);
+	public EList<String> getImportURI() {
+		if (importURI == null) {
+			importURI = new EDataTypeEList<String>(String.class, this, ThingMLPackage.THING_ML_MODEL__IMPORT_URI);
 		}
-		return imports;
+		return importURI;
 	}
 
 	/**
@@ -155,8 +155,6 @@ public class ThingMLModelImpl extends EObjectImpl implements ThingMLModel {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ThingMLPackage.THING_ML_MODEL__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case ThingMLPackage.THING_ML_MODEL__TYPES:
 				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case ThingMLPackage.THING_ML_MODEL__PROTOCOLS:
@@ -175,8 +173,8 @@ public class ThingMLModelImpl extends EObjectImpl implements ThingMLModel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ThingMLPackage.THING_ML_MODEL__IMPORTS:
-				return getImports();
+			case ThingMLPackage.THING_ML_MODEL__IMPORT_URI:
+				return getImportURI();
 			case ThingMLPackage.THING_ML_MODEL__TYPES:
 				return getTypes();
 			case ThingMLPackage.THING_ML_MODEL__PROTOCOLS:
@@ -196,9 +194,9 @@ public class ThingMLModelImpl extends EObjectImpl implements ThingMLModel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ThingMLPackage.THING_ML_MODEL__IMPORTS:
-				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
+			case ThingMLPackage.THING_ML_MODEL__IMPORT_URI:
+				getImportURI().clear();
+				getImportURI().addAll((Collection<? extends String>)newValue);
 				return;
 			case ThingMLPackage.THING_ML_MODEL__TYPES:
 				getTypes().clear();
@@ -224,8 +222,8 @@ public class ThingMLModelImpl extends EObjectImpl implements ThingMLModel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.THING_ML_MODEL__IMPORTS:
-				getImports().clear();
+			case ThingMLPackage.THING_ML_MODEL__IMPORT_URI:
+				getImportURI().clear();
 				return;
 			case ThingMLPackage.THING_ML_MODEL__TYPES:
 				getTypes().clear();
@@ -248,8 +246,8 @@ public class ThingMLModelImpl extends EObjectImpl implements ThingMLModel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.THING_ML_MODEL__IMPORTS:
-				return imports != null && !imports.isEmpty();
+			case ThingMLPackage.THING_ML_MODEL__IMPORT_URI:
+				return importURI != null && !importURI.isEmpty();
 			case ThingMLPackage.THING_ML_MODEL__TYPES:
 				return types != null && !types.isEmpty();
 			case ThingMLPackage.THING_ML_MODEL__PROTOCOLS:
@@ -258,6 +256,22 @@ public class ThingMLModelImpl extends EObjectImpl implements ThingMLModel {
 				return configs != null && !configs.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (importURI: ");
+		result.append(importURI);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ThingMLModelImpl
