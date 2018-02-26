@@ -12,3 +12,7 @@ thing HelloThing {
 		}
 	}
 }
+
+configuration HelloConfig {
+	instance hello : HelloThing
+}
