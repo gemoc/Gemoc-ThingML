@@ -106,7 +106,7 @@ thing Ports includes SynchroMsgs, PortMsgs {
 
 thing Server includes SynchroMsgs, PortMsgs {
 
-	property side : EInteger = 0
+	property side : EInteger = 1
 	property turn : EInteger = 0
 	property target : EInteger = 0
 	property message_text : EString = ""
@@ -125,6 +125,29 @@ thing Server includes SynchroMsgs, PortMsgs {
 		receives none
 	}
 
+	function switch_side() do
+		print "side " + side
+		side = (side % 2) + 1
+		print " --> " + side + "\n"
+		if (side == 1) turn++
+	end
+
+	function deliver() do
+		if (target == side) do
+			print "deliver on port " + side + "\n"
+			ports!deliver(side, message_text)
+			target = 0
+			waiting--
+		end else do
+			print "nothing to deliver for " + side + "\n"
+		end
+	end
+
+	function fetch() do
+		print "fetch on port " + side + "\n"
+		ports!fetch(side)
+	end
+
 	statechart Behaviour init Active {
 
 		on entry do
@@ -132,50 +155,47 @@ thing Server includes SynchroMsgs, PortMsgs {
 			synchro!start()
 		end
 
-		composite state Active init Deliver {
+		composite state Active init Wait {
 
 			internal on_ping
 				event ports?ping
 				action waiting++
 
-			state Deliver {
-				on entry do
-					print "side " + side
-					side = (side % 2) + 1
-					print " --> " + side + "\n"
-					if (side == 1) turn++
-
-					if (target == side) do
-						print "deliver on port " + side + "\n"
-						ports!deliver(side, message_text)
-						target = 0
-						waiting--
-					end else do
-						print "nothing to deliver for " + side + "\n"
+			state Wait {
+				internal not_delivered
+					guard waiting > 0 and target > 0
+					action do
+						switch_side()
+						deliver()
 					end
-				end
 
 				transition delivered -> Fetch
-					guard waiting > 0
+					guard waiting > 0 and target == 0
 					action print "waiting: " + waiting + "\n"
+
 			}
 
 			state Fetch {
 				on entry do
-					print "fetch on port " + side + "\n"
-					ports!fetch(side)
+					fetch()
 				end
 
-				transition nothing_fetched -> Deliver
+				internal not_fetched
 					event ports?none
-					action print "nothing fetched\n"
+					action do
+						print "nothing fetched\n"
+						switch_side()
+						fetch()
+					end
 
-				transition fetched -> Deliver
+				transition fetched -> Wait
 					event request : ports?request
 					action do
 						target = request.target
 						message_text = request.content
 						print "fetched request '" + message_text + "' for " + target + "\n"
+						switch_side()
+						deliver()
 					end
 			}
 
