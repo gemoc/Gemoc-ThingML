@@ -12,6 +12,7 @@ thing fragment SynchroMsgs {
 thing fragment PortMsgs {
 	message deliver(target : EInteger, content : EString)
 	message fetch(target : EInteger)
+	message ping(number : EInteger)
 	message request(target : EInteger, content : EString)
 	message none()
 }
@@ -33,6 +34,7 @@ thing Ports includes SynchroMsgs, PortMsgs {
 	provided port server {
 		receives deliver
 		receives fetch
+		sends ping
 		sends request
 		sends none
 	}
@@ -61,16 +63,20 @@ thing Ports includes SynchroMsgs, PortMsgs {
 
 	statechart Behaviour init Inactive {
 
-		on entry do
-			if (port_number == 2) write_buffer(1, "hello")
-		end
-
 		state Inactive {
 			transition start -> Active
 				event synchro?start
 		}
 
 		state Active {
+			on entry do
+				if (port_number == 2) do
+					write_buffer(1, "hello")
+					print "pinging !!!!\n"
+					server!ping(port_number)
+				end
+			end
+
 			internal on_fetch
 				event fetch : server?fetch
 				guard fetch.target == port_number
@@ -104,6 +110,7 @@ thing Server includes SynchroMsgs, PortMsgs {
 	property turn : EInteger = 0
 	property target : EInteger = 0
 	property message_text : EString = ""
+	property waiting : EInteger = 0
 
 	provided port synchro {
 		sends start
@@ -113,6 +120,7 @@ thing Server includes SynchroMsgs, PortMsgs {
 	required port ports {
 		sends deliver
 		sends fetch
+		receives ping
 		receives request
 		receives none
 	}
@@ -126,25 +134,30 @@ thing Server includes SynchroMsgs, PortMsgs {
 
 		composite state Active init Deliver {
 
+			internal on_ping
+				event ports?ping
+				action waiting++
+
 			state Deliver {
 				on entry do
 					print "side " + side
 					side = (side % 2) + 1
 					print " --> " + side + "\n"
-					turn++
+					if (side == 1) turn++
 
 					if (target == side) do
 						print "deliver on port " + side + "\n"
 						ports!deliver(side, message_text)
 						target = 0
+						waiting--
 					end else do
 						print "nothing to deliver for " + side + "\n"
 					end
-
-					`try {Thread.sleep(1000);} catch (InterruptedException ignored) {}`
 				end
 
 				transition delivered -> Fetch
+					guard waiting > 0
+					action print "waiting: " + waiting + "\n"
 			}
 
 			state Fetch {
