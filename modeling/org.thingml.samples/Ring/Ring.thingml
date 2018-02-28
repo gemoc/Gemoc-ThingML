@@ -1,14 +1,8 @@
-object String
+object EString
 	@java_type "String"
-	
-datatype int<4>
+
+datatype EInteger<4>
 	@java_type "Integer"
-
-object t_int
-	@java_type "ArrayList<Integer>"
-
-object t_String
-	@java_type "ArrayList<String>"
 
 thing fragment SynchroMsgs {
 	message start()
@@ -16,18 +10,21 @@ thing fragment SynchroMsgs {
 }
 
 thing fragment PortMsgs {
-	message deliver(target : int, content : String)
-	message fetch(target : int)
-	message request(target : int, content : String)
+	message deliver(target : EInteger, content : EString)
+	message fetch(target : EInteger)
+	message request(target : EInteger, content : EString)
 	message none()
 }
 
 thing Ports includes SynchroMsgs, PortMsgs {
-	
-	readonly property port_number : int = 0
-	property target_buffer : t_int = `new ArrayList<Integer>()`
-	property message_buffer : t_String = `new ArrayList<String>()`
-	
+
+	readonly property port_number : EInteger = 0
+	readonly property buffer_size : EInteger = 100
+	property buffer_head : EInteger = 0
+	property buffer_queue : EInteger = 0
+	property target_buffer : EInteger[buffer_size]
+	property message_buffer : EString[buffer_size]
+
 	required port synchro {
 		receives start
 		receives stop
@@ -39,14 +36,33 @@ thing Ports includes SynchroMsgs, PortMsgs {
 		sends request
 		sends none
 	}
-	
+
+	function write_buffer(target : EInteger, mess : EString) do
+		var next_head : EInteger = (buffer_head + 1) % buffer_size
+		if (next_head == buffer_queue) do
+			print "ALERT: buffer " + port_number + " is full!\n"
+			print "       message: \"" + mess + "\" for target " + target + " is dropped!\n"
+		end else do
+			target_buffer[buffer_head] = target
+			message_buffer[buffer_head] = mess
+			buffer_head = next_head
+		end
+	end
+
+	function read_buffer() : EInteger do
+		if (buffer_queue == buffer_head) do
+			return -1
+		end else do
+			var return_value : EInteger = buffer_queue
+			buffer_queue = (buffer_queue + 1) % buffer_size
+			return return_value
+		end
+	end
+
 	statechart Behaviour init Inactive {
-		
+
 		on entry do
-			if (port_number == 2) do
-				`` & target_buffer & `.add(1);`
-				`` & message_buffer & `.add("hello");`
-			end
+			if (port_number == 2) write_buffer(1, "hello")
 		end
 
 		state Inactive {
@@ -59,18 +75,19 @@ thing Ports includes SynchroMsgs, PortMsgs {
 				event fetch : server?fetch
 				guard fetch.target == port_number
 				action do
-					if (`` & target_buffer & `.size()` > 0) do
-						server!request(`` & target_buffer & `.remove(0)`, `` & message_buffer & `.remove(0)`)
-					end else do
+					var index : EInteger = read_buffer()
+					if (index < 0) do
 						server!none()
+					end else do
+						server!request(target_buffer[index], message_buffer[index])
 					end
 				end
-			
+
 			internal on_deliver
 				event deliver : server?deliver
 				guard deliver.target == port_number
 				action print "deliver received\n"
-			
+
 			transition stop -> End
 				event synchro?stop
 		}
@@ -83,30 +100,30 @@ thing Ports includes SynchroMsgs, PortMsgs {
 
 thing Server includes SynchroMsgs, PortMsgs {
 
-	property side : int = 0
-	property turn : int = 0
-	property target : int = 0
-	property message_text : String = ""
-	
+	property side : EInteger = 0
+	property turn : EInteger = 0
+	property target : EInteger = 0
+	property message_text : EString = ""
+
 	provided port synchro {
 		sends start
 		sends stop
 	}
-	
+
 	required port ports {
 		sends deliver
 		sends fetch
 		receives request
 		receives none
 	}
-	
+
 	statechart Behaviour init Active {
-		
+
 		on entry do
 			print "Server started\n"
 			synchro!start()
 		end
-		
+
 		composite state Active init Deliver {
 
 			state Deliver {
@@ -152,7 +169,7 @@ thing Server includes SynchroMsgs, PortMsgs {
 			transition stop -> End
 				guard turn > 3
 		}
-		
+
 		final state End {
 			on entry do
 				synchro!stop()
