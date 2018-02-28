@@ -1,0 +1,177 @@
+object String
+	@java_type "String"
+	
+datatype int<4>
+	@java_type "Integer"
+
+object t_int
+	@java_type "ArrayList<Integer>"
+
+object t_String
+	@java_type "ArrayList<String>"
+
+thing fragment SynchroMsgs {
+	message start()
+	message stop()
+}
+
+thing fragment PortMsgs {
+	message deliver(target : int, content : String)
+	message fetch(target : int)
+	message request(target : int, content : String)
+	message none()
+}
+
+thing Ports includes SynchroMsgs, PortMsgs {
+	
+	readonly property port_number : int = 0
+	property target_buffer : t_int = `new ArrayList<Integer>()`
+	property message_buffer : t_String = `new ArrayList<String>()`
+	
+	required port synchro {
+		receives start
+		receives stop
+	}
+
+	provided port server {
+		receives deliver
+		receives fetch
+		sends request
+		sends none
+	}
+	
+	statechart Behaviour init Inactive {
+		
+		on entry do
+			if (port_number == 2) do
+				`` & target_buffer & `.add(1);`
+				`` & message_buffer & `.add("hello");`
+			end
+		end
+
+		state Inactive {
+			transition start -> Active
+				event synchro?start
+		}
+
+		state Active {
+			internal on_fetch
+				event fetch : server?fetch
+				guard fetch.target == port_number
+				action do
+					if (`` & target_buffer & `.size()` > 0) do
+						server!request(`` & target_buffer & `.remove(0)`, `` & message_buffer & `.remove(0)`)
+					end else do
+						server!none()
+					end
+				end
+			
+			internal on_deliver
+				event deliver : server?deliver
+				guard deliver.target == port_number
+				action print "deliver received\n"
+			
+			transition stop -> End
+				event synchro?stop
+		}
+
+		final state End {
+			on entry print "Port " + port_number + " stopped\n"
+		}
+	}
+}
+
+thing Server includes SynchroMsgs, PortMsgs {
+
+	property side : int = 0
+	property turn : int = 0
+	property target : int = 0
+	property message_text : String = ""
+	
+	provided port synchro {
+		sends start
+		sends stop
+	}
+	
+	required port ports {
+		sends deliver
+		sends fetch
+		receives request
+		receives none
+	}
+	
+	statechart Behaviour init Active {
+		
+		on entry do
+			print "Server started\n"
+			synchro!start()
+		end
+		
+		composite state Active init Deliver {
+
+			state Deliver {
+				on entry do
+					print "side " + side
+					side = (side % 2) + 1
+					print " --> " + side + "\n"
+					turn++
+
+					if (target == side) do
+						print "deliver on port " + side + "\n"
+						ports!deliver(side, message_text)
+						target = 0
+					end else do
+						print "nothing to deliver for " + side + "\n"
+					end
+
+					`try {Thread.sleep(1000);} catch (InterruptedException ignored) {}`
+				end
+
+				transition delivered -> Fetch
+			}
+
+			state Fetch {
+				on entry do
+					print "fetch on port " + side + "\n"
+					ports!fetch(side)
+				end
+
+				transition nothing_fetched -> Deliver
+					event ports?none
+					action print "nothing fetched\n"
+
+				transition fetched -> Deliver
+					event request : ports?request
+					action do
+						target = request.target
+						message_text = request.content
+						print "fetched request '" + message_text + "' for " + target + "\n"
+					end
+			}
+
+			transition stop -> End
+				guard turn > 3
+		}
+		
+		final state End {
+			on entry do
+				synchro!stop()
+				print "Server stopped\n"
+			end
+		}
+	}
+}
+
+configuration RingConfig {
+	instance server : Server
+
+	instance port1 : Ports
+	set port1.port_number = 1
+	connector port1.synchro => server.synchro
+	connector server.ports => port1.server
+
+	instance port2 : Ports
+	set port2.port_number = 2
+	connector port2.synchro => server.synchro
+	connector server.ports => port2.server
+}
