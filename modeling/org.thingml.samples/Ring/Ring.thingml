@@ -14,6 +14,7 @@ thing fragment PortMsgs {
 	message fetch(target : EInteger)
 	message ping(number : EInteger)
 	message request(target : EInteger, content : EString)
+	message broadcast(sender : EInteger, content : EString)
 	message none()
 }
 
@@ -36,6 +37,7 @@ thing Ports includes SynchroMsgs, PortMsgs {
 		receives fetch
 		sends ping
 		sends request
+		sends broadcast
 		sends none
 	}
 
@@ -71,7 +73,7 @@ thing Ports includes SynchroMsgs, PortMsgs {
 		state Active {
 			on entry do
 				if (port_number == 2) do
-					write_buffer(1, "hello")
+					write_buffer(0, "hello")
 					print "pinging !!!!\n"
 					server!ping(port_number)
 				end
@@ -84,8 +86,10 @@ thing Ports includes SynchroMsgs, PortMsgs {
 					var index : EInteger = read_buffer()
 					if (index < 0) do
 						server!none()
-					end else do
+					end else if (target_buffer[index] > 0) do
 						server!request(target_buffer[index], message_buffer[index])
+					end else do
+						server!broadcast(port_number, message_buffer[index])
 					end
 				end
 
@@ -122,6 +126,7 @@ thing Server includes SynchroMsgs, PortMsgs {
 		sends fetch
 		receives ping
 		receives request
+		receives broadcast
 		receives none
 	}
 
@@ -188,7 +193,7 @@ thing Server includes SynchroMsgs, PortMsgs {
 						fetch()
 					end
 
-				transition fetched -> Wait
+				transition request_fetched -> Wait
 					event request : ports?request
 					action do
 						target = request.target
@@ -196,6 +201,20 @@ thing Server includes SynchroMsgs, PortMsgs {
 						print "fetched request '" + message_text + "' for " + target + "\n"
 						switch_side()
 						deliver()
+					end
+
+				transition broadcast_fetched -> Wait
+					event broadcast : ports?broadcast
+					action do
+						message_text = broadcast.content
+						print "fetched broadcast '" + message_text + "'\n"
+						switch_side()
+						while (side != broadcast.sender) do
+							target = side
+							deliver()
+							switch_side()
+						end
+						switch_side()
 					end
 			}
 
