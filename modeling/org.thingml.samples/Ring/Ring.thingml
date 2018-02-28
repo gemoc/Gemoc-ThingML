@@ -9,16 +9,62 @@ thing fragment SynchroMsgs {
 	message stop()
 }
 
-thing fragment PortMsgs {
+thing fragment ServerMsgs {
+	// server wants to give a message to client
 	message deliver(target : EInteger, content : EString)
-	message fetch(target : EInteger)
+
+	// client gave a message to server
 	message ping(number : EInteger)
+	message fetch(target : EInteger)
+	message none()
 	message request(target : EInteger, content : EString)
 	message broadcast(sender : EInteger, content : EString)
-	message none()
 }
 
-thing Ports includes SynchroMsgs, PortMsgs {
+thing fragment ClientMsgs {
+	// client wants to give a message to server
+	message client_request(target : EInteger, content : EString)
+	message client_broadcast(content : EString)
+}
+
+thing Client includes SynchroMsgs, ClientMsgs {
+
+	readonly property client_number : EInteger = 0
+
+	required port server_port {
+		sends client_request
+		sends client_broadcast
+	}
+
+	required port synchro {
+		receives start
+		receives stop
+	}
+
+	statechart Behaviour init Inactive {
+
+		state Inactive {
+			transition start -> Active
+				event synchro?start
+		}
+
+		state Active {
+			on entry do
+				print "Client " + client_number + " started\n"
+				server_port!client_broadcast("hello, I am client " + client_number)
+			end
+
+			transition stop -> End
+				event synchro?stop
+		}
+
+		final state End {
+			on entry print "Client " + client_number + " stopped\n"
+		}
+	}
+}
+
+thing Ports includes SynchroMsgs, ClientMsgs, ServerMsgs {
 
 	readonly property port_number : EInteger = 0
 	readonly property buffer_size : EInteger = 100
@@ -27,9 +73,19 @@ thing Ports includes SynchroMsgs, PortMsgs {
 	property target_buffer : EInteger[buffer_size]
 	property message_buffer : EString[buffer_size]
 
-	required port synchro {
+	required port server_synchro {
 		receives start
 		receives stop
+	}
+
+	provided port client_synchro {
+		sends start
+		sends stop
+	}
+
+	provided port client {
+		receives client_request
+		receives client_broadcast
 	}
 
 	provided port server {
@@ -67,17 +123,26 @@ thing Ports includes SynchroMsgs, PortMsgs {
 
 		state Inactive {
 			transition start -> Active
-				event synchro?start
+				event server_synchro?start
+				action client_synchro!start()
 		}
 
 		state Active {
-			on entry do
-				if (port_number == 2) do
-					write_buffer(0, "hello")
-					print "pinging !!!!\n"
+			on entry print "Port " + port_number + " started\n"
+
+			internal on_request
+				event client_request : client?client_request
+				action do
+					write_buffer(client_request.target, client_request.content)
 					server!ping(port_number)
 				end
-			end
+
+			internal on_broadcast
+				event client_broadcast : client?client_broadcast
+				action do
+					write_buffer(0, client_broadcast.content)
+					server!ping(port_number)
+				end
 
 			internal on_fetch
 				event fetch : server?fetch
@@ -99,7 +164,8 @@ thing Ports includes SynchroMsgs, PortMsgs {
 				action print "deliver received\n"
 
 			transition stop -> End
-				event synchro?stop
+				event server_synchro?stop
+				action client_synchro!stop()
 		}
 
 		final state End {
@@ -108,7 +174,7 @@ thing Ports includes SynchroMsgs, PortMsgs {
 	}
 }
 
-thing Server includes SynchroMsgs, PortMsgs {
+thing Server includes SynchroMsgs, ServerMsgs {
 
 	property side : EInteger = 1
 	property turn : EInteger = 0
@@ -236,11 +302,21 @@ configuration RingConfig {
 
 	instance port1 : Ports
 	set port1.port_number = 1
-	connector port1.synchro => server.synchro
+	connector port1.server_synchro => server.synchro
 	connector server.ports => port1.server
+
+	instance client1 : Client
+	set client1.client_number = 1
+	connector client1.synchro => port1.client_synchro
+	connector client1.server_port => port1.client
 
 	instance port2 : Ports
 	set port2.port_number = 2
-	connector port2.synchro => server.synchro
+	connector port2.server_synchro => server.synchro
 	connector server.ports => port2.server
+
+	instance client2 : Client
+	set client2.client_number = 2
+	connector client2.synchro => port2.client_synchro
+	connector client2.server_port => port2.client
 }
