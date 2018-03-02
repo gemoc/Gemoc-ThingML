@@ -4,45 +4,44 @@ object EString
 datatype EInteger<4>
 	@java_type "Integer"
 
+datatype EBoolean<1>
+	@java_type "Boolean"
+
 thing fragment SynchroMsgs {
 	message start()
 	message stop()
+	message stop_request(emmiter : EInteger)
 }
 
-thing fragment ServerMsgs {
+thing fragment DataMsgs {
 	// server wants to give a message to client
 	message deliver(target : EInteger, content : EString)
 
 	// client gave a message to server
-	message ping(number : EInteger)
+	message ping()
 	message fetch(target : EInteger)
 	message none()
 	message request(target : EInteger, content : EString)
-	message broadcast(sender : EInteger, content : EString)
+	message broadcast(content : EString)
 }
 
-thing fragment ClientMsgs {
-	// client wants to give a message to server
-	message client_request(target : EInteger, content : EString)
-	message client_broadcast(content : EString)
-
-	// server gave a message to client
-	message client_deliver(content : EString)
-}
-
-thing Client includes SynchroMsgs, ClientMsgs {
+thing Client includes SynchroMsgs, DataMsgs {
 
 	readonly property client_number : EInteger = 0
 
-	required port server_port {
-		sends client_request
-		sends client_broadcast
-		receives client_deliver
+	required port server {
+		receives deliver
+		receives fetch
+		sends ping
+		sends request
+		sends broadcast
+		sends none
 	}
 
 	required port synchro {
 		receives start
 		receives stop
+		sends stop_request
 	}
 
 	function log(line : EString) do
@@ -56,16 +55,40 @@ thing Client includes SynchroMsgs, ClientMsgs {
 				event synchro?start
 		}
 
-		state Active {
+		composite state Active init SayHello {
 			on entry do
 				log("started")
-				server_port!client_broadcast("hello, I am client " + client_number)
 			end
 
-			internal on_deliver
-				event client_deliver : server_port?client_deliver
+			state SayHello {
+				on entry do
+					log("ping server")
+					server!ping()
+				end
+
+				transition on_fetch -> Wait
+					event fetch : server?fetch
+					guard fetch.target == client_number
+					action do
+						server!broadcast("hello, I am client " + client_number)
+						synchro!stop_request(client_number)
+					end
+			}
+
+			final state Wait {}
+
+			internal on_fetch
+				event fetch : server?fetch
+				guard fetch.target == client_number
 				action do
-					log("message received : \"" + client_deliver.content + "\"")
+					server!none()
+				end
+
+			internal on_deliver
+				event deliver : server?deliver
+				guard deliver.target == client_number
+				action do
+					log("message received : \"" + deliver.content + "\"")
 				end
 
 			transition stop -> End
@@ -78,126 +101,11 @@ thing Client includes SynchroMsgs, ClientMsgs {
 	}
 }
 
-thing Ports includes SynchroMsgs, ClientMsgs, ServerMsgs {
-
-	readonly property port_number : EInteger = 0
-	readonly property buffer_size : EInteger = 100
-	property buffer_head : EInteger = 0
-	property buffer_queue : EInteger = 0
-	property target_buffer : EInteger[buffer_size]
-	property message_buffer : EString[buffer_size]
-
-	required port server_synchro {
-		receives start
-		receives stop
-	}
-
-	provided port client_synchro {
-		sends start
-		sends stop
-	}
-
-	provided port client {
-		receives client_request
-		receives client_broadcast
-		sends client_deliver
-	}
-
-	provided port server {
-		receives deliver
-		receives fetch
-		sends ping
-		sends request
-		sends broadcast
-		sends none
-	}
-
-	function log(line : EString) do
-		print "Port " + port_number + "   : " + line + "\n"
-	end
-
-	function write_buffer(target : EInteger, mess : EString) do
-		var next_head : EInteger = (buffer_head + 1) % buffer_size
-		if (next_head == buffer_queue) do
-			print "ALERT: buffer " + port_number + " is full!\n"
-			print "       message: \"" + mess + "\" for target " + target + " is dropped!\n"
-		end else do
-			target_buffer[buffer_head] = target
-			message_buffer[buffer_head] = mess
-			buffer_head = next_head
-		end
-	end
-
-	function read_buffer() : EInteger do
-		if (buffer_queue == buffer_head) do
-			return -1
-		end else do
-			var return_value : EInteger = buffer_queue
-			buffer_queue = (buffer_queue + 1) % buffer_size
-			return return_value
-		end
-	end
-
-	statechart Behaviour init Inactive {
-
-		state Inactive {
-			transition start -> Active
-				event server_synchro?start
-				action client_synchro!start()
-		}
-
-		state Active {
-			on entry log("started")
-
-			internal on_request
-				event client_request : client?client_request
-				action do
-					write_buffer(client_request.target, client_request.content)
-					server!ping(port_number)
-				end
-
-			internal on_broadcast
-				event client_broadcast : client?client_broadcast
-				action do
-					write_buffer(0, client_broadcast.content)
-					server!ping(port_number)
-				end
-
-			internal on_fetch
-				event fetch : server?fetch
-				guard fetch.target == port_number
-				action do
-					var index : EInteger = read_buffer()
-					if (index < 0) do
-						server!none()
-					end else if (target_buffer[index] > 0) do
-						server!request(target_buffer[index], message_buffer[index])
-					end else do
-						server!broadcast(port_number, message_buffer[index])
-					end
-				end
-
-			internal on_deliver
-				event deliver : server?deliver
-				guard deliver.target == port_number
-				action client!client_deliver(deliver.content)
-
-			transition stop -> End
-				event server_synchro?stop
-				action client_synchro!stop()
-		}
-
-		final state End {
-			on entry log("stopped")
-		}
-	}
-}
-
-thing Server includes SynchroMsgs, ServerMsgs {
+thing Server includes SynchroMsgs, DataMsgs {
 
 	readonly property number_sides : EInteger = 0
+	property stop_requests : EInteger[number_sides]
 	property side : EInteger = 1
-	property turn : EInteger = 0
 	property target : EInteger = 0
 	property message_text : EString = ""
 	property waiting : EInteger = 0
@@ -205,9 +113,10 @@ thing Server includes SynchroMsgs, ServerMsgs {
 	provided port synchro {
 		sends start
 		sends stop
+		receives stop_request
 	}
 
-	required port ports {
+	provided port clients {
 		sends deliver
 		sends fetch
 		receives ping
@@ -220,32 +129,50 @@ thing Server includes SynchroMsgs, ServerMsgs {
 		print "Server   : " + line + "\n"
 	end
 
+	function init_stop_requests() do
+		var i : EInteger = 0
+		while (i < number_sides) do
+			stop_requests[i] = 0
+			i++
+		end
+	end
+
+	function can_stop() : EBoolean do
+		var number : EInteger = number_sides
+		var i : EInteger = 0
+		while (i < number_sides) do
+			if (stop_requests[i] > 0) number--
+			i++
+		end
+		return number == 0
+	end
+
 	function switch_side() do
 		var new_side : EInteger = (side % number_sides) + 1
 		log("side " + side + " --> " + new_side)
 		side = new_side
-		if (side == 1) turn++
 	end
 
 	function deliver() do
 		if (target == side) do
-			log("deliver on port " + side)
-			ports!deliver(side, message_text)
+			log("deliver to client " + side)
+			clients!deliver(side, message_text)
 			target = 0
 			waiting--
 		end else do
-			log("nothing to deliver for " + side)
+			log("nothing to deliver for client " + side)
 		end
 	end
 
 	function fetch() do
-		log("fetch on port " + side)
-		ports!fetch(side)
+		log("fetch on client " + side)
+		clients!fetch(side)
 	end
 
 	statechart Behaviour init Active {
 
 		on entry do
+			init_stop_requests()
 			log("started")
 			synchro!start()
 		end
@@ -253,7 +180,7 @@ thing Server includes SynchroMsgs, ServerMsgs {
 		composite state Active init Wait {
 
 			internal on_ping
-				event ports?ping
+				event clients?ping
 				action waiting++
 
 			state Wait {
@@ -276,7 +203,7 @@ thing Server includes SynchroMsgs, ServerMsgs {
 				end
 
 				internal not_fetched
-					event ports?none
+					event clients?none
 					action do
 						log("nothing fetched")
 						switch_side()
@@ -284,7 +211,7 @@ thing Server includes SynchroMsgs, ServerMsgs {
 					end
 
 				transition request_fetched -> Wait
-					event request : ports?request
+					event request : clients?request
 					action do
 						target = request.target
 						message_text = request.content
@@ -294,12 +221,13 @@ thing Server includes SynchroMsgs, ServerMsgs {
 					end
 
 				transition broadcast_fetched -> Wait
-					event broadcast : ports?broadcast
+					event broadcast : clients?broadcast
 					action do
 						message_text = broadcast.content
 						log("fetched broadcast '" + message_text + "'")
+						var sender : EInteger = side
 						switch_side()
-						while (side != broadcast.sender) do
+						while (side != sender) do
 							target = side
 							deliver()
 							switch_side()
@@ -308,8 +236,15 @@ thing Server includes SynchroMsgs, ServerMsgs {
 					end
 			}
 
+			internal on_stop
+				event stop_request : synchro?stop_request
+				action do
+					log("stop request from client " + stop_request.emmiter)
+					stop_requests[stop_request.emmiter - 1] = 1
+				end
+
 			transition stop -> End
-				guard turn > 3
+				guard can_stop()
 		}
 
 		final state End {
@@ -325,23 +260,13 @@ configuration RingConfig {
 	instance server : Server
 	set server.number_sides = 2
 
-	instance port1 : Ports
-	set port1.port_number = 1
-	connector port1.server_synchro => server.synchro
-	connector server.ports => port1.server
-
 	instance client1 : Client
 	set client1.client_number = 1
-	connector client1.synchro => port1.client_synchro
-	connector client1.server_port => port1.client
-
-	instance port2 : Ports
-	set port2.port_number = 2
-	connector port2.server_synchro => server.synchro
-	connector server.ports => port2.server
+	connector client1.synchro => server.synchro
+	connector client1.server => server.clients
 
 	instance client2 : Client
 	set client2.client_number = 2
-	connector client2.synchro => port2.client_synchro
-	connector client2.server_port => port2.client
+	connector client2.synchro => server.synchro
+	connector client2.server => server.clients
 }
