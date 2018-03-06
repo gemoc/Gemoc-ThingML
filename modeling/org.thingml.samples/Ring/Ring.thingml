@@ -9,25 +9,42 @@ datatype EBoolean<1>
 
 thing fragment SynchroMsgs {
 	message start()
-	message stop()
+	message tic()
 	message stop_request(emmiter : EInteger)
+	message stop()
 }
 
 thing fragment DataMsgs {
 	// server wants to give a message to client
-	message deliver(target : EInteger, content : EString)
+	message deliver(target : EInteger, sender : EInteger, content : EString, param : EInteger)
 
 	// client gave a message to server
-	message ping()
+	message ping(emmiter : EInteger)
 	message fetch(target : EInteger)
 	message none()
-	message request(target : EInteger, content : EString)
-	message broadcast(content : EString)
+	message request(target : EInteger, content : EString, param : EInteger)
+	message broadcast(content : EString, param : EInteger)
 }
 
 thing Client includes SynchroMsgs, DataMsgs {
 
 	readonly property client_number : EInteger = 0
+	property mode : EString = "WantBroadcast"
+	property has_pinged : EInteger = 0
+	readonly property initial_timeout : EInteger = 30
+	property timeout : EInteger = 0
+	property target : EInteger = 0
+	property target_block : EInteger = 0
+	readonly property block_count : EInteger = 4
+	readonly property has_block : EInteger = 0
+	property block_wanted : EInteger = block_count - 1
+	property blocks_available : EInteger[9000]
+	set blocks_available[0] = 100
+	set blocks_available[1] = 200
+	set blocks_available[2] = 50
+	set blocks_available[3] = 200
+	property previous_mode : EString = "Idle"
+	property stop_sent : EInteger = 0
 
 	required port server {
 		receives deliver
@@ -40,55 +57,175 @@ thing Client includes SynchroMsgs, DataMsgs {
 
 	required port synchro {
 		receives start
-		receives stop
+		receives tic
 		sends stop_request
+		receives stop
 	}
 
 	function log(line : EString) do
 		print "Client " + client_number + " : " + line + "\n"
 	end
 
+	function index(offset : EInteger) : EInteger do
+		return client_number * block_count + offset
+	end
+
+	function ping() do
+		if (has_pinged == 0) do
+			has_pinged = 1
+			log("ping server")
+			server!ping(client_number)
+		end
+	end
+
+	function remaining() : EInteger do
+		var remaining_blocks : EInteger = block_count
+		var i : EInteger = 0
+		while (i < block_count) do
+			if (blocks_available[index(i)] == 0) do
+				remaining_blocks--
+			end
+			i++
+		end
+		return remaining_blocks
+	end
+
 	statechart Behaviour init Inactive {
+
+		on entry do
+			var i : EInteger = 0
+			while (i < block_count) do
+				blocks_available[index(i)] = blocks_available[i]
+				i++
+			end
+			blocks_available[index(has_block)] = 0
+		end
 
 		state Inactive {
 			transition start -> Active
 				event synchro?start
 		}
 
-		composite state Active init SayHello {
+		state Active {
 			on entry do
 				log("started")
+				var i : EInteger = 0
+				while (i < block_count) do
+					log(i + ": " + blocks_available[index(i)])
+					i++
+				end
 			end
 
-			state SayHello {
-				on entry do
-					log("ping server")
-					server!ping()
+			internal on_tic
+				event tic : synchro?tic
+				action do
+					if (target == 0) do
+						timeout--
+					end
 				end
 
-				transition on_fetch -> Wait
-					event fetch : server?fetch
-					guard fetch.target == client_number
-					action do
-						server!broadcast("hello, I am client " + client_number)
-						synchro!stop_request(client_number)
-					end
-			}
+			internal finished
+				guard remaining() == 0 and stop_sent == 0
+				action do
+					stop_sent = 1
+					synchro!stop_request(client_number)
+				end
 
-			final state Wait {}
+			internal timeout_reached 
+				guard timeout <= 0 and remaining() > 0
+				action do
+					log("rotate from: " + block_wanted)
+					block_wanted = (block_wanted + 1) % block_count
+					log("to: " + block_wanted)
+					while (blocks_available[index(block_wanted)] == 0) do
+						block_wanted = (block_wanted + 1) % block_count
+						log("to: " + block_wanted)
+					end
+					timeout = initial_timeout
+					mode = "WantAnnounce"
+					log("timeout reached, now wants " + block_wanted)
+					ping()
+				end
 
 			internal on_fetch
 				event fetch : server?fetch
 				guard fetch.target == client_number
 				action do
-					server!none()
+					has_pinged = 0
+					if (mode == "Idle") do
+						log("Idle: send none")
+						server!none()
+					end else if (mode == "WantAnnounce") do
+						log("WantAnnounce: send broadcast \"Want," + block_wanted + "\"")
+						timeout = initial_timeout
+						server!broadcast("Want", block_wanted)
+						mode = "Idle"
+					end else if (mode == "StartAnnounce") do
+						log("StartAnnounce: send broadcast \"Serve," + target + "\"")
+						timeout = initial_timeout
+						server!broadcast("Serve", target)
+						mode = "Give"
+						ping()
+					end else if (mode == "Give") do
+						log("Give: send block " + target_block + " to client " + target)
+						timeout = initial_timeout
+						server!request(target, "Give", target_block)
+						ping()
+					end else if (mode == "FinishedAnnounce") do
+						log("FinishedAnnounce: send broadcast \"Finished," + block_wanted + "\"")
+						server!broadcast("Finished", block_wanted)
+						mode = previous_mode
+						timeout = 0
+					end
 				end
 
 			internal on_deliver
 				event deliver : server?deliver
 				guard deliver.target == client_number
 				action do
-					log("message received : \"" + deliver.content + "\"")
+					log(deliver.sender + " sent message: \"" + deliver.content + "," + deliver.param + "\"")
+					if (deliver.content == "Want") do
+						if (target > 0 and target != deliver.sender) do
+							log("already sending to " + target + ", ignoring")
+						end else if (blocks_available[index(deliver.param)] == 0) do
+							target = deliver.sender
+							target_block = deliver.param
+							previous_mode = mode
+							mode = "StartAnnounce"
+							log("start sending block " + target_block + " to client " + target)
+							ping()
+						end else do
+							log("cannot send this block")
+							if (target > 0) do
+								log("stop sending to client " + target)
+								target = 0
+								mode = previous_mode
+							end
+						end
+					end else if (deliver.content == "Serve") do
+						if (target == deliver.param) do
+							log(deliver.sender + " is already serving client " + target + ", stop sending")
+							target = 0
+							mode = previous_mode
+						end
+					end else if (deliver.content == "Give") do
+						if (deliver.param == block_wanted) do
+							log("received part of block " + block_wanted)
+							timeout = initial_timeout
+							blocks_available[index(block_wanted)] = blocks_available[index(block_wanted)] - 1
+							if (blocks_available[index(block_wanted)] == 0) do
+								log("finished receiving block " + block_wanted)
+								mode = "FinishedAnnounce"
+								ping()
+							end
+						end
+					end else if (deliver.content == "Finished") do
+						if (deliver.sender == target and deliver.param == target_block) do
+							log("finished to send bloc " + target_block + " to client " + target)
+							target = 0
+							mode = previous_mode
+						end
+					end
 				end
 
 			transition stop -> End
@@ -106,14 +243,17 @@ thing Server includes SynchroMsgs, DataMsgs {
 	readonly property number_sides : EInteger = 0
 	property stop_requests : EInteger[number_sides]
 	property side : EInteger = 1
+	property sender : EInteger = 0
 	property target : EInteger = 0
 	property message_text : EString = ""
-	property waiting : EInteger = 0
+	property message_param : EInteger = 0
+	property waiting : EInteger[number_sides]
 
 	provided port synchro {
 		sends start
-		sends stop
+		sends tic
 		receives stop_request
+		sends stop
 	}
 
 	provided port clients {
@@ -137,6 +277,24 @@ thing Server includes SynchroMsgs, DataMsgs {
 		end
 	end
 
+	function init_waiting() do
+		var i : EInteger = 0
+		while (i < number_sides) do
+			waiting[i] = 0
+			i++
+		end
+	end
+
+	function waiting() : EInteger do
+		var count : EInteger = 0
+		var i : EInteger = 0
+		while (i < number_sides) do
+			if (waiting[i] > 0) count++
+			i++
+		end
+		return count
+	end
+
 	function can_stop() : EBoolean do
 		var number : EInteger = number_sides
 		var i : EInteger = 0
@@ -151,14 +309,14 @@ thing Server includes SynchroMsgs, DataMsgs {
 		var new_side : EInteger = (side % number_sides) + 1
 		log("side " + side + " --> " + new_side)
 		side = new_side
+		if (side == 1) synchro!tic()
 	end
 
 	function deliver() do
 		if (target == side) do
 			log("deliver to client " + side)
-			clients!deliver(side, message_text)
+			clients!deliver(side, sender, message_text, message_param)
 			target = 0
-			waiting--
 		end else do
 			log("nothing to deliver for client " + side)
 		end
@@ -167,12 +325,14 @@ thing Server includes SynchroMsgs, DataMsgs {
 	function fetch() do
 		log("fetch on client " + side)
 		clients!fetch(side)
+		waiting[side - 1] = 0
 	end
 
 	statechart Behaviour init Active {
 
 		on entry do
 			init_stop_requests()
+			init_waiting()
 			log("started")
 			synchro!start()
 		end
@@ -180,20 +340,23 @@ thing Server includes SynchroMsgs, DataMsgs {
 		composite state Active init Wait {
 
 			internal on_ping
-				event clients?ping
-				action waiting++
+				event ping : clients?ping
+				action do
+					log("pinged")
+					waiting[ping.emmiter - 1] = 1
+				end
 
 			state Wait {
 				internal not_delivered
-					guard waiting > 0 and target > 0
+					guard waiting() > 0 and target > 0
 					action do
 						switch_side()
 						deliver()
 					end
 
-				transition delivered -> Fetch
-					guard waiting > 0 and target == 0
-					action log(waiting + " waiting")
+				transition client_is_waiting -> Fetch
+					guard waiting() > 0 and target == 0
+					action log(waiting() + " waiting")
 
 			}
 
@@ -213,9 +376,11 @@ thing Server includes SynchroMsgs, DataMsgs {
 				transition request_fetched -> Wait
 					event request : clients?request
 					action do
+						sender = side
 						target = request.target
 						message_text = request.content
-						log("fetched request '" + message_text + "' for " + target)
+						message_param = request.param
+						log("fetched request '" + message_text + "," + message_param + "' for " + target)
 						switch_side()
 						deliver()
 					end
@@ -223,9 +388,10 @@ thing Server includes SynchroMsgs, DataMsgs {
 				transition broadcast_fetched -> Wait
 					event broadcast : clients?broadcast
 					action do
+						sender = side
 						message_text = broadcast.content
-						log("fetched broadcast '" + message_text + "'")
-						var sender : EInteger = side
+						message_param = broadcast.param
+						log("fetched broadcast '" + message_text + "," + message_param + "'")
 						switch_side()
 						while (side != sender) do
 							target = side
@@ -258,15 +424,29 @@ thing Server includes SynchroMsgs, DataMsgs {
 
 configuration RingConfig {
 	instance server : Server
-	set server.number_sides = 2
+	set server.number_sides = 4
 
 	instance client1 : Client
 	set client1.client_number = 1
+	set client1.has_block = 2
 	connector client1.synchro => server.synchro
 	connector client1.server => server.clients
 
 	instance client2 : Client
 	set client2.client_number = 2
+	set client2.has_block = 1
 	connector client2.synchro => server.synchro
 	connector client2.server => server.clients
+
+	instance client3 : Client
+	set client3.client_number = 3
+	set client3.has_block = 0
+	connector client3.synchro => server.synchro
+	connector client3.server => server.clients
+
+	instance client4 : Client
+	set client4.client_number = 4
+	set client4.has_block = 3
+	connector client4.synchro => server.synchro
+	connector client4.server => server.clients
 }
