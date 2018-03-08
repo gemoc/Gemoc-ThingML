@@ -77,10 +77,16 @@ thing Producer includes DataMsgs, SynchroMsgs {
 				event output?nack
 				guard (consumer_ack > 0) and (consumer_count == (consumer_ack + consumer_nack + 1))
 
-			transition -> End
+			transition -> Error
 				event output?nack
 				guard consumer_count == (consumer_nack + 1)
-				action log("Message has not been consumed")
+		}
+
+		final state Error {
+			on entry do
+				synchro!stop()
+				log("Error")
+			end
 		}
 
 		final state End {
