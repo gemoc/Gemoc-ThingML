@@ -1,0 +1,15 @@
+package thingml
+
+external language ThingML {
+	syntax "platform:/plugin/thingml/model/generated/ThingML.ecore"
+}
+
+language XThingML inherits ThingML {
+	syntax "platform:/resource/thingml.model/model/xthingml.ecore"
+	with thingml.k3.AConfiguration
+	with thingml.k3.AExpression
+	with thingml.k3.AIntegerLiteral
+	with thingml.k3.AStringLiteral
+	with thingml.k3.AInstance
+	with thingml.k3.Printer
+}
