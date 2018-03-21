@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.thingml.xthingmlmt.thingML.ThingMLModel#getImportURI <em>Import URI</em>}</li>
+ *   <li>{@link org.thingml.xthingmlmt.thingML.ThingMLModel#getImports <em>Imports</em>}</li>
  *   <li>{@link org.thingml.xthingmlmt.thingML.ThingMLModel#getTypes <em>Types</em>}</li>
  *   <li>{@link org.thingml.xthingmlmt.thingML.ThingMLModel#getProtocols <em>Protocols</em>}</li>
  *   <li>{@link org.thingml.xthingmlmt.thingML.ThingMLModel#getConfigs <em>Configs</em>}</li>
@@ -27,20 +27,20 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ThingMLModel extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Import URI</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link org.thingml.xthingmlmt.thingML.Import}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Import URI</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Import URI</em>' attribute list.
-	 * @see org.thingml.xthingmlmt.thingML.ThingMLPackage#getThingMLModel_ImportURI()
-	 * @model unique="false"
+	 * @return the value of the '<em>Imports</em>' containment reference list.
+	 * @see org.thingml.xthingmlmt.thingML.ThingMLPackage#getThingMLModel_Imports()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<String> getImportURI();
+	EList<Import> getImports();
 
 	/**
 	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
@@ -89,5 +89,21 @@ public interface ThingMLModel extends EObject {
 	 * @generated
 	 */
 	EList<Configuration> getConfigs();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model pMany="true"
+	 * @generated
+	 */
+	void initialize(EList<String> p);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void main();
 
 } // ThingMLModel

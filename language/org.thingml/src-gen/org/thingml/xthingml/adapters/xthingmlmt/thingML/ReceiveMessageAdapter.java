@@ -50,6 +50,11 @@ public class ReceiveMessageAdapter extends EObjectAdapter<ReceiveMessage> implem
     else adaptee.setMessage(null);
   }
   
+  @Override
+  public boolean happened() {
+    return org.thingml.xthingml.aspects.ReceiveMessageAspect.happened(adaptee);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   @Override

@@ -28,7 +28,7 @@ public class ActionBlockAdapter extends EObjectAdapter<ActionBlock> implements o
   
   @Override
   public void execute() {
-    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+    org.thingml.xthingml.aspects.ActionBlockAspect.execute(adaptee);
   }
   
   @Override

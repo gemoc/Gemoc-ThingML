@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.thingml.xthingml.adapters.xthingmlmt.XThingMLMTAdaptersFactory;
 import org.thingml.xthingml.thingML.ThingMLModel;
 import org.thingml.xthingmlmt.thingML.Configuration;
+import org.thingml.xthingmlmt.thingML.Import;
 import org.thingml.xthingmlmt.thingML.Protocol;
 import org.thingml.xthingmlmt.thingML.Type;
 
@@ -19,9 +20,13 @@ public class ThingMLModelAdapter extends EObjectAdapter<ThingMLModel> implements
     adaptersFactory = org.thingml.xthingml.adapters.xthingmlmt.XThingMLMTAdaptersFactory.getInstance();
   }
   
+  private EList<Import> imports_;
+  
   @Override
-  public EList<String> getImportURI() {
-    return adaptee.getImportURI();
+  public EList<Import> getImports() {
+    if (imports_ == null)
+    	imports_ = fr.inria.diverse.melange.adapters.EListAdapter.newInstance(adaptee.getImports(), adaptersFactory, eResource);
+    return imports_;
   }
   
   private EList<Type> types_;
@@ -52,6 +57,17 @@ public class ThingMLModelAdapter extends EObjectAdapter<ThingMLModel> implements
   }
   
   @Override
+  public void initialize(final org.eclipse.emf.common.util.EList<java.lang.String> p) {
+    org.thingml.xthingml.aspects.ThingMLModelAspect.initialize(adaptee, p
+    );
+  }
+  
+  @Override
+  public void main() {
+    org.thingml.xthingml.aspects.ThingMLModelAspect.main(adaptee);
+  }
+  
+  @Override
   public EClass eClass() {
     return org.thingml.xthingmlmt.thingML.ThingMLPackage.eINSTANCE.getThingMLModel();
   }
@@ -59,8 +75,8 @@ public class ThingMLModelAdapter extends EObjectAdapter<ThingMLModel> implements
   @Override
   public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
     switch (featureID) {
-    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__IMPORT_URI:
-    		return getImportURI();
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__IMPORTS:
+    		return getImports();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__TYPES:
     		return getTypes();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__PROTOCOLS:
@@ -75,8 +91,8 @@ public class ThingMLModelAdapter extends EObjectAdapter<ThingMLModel> implements
   @Override
   public boolean eIsSet(final int featureID) {
     switch (featureID) {
-    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__IMPORT_URI:
-    		return getImportURI() != null && !getImportURI().isEmpty();
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__IMPORTS:
+    		return getImports() != null && !getImports().isEmpty();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__TYPES:
     		return getTypes() != null && !getTypes().isEmpty();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__PROTOCOLS:
@@ -91,9 +107,9 @@ public class ThingMLModelAdapter extends EObjectAdapter<ThingMLModel> implements
   @Override
   public void eSet(final int featureID, final Object newValue) {
     switch (featureID) {
-    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__IMPORT_URI:
-    		getImportURI().clear();
-    		getImportURI().addAll((Collection) newValue);
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__IMPORTS:
+    		getImports().clear();
+    		getImports().addAll((Collection) newValue);
     		return;
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.THING_ML_MODEL__TYPES:
     		getTypes().clear();

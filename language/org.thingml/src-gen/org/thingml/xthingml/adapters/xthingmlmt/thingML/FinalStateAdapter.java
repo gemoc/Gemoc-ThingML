@@ -10,6 +10,7 @@ import org.thingml.xthingmlmt.thingML.Action;
 import org.thingml.xthingmlmt.thingML.InternalTransition;
 import org.thingml.xthingmlmt.thingML.PlatformAnnotation;
 import org.thingml.xthingmlmt.thingML.Property;
+import org.thingml.xthingmlmt.thingML.State;
 import org.thingml.xthingmlmt.thingML.Transition;
 
 @SuppressWarnings("all")
@@ -92,8 +93,8 @@ public class FinalStateAdapter extends EObjectAdapter<FinalState> implements org
   }
   
   @Override
-  public Transition getTransition() {
-    return (Transition) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.StateAspect.getTransition(adaptee), eResource);
+  public State run() {
+    return (State) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.StateAspect.run(adaptee), eResource);
   }
   
   protected final static String NAME_EDEFAULT = null;

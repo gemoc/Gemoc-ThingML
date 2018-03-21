@@ -8,8 +8,8 @@
     </genDataTypes>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//ThingMLModel"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="XThingMLMT.ecore#//ThingMLModel/importURI"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//ThingMLModel/imports"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//ThingMLModel/types"/>
@@ -19,6 +19,24 @@
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//ThingMLModel/configs"/>
+      </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//ThingMLModel/initialize"/>
+        <genParameters>
+          <ecoreParameter href="XThingMLMT.ecore#//ThingMLModel/initialize/p"/>
+        </genParameters>
+      </genOperations>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//ThingMLModel/main"/>
+      </genOperations>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="XThingMLMT.ecore#//Import"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="XThingMLMT.ecore#//Import/importURI"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="XThingMLMT.ecore#//Import/from"/>
       </genFeatures>
     </genClasses>
     <genClasses>
@@ -62,6 +80,12 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Type"/>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Type/initialize"/>
+      </genOperations>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Type/run"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//PrimitiveType"/>
@@ -109,12 +133,9 @@
       </genFeatures>
       <genOperations>
         <ecoreOperation href="XThingMLMT.ecore#//Thing/initialize"/>
-        <genParameters>
-          <ecoreParameter href="XThingMLMT.ecore#//Thing/initialize/p"/>
-        </genParameters>
       </genOperations>
       <genOperations>
-        <ecoreOperation href="XThingMLMT.ecore#//Thing/main"/>
+        <ecoreOperation href="XThingMLMT.ecore#//Thing/run"/>
       </genOperations>
     </genClasses>
     <genClasses>
@@ -168,11 +189,26 @@
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Port"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//Port/sends"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//Port/sends.1"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//Port/receives"/>
       </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//Port/messages"/>
+      </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Port/hasReceived"/>
+        <genParameters>
+          <ecoreParameter href="XThingMLMT.ecore#//Port/hasReceived/message"/>
+        </genParameters>
+      </genOperations>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Port/sends"/>
+        <genParameters>
+          <ecoreParameter href="XThingMLMT.ecore#//Port/sends/message"/>
+        </genParameters>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//RequiredPort"/>
@@ -204,7 +240,7 @@
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//State/outgoing"/>
       </genFeatures>
       <genOperations>
-        <ecoreOperation href="XThingMLMT.ecore#//State/getTransition"/>
+        <ecoreOperation href="XThingMLMT.ecore#//State/run"/>
       </genOperations>
     </genClasses>
     <genClasses>
@@ -218,12 +254,27 @@
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//Handler/action"/>
       </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Handler/isValid"/>
+      </genOperations>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Handler/fire"/>
+        <genParameters>
+          <ecoreParameter href="XThingMLMT.ecore#//Handler/fire/state"/>
+        </genParameters>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Transition"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//Transition/target"/>
       </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Transition/fire"/>
+        <genParameters>
+          <ecoreParameter href="XThingMLMT.ecore#//Transition/fire/state"/>
+        </genParameters>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//InternalTransition"/>
@@ -272,6 +323,9 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Event"/>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//Event/happened"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//ReceiveMessage"/>
@@ -281,6 +335,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//ReceiveMessage/message"/>
       </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//ReceiveMessage/happened"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//Action"/>
@@ -293,6 +350,9 @@
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//ActionBlock/actions"/>
       </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//ActionBlock/execute"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//ExternStatement"/>
@@ -323,6 +383,9 @@
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XThingMLMT.ecore#//SendAction/parameters"/>
       </genFeatures>
+      <genOperations>
+        <ecoreOperation href="XThingMLMT.ecore#//SendAction/execute"/>
+      </genOperations>
     </genClasses>
     <genClasses>
       <ecoreClass href="XThingMLMT.ecore#//VariableAssignment"/>

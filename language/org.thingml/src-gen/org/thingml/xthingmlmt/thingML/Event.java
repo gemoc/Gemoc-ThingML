@@ -14,4 +14,12 @@ package org.thingml.xthingmlmt.thingML;
  * @generated
  */
 public interface Event extends NamedElement {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean happened();
+
 } // Event

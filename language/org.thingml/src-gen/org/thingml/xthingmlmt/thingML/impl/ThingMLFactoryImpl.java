@@ -58,6 +58,7 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ThingMLPackage.THING_ML_MODEL: return createThingMLModel();
+			case ThingMLPackage.IMPORT: return createImport();
 			case ThingMLPackage.PLATFORM_ANNOTATION: return createPlatformAnnotation();
 			case ThingMLPackage.NAMED_ELEMENT: return createNamedElement();
 			case ThingMLPackage.ANNOTATED_ELEMENT: return createAnnotatedElement();
@@ -182,6 +183,15 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	 * @generated
 	 */
 	public ThingMLModel createThingMLModel() {
+		throw new UnsupportedOperationException("Cannot invoke element creation on a model type");
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Import createImport() {
 		throw new UnsupportedOperationException("Cannot invoke element creation on a model type");
 	}
 

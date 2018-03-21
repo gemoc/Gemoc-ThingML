@@ -4,16 +4,14 @@ thing fragment PingPongMsgs {
 }
 
 thing PingServer includes PingPongMsgs {
-	
 	provided port ping_service {
 		sends pong
 		receives ping
 	}
-	
+
 	statechart PingServerMachine init Active {
-		
 		on entry print "Ping Server Started!\n"
-		
+
 		state Active {
 			internal
 				event ping_service?ping
@@ -23,32 +21,26 @@ thing PingServer includes PingPongMsgs {
 }
 
 thing PingClient includes PingPongMsgs {
-	
+
 	required port ping_service {
 		receives pong
 		sends ping
 	}
-	
+
 	statechart PingClientMachine init Ping {
-		
 		on entry print "Ping Client Started!\n"
-		
+
 		state Ping {
 			on entry do
 				print "Send Ping..."
 				ping_service!ping()
 			end
-			
-			transition PONG -> Pong
+
+			transition PONG -> Stop
 				event ping_service?pong
+				action print "Got Pong!\n"
 		}
-		
-		state Pong {
-			on entry print "Got Pong!\n"
-			
-			transition -> Stop
-		}
-		
+
 		final state Stop {
 			on entry print "Bye.\n"
 		}

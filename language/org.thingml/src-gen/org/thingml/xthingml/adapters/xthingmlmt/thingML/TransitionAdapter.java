@@ -88,6 +88,17 @@ public class TransitionAdapter extends EObjectAdapter<Transition> implements org
     else adaptee.setTarget(null);
   }
   
+  @Override
+  public State fire(final State state) {
+    return (State) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.TransitionAspect.fire(adaptee, (org.thingml.xthingml.thingML.State)((EObjectAdapter)state).getAdaptee()
+    ), eResource);
+  }
+  
+  @Override
+  public boolean isValid() {
+    return org.thingml.xthingml.aspects.HandlerAspect.isValid(adaptee);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   @Override

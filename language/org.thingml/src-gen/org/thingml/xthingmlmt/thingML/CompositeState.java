@@ -95,6 +95,6 @@ public interface CompositeState extends State, StateContainer {
 	 * @model
 	 * @generated
 	 */
-	void run();
+	State run();
 
 } // CompositeState

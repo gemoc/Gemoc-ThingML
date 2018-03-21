@@ -179,10 +179,10 @@ public interface Thing extends Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model pMany="true"
+	 * @model
 	 * @generated
 	 */
-	void initialize(EList<String> p);
+	void initialize();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +190,6 @@ public interface Thing extends Type {
 	 * @model
 	 * @generated
 	 */
-	void main();
+	void run();
 
 } // Thing

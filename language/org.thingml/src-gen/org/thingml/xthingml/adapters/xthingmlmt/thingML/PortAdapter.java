@@ -55,6 +55,23 @@ public class PortAdapter extends EObjectAdapter<Port> implements org.thingml.xth
     return receives_;
   }
   
+  @Override
+  public boolean hasReceived(final Message message) {
+    return org.thingml.xthingml.aspects.PortAspect.hasReceived(adaptee, (org.thingml.xthingml.thingML.Message)((EObjectAdapter)message).getAdaptee()
+    );
+  }
+  
+  @Override
+  public EList<Message> getMessages() {
+    return fr.inria.diverse.melange.adapters.EListAdapter.newInstance(org.thingml.xthingml.aspects.PortAspect.messages(adaptee), adaptersFactory, eResource);
+  }
+  
+  @Override
+  public void sends(final Message message) {
+    org.thingml.xthingml.aspects.PortAspect.sends(adaptee, (org.thingml.xthingml.thingML.Message)((EObjectAdapter)message).getAdaptee()
+    );
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   @Override
@@ -73,6 +90,8 @@ public class PortAdapter extends EObjectAdapter<Port> implements org.thingml.xth
     		return getSends();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PORT__RECEIVES:
     		return getReceives();
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PORT__MESSAGES:
+    		return getMessages();
     }
     
     return super.eGet(featureID, resolve, coreType);
@@ -89,6 +108,8 @@ public class PortAdapter extends EObjectAdapter<Port> implements org.thingml.xth
     		return getSends() != null && !getSends().isEmpty();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PORT__RECEIVES:
     		return getReceives() != null && !getReceives().isEmpty();
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PORT__MESSAGES:
+    		return getMessages() != null && !getMessages().isEmpty();
     }
     
     return super.eIsSet(featureID);
@@ -113,6 +134,10 @@ public class PortAdapter extends EObjectAdapter<Port> implements org.thingml.xth
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PORT__RECEIVES:
     		getReceives().clear();
     		getReceives().addAll((Collection) newValue);
+    		return;
+    	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PORT__MESSAGES:
+    		getMessages().clear();
+    		getMessages().addAll((Collection) newValue);
     		return;
     }
     

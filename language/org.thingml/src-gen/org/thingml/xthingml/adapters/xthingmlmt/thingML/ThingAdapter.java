@@ -119,14 +119,13 @@ public class ThingAdapter extends EObjectAdapter<Thing> implements org.thingml.x
   }
   
   @Override
-  public void initialize(final org.eclipse.emf.common.util.EList<java.lang.String> p) {
-    org.thingml.xthingml.aspects.ThingAspect.initialize(adaptee, p
-    );
+  public void initialize() {
+    org.thingml.xthingml.aspects.ThingAspect.initialize(adaptee);
   }
   
   @Override
-  public void main() {
-    org.thingml.xthingml.aspects.ThingAspect.main(adaptee);
+  public void run() {
+    org.thingml.xthingml.aspects.ThingAspect.run(adaptee);
   }
   
   protected final static String NAME_EDEFAULT = null;

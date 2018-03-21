@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="thingML" nsURI="http://org.thingml.xthingmlmt/thingML/" nsPrefix="thingML">
   <eClassifiers xsi:type="ecore:EClass" name="ThingMLModel">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" unique="false" upperBound="-1">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+    <eOperations name="initialize">
+      <eAnnotations source="aspect"/>
+      <eParameters name="p" upperBound="-1">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="main">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1" eType="//Import" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1" eType="//Type" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocols" upperBound="-1" eType="//Protocol" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="configs" upperBound="-1" eType="//Configuration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="from">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PlatformAnnotation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
@@ -34,10 +49,17 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cardinality" eType="//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="//NamedElement //AnnotatedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="//NamedElement //AnnotatedElement">
+    <eOperations name="initialize">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eOperations name="run">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="//Type">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ByteSize">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectType" eSuperTypes="//Type"/>
@@ -48,11 +70,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="//Type">
     <eOperations name="initialize">
       <eAnnotations source="aspect"/>
-      <eParameters name="p" upperBound="-1">
-        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </eParameters>
     </eOperations>
-    <eOperations name="main">
+    <eOperations name="run">
       <eAnnotations source="aspect"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragment">
@@ -91,8 +110,20 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="//Variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="//NamedElement //AnnotatedElement">
+    <eOperations name="hasReceived">
+      <eAnnotations source="aspect"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="message" eType="//Message"/>
+    </eOperations>
+    <eOperations name="sends">
+      <eAnnotations source="aspect"/>
+      <eParameters name="message" eType="//Message"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sends" unique="false" upperBound="-1" eType="//Message"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="receives" unique="false" upperBound="-1" eType="//Message"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" unique="false" upperBound="-1" eType="//Message">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RequiredPort" eSuperTypes="//Port">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional">
@@ -102,7 +133,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ProvidedPort" eSuperTypes="//Port"/>
   <eClassifiers xsi:type="ecore:EClass" name="InternalPort" eSuperTypes="//Port"/>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="//NamedElement //AnnotatedElement">
-    <eOperations name="getTransition" eType="//Transition">
+    <eOperations name="run" eType="//State">
       <eAnnotations source="aspect"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1" eType="//Property" containment="true"/>
@@ -112,11 +143,23 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1" eType="//Transition" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Handler" eSuperTypes="//NamedElement //AnnotatedElement">
+    <eOperations name="isValid">
+      <eAnnotations source="aspect"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="fire" eType="//State">
+      <eAnnotations source="aspect"/>
+      <eParameters name="state" eType="//State"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="//Event" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="//Action" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="//Handler">
+    <eOperations name="fire" eType="//State">
+      <eAnnotations source="aspect"/>
+      <eParameters name="state" eType="//State"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternalTransition" eSuperTypes="//Handler"/>
@@ -124,7 +167,7 @@
     <eOperations name="initialize">
       <eAnnotations source="aspect"/>
     </eOperations>
-    <eOperations name="run">
+    <eOperations name="run" eType="//State">
       <eAnnotations source="aspect"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" upperBound="-1" eType="//Region" containment="true"/>
@@ -145,8 +188,17 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="substate" upperBound="-1" eType="//State" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="//NamedElement">
+    <eOperations name="happened">
+      <eAnnotations source="aspect"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReceiveMessage" eSuperTypes="//Event">
+    <eOperations name="happened">
+      <eAnnotations source="aspect"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="//Port"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="//Message"/>
   </eClassifiers>
@@ -156,6 +208,9 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionBlock" eSuperTypes="//Action">
+    <eOperations name="execute">
+      <eAnnotations source="aspect"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1" eType="//Action" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExternStatement" eSuperTypes="//Action">
@@ -171,6 +226,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="init" eType="//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SendAction" eSuperTypes="//Action">
+    <eOperations name="execute">
+      <eAnnotations source="aspect"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="//Port"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="//Message"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//Expression" containment="true"/>
@@ -247,7 +305,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="intValue">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="//Expression">

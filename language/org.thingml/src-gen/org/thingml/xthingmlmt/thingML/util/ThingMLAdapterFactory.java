@@ -72,6 +72,10 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 				return createThingMLModelAdapter();
 			}
 			@Override
+			public Adapter caseImport(Import object) {
+				return createImportAdapter();
+			}
+			@Override
 			public Adapter casePlatformAnnotation(PlatformAnnotation object) {
 				return createPlatformAnnotationAdapter();
 			}
@@ -434,6 +438,20 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createThingMLModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.thingml.xthingmlmt.thingML.Import <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.thingml.xthingmlmt.thingML.Import
+	 * @generated
+	 */
+	public Adapter createImportAdapter() {
 		return null;
 	}
 

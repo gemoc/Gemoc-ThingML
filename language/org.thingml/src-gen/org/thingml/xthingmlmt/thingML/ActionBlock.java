@@ -37,4 +37,12 @@ public interface ActionBlock extends Action {
 	 */
 	EList<Action> getActions();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void execute();
+
 } // ActionBlock

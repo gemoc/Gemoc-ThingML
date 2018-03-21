@@ -91,4 +91,12 @@ public interface SendAction extends Action {
 	 */
 	EList<Expression> getParameters();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void execute();
+
 } // SendAction

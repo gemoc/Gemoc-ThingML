@@ -92,8 +92,8 @@ public class StateAdapter extends EObjectAdapter<State> implements org.thingml.x
   }
   
   @Override
-  public Transition getTransition() {
-    return (Transition) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.StateAspect.getTransition(adaptee), eResource);
+  public org.thingml.xthingmlmt.thingML.State run() {
+    return (org.thingml.xthingmlmt.thingML.State) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.StateAspect.run(adaptee), eResource);
   }
   
   protected final static String NAME_EDEFAULT = null;

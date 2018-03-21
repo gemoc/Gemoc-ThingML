@@ -160,13 +160,8 @@ public class CompositeStateAdapter extends EObjectAdapter<CompositeState> implem
   }
   
   @Override
-  public void run() {
-    org.thingml.xthingml.aspects.CompositeStateAspect.run(adaptee);
-  }
-  
-  @Override
-  public Transition getTransition() {
-    return (Transition) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.StateAspect.getTransition(adaptee), eResource);
+  public State run() {
+    return (State) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.CompositeStateAspect.run(adaptee), eResource);
   }
   
   protected final static String NAME_EDEFAULT = null;

@@ -46,4 +46,12 @@ public interface Transition extends Handler {
 	 */
 	void setTarget(State value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	State fire(State state);
+
 } // Transition

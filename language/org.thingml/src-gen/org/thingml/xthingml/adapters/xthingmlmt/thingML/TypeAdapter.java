@@ -36,6 +36,16 @@ public class TypeAdapter extends EObjectAdapter<Type> implements org.thingml.xth
     return annotations_;
   }
   
+  @Override
+  public void initialize() {
+    org.thingml.xthingml.aspects.TypeAspect.initialize(adaptee);
+  }
+  
+  @Override
+  public void run() {
+    org.thingml.xthingml.aspects.TypeAspect.run(adaptee);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   @Override

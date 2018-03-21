@@ -40,6 +40,7 @@ import org.thingml.xthingmlmt.thingML.FunctionCallStatement;
 import org.thingml.xthingmlmt.thingML.GreaterExpression;
 import org.thingml.xthingmlmt.thingML.GreaterOrEqualExpression;
 import org.thingml.xthingmlmt.thingML.Handler;
+import org.thingml.xthingmlmt.thingML.Import;
 import org.thingml.xthingmlmt.thingML.Increment;
 import org.thingml.xthingmlmt.thingML.Instance;
 import org.thingml.xthingmlmt.thingML.IntegerLiteral;
@@ -99,6 +100,11 @@ public class ThingMLFactoryAdapter extends EFactoryImpl implements ThingMLFactor
   @Override
   public ThingMLModel createThingMLModel() {
     return adaptersFactory.createThingMLModelAdapter(thingMLAdaptee.createThingMLModel(), null);
+  }
+  
+  @Override
+  public Import createImport() {
+    return adaptersFactory.createImportAdapter(thingMLAdaptee.createImport(), null);
   }
   
   @Override

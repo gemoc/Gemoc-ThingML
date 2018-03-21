@@ -128,9 +128,9 @@ public interface State extends NamedElement, AnnotatedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @model
 	 * @generated
 	 */
-	Transition getTransition();
+	State run();
 
 } // State

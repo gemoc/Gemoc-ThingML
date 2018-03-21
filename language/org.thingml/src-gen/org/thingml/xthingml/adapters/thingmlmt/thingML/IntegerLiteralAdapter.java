@@ -15,16 +15,16 @@ public class IntegerLiteralAdapter extends EObjectAdapter<IntegerLiteral> implem
   }
   
   @Override
-  public int getIntValue() {
+  public long getIntValue() {
     return adaptee.getIntValue();
   }
   
   @Override
-  public void setIntValue(final int o) {
+  public void setIntValue(final long o) {
     adaptee.setIntValue(o);
   }
   
-  protected final static int INT_VALUE_EDEFAULT = 0;
+  protected final static long INT_VALUE_EDEFAULT = 0L;
   
   @Override
   public EClass eClass() {
@@ -35,7 +35,7 @@ public class IntegerLiteralAdapter extends EObjectAdapter<IntegerLiteral> implem
   public Object eGet(final int featureID, final boolean resolve, final boolean coreType) {
     switch (featureID) {
     	case org.thingml.xtext.thingML.ThingMLPackage.INTEGER_LITERAL__INT_VALUE:
-    		return new java.lang.Integer(getIntValue());
+    		return new java.lang.Long(getIntValue());
     }
     
     return super.eGet(featureID, resolve, coreType);
@@ -55,7 +55,7 @@ public class IntegerLiteralAdapter extends EObjectAdapter<IntegerLiteral> implem
   public void eSet(final int featureID, final Object newValue) {
     switch (featureID) {
     	case org.thingml.xtext.thingML.ThingMLPackage.INTEGER_LITERAL__INT_VALUE:
-    		setIntValue(((java.lang.Integer) newValue).intValue());
+    		setIntValue(((java.lang.Long) newValue).longValue());
     		return;
     }
     

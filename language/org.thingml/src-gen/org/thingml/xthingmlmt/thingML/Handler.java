@@ -100,4 +100,20 @@ public interface Handler extends NamedElement, AnnotatedElement {
 	 */
 	void setAction(Action value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isValid();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	State fire(State state);
+
 } // Handler

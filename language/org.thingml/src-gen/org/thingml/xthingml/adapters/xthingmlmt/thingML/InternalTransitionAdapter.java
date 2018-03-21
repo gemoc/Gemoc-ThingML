@@ -10,6 +10,7 @@ import org.thingml.xthingmlmt.thingML.Action;
 import org.thingml.xthingmlmt.thingML.Event;
 import org.thingml.xthingmlmt.thingML.Expression;
 import org.thingml.xthingmlmt.thingML.PlatformAnnotation;
+import org.thingml.xthingmlmt.thingML.State;
 
 @SuppressWarnings("all")
 public class InternalTransitionAdapter extends EObjectAdapter<InternalTransition> implements org.thingml.xthingmlmt.thingML.InternalTransition {
@@ -73,6 +74,17 @@ public class InternalTransitionAdapter extends EObjectAdapter<InternalTransition
     if (o != null)
     	adaptee.setAction(((org.thingml.xthingml.adapters.xthingmlmt.thingML.ActionAdapter) o).getAdaptee());
     else adaptee.setAction(null);
+  }
+  
+  @Override
+  public State fire(final State state) {
+    return (State) adaptersFactory.createAdapter(org.thingml.xthingml.aspects.HandlerAspect.fire(adaptee, (org.thingml.xthingml.thingML.State)((EObjectAdapter)state).getAdaptee()
+    ), eResource);
+  }
+  
+  @Override
+  public boolean isValid() {
+    return org.thingml.xthingml.aspects.HandlerAspect.isValid(adaptee);
   }
   
   protected final static String NAME_EDEFAULT = null;

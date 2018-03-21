@@ -24,6 +24,11 @@ public class EventAdapter extends EObjectAdapter<Event> implements org.thingml.x
     adaptee.setName(o);
   }
   
+  @Override
+  public boolean happened() {
+    return org.thingml.xthingml.aspects.EventAspect.happened(adaptee);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
   @Override

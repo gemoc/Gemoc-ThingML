@@ -42,6 +42,7 @@ import org.thingml.xthingml.adapters.xthingmlmt.thingML.FunctionCallStatementAda
 import org.thingml.xthingml.adapters.xthingmlmt.thingML.GreaterExpressionAdapter;
 import org.thingml.xthingml.adapters.xthingmlmt.thingML.GreaterOrEqualExpressionAdapter;
 import org.thingml.xthingml.adapters.xthingmlmt.thingML.HandlerAdapter;
+import org.thingml.xthingml.adapters.xthingmlmt.thingML.ImportAdapter;
 import org.thingml.xthingml.adapters.xthingmlmt.thingML.IncrementAdapter;
 import org.thingml.xthingml.adapters.xthingmlmt.thingML.InstanceAdapter;
 import org.thingml.xthingml.adapters.xthingmlmt.thingML.IntegerLiteralAdapter;
@@ -126,6 +127,7 @@ import org.thingml.xthingml.thingML.FunctionCallStatement;
 import org.thingml.xthingml.thingML.GreaterExpression;
 import org.thingml.xthingml.thingML.GreaterOrEqualExpression;
 import org.thingml.xthingml.thingML.Handler;
+import org.thingml.xthingml.thingML.Import;
 import org.thingml.xthingml.thingML.Increment;
 import org.thingml.xthingml.thingML.Instance;
 import org.thingml.xthingml.thingML.IntegerLiteral;
@@ -195,6 +197,9 @@ public class XThingMLMTAdaptersFactory implements AdaptersFactory {
     if (o instanceof org.thingml.xthingml.thingML.ThingMLModel){
     	return createThingMLModelAdapter((org.thingml.xthingml.thingML.ThingMLModel) o, res);
     }
+    if (o instanceof org.thingml.xthingml.thingML.Import){
+    	return createImportAdapter((org.thingml.xthingml.thingML.Import) o, res);
+    }
     if (o instanceof org.thingml.xthingml.thingML.PlatformAnnotation){
     	return createPlatformAnnotationAdapter((org.thingml.xthingml.thingML.PlatformAnnotation) o, res);
     }
@@ -240,9 +245,6 @@ public class XThingMLMTAdaptersFactory implements AdaptersFactory {
     if (o instanceof org.thingml.xthingml.thingML.ProvidedPort){
     	return createProvidedPortAdapter((org.thingml.xthingml.thingML.ProvidedPort) o, res);
     }
-    if (o instanceof org.thingml.xthingml.thingML.Port){
-    	return createPortAdapter((org.thingml.xthingml.thingML.Port) o, res);
-    }
     if (o instanceof org.thingml.xthingml.thingML.NamedElement){
     	return createNamedElementAdapter((org.thingml.xthingml.thingML.NamedElement) o, res);
     }
@@ -257,6 +259,9 @@ public class XThingMLMTAdaptersFactory implements AdaptersFactory {
     }
     if (o instanceof org.thingml.xthingml.thingML.InternalPort){
     	return createInternalPortAdapter((org.thingml.xthingml.thingML.InternalPort) o, res);
+    }
+    if (o instanceof org.thingml.xthingml.thingML.Port){
+    	return createPortAdapter((org.thingml.xthingml.thingML.Port) o, res);
     }
     if (o instanceof org.thingml.xthingml.thingML.State){
     	return createStateAdapter((org.thingml.xthingml.thingML.State) o, res);
@@ -460,6 +465,21 @@ public class XThingMLMTAdaptersFactory implements AdaptersFactory {
     	adapter.setResource(res);
     	register.put(adaptee, adapter);
     	return (org.thingml.xthingml.adapters.xthingmlmt.thingML.ThingMLModelAdapter) adapter;
+    }
+  }
+  
+  public ImportAdapter createImportAdapter(final Import adaptee, final Resource res) {
+    if (adaptee == null)
+    	return null;
+    EObjectAdapter adapter = register.get(adaptee);
+    if(adapter != null)
+    	 return (org.thingml.xthingml.adapters.xthingmlmt.thingML.ImportAdapter) adapter;
+    else {
+    	adapter = new org.thingml.xthingml.adapters.xthingmlmt.thingML.ImportAdapter();
+    	adapter.setAdaptee(adaptee);
+    	adapter.setResource(res);
+    	register.put(adaptee, adapter);
+    	return (org.thingml.xthingml.adapters.xthingmlmt.thingML.ImportAdapter) adapter;
     }
   }
   

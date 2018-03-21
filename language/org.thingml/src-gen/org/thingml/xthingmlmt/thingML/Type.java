@@ -14,4 +14,20 @@ package org.thingml.xthingmlmt.thingML;
  * @generated
  */
 public interface Type extends NamedElement, AnnotatedElement {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void initialize();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void run();
+
 } // Type

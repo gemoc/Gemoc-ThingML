@@ -73,4 +73,12 @@ public interface ReceiveMessage extends Event {
 	 */
 	void setMessage(Message value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean happened();
+
 } // ReceiveMessage

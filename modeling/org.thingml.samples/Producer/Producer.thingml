@@ -166,7 +166,7 @@ thing Consumer1 includes Consumer {
 	set links[4] = 1
 	set links[6] = 3
 	set links[7] = 2
-	set links[8] = 3
+	set links[10] = 3
 	set links[11] = 2
 	set current_state = 2
 }
@@ -198,17 +198,13 @@ thing Consumer3 includes Consumer {
 configuration ProducerConfig {
 	instance producer : Producer
 	set producer.consumer_count = 3
-	set producer.data_size = 10
-	set producer.data_list[0] = 0
-	set producer.data_list[1] = 1
+	set producer.data_size = 6
+	set producer.data_list[0] = 1
+	set producer.data_list[1] = 3
 	set producer.data_list[2] = 2
-	set producer.data_list[3] = 3
-	set producer.data_list[4] = 2
-	set producer.data_list[5] = 3
-	set producer.data_list[6] = 1
-	set producer.data_list[7] = 0
-	set producer.data_list[8] = 3
-	set producer.data_list[9] = 2
+	set producer.data_list[3] = 2
+	set producer.data_list[4] = 0
+	set producer.data_list[5] = 0
 
 	instance consumer1 : Consumer1
 	connector consumer1.input => producer.output

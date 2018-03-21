@@ -28,12 +28,12 @@ public class PrimitiveTypeAdapter extends EObjectAdapter<PrimitiveType> implemen
   }
   
   @Override
-  public int getByteSize() {
+  public long getByteSize() {
     return adaptee.getByteSize();
   }
   
   @Override
-  public void setByteSize(final int o) {
+  public void setByteSize(final long o) {
     adaptee.setByteSize(o);
   }
   
@@ -46,9 +46,19 @@ public class PrimitiveTypeAdapter extends EObjectAdapter<PrimitiveType> implemen
     return annotations_;
   }
   
+  @Override
+  public void initialize() {
+    org.thingml.xthingml.aspects.TypeAspect.initialize(adaptee);
+  }
+  
+  @Override
+  public void run() {
+    org.thingml.xthingml.aspects.TypeAspect.run(adaptee);
+  }
+  
   protected final static String NAME_EDEFAULT = null;
   
-  protected final static int BYTE_SIZE_EDEFAULT = 0;
+  protected final static long BYTE_SIZE_EDEFAULT = 0L;
   
   @Override
   public EClass eClass() {
@@ -63,7 +73,7 @@ public class PrimitiveTypeAdapter extends EObjectAdapter<PrimitiveType> implemen
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PRIMITIVE_TYPE__ANNOTATIONS:
     		return getAnnotations();
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PRIMITIVE_TYPE__BYTE_SIZE:
-    		return new java.lang.Integer(getByteSize());
+    		return new java.lang.Long(getByteSize());
     }
     
     return super.eGet(featureID, resolve, coreType);
@@ -96,7 +106,7 @@ public class PrimitiveTypeAdapter extends EObjectAdapter<PrimitiveType> implemen
     		getAnnotations().addAll((Collection) newValue);
     		return;
     	case org.thingml.xthingmlmt.thingML.ThingMLPackage.PRIMITIVE_TYPE__BYTE_SIZE:
-    		setByteSize(((java.lang.Integer) newValue).intValue());
+    		setByteSize(((java.lang.Long) newValue).longValue());
     		return;
     }
     

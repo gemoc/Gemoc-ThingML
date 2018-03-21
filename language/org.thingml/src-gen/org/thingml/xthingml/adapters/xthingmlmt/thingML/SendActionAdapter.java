@@ -54,7 +54,7 @@ public class SendActionAdapter extends EObjectAdapter<SendAction> implements org
   
   @Override
   public void execute() {
-    org.thingml.xthingml.aspects.ActionAspect.execute(adaptee);
+    org.thingml.xthingml.aspects.SendActionAspect.execute(adaptee);
   }
   
   @Override
