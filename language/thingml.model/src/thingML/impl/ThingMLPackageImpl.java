@@ -10,7 +10,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import thingML.ArrayValue;
+import thingML.InstanceContext;
 import thingML.IntegerValue;
+import thingML.NullValue;
 import thingML.PropertyEntry;
 import thingML.StringValue;
 import thingML.ThingMLFactory;
@@ -58,6 +60,20 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * @generated
 	 */
 	private EClass arrayValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass instanceContextEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nullValueEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -218,6 +234,33 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInstanceContext() {
+		return instanceContextEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInstanceContext_PropertyEntries() {
+		return (EReference)instanceContextEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNullValue() {
+		return nullValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ThingMLFactory getThingMLFactory() {
 		return (ThingMLFactory)getEFactoryInstance();
 	}
@@ -255,6 +298,11 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		arrayValueEClass = createEClass(ARRAY_VALUE);
 		createEReference(arrayValueEClass, ARRAY_VALUE__VALUES);
+
+		instanceContextEClass = createEClass(INSTANCE_CONTEXT);
+		createEReference(instanceContextEClass, INSTANCE_CONTEXT__PROPERTY_ENTRIES);
+
+		nullValueEClass = createEClass(NULL_VALUE);
 	}
 
 	/**
@@ -291,6 +339,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		integerValueEClass.getESuperTypes().add(this.getValue());
 		stringValueEClass.getESuperTypes().add(this.getValue());
 		arrayValueEClass.getESuperTypes().add(this.getValue());
+		nullValueEClass.getESuperTypes().add(this.getValue());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(propertyEntryEClass, PropertyEntry.class, "PropertyEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -307,6 +356,11 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		initEClass(arrayValueEClass, ArrayValue.class, "ArrayValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArrayValue_Values(), this.getValue(), null, "values", null, 0, -1, ArrayValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(instanceContextEClass, InstanceContext.class, "InstanceContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInstanceContext_PropertyEntries(), this.getPropertyEntry(), null, "propertyEntries", null, 0, -1, InstanceContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nullValueEClass, NullValue.class, "NullValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -326,6 +380,36 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		String source = "aspect";	
 		addAnnotation
 		  (propertyEntryEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (valueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (integerValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (stringValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (arrayValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (instanceContextEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (nullValueEClass, 
 		   source, 
 		   new String[] {
 		   });

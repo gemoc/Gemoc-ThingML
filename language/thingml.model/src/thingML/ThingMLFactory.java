@@ -58,6 +58,24 @@ public interface ThingMLFactory extends EFactory {
 	ArrayValue createArrayValue();
 
 	/**
+	 * Returns a new object of class '<em>Instance Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Instance Context</em>'.
+	 * @generated
+	 */
+	InstanceContext createInstanceContext();
+
+	/**
+	 * Returns a new object of class '<em>Null Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Null Value</em>'.
+	 * @generated
+	 */
+	NullValue createNullValue();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

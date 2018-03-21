@@ -16,7 +16,7 @@
   </extension>
   <extension point="fr.inria.diverse.melange.language">
     <language aspects="" entryPoints="" exactType="thingml.ThingMLMT" id="thingml.ThingML" uri="http://www.thingml.org/xtext/ThingML"/>
-    <language aspects="Configuration:thingml.xthingml.aspects.AConfiguration;StringLiteral:thingml.xthingml.aspects.AStringLiteral;Expression:thingml.xthingml.aspects.AExpression;Instance:thingml.xthingml.aspects.AInstance;ThingMLModel:thingml.xthingml.aspects.Printer;IntegerLiteral:thingml.xthingml.aspects.AIntegerLiteral" entryPoints="thingml.xthingml.aspects.AConfiguration.main(thingml.xthingml.thingML.Configuration)" exactType="thingml.XThingMLMT" id="thingml.XThingML" uri="http://thingml.xthingml/thingML/">
+    <language aspects="PropertyReference:thingml.xthingml.aspects.APropertyReference;Configuration:thingml.xthingml.aspects.AConfiguration;StringLiteral:thingml.xthingml.aspects.AStringLiteral;Expression:thingml.xthingml.aspects.AExpression;Instance:thingml.xthingml.aspects.AInstance;InstanceContext:thingml.xthingml.aspects.AInstanceContext;IntegerValue:thingml.xthingml.aspects.AIntegerValue;Value:thingml.xthingml.aspects.AValue;ThingMLModel:thingml.xthingml.aspects.Printer;TimesExpression:thingml.xthingml.aspects.ATimesExpression;IntegerLiteral:thingml.xthingml.aspects.AIntegerLiteral" entryPoints="thingml.xthingml.aspects.AConfiguration.main(thingml.xthingml.thingML.Configuration)" exactType="thingml.XThingMLMT" id="thingml.XThingML" uri="http://thingml.xthingml/thingML/">
       <adapter class="thingml.xthingml.adapters.thingmlmt.XThingMLAdapter" modeltypeId="thingml.ThingMLMT"/>
       <adapter class="thingml.xthingml.adapters.xthingmlmt.XThingMLAdapter" modeltypeId="thingml.XThingMLMT"/>
     </language>

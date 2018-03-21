@@ -7,18 +7,30 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true">
+    <eAnnotations source="aspect"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="//Value">
+    <eAnnotations source="aspect"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="//Value">
+    <eAnnotations source="aspect"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayValue" eSuperTypes="//Value">
+    <eAnnotations source="aspect"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceContext">
+    <eAnnotations source="aspect"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyEntries" upperBound="-1" eType="//PropertyEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="//Value">
+    <eAnnotations source="aspect"/>
   </eClassifiers>
 </ecore:EPackage>

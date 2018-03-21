@@ -99,6 +99,19 @@ public class ThingMLSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ThingMLPackage.INSTANCE_CONTEXT: {
+				InstanceContext instanceContext = (InstanceContext)theEObject;
+				T result = caseInstanceContext(instanceContext);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ThingMLPackage.NULL_VALUE: {
+				NullValue nullValue = (NullValue)theEObject;
+				T result = caseNullValue(nullValue);
+				if (result == null) result = caseValue(nullValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -175,6 +188,36 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseArrayValue(ArrayValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Instance Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Instance Context</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInstanceContext(InstanceContext object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Null Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Null Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNullValue(NullValue object) {
 		return null;
 	}
 

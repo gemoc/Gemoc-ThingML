@@ -167,7 +167,6 @@ public interface ThingMLPackage extends EPackage {
 	 */
 	int INTEGER_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
-
 	/**
 	 * The meta object id for the '{@link thingML.impl.StringValueImpl <em>String Value</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -205,7 +204,6 @@ public interface ThingMLPackage extends EPackage {
 	 */
 	int STRING_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
-
 	/**
 	 * The meta object id for the '{@link thingML.impl.ArrayValueImpl <em>Array Value</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -242,6 +240,72 @@ public interface ThingMLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ARRAY_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.InstanceContextImpl <em>Instance Context</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.InstanceContextImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getInstanceContext()
+	 * @generated
+	 */
+	int INSTANCE_CONTEXT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Property Entries</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_CONTEXT__PROPERTY_ENTRIES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Instance Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_CONTEXT_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Instance Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_CONTEXT_OPERATION_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.NullValueImpl <em>Null Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.NullValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getNullValue()
+	 * @generated
+	 */
+	int NULL_VALUE = 6;
+
+	/**
+	 * The number of structural features of the '<em>Null Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Null Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 
 	/**
@@ -348,6 +412,37 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getArrayValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.InstanceContext <em>Instance Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Instance Context</em>'.
+	 * @see thingML.InstanceContext
+	 * @generated
+	 */
+	EClass getInstanceContext();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link thingML.InstanceContext#getPropertyEntries <em>Property Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Property Entries</em>'.
+	 * @see thingML.InstanceContext#getPropertyEntries()
+	 * @see #getInstanceContext()
+	 * @generated
+	 */
+	EReference getInstanceContext_PropertyEntries();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.NullValue <em>Null Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Null Value</em>'.
+	 * @see thingML.NullValue
+	 * @generated
+	 */
+	EClass getNullValue();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -461,6 +556,34 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ARRAY_VALUE__VALUES = eINSTANCE.getArrayValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.InstanceContextImpl <em>Instance Context</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.InstanceContextImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getInstanceContext()
+		 * @generated
+		 */
+		EClass INSTANCE_CONTEXT = eINSTANCE.getInstanceContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Entries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE_CONTEXT__PROPERTY_ENTRIES = eINSTANCE.getInstanceContext_PropertyEntries();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.NullValueImpl <em>Null Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.NullValueImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getNullValue()
+		 * @generated
+		 */
+		EClass NULL_VALUE = eINSTANCE.getNullValue();
 
 	}
 

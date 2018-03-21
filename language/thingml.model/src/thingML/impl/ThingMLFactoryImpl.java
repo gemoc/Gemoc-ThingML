@@ -60,6 +60,8 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 			case ThingMLPackage.INTEGER_VALUE: return createIntegerValue();
 			case ThingMLPackage.STRING_VALUE: return createStringValue();
 			case ThingMLPackage.ARRAY_VALUE: return createArrayValue();
+			case ThingMLPackage.INSTANCE_CONTEXT: return createInstanceContext();
+			case ThingMLPackage.NULL_VALUE: return createNullValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -103,6 +105,26 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	public ArrayValue createArrayValue() {
 		ArrayValueImpl arrayValue = new ArrayValueImpl();
 		return arrayValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InstanceContext createInstanceContext() {
+		InstanceContextImpl instanceContext = new InstanceContextImpl();
+		return instanceContext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NullValue createNullValue() {
+		NullValueImpl nullValue = new NullValueImpl();
+		return nullValue;
 	}
 
 	/**
