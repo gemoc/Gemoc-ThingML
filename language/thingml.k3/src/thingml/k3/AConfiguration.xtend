@@ -12,7 +12,7 @@ import org.thingml.xtext.thingML.Instance
 
 import static thingml.k3.Printer.log
 
-import static extension thingml.k3.AInstance.init
+import static extension thingml.k3.AInstance.*
 
 @Aspect(className=Configuration)
 class AConfiguration {
@@ -22,7 +22,7 @@ class AConfiguration {
 			instance.init()
 		}
 		for (ConfigPropertyAssign assign : _self.propassigns) {
-			log(null, "Hello World!")
+			assign.instance.assign(assign)
 		}
 		for (AbstractConnector connector : _self.connectors) {
 			log(null, "Hello World!")

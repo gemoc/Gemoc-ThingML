@@ -1,7 +1,7 @@
 package thingml.k3
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-import fr.inria.diverse.k3.al.annotationprocessor.Step
+import org.thingml.xtext.thingML.ConfigPropertyAssign
 import org.thingml.xtext.thingML.Instance
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyAssign
@@ -47,21 +47,36 @@ class AInstance {
 		}
 		for (PropertyAssign assign : thing.assign) {
 			val entry = _self.context.get_property_entry(assign.property)
-			if (entry.value instanceof ArrayValue) {
+			if (assign.index.length == 0) {
+				entry.value = assign.init.value(_self.context)
+			} else if (assign.index.length == 1) {
 				val array_property = entry.value as ArrayValue
 				val index = (assign.index.get(0).value(_self.context) as IntegerValue).value as int
 				val value = assign.init.value(_self.context)
 				array_property.values.set(index, value)
 			} else {
-				entry.value = assign.init.value(_self.context)
+				throw new Exception("I don't understand this language…")
 			}
 		}
 	}
 
-	@Step
 	def public void init() {
 		_self.context = ThingMLFactory.eINSTANCE.createInstanceContext()
 		_self.init_properties(_self.type)
 		_self.init_property_assigns(_self.type)
+	}
+
+	def public void assign(ConfigPropertyAssign assign) {
+		val entry = _self.context.get_property_entry(assign.property)
+		if (assign.index.length == 0) {
+			entry.value = assign.init.value(_self.context)
+		} else if (assign.index.length == 1) {
+			val array_property = entry.value as ArrayValue
+			val index = (assign.index.get(0).value(_self.context) as IntegerValue).value as int
+			val value = assign.init.value(_self.context)
+			array_property.values.set(index, value)
+		} else {
+			throw new Exception("I don't understand this language…")
+		}
 	}
 }
