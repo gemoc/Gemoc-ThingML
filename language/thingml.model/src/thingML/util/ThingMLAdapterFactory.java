@@ -68,12 +68,20 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	protected ThingMLSwitch<Adapter> modelSwitch =
 		new ThingMLSwitch<Adapter>() {
 			@Override
+			public Adapter caseInstanceContext(InstanceContext object) {
+				return createInstanceContextAdapter();
+			}
+			@Override
 			public Adapter casePropertyEntry(PropertyEntry object) {
 				return createPropertyEntryAdapter();
 			}
 			@Override
 			public Adapter caseValue(Value object) {
 				return createValueAdapter();
+			}
+			@Override
+			public Adapter caseNullValue(NullValue object) {
+				return createNullValueAdapter();
 			}
 			@Override
 			public Adapter caseIntegerValue(IntegerValue object) {
@@ -86,14 +94,6 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseArrayValue(ArrayValue object) {
 				return createArrayValueAdapter();
-			}
-			@Override
-			public Adapter caseInstanceContext(InstanceContext object) {
-				return createInstanceContextAdapter();
-			}
-			@Override
-			public Adapter caseNullValue(NullValue object) {
-				return createNullValueAdapter();
 			}
 			@Override
 			public Adapter caseProxyValue(ProxyValue object) {

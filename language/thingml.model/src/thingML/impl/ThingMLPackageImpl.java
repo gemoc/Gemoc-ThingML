@@ -371,11 +371,16 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		instanceContextEClass = createEClass(INSTANCE_CONTEXT);
+		createEReference(instanceContextEClass, INSTANCE_CONTEXT__PROPERTY_ENTRIES);
+
 		propertyEntryEClass = createEClass(PROPERTY_ENTRY);
 		createEReference(propertyEntryEClass, PROPERTY_ENTRY__PROPERTY);
 		createEReference(propertyEntryEClass, PROPERTY_ENTRY__VALUE);
 
 		valueEClass = createEClass(VALUE);
+
+		nullValueEClass = createEClass(NULL_VALUE);
 
 		integerValueEClass = createEClass(INTEGER_VALUE);
 		createEAttribute(integerValueEClass, INTEGER_VALUE__VALUE);
@@ -385,11 +390,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		arrayValueEClass = createEClass(ARRAY_VALUE);
 		createEReference(arrayValueEClass, ARRAY_VALUE__VALUES);
-
-		instanceContextEClass = createEClass(INSTANCE_CONTEXT);
-		createEReference(instanceContextEClass, INSTANCE_CONTEXT__PROPERTY_ENTRIES);
-
-		nullValueEClass = createEClass(NULL_VALUE);
 
 		proxyValueEClass = createEClass(PROXY_VALUE);
 		createEReference(proxyValueEClass, PROXY_VALUE__EXPRESSION);
@@ -433,19 +433,24 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		nullValueEClass.getESuperTypes().add(this.getValue());
 		integerValueEClass.getESuperTypes().add(this.getValue());
 		stringValueEClass.getESuperTypes().add(this.getValue());
 		arrayValueEClass.getESuperTypes().add(this.getValue());
-		nullValueEClass.getESuperTypes().add(this.getValue());
 		proxyValueEClass.getESuperTypes().add(this.getValue());
 		arrayProxyValueEClass.getESuperTypes().add(this.getProxyValue());
 
 		// Initialize classes, features, and operations; add parameters
+		initEClass(instanceContextEClass, InstanceContext.class, "InstanceContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInstanceContext_PropertyEntries(), this.getPropertyEntry(), null, "propertyEntries", null, 0, -1, InstanceContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(propertyEntryEClass, PropertyEntry.class, "PropertyEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyEntry_Property(), theThingMLPackage_1.getProperty(), null, "property", null, 1, 1, PropertyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyEntry_Value(), this.getValue(), null, "value", null, 1, 1, PropertyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(nullValueEClass, NullValue.class, "NullValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(integerValueEClass, IntegerValue.class, "IntegerValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIntegerValue_Value(), ecorePackage.getELong(), "value", null, 0, 1, IntegerValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -455,11 +460,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		initEClass(arrayValueEClass, ArrayValue.class, "ArrayValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArrayValue_Values(), this.getValue(), null, "values", null, 0, -1, ArrayValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(instanceContextEClass, InstanceContext.class, "InstanceContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstanceContext_PropertyEntries(), this.getPropertyEntry(), null, "propertyEntries", null, 0, -1, InstanceContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(nullValueEClass, NullValue.class, "NullValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(proxyValueEClass, ProxyValue.class, "ProxyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProxyValue_Expression(), theThingMLPackage_1.getExpression(), null, "expression", null, 1, 1, ProxyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

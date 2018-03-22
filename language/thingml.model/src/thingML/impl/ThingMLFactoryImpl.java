@@ -56,12 +56,12 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case ThingMLPackage.INSTANCE_CONTEXT: return createInstanceContext();
 			case ThingMLPackage.PROPERTY_ENTRY: return createPropertyEntry();
+			case ThingMLPackage.NULL_VALUE: return createNullValue();
 			case ThingMLPackage.INTEGER_VALUE: return createIntegerValue();
 			case ThingMLPackage.STRING_VALUE: return createStringValue();
 			case ThingMLPackage.ARRAY_VALUE: return createArrayValue();
-			case ThingMLPackage.INSTANCE_CONTEXT: return createInstanceContext();
-			case ThingMLPackage.NULL_VALUE: return createNullValue();
 			case ThingMLPackage.PROXY_VALUE: return createProxyValue();
 			case ThingMLPackage.ARRAY_PROXY_VALUE: return createArrayProxyValue();
 			case ThingMLPackage.ARRAY_PROXY_ENTRY: return createArrayProxyEntry();

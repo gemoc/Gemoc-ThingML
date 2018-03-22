@@ -66,6 +66,12 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case ThingMLPackage.INSTANCE_CONTEXT: {
+				InstanceContext instanceContext = (InstanceContext)theEObject;
+				T result = caseInstanceContext(instanceContext);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ThingMLPackage.PROPERTY_ENTRY: {
 				PropertyEntry propertyEntry = (PropertyEntry)theEObject;
 				T result = casePropertyEntry(propertyEntry);
@@ -75,6 +81,13 @@ public class ThingMLSwitch<T> extends Switch<T> {
 			case ThingMLPackage.VALUE: {
 				Value value = (Value)theEObject;
 				T result = caseValue(value);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ThingMLPackage.NULL_VALUE: {
+				NullValue nullValue = (NullValue)theEObject;
+				T result = caseNullValue(nullValue);
+				if (result == null) result = caseValue(nullValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -96,19 +109,6 @@ public class ThingMLSwitch<T> extends Switch<T> {
 				ArrayValue arrayValue = (ArrayValue)theEObject;
 				T result = caseArrayValue(arrayValue);
 				if (result == null) result = caseValue(arrayValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ThingMLPackage.INSTANCE_CONTEXT: {
-				InstanceContext instanceContext = (InstanceContext)theEObject;
-				T result = caseInstanceContext(instanceContext);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ThingMLPackage.NULL_VALUE: {
-				NullValue nullValue = (NullValue)theEObject;
-				T result = caseNullValue(nullValue);
-				if (result == null) result = caseValue(nullValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

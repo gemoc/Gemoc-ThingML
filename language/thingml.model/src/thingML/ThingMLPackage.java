@@ -64,7 +64,84 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getPropertyEntry()
 	 * @generated
 	 */
-	int PROPERTY_ENTRY = 0;
+	int PROPERTY_ENTRY = 1;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.ValueImpl <em>Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.ValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getValue()
+	 * @generated
+	 */
+	int VALUE = 2;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.IntegerValueImpl <em>Integer Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.IntegerValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getIntegerValue()
+	 * @generated
+	 */
+	int INTEGER_VALUE = 4;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.StringValueImpl <em>String Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.StringValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getStringValue()
+	 * @generated
+	 */
+	int STRING_VALUE = 5;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.ArrayValueImpl <em>Array Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.ArrayValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getArrayValue()
+	 * @generated
+	 */
+	int ARRAY_VALUE = 6;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.InstanceContextImpl <em>Instance Context</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.InstanceContextImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getInstanceContext()
+	 * @generated
+	 */
+	int INSTANCE_CONTEXT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Property Entries</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_CONTEXT__PROPERTY_ENTRIES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Instance Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_CONTEXT_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Instance Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_CONTEXT_OPERATION_COUNT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -103,16 +180,6 @@ public interface ThingMLPackage extends EPackage {
 	int PROPERTY_ENTRY_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link thingML.impl.ValueImpl <em>Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.ValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getValue()
-	 * @generated
-	 */
-	int VALUE = 1;
-
-	/**
 	 * The number of structural features of the '<em>Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,15 +197,34 @@ public interface ThingMLPackage extends EPackage {
 	 */
 	int VALUE_OPERATION_COUNT = 0;
 
+
 	/**
-	 * The meta object id for the '{@link thingML.impl.IntegerValueImpl <em>Integer Value</em>}' class.
+	 * The meta object id for the '{@link thingML.impl.NullValueImpl <em>Null Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see thingML.impl.IntegerValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getIntegerValue()
+	 * @see thingML.impl.NullValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getNullValue()
 	 * @generated
 	 */
-	int INTEGER_VALUE = 2;
+	int NULL_VALUE = 3;
+
+	/**
+	 * The number of structural features of the '<em>Null Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Null Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -168,16 +254,6 @@ public interface ThingMLPackage extends EPackage {
 	int INTEGER_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link thingML.impl.StringValueImpl <em>String Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.StringValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getStringValue()
-	 * @generated
-	 */
-	int STRING_VALUE = 3;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -205,16 +281,6 @@ public interface ThingMLPackage extends EPackage {
 	int STRING_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link thingML.impl.ArrayValueImpl <em>Array Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.ArrayValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getArrayValue()
-	 * @generated
-	 */
-	int ARRAY_VALUE = 4;
-
-	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -240,72 +306,6 @@ public interface ThingMLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ARRAY_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link thingML.impl.InstanceContextImpl <em>Instance Context</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.InstanceContextImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getInstanceContext()
-	 * @generated
-	 */
-	int INSTANCE_CONTEXT = 5;
-
-	/**
-	 * The feature id for the '<em><b>Property Entries</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_CONTEXT__PROPERTY_ENTRIES = 0;
-
-	/**
-	 * The number of structural features of the '<em>Instance Context</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_CONTEXT_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Instance Context</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_CONTEXT_OPERATION_COUNT = 0;
-
-
-	/**
-	 * The meta object id for the '{@link thingML.impl.NullValueImpl <em>Null Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.NullValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getNullValue()
-	 * @generated
-	 */
-	int NULL_VALUE = 6;
-
-	/**
-	 * The number of structural features of the '<em>Null Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NULL_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Null Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NULL_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 
 	/**
