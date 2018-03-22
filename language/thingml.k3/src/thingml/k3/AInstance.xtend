@@ -8,12 +8,17 @@ import org.thingml.xtext.thingML.Instance
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyAssign
 import org.thingml.xtext.thingML.Thing
+import thingML.ArrayProxyEntry
 import thingML.ArrayProxyValue
 import thingML.ArrayValue
 import thingML.InstanceContext
 import thingML.IntegerValue
+import thingML.PropertyEntry
 import thingML.ProxyValue
 import thingML.ThingMLFactory
+import thingML.Value
+
+import static thingml.k3.Printer.log
 
 import static extension thingml.k3.AExpression.value
 import static extension thingml.k3.AInstanceContext.get_property_entry
@@ -109,5 +114,91 @@ class AInstance {
 
 	def public void assign(ConfigPropertyAssign assign) {
 		_self._assign(assign.property, assign.index, assign.init)
+	}
+
+	def public void resolve() {
+		var proxy_counter = 0
+		var proxy_resolved = 0
+
+		for (PropertyEntry entry : _self.context.propertyEntries) {
+
+			if (entry.value instanceof ArrayProxyValue) {
+				val array_proxy = (entry.value as ArrayProxyValue)
+
+				log(null, "Entering ArrayProxyValue of property '" + entry.property.name + "'")
+				proxy_counter++
+
+				val cardinality = array_proxy.expression.value(_self.context, false)
+
+				var continue = !(cardinality instanceof ProxyValue)
+
+				if (continue) {
+					log(null, "Cardinality is not a Proxy anymore!")
+
+					for (ArrayProxyEntry array_entry : array_proxy.arrayProxyEntries) {
+						val index = array_entry.index.value(_self.context, false)
+						continue = continue && !(index instanceof ProxyValue)
+					}
+				}
+
+				if (continue) {
+					log(null, "All indexes have been resolved!")
+					proxy_resolved++
+
+					if (cardinality instanceof IntegerValue) {
+						val new_value = ThingMLFactory.eINSTANCE.createArrayValue()
+						val length = cardinality.value
+						for (var i = 0; i < length; i++) {
+							new_value.values.add(ThingMLFactory.eINSTANCE.createNullValue())
+						}
+						for (ArrayProxyEntry array_entry : array_proxy.arrayProxyEntries) {
+							val index = array_entry.index.value(_self.context, false)
+							if (index instanceof IntegerValue) {
+								new_value.values.set(index.value as int, array_entry.value)
+								if (array_entry.value instanceof ProxyValue) {
+									log(null, "Discovering a new ProxyValue!")
+									proxy_counter++
+								}
+							} else {
+								throw new Exception("Index must be an integer")
+							}
+						}
+
+						entry.value = new_value
+					} else {
+						throw new Exception("Cardinality has to be an IntegerValue")
+					}
+				}
+			} else if (entry.value instanceof ProxyValue) {
+				log(null, "Entering ProxyValue of property '" + entry.property.name + "'")
+				proxy_counter++
+				// TODO
+				throw new Exception("This is to be done")
+			} else if (entry.value instanceof ArrayValue) {
+				log(null, "Analysing ArrayValue of property '" + entry.property.name + "'")
+				var i = 0
+				for (Value value : (entry.value as ArrayValue).values) {
+					if (value instanceof ProxyValue) {
+						log(null, "Entering ProxyValue of property '" + entry.property.name + "[" + i + "]'")
+						proxy_counter++
+						// TODO
+						throw new Exception("This is to be done")
+					}
+					i++
+				}
+			}
+		}
+
+		log(null, "Counters:")
+		log(null, " - proxies:  " + proxy_counter)
+		log(null, " - resolved: " + proxy_resolved)
+
+		if (proxy_counter > 0) {
+			if (proxy_resolved == 0) {
+				throw new Exception("Cycle detected... See the variable view to understand. Good luck ;)")
+			} else if (proxy_resolved < proxy_counter) {
+				_self.resolve()
+			}
+		}
 	}
 }

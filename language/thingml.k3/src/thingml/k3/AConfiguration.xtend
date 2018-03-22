@@ -24,6 +24,9 @@ class AConfiguration {
 		for (ConfigPropertyAssign assign : _self.propassigns) {
 			assign.instance.assign(assign)
 		}
+		for (Instance instance : _self.instances) {
+			instance.resolve()
+		}
 		for (AbstractConnector connector : _self.connectors) {
 			log(null, "Hello World!")
 		}
