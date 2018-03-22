@@ -309,6 +309,82 @@ public interface ThingMLPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link thingML.impl.ProxyValueImpl <em>Proxy Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.ProxyValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getProxyValue()
+	 * @generated
+	 */
+	int PROXY_VALUE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROXY_VALUE__EXPRESSION = VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Proxy Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROXY_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Proxy Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROXY_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.ArrayProxyValueImpl <em>Array Proxy Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.ArrayProxyValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getArrayProxyValue()
+	 * @generated
+	 */
+	int ARRAY_PROXY_VALUE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_PROXY_VALUE__EXPRESSION = PROXY_VALUE__EXPRESSION;
+
+	/**
+	 * The number of structural features of the '<em>Array Proxy Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_PROXY_VALUE_FEATURE_COUNT = PROXY_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Array Proxy Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_PROXY_VALUE_OPERATION_COUNT = PROXY_VALUE_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link thingML.PropertyEntry <em>Property Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -443,6 +519,37 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNullValue();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.ProxyValue <em>Proxy Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Proxy Value</em>'.
+	 * @see thingML.ProxyValue
+	 * @generated
+	 */
+	EClass getProxyValue();
+
+	/**
+	 * Returns the meta object for the reference '{@link thingML.ProxyValue#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Expression</em>'.
+	 * @see thingML.ProxyValue#getExpression()
+	 * @see #getProxyValue()
+	 * @generated
+	 */
+	EReference getProxyValue_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.ArrayProxyValue <em>Array Proxy Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Array Proxy Value</em>'.
+	 * @see thingML.ArrayProxyValue
+	 * @generated
+	 */
+	EClass getArrayProxyValue();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -584,6 +691,34 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NULL_VALUE = eINSTANCE.getNullValue();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.ProxyValueImpl <em>Proxy Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.ProxyValueImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getProxyValue()
+		 * @generated
+		 */
+		EClass PROXY_VALUE = eINSTANCE.getProxyValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROXY_VALUE__EXPRESSION = eINSTANCE.getProxyValue_Expression();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.ArrayProxyValueImpl <em>Array Proxy Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.ArrayProxyValueImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getArrayProxyValue()
+		 * @generated
+		 */
+		EClass ARRAY_PROXY_VALUE = eINSTANCE.getArrayProxyValue();
 
 	}
 

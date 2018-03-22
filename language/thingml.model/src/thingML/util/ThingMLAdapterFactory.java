@@ -96,6 +96,14 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 				return createNullValueAdapter();
 			}
 			@Override
+			public Adapter caseProxyValue(ProxyValue object) {
+				return createProxyValueAdapter();
+			}
+			@Override
+			public Adapter caseArrayProxyValue(ArrayProxyValue object) {
+				return createArrayProxyValueAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -210,6 +218,34 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNullValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.ProxyValue <em>Proxy Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.ProxyValue
+	 * @generated
+	 */
+	public Adapter createProxyValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.ArrayProxyValue <em>Array Proxy Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.ArrayProxyValue
+	 * @generated
+	 */
+	public Adapter createArrayProxyValueAdapter() {
 		return null;
 	}
 

@@ -112,6 +112,21 @@ public class ThingMLSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ThingMLPackage.PROXY_VALUE: {
+				ProxyValue proxyValue = (ProxyValue)theEObject;
+				T result = caseProxyValue(proxyValue);
+				if (result == null) result = caseValue(proxyValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ThingMLPackage.ARRAY_PROXY_VALUE: {
+				ArrayProxyValue arrayProxyValue = (ArrayProxyValue)theEObject;
+				T result = caseArrayProxyValue(arrayProxyValue);
+				if (result == null) result = caseProxyValue(arrayProxyValue);
+				if (result == null) result = caseValue(arrayProxyValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -218,6 +233,36 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNullValue(NullValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Proxy Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Proxy Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProxyValue(ProxyValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Array Proxy Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Array Proxy Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArrayProxyValue(ArrayProxyValue object) {
 		return null;
 	}
 

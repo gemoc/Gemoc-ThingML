@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="thingML" nsURI="xthingml" nsPrefix="thingML">
   <eClassifiers xsi:type="ecore:EClass" name="PropertyEntry">
-    <eAnnotations source="aspect"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1">
       <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//Property"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true">
-    <eAnnotations source="aspect"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="//Value">
-    <eAnnotations source="aspect"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="//Value">
-    <eAnnotations source="aspect"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayValue" eSuperTypes="//Value">
-    <eAnnotations source="aspect"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Value" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceContext">
-    <eAnnotations source="aspect"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyEntries" upperBound="-1" eType="//PropertyEntry" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="//Value">
-    <eAnnotations source="aspect"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProxyValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//Expression"/>
+    </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayProxyValue" eSuperTypes="//ProxyValue"/>
 </ecore:EPackage>

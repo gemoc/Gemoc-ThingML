@@ -9,11 +9,13 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import thingML.ArrayProxyValue;
 import thingML.ArrayValue;
 import thingML.InstanceContext;
 import thingML.IntegerValue;
 import thingML.NullValue;
 import thingML.PropertyEntry;
+import thingML.ProxyValue;
 import thingML.StringValue;
 import thingML.ThingMLFactory;
 import thingML.ThingMLPackage;
@@ -74,6 +76,20 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * @generated
 	 */
 	private EClass nullValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass proxyValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass arrayProxyValueEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -261,6 +277,33 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getProxyValue() {
+		return proxyValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProxyValue_Expression() {
+		return (EReference)proxyValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getArrayProxyValue() {
+		return arrayProxyValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ThingMLFactory getThingMLFactory() {
 		return (ThingMLFactory)getEFactoryInstance();
 	}
@@ -303,6 +346,11 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		createEReference(instanceContextEClass, INSTANCE_CONTEXT__PROPERTY_ENTRIES);
 
 		nullValueEClass = createEClass(NULL_VALUE);
+
+		proxyValueEClass = createEClass(PROXY_VALUE);
+		createEReference(proxyValueEClass, PROXY_VALUE__EXPRESSION);
+
+		arrayProxyValueEClass = createEClass(ARRAY_PROXY_VALUE);
 	}
 
 	/**
@@ -340,6 +388,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		stringValueEClass.getESuperTypes().add(this.getValue());
 		arrayValueEClass.getESuperTypes().add(this.getValue());
 		nullValueEClass.getESuperTypes().add(this.getValue());
+		proxyValueEClass.getESuperTypes().add(this.getValue());
+		arrayProxyValueEClass.getESuperTypes().add(this.getProxyValue());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(propertyEntryEClass, PropertyEntry.class, "PropertyEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -362,57 +412,13 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		initEClass(nullValueEClass, NullValue.class, "NullValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(proxyValueEClass, ProxyValue.class, "ProxyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProxyValue_Expression(), theThingMLPackage_1.getExpression(), null, "expression", null, 1, 1, ProxyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(arrayProxyValueEClass, ArrayProxyValue.class, "ArrayProxyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// aspect
-		createAspectAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>aspect</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createAspectAnnotations() {
-		String source = "aspect";	
-		addAnnotation
-		  (propertyEntryEClass, 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (valueEClass, 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (integerValueEClass, 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (stringValueEClass, 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (arrayValueEClass, 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (instanceContextEClass, 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (nullValueEClass, 
-		   source, 
-		   new String[] {
-		   });
 	}
 
 } //ThingMLPackageImpl

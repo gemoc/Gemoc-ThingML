@@ -9,6 +9,7 @@ import org.thingml.xtext.thingML.Thing
 import thingML.ArrayValue
 import thingML.InstanceContext
 import thingML.IntegerValue
+import thingML.ProxyValue
 import thingML.ThingMLFactory
 
 import static extension thingml.k3.AExpression.value
@@ -19,25 +20,34 @@ class AInstance {
 	public InstanceContext context
 
 	def public void init_properties(Thing thing) {
+		for (Thing fragment : thing.includes) {
+			_self.init_properties(fragment)
+		}
 		for (Property property : thing.properties) {
 			val entry = ThingMLFactory.eINSTANCE.createPropertyEntry()
 			entry.property = property
 			if (property.typeRef.isArray) {
-				entry.value = ThingMLFactory.eINSTANCE.createArrayValue()
-				val array = (entry.value as ArrayValue).values
-				val length = (property.typeRef.cardinality.value(_self.context) as IntegerValue).value
-				for (var i = 0; i < length; i++) {
-					array.add(ThingMLFactory.eINSTANCE.createNullValue())
+				val length_value = property.typeRef.cardinality.value(_self.context, true)
+				if (length_value instanceof ProxyValue) {
+					entry.value = ThingMLFactory.eINSTANCE.createArrayProxyValue()
+					val proxy = (entry.value as ProxyValue)
+					proxy.expression = property.typeRef.cardinality
+				} else if (length_value instanceof IntegerValue) {
+					entry.value = ThingMLFactory.eINSTANCE.createArrayValue()
+					val array = (entry.value as ArrayValue).values
+					val length = length_value.value
+					for (var i = 0; i < length; i++) {
+						array.add(ThingMLFactory.eINSTANCE.createNullValue())
+					}
+				} else {
+					throw new Exception("Cardinality has to be an IntegerValue")
 				}
 			} else if (property.init === null) {
 				entry.value = ThingMLFactory.eINSTANCE.createNullValue()
 			} else {
-				entry.value = property.init.value(_self.context)
+				entry.value = property.init.value(_self.context, true)
 			}
 			_self.context.propertyEntries.add(entry)
-		}
-		for (Thing fragment : thing.includes) {
-			_self.init_properties(fragment)
 		}
 	}
 
@@ -48,12 +58,27 @@ class AInstance {
 		for (PropertyAssign assign : thing.assign) {
 			val entry = _self.context.get_property_entry(assign.property)
 			if (assign.index.length == 0) {
-				entry.value = assign.init.value(_self.context)
+				entry.value = assign.init.value(_self.context, true)
 			} else if (assign.index.length == 1) {
-				val array_property = entry.value as ArrayValue
-				val index = (assign.index.get(0).value(_self.context) as IntegerValue).value as int
-				val value = assign.init.value(_self.context)
-				array_property.values.set(index, value)
+				if (entry.value instanceof ProxyValue) {
+					// TODO delay
+				} else {
+					val array_property = entry.value as ArrayValue
+					val index_value = assign.index.get(0).value(_self.context, true)
+					if (index_value instanceof ProxyValue) {
+						// TODO I don't know what to do
+						// entry.value = ThingMLFactory.eINSTANCE.createArrayProxyValue()
+						// val proxy = (entry.value as ProxyValue)
+						// proxy.expression = property.typeRef.cardinality
+						throw new Exception("I don't know what to do")
+					} else if (index_value instanceof IntegerValue) {
+						val index = index_value.value as int
+						val value = assign.init.value(_self.context, true)
+						array_property.values.set(index, value)
+					} else {
+						throw new Exception("Cardinality has to be an IntegerValue")
+					}
+				}
 			} else {
 				throw new Exception("I don't understand this language…")
 			}
@@ -69,12 +94,27 @@ class AInstance {
 	def public void assign(ConfigPropertyAssign assign) {
 		val entry = _self.context.get_property_entry(assign.property)
 		if (assign.index.length == 0) {
-			entry.value = assign.init.value(_self.context)
+			entry.value = assign.init.value(_self.context, true)
 		} else if (assign.index.length == 1) {
-			val array_property = entry.value as ArrayValue
-			val index = (assign.index.get(0).value(_self.context) as IntegerValue).value as int
-			val value = assign.init.value(_self.context)
-			array_property.values.set(index, value)
+			if (entry.value instanceof ProxyValue) {
+				// TODO delay
+			} else {
+				val array_property = entry.value as ArrayValue
+				val index_value = assign.index.get(0).value(_self.context, true)
+				if (index_value instanceof ProxyValue) {
+					// TODO I don't know what to do
+					// entry.value = ThingMLFactory.eINSTANCE.createArrayProxyValue()
+					// val proxy = (entry.value as ProxyValue)
+					// proxy.expression = property.typeRef.cardinality
+					throw new Exception("I don't know what to do")
+				} else if (index_value instanceof IntegerValue) {
+					val index = index_value.value as int
+					val value = assign.init.value(_self.context, true)
+					array_property.values.set(index, value)
+				} else {
+					throw new Exception("Cardinality has to be an IntegerValue")
+				}
+			}
 		} else {
 			throw new Exception("I don't understand this language…")
 		}
