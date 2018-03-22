@@ -366,13 +366,22 @@ public interface ThingMLPackage extends EPackage {
 	int ARRAY_PROXY_VALUE__EXPRESSION = PROXY_VALUE__EXPRESSION;
 
 	/**
+	 * The feature id for the '<em><b>Array Proxy Entries</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_PROXY_VALUE__ARRAY_PROXY_ENTRIES = PROXY_VALUE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Array Proxy Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_PROXY_VALUE_FEATURE_COUNT = PROXY_VALUE_FEATURE_COUNT + 0;
+	int ARRAY_PROXY_VALUE_FEATURE_COUNT = PROXY_VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Array Proxy Value</em>' class.
@@ -382,6 +391,53 @@ public interface ThingMLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ARRAY_PROXY_VALUE_OPERATION_COUNT = PROXY_VALUE_OPERATION_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.ArrayProxyEntryImpl <em>Array Proxy Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.ArrayProxyEntryImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getArrayProxyEntry()
+	 * @generated
+	 */
+	int ARRAY_PROXY_ENTRY = 9;
+
+	/**
+	 * The feature id for the '<em><b>Index</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_PROXY_ENTRY__INDEX = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_PROXY_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Array Proxy Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_PROXY_ENTRY_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Array Proxy Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_PROXY_ENTRY_OPERATION_COUNT = 0;
 
 
 	/**
@@ -552,6 +608,49 @@ public interface ThingMLPackage extends EPackage {
 	EClass getArrayProxyValue();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link thingML.ArrayProxyValue#getArrayProxyEntries <em>Array Proxy Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Array Proxy Entries</em>'.
+	 * @see thingML.ArrayProxyValue#getArrayProxyEntries()
+	 * @see #getArrayProxyValue()
+	 * @generated
+	 */
+	EReference getArrayProxyValue_ArrayProxyEntries();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.ArrayProxyEntry <em>Array Proxy Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Array Proxy Entry</em>'.
+	 * @see thingML.ArrayProxyEntry
+	 * @generated
+	 */
+	EClass getArrayProxyEntry();
+
+	/**
+	 * Returns the meta object for the reference '{@link thingML.ArrayProxyEntry#getIndex <em>Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Index</em>'.
+	 * @see thingML.ArrayProxyEntry#getIndex()
+	 * @see #getArrayProxyEntry()
+	 * @generated
+	 */
+	EReference getArrayProxyEntry_Index();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link thingML.ArrayProxyEntry#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see thingML.ArrayProxyEntry#getValue()
+	 * @see #getArrayProxyEntry()
+	 * @generated
+	 */
+	EReference getArrayProxyEntry_Value();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -719,6 +818,40 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ARRAY_PROXY_VALUE = eINSTANCE.getArrayProxyValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Array Proxy Entries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARRAY_PROXY_VALUE__ARRAY_PROXY_ENTRIES = eINSTANCE.getArrayProxyValue_ArrayProxyEntries();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.ArrayProxyEntryImpl <em>Array Proxy Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.ArrayProxyEntryImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getArrayProxyEntry()
+		 * @generated
+		 */
+		EClass ARRAY_PROXY_ENTRY = eINSTANCE.getArrayProxyEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Index</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARRAY_PROXY_ENTRY__INDEX = eINSTANCE.getArrayProxyEntry_Index();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARRAY_PROXY_ENTRY__VALUE = eINSTANCE.getArrayProxyEntry_Value();
 
 	}
 

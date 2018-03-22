@@ -64,6 +64,7 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 			case ThingMLPackage.NULL_VALUE: return createNullValue();
 			case ThingMLPackage.PROXY_VALUE: return createProxyValue();
 			case ThingMLPackage.ARRAY_PROXY_VALUE: return createArrayProxyValue();
+			case ThingMLPackage.ARRAY_PROXY_ENTRY: return createArrayProxyEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -147,6 +148,16 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	public ArrayProxyValue createArrayProxyValue() {
 		ArrayProxyValueImpl arrayProxyValue = new ArrayProxyValueImpl();
 		return arrayProxyValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ArrayProxyEntry createArrayProxyEntry() {
+		ArrayProxyEntryImpl arrayProxyEntry = new ArrayProxyEntryImpl();
+		return arrayProxyEntry;
 	}
 
 	/**

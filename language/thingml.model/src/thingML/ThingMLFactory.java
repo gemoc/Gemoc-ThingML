@@ -94,6 +94,15 @@ public interface ThingMLFactory extends EFactory {
 	ArrayProxyValue createArrayProxyValue();
 
 	/**
+	 * Returns a new object of class '<em>Array Proxy Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Array Proxy Entry</em>'.
+	 * @generated
+	 */
+	ArrayProxyEntry createArrayProxyEntry();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
