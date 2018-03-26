@@ -10,8 +10,6 @@ import org.thingml.xtext.thingML.ConfigPropertyAssign
 import org.thingml.xtext.thingML.Configuration
 import org.thingml.xtext.thingML.Instance
 
-import static thingml.k3.Printer.log
-
 import static extension thingml.k3.AInstance.*
 
 @Aspect(className=Configuration)
@@ -28,13 +26,12 @@ class AConfiguration {
 			instance.resolve()
 		}
 		for (AbstractConnector connector : _self.connectors) {
-			log(null, "Hello World!")
+			println("Initializing connectors?")
 		}
 	}
 
 	@Main
 	def public void main() {
-		log(null, "Hello World!")
 		_self.end()
 	}
 

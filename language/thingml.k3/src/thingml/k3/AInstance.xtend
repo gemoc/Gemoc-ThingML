@@ -20,8 +20,6 @@ import thingML.ProxyValue
 import thingML.ThingMLFactory
 import thingML.Value
 
-import static thingml.k3.Printer.log
-
 import static extension thingml.k3.AExpression.value
 import static extension thingml.k3.AInstanceContext.get_property_entry
 
@@ -156,7 +154,7 @@ class AInstance {
 			if (entry.value instanceof ArrayProxyValue) {
 				val array_proxy = (entry.value as ArrayProxyValue)
 
-				log(null, "Entering ArrayProxyValue of property '" + entry.property.name + "'")
+				println("Entering ArrayProxyValue of property '" + entry.property.name + "'")
 				proxy_counter++
 
 				val cardinality = array_proxy.expression.value(_self.context, false)
@@ -164,7 +162,7 @@ class AInstance {
 				var continue = !(cardinality instanceof ProxyValue)
 
 				if (continue) {
-					log(null, "Cardinality is not a Proxy anymore!")
+					println("Cardinality is not a Proxy anymore!")
 
 					for (ArrayProxyEntry array_entry : array_proxy.arrayProxyEntries) {
 						val index = array_entry.index.value(_self.context, false)
@@ -173,7 +171,7 @@ class AInstance {
 				}
 
 				if (continue) {
-					log(null, "All indexes have been resolved!")
+					println("All indexes have been resolved!")
 					proxy_resolved++
 
 					if (cardinality instanceof IntegerValue) {
@@ -187,7 +185,7 @@ class AInstance {
 							if (index instanceof IntegerValue) {
 								new_value.values.set(index.value as int, array_entry.value)
 								if (array_entry.value instanceof ProxyValue) {
-									log(null, "Discovering a new ProxyValue!")
+									println("Discovering a new ProxyValue!")
 									proxy_counter++
 								}
 							} else {
@@ -201,16 +199,16 @@ class AInstance {
 					}
 				}
 			} else if (entry.value instanceof ProxyValue) {
-				log(null, "Entering ProxyValue of property '" + entry.property.name + "'")
+				println("Entering ProxyValue of property '" + entry.property.name + "'")
 				proxy_counter++
 				// TODO
 				throw new Exception("This is to be done")
 			} else if (entry.value instanceof ArrayValue) {
-				log(null, "Analysing ArrayValue of property '" + entry.property.name + "'")
+				println("Analysing ArrayValue of property '" + entry.property.name + "'")
 				var i = 0
 				for (Value value : (entry.value as ArrayValue).values) {
 					if (value instanceof ProxyValue) {
-						log(null, "Entering ProxyValue of property '" + entry.property.name + "[" + i + "]'")
+						println("Entering ProxyValue of property '" + entry.property.name + "[" + i + "]'")
 						proxy_counter++
 						// TODO
 						throw new Exception("This is to be done")
@@ -220,9 +218,9 @@ class AInstance {
 			}
 		}
 
-		log(null, "Counters:")
-		log(null, " - proxies:  " + proxy_counter)
-		log(null, " - resolved: " + proxy_resolved)
+		println("Counters:")
+		println(" - proxies:  " + proxy_counter)
+		println(" - resolved: " + proxy_resolved)
 
 		if (proxy_counter > 0) {
 			if (proxy_resolved == 0) {
