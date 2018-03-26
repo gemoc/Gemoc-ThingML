@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: thingml.k3.test
+Bundle-SymbolicName: thingml.k3.test;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: thingml.k3.test
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: thingml;bundle-version="2.0.0",
+ thingml.k3;bundle-version="1.0.0",
+ thingml.model;bundle-version="0.1.0",
+ org.junit;bundle-version="4.12.0",
+ thingml.samples;bundle-version="1.0.0"
