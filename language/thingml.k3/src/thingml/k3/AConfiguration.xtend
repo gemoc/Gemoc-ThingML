@@ -32,6 +32,13 @@ class AConfiguration {
 
 	@Main
 	def public void main() {
+		var running = true
+		while (running) {
+			running = false
+			for (Instance instance : _self.instances) {
+				running = running || instance.run()
+			}
+		}
 		_self.end()
 	}
 

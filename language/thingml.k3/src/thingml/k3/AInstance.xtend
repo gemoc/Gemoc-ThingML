@@ -1,6 +1,7 @@
 package thingml.k3
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+import fr.inria.diverse.k3.al.annotationprocessor.Step
 import org.eclipse.emf.common.util.EList
 import org.thingml.xtext.thingML.CompositeState
 import org.thingml.xtext.thingML.ConfigPropertyAssign
@@ -22,6 +23,7 @@ import thingML.Value
 
 import static extension thingml.k3.AExpression.value
 import static extension thingml.k3.AInstanceContext.get_property_entry
+import static extension thingml.k3.AState.run
 
 @Aspect(className=Instance)
 class AInstance {
@@ -225,5 +227,10 @@ class AInstance {
 				_self.resolve()
 			}
 		}
+	}
+
+	@Step
+	def public boolean run() {
+		return _self.get_behaviour().run(_self.context)
 	}
 }
