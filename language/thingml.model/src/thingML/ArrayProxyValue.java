@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ArrayProxyValue extends ProxyValue {
-
 	/**
 	 * Returns the value of the '<em><b>Array Proxy Entries</b></em>' containment reference list.
 	 * The list contents are of type {@link thingML.ArrayProxyEntry}.
@@ -37,4 +36,5 @@ public interface ArrayProxyValue extends ProxyValue {
 	 * @generated
 	 */
 	EList<ArrayProxyEntry> getArrayProxyEntries();
+
 } // ArrayProxyValue

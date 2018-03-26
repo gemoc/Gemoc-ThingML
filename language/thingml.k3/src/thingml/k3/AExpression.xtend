@@ -4,6 +4,7 @@ import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import org.thingml.xtext.thingML.Expression
 import org.thingml.xtext.thingML.IntegerLiteral
+import org.thingml.xtext.thingML.MinusExpression
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyReference
 import org.thingml.xtext.thingML.StringLiteral
@@ -14,12 +15,24 @@ import thingML.ThingMLFactory
 import thingML.Value
 
 import static extension thingml.k3.AInstanceContext.get_property_entry
-import static extension thingml.k3.AValue.times
+import static extension thingml.k3.AValue.*
 
 @Aspect(className=Expression)
 class AExpression {
 	def public Value value(InstanceContext context, boolean createProxies) {
 		throw new Exception("Expression type " + _self.class + " is not supported in semantics yet")
+	}
+}
+
+@Aspect(className=MinusExpression)
+class AMinusExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(InstanceContext context, boolean createProxies) {
+		val value = _self.lhs.value(context, createProxies).minus(_self.rhs.value(context, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
 	}
 }
 
