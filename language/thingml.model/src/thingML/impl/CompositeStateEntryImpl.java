@@ -10,36 +10,36 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.thingml.xtext.thingML.CompositeState;
 import org.thingml.xtext.thingML.State;
-import org.thingml.xtext.thingML.StateContainer;
 
-import thingML.StateContainerEntry;
+import thingML.CompositeStateEntry;
 import thingML.ThingMLPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>State Container Entry</b></em>'.
+ * An implementation of the model object '<em><b>Composite State Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link thingML.impl.StateContainerEntryImpl#getStateContainer <em>State Container</em>}</li>
- *   <li>{@link thingML.impl.StateContainerEntryImpl#getCurrentState <em>Current State</em>}</li>
+ *   <li>{@link thingML.impl.CompositeStateEntryImpl#getCompositeState <em>Composite State</em>}</li>
+ *   <li>{@link thingML.impl.CompositeStateEntryImpl#getCurrentState <em>Current State</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implements StateContainerEntry {
+public class CompositeStateEntryImpl extends MinimalEObjectImpl.Container implements CompositeStateEntry {
 	/**
-	 * The cached value of the '{@link #getStateContainer() <em>State Container</em>}' reference.
+	 * The cached value of the '{@link #getCompositeState() <em>Composite State</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStateContainer()
+	 * @see #getCompositeState()
 	 * @generated
 	 * @ordered
 	 */
-	protected StateContainer stateContainer;
+	protected CompositeState compositeState;
 
 	/**
 	 * The cached value of the '{@link #getCurrentState() <em>Current State</em>}' reference.
@@ -56,7 +56,7 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StateContainerEntryImpl() {
+	protected CompositeStateEntryImpl() {
 		super();
 	}
 
@@ -67,7 +67,7 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ThingMLPackage.Literals.STATE_CONTAINER_ENTRY;
+		return ThingMLPackage.Literals.COMPOSITE_STATE_ENTRY;
 	}
 
 	/**
@@ -75,16 +75,16 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StateContainer getStateContainer() {
-		if (stateContainer != null && stateContainer.eIsProxy()) {
-			InternalEObject oldStateContainer = (InternalEObject)stateContainer;
-			stateContainer = (StateContainer)eResolveProxy(oldStateContainer);
-			if (stateContainer != oldStateContainer) {
+	public CompositeState getCompositeState() {
+		if (compositeState != null && compositeState.eIsProxy()) {
+			InternalEObject oldCompositeState = (InternalEObject)compositeState;
+			compositeState = (CompositeState)eResolveProxy(oldCompositeState);
+			if (compositeState != oldCompositeState) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.STATE_CONTAINER_ENTRY__STATE_CONTAINER, oldStateContainer, stateContainer));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.COMPOSITE_STATE_ENTRY__COMPOSITE_STATE, oldCompositeState, compositeState));
 			}
 		}
-		return stateContainer;
+		return compositeState;
 	}
 
 	/**
@@ -92,8 +92,8 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StateContainer basicGetStateContainer() {
-		return stateContainer;
+	public CompositeState basicGetCompositeState() {
+		return compositeState;
 	}
 
 	/**
@@ -101,11 +101,11 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStateContainer(StateContainer newStateContainer) {
-		StateContainer oldStateContainer = stateContainer;
-		stateContainer = newStateContainer;
+	public void setCompositeState(CompositeState newCompositeState) {
+		CompositeState oldCompositeState = compositeState;
+		compositeState = newCompositeState;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.STATE_CONTAINER_ENTRY__STATE_CONTAINER, oldStateContainer, stateContainer));
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.COMPOSITE_STATE_ENTRY__COMPOSITE_STATE, oldCompositeState, compositeState));
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 			currentState = (State)eResolveProxy(oldCurrentState);
 			if (currentState != oldCurrentState) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.STATE_CONTAINER_ENTRY__CURRENT_STATE, oldCurrentState, currentState));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.COMPOSITE_STATE_ENTRY__CURRENT_STATE, oldCurrentState, currentState));
 			}
 		}
 		return currentState;
@@ -143,7 +143,7 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 		State oldCurrentState = currentState;
 		currentState = newCurrentState;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.STATE_CONTAINER_ENTRY__CURRENT_STATE, oldCurrentState, currentState));
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.COMPOSITE_STATE_ENTRY__CURRENT_STATE, oldCurrentState, currentState));
 	}
 
 	/**
@@ -154,10 +154,10 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ThingMLPackage.STATE_CONTAINER_ENTRY__STATE_CONTAINER:
-				if (resolve) return getStateContainer();
-				return basicGetStateContainer();
-			case ThingMLPackage.STATE_CONTAINER_ENTRY__CURRENT_STATE:
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY__COMPOSITE_STATE:
+				if (resolve) return getCompositeState();
+				return basicGetCompositeState();
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY__CURRENT_STATE:
 				if (resolve) return getCurrentState();
 				return basicGetCurrentState();
 		}
@@ -172,10 +172,10 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ThingMLPackage.STATE_CONTAINER_ENTRY__STATE_CONTAINER:
-				setStateContainer((StateContainer)newValue);
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY__COMPOSITE_STATE:
+				setCompositeState((CompositeState)newValue);
 				return;
-			case ThingMLPackage.STATE_CONTAINER_ENTRY__CURRENT_STATE:
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY__CURRENT_STATE:
 				setCurrentState((State)newValue);
 				return;
 		}
@@ -190,10 +190,10 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.STATE_CONTAINER_ENTRY__STATE_CONTAINER:
-				setStateContainer((StateContainer)null);
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY__COMPOSITE_STATE:
+				setCompositeState((CompositeState)null);
 				return;
-			case ThingMLPackage.STATE_CONTAINER_ENTRY__CURRENT_STATE:
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY__CURRENT_STATE:
 				setCurrentState((State)null);
 				return;
 		}
@@ -208,12 +208,12 @@ public class StateContainerEntryImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.STATE_CONTAINER_ENTRY__STATE_CONTAINER:
-				return stateContainer != null;
-			case ThingMLPackage.STATE_CONTAINER_ENTRY__CURRENT_STATE:
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY__COMPOSITE_STATE:
+				return compositeState != null;
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY__CURRENT_STATE:
 				return currentState != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //StateContainerEntryImpl
+} //CompositeStateEntryImpl

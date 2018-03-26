@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import thingML.CompositeStateEntry;
 import thingML.InstanceContext;
 import thingML.PropertyEntry;
-import thingML.StateContainerEntry;
 import thingML.ThingMLPackage;
 
 /**
@@ -54,7 +54,7 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<StateContainerEntry> stateContainerEntries;
+	protected EList<CompositeStateEntry> stateContainerEntries;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,9 +92,9 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<StateContainerEntry> getStateContainerEntries() {
+	public EList<CompositeStateEntry> getStateContainerEntries() {
 		if (stateContainerEntries == null) {
-			stateContainerEntries = new EObjectContainmentEList<StateContainerEntry>(StateContainerEntry.class, this, ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES);
+			stateContainerEntries = new EObjectContainmentEList<CompositeStateEntry>(CompositeStateEntry.class, this, ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES);
 		}
 		return stateContainerEntries;
 	}
@@ -146,7 +146,7 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 				return;
 			case ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES:
 				getStateContainerEntries().clear();
-				getStateContainerEntries().addAll((Collection<? extends StateContainerEntry>)newValue);
+				getStateContainerEntries().addAll((Collection<? extends CompositeStateEntry>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -65,7 +65,7 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 			case ThingMLPackage.PROXY_VALUE: return createProxyValue();
 			case ThingMLPackage.ARRAY_PROXY_VALUE: return createArrayProxyValue();
 			case ThingMLPackage.ARRAY_PROXY_ENTRY: return createArrayProxyEntry();
-			case ThingMLPackage.STATE_CONTAINER_ENTRY: return createStateContainerEntry();
+			case ThingMLPackage.COMPOSITE_STATE_ENTRY: return createCompositeStateEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -76,9 +76,29 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public InstanceContext createInstanceContext() {
+		InstanceContextImpl instanceContext = new InstanceContextImpl();
+		return instanceContext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public PropertyEntry createPropertyEntry() {
 		PropertyEntryImpl propertyEntry = new PropertyEntryImpl();
 		return propertyEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NullValue createNullValue() {
+		NullValueImpl nullValue = new NullValueImpl();
+		return nullValue;
 	}
 
 	/**
@@ -116,26 +136,6 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstanceContext createInstanceContext() {
-		InstanceContextImpl instanceContext = new InstanceContextImpl();
-		return instanceContext;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NullValue createNullValue() {
-		NullValueImpl nullValue = new NullValueImpl();
-		return nullValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ProxyValue createProxyValue() {
 		ProxyValueImpl proxyValue = new ProxyValueImpl();
 		return proxyValue;
@@ -166,9 +166,9 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StateContainerEntry createStateContainerEntry() {
-		StateContainerEntryImpl stateContainerEntry = new StateContainerEntryImpl();
-		return stateContainerEntry;
+	public CompositeStateEntry createCompositeStateEntry() {
+		CompositeStateEntryImpl compositeStateEntry = new CompositeStateEntryImpl();
+		return compositeStateEntry;
 	}
 
 	/**

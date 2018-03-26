@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="thingML" nsURI="xthingml" nsPrefix="thingML">
   <eClassifiers xsi:type="ecore:EClass" name="InstanceContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyEntries" upperBound="-1" eType="//PropertyEntry" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stateContainerEntries" upperBound="-1" eType="//StateContainerEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateContainerEntries" upperBound="-1" eType="//CompositeStateEntry" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1">
@@ -39,9 +39,9 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StateContainerEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stateContainer" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//StateContainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeStateEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeState" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//CompositeState"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" lowerBound="1">
       <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//State"/>

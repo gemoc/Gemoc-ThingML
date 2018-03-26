@@ -108,8 +108,8 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 				return createArrayProxyEntryAdapter();
 			}
 			@Override
-			public Adapter caseStateContainerEntry(StateContainerEntry object) {
-				return createStateContainerEntryAdapter();
+			public Adapter caseCompositeStateEntry(CompositeStateEntry object) {
+				return createCompositeStateEntryAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -130,6 +130,20 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.InstanceContext <em>Instance Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.InstanceContext
+	 * @generated
+	 */
+	public Adapter createInstanceContextAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link thingML.PropertyEntry <em>Property Entry</em>}'.
@@ -156,6 +170,20 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.NullValue <em>Null Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.NullValue
+	 * @generated
+	 */
+	public Adapter createNullValueAdapter() {
 		return null;
 	}
 
@@ -202,34 +230,6 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link thingML.InstanceContext <em>Instance Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see thingML.InstanceContext
-	 * @generated
-	 */
-	public Adapter createInstanceContextAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link thingML.NullValue <em>Null Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see thingML.NullValue
-	 * @generated
-	 */
-	public Adapter createNullValueAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link thingML.ProxyValue <em>Proxy Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -272,16 +272,16 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link thingML.StateContainerEntry <em>State Container Entry</em>}'.
+	 * Creates a new adapter for an object of class '{@link thingML.CompositeStateEntry <em>Composite State Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see thingML.StateContainerEntry
+	 * @see thingML.CompositeStateEntry
 	 * @generated
 	 */
-	public Adapter createStateContainerEntryAdapter() {
+	public Adapter createCompositeStateEntryAdapter() {
 		return null;
 	}
 

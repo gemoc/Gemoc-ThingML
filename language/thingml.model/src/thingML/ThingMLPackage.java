@@ -57,56 +57,6 @@ public interface ThingMLPackage extends EPackage {
 	ThingMLPackage eINSTANCE = thingML.impl.ThingMLPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link thingML.impl.PropertyEntryImpl <em>Property Entry</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.PropertyEntryImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getPropertyEntry()
-	 * @generated
-	 */
-	int PROPERTY_ENTRY = 1;
-
-	/**
-	 * The meta object id for the '{@link thingML.impl.ValueImpl <em>Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.ValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getValue()
-	 * @generated
-	 */
-	int VALUE = 2;
-
-	/**
-	 * The meta object id for the '{@link thingML.impl.IntegerValueImpl <em>Integer Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.IntegerValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getIntegerValue()
-	 * @generated
-	 */
-	int INTEGER_VALUE = 4;
-
-	/**
-	 * The meta object id for the '{@link thingML.impl.StringValueImpl <em>String Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.StringValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getStringValue()
-	 * @generated
-	 */
-	int STRING_VALUE = 5;
-
-	/**
-	 * The meta object id for the '{@link thingML.impl.ArrayValueImpl <em>Array Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.ArrayValueImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getArrayValue()
-	 * @generated
-	 */
-	int ARRAY_VALUE = 6;
-
-	/**
 	 * The meta object id for the '{@link thingML.impl.InstanceContextImpl <em>Instance Context</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -153,6 +103,16 @@ public interface ThingMLPackage extends EPackage {
 	int INSTANCE_CONTEXT_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link thingML.impl.PropertyEntryImpl <em>Property Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.PropertyEntryImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getPropertyEntry()
+	 * @generated
+	 */
+	int PROPERTY_ENTRY = 1;
+
+	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -189,6 +149,16 @@ public interface ThingMLPackage extends EPackage {
 	int PROPERTY_ENTRY_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link thingML.impl.ValueImpl <em>Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.ValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getValue()
+	 * @generated
+	 */
+	int VALUE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -205,7 +175,6 @@ public interface ThingMLPackage extends EPackage {
 	 * @ordered
 	 */
 	int VALUE_OPERATION_COUNT = 0;
-
 
 	/**
 	 * The meta object id for the '{@link thingML.impl.NullValueImpl <em>Null Value</em>}' class.
@@ -236,6 +205,16 @@ public interface ThingMLPackage extends EPackage {
 	int NULL_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link thingML.impl.IntegerValueImpl <em>Integer Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.IntegerValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getIntegerValue()
+	 * @generated
+	 */
+	int INTEGER_VALUE = 4;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -261,6 +240,16 @@ public interface ThingMLPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.StringValueImpl <em>String Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.StringValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getStringValue()
+	 * @generated
+	 */
+	int STRING_VALUE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -290,6 +279,16 @@ public interface ThingMLPackage extends EPackage {
 	int STRING_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link thingML.impl.ArrayValueImpl <em>Array Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.ArrayValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getArrayValue()
+	 * @generated
+	 */
+	int ARRAY_VALUE = 6;
+
+	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,7 +314,6 @@ public interface ThingMLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ARRAY_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
-
 
 	/**
 	 * The meta object id for the '{@link thingML.impl.ProxyValueImpl <em>Proxy Value</em>}' class.
@@ -353,7 +351,6 @@ public interface ThingMLPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROXY_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
-
 
 	/**
 	 * The meta object id for the '{@link thingML.impl.ArrayProxyValueImpl <em>Array Proxy Value</em>}' class.
@@ -401,7 +398,6 @@ public interface ThingMLPackage extends EPackage {
 	 */
 	int ARRAY_PROXY_VALUE_OPERATION_COUNT = PROXY_VALUE_OPERATION_COUNT + 0;
 
-
 	/**
 	 * The meta object id for the '{@link thingML.impl.ArrayProxyEntryImpl <em>Array Proxy Entry</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -448,25 +444,24 @@ public interface ThingMLPackage extends EPackage {
 	 */
 	int ARRAY_PROXY_ENTRY_OPERATION_COUNT = 0;
 
-
 	/**
-	 * The meta object id for the '{@link thingML.impl.StateContainerEntryImpl <em>State Container Entry</em>}' class.
+	 * The meta object id for the '{@link thingML.impl.CompositeStateEntryImpl <em>Composite State Entry</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see thingML.impl.StateContainerEntryImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getStateContainerEntry()
+	 * @see thingML.impl.CompositeStateEntryImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getCompositeStateEntry()
 	 * @generated
 	 */
-	int STATE_CONTAINER_ENTRY = 10;
+	int COMPOSITE_STATE_ENTRY = 10;
 
 	/**
-	 * The feature id for the '<em><b>State Container</b></em>' reference.
+	 * The feature id for the '<em><b>Composite State</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_CONTAINER_ENTRY__STATE_CONTAINER = 0;
+	int COMPOSITE_STATE_ENTRY__COMPOSITE_STATE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Current State</b></em>' reference.
@@ -475,26 +470,58 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_CONTAINER_ENTRY__CURRENT_STATE = 1;
+	int COMPOSITE_STATE_ENTRY__CURRENT_STATE = 1;
 
 	/**
-	 * The number of structural features of the '<em>State Container Entry</em>' class.
+	 * The number of structural features of the '<em>Composite State Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_CONTAINER_ENTRY_FEATURE_COUNT = 2;
+	int COMPOSITE_STATE_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>State Container Entry</em>' class.
+	 * The number of operations of the '<em>Composite State Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_CONTAINER_ENTRY_OPERATION_COUNT = 0;
+	int COMPOSITE_STATE_ENTRY_OPERATION_COUNT = 0;
 
+
+	/**
+	 * Returns the meta object for class '{@link thingML.InstanceContext <em>Instance Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Instance Context</em>'.
+	 * @see thingML.InstanceContext
+	 * @generated
+	 */
+	EClass getInstanceContext();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link thingML.InstanceContext#getPropertyEntries <em>Property Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Property Entries</em>'.
+	 * @see thingML.InstanceContext#getPropertyEntries()
+	 * @see #getInstanceContext()
+	 * @generated
+	 */
+	EReference getInstanceContext_PropertyEntries();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link thingML.InstanceContext#getStateContainerEntries <em>State Container Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>State Container Entries</em>'.
+	 * @see thingML.InstanceContext#getStateContainerEntries()
+	 * @see #getInstanceContext()
+	 * @generated
+	 */
+	EReference getInstanceContext_StateContainerEntries();
 
 	/**
 	 * Returns the meta object for class '{@link thingML.PropertyEntry <em>Property Entry</em>}'.
@@ -537,6 +564,16 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getValue();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.NullValue <em>Null Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Null Value</em>'.
+	 * @see thingML.NullValue
+	 * @generated
+	 */
+	EClass getNullValue();
 
 	/**
 	 * Returns the meta object for class '{@link thingML.IntegerValue <em>Integer Value</em>}'.
@@ -600,48 +637,6 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getArrayValue_Values();
-
-	/**
-	 * Returns the meta object for class '{@link thingML.InstanceContext <em>Instance Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Instance Context</em>'.
-	 * @see thingML.InstanceContext
-	 * @generated
-	 */
-	EClass getInstanceContext();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link thingML.InstanceContext#getPropertyEntries <em>Property Entries</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Property Entries</em>'.
-	 * @see thingML.InstanceContext#getPropertyEntries()
-	 * @see #getInstanceContext()
-	 * @generated
-	 */
-	EReference getInstanceContext_PropertyEntries();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link thingML.InstanceContext#getStateContainerEntries <em>State Container Entries</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>State Container Entries</em>'.
-	 * @see thingML.InstanceContext#getStateContainerEntries()
-	 * @see #getInstanceContext()
-	 * @generated
-	 */
-	EReference getInstanceContext_StateContainerEntries();
-
-	/**
-	 * Returns the meta object for class '{@link thingML.NullValue <em>Null Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Null Value</em>'.
-	 * @see thingML.NullValue
-	 * @generated
-	 */
-	EClass getNullValue();
 
 	/**
 	 * Returns the meta object for class '{@link thingML.ProxyValue <em>Proxy Value</em>}'.
@@ -718,36 +713,36 @@ public interface ThingMLPackage extends EPackage {
 	EReference getArrayProxyEntry_Value();
 
 	/**
-	 * Returns the meta object for class '{@link thingML.StateContainerEntry <em>State Container Entry</em>}'.
+	 * Returns the meta object for class '{@link thingML.CompositeStateEntry <em>Composite State Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>State Container Entry</em>'.
-	 * @see thingML.StateContainerEntry
+	 * @return the meta object for class '<em>Composite State Entry</em>'.
+	 * @see thingML.CompositeStateEntry
 	 * @generated
 	 */
-	EClass getStateContainerEntry();
+	EClass getCompositeStateEntry();
 
 	/**
-	 * Returns the meta object for the reference '{@link thingML.StateContainerEntry#getStateContainer <em>State Container</em>}'.
+	 * Returns the meta object for the reference '{@link thingML.CompositeStateEntry#getCompositeState <em>Composite State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>State Container</em>'.
-	 * @see thingML.StateContainerEntry#getStateContainer()
-	 * @see #getStateContainerEntry()
+	 * @return the meta object for the reference '<em>Composite State</em>'.
+	 * @see thingML.CompositeStateEntry#getCompositeState()
+	 * @see #getCompositeStateEntry()
 	 * @generated
 	 */
-	EReference getStateContainerEntry_StateContainer();
+	EReference getCompositeStateEntry_CompositeState();
 
 	/**
-	 * Returns the meta object for the reference '{@link thingML.StateContainerEntry#getCurrentState <em>Current State</em>}'.
+	 * Returns the meta object for the reference '{@link thingML.CompositeStateEntry#getCurrentState <em>Current State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Current State</em>'.
-	 * @see thingML.StateContainerEntry#getCurrentState()
-	 * @see #getStateContainerEntry()
+	 * @see thingML.CompositeStateEntry#getCurrentState()
+	 * @see #getCompositeStateEntry()
 	 * @generated
 	 */
-	EReference getStateContainerEntry_CurrentState();
+	EReference getCompositeStateEntry_CurrentState();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -772,6 +767,32 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link thingML.impl.InstanceContextImpl <em>Instance Context</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.InstanceContextImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getInstanceContext()
+		 * @generated
+		 */
+		EClass INSTANCE_CONTEXT = eINSTANCE.getInstanceContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Entries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE_CONTEXT__PROPERTY_ENTRIES = eINSTANCE.getInstanceContext_PropertyEntries();
+
+		/**
+		 * The meta object literal for the '<em><b>State Container Entries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES = eINSTANCE.getInstanceContext_StateContainerEntries();
+
 		/**
 		 * The meta object literal for the '{@link thingML.impl.PropertyEntryImpl <em>Property Entry</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -807,6 +828,16 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VALUE = eINSTANCE.getValue();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.NullValueImpl <em>Null Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.NullValueImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getNullValue()
+		 * @generated
+		 */
+		EClass NULL_VALUE = eINSTANCE.getNullValue();
 
 		/**
 		 * The meta object literal for the '{@link thingML.impl.IntegerValueImpl <em>Integer Value</em>}' class.
@@ -861,42 +892,6 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ARRAY_VALUE__VALUES = eINSTANCE.getArrayValue_Values();
-
-		/**
-		 * The meta object literal for the '{@link thingML.impl.InstanceContextImpl <em>Instance Context</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see thingML.impl.InstanceContextImpl
-		 * @see thingML.impl.ThingMLPackageImpl#getInstanceContext()
-		 * @generated
-		 */
-		EClass INSTANCE_CONTEXT = eINSTANCE.getInstanceContext();
-
-		/**
-		 * The meta object literal for the '<em><b>Property Entries</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INSTANCE_CONTEXT__PROPERTY_ENTRIES = eINSTANCE.getInstanceContext_PropertyEntries();
-
-		/**
-		 * The meta object literal for the '<em><b>State Container Entries</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES = eINSTANCE.getInstanceContext_StateContainerEntries();
-
-		/**
-		 * The meta object literal for the '{@link thingML.impl.NullValueImpl <em>Null Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see thingML.impl.NullValueImpl
-		 * @see thingML.impl.ThingMLPackageImpl#getNullValue()
-		 * @generated
-		 */
-		EClass NULL_VALUE = eINSTANCE.getNullValue();
 
 		/**
 		 * The meta object literal for the '{@link thingML.impl.ProxyValueImpl <em>Proxy Value</em>}' class.
@@ -961,22 +956,22 @@ public interface ThingMLPackage extends EPackage {
 		EReference ARRAY_PROXY_ENTRY__VALUE = eINSTANCE.getArrayProxyEntry_Value();
 
 		/**
-		 * The meta object literal for the '{@link thingML.impl.StateContainerEntryImpl <em>State Container Entry</em>}' class.
+		 * The meta object literal for the '{@link thingML.impl.CompositeStateEntryImpl <em>Composite State Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see thingML.impl.StateContainerEntryImpl
-		 * @see thingML.impl.ThingMLPackageImpl#getStateContainerEntry()
+		 * @see thingML.impl.CompositeStateEntryImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getCompositeStateEntry()
 		 * @generated
 		 */
-		EClass STATE_CONTAINER_ENTRY = eINSTANCE.getStateContainerEntry();
+		EClass COMPOSITE_STATE_ENTRY = eINSTANCE.getCompositeStateEntry();
 
 		/**
-		 * The meta object literal for the '<em><b>State Container</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Composite State</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE_CONTAINER_ENTRY__STATE_CONTAINER = eINSTANCE.getStateContainerEntry_StateContainer();
+		EReference COMPOSITE_STATE_ENTRY__COMPOSITE_STATE = eINSTANCE.getCompositeStateEntry_CompositeState();
 
 		/**
 		 * The meta object literal for the '<em><b>Current State</b></em>' reference feature.
@@ -984,7 +979,7 @@ public interface ThingMLPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATE_CONTAINER_ENTRY__CURRENT_STATE = eINSTANCE.getStateContainerEntry_CurrentState();
+		EReference COMPOSITE_STATE_ENTRY__CURRENT_STATE = eINSTANCE.getCompositeStateEntry_CurrentState();
 
 	}
 

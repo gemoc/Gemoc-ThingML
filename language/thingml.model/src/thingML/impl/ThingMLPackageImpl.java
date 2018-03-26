@@ -12,12 +12,12 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import thingML.ArrayProxyEntry;
 import thingML.ArrayProxyValue;
 import thingML.ArrayValue;
+import thingML.CompositeStateEntry;
 import thingML.InstanceContext;
 import thingML.IntegerValue;
 import thingML.NullValue;
 import thingML.PropertyEntry;
 import thingML.ProxyValue;
-import thingML.StateContainerEntry;
 import thingML.StringValue;
 import thingML.ThingMLFactory;
 import thingML.ThingMLPackage;
@@ -35,6 +35,13 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass instanceContextEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass propertyEntryEClass = null;
 
 	/**
@@ -43,6 +50,13 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * @generated
 	 */
 	private EClass valueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nullValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,20 +84,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass instanceContextEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nullValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass proxyValueEClass = null;
 
 	/**
@@ -105,7 +105,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass stateContainerEntryEClass = null;
+	private EClass compositeStateEntryEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -176,6 +176,33 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInstanceContext() {
+		return instanceContextEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInstanceContext_PropertyEntries() {
+		return (EReference)instanceContextEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInstanceContext_StateContainerEntries() {
+		return (EReference)instanceContextEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPropertyEntry() {
 		return propertyEntryEClass;
 	}
@@ -205,6 +232,15 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 */
 	public EClass getValue() {
 		return valueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNullValue() {
+		return nullValueEClass;
 	}
 
 	/**
@@ -259,42 +295,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 */
 	public EReference getArrayValue_Values() {
 		return (EReference)arrayValueEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getInstanceContext() {
-		return instanceContextEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getInstanceContext_PropertyEntries() {
-		return (EReference)instanceContextEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getInstanceContext_StateContainerEntries() {
-		return (EReference)instanceContextEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNullValue() {
-		return nullValueEClass;
 	}
 
 	/**
@@ -365,8 +365,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStateContainerEntry() {
-		return stateContainerEntryEClass;
+	public EClass getCompositeStateEntry() {
+		return compositeStateEntryEClass;
 	}
 
 	/**
@@ -374,8 +374,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStateContainerEntry_StateContainer() {
-		return (EReference)stateContainerEntryEClass.getEStructuralFeatures().get(0);
+	public EReference getCompositeStateEntry_CompositeState() {
+		return (EReference)compositeStateEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -383,8 +383,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStateContainerEntry_CurrentState() {
-		return (EReference)stateContainerEntryEClass.getEStructuralFeatures().get(1);
+	public EReference getCompositeStateEntry_CurrentState() {
+		return (EReference)compositeStateEntryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -446,9 +446,9 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		createEReference(arrayProxyEntryEClass, ARRAY_PROXY_ENTRY__INDEX);
 		createEReference(arrayProxyEntryEClass, ARRAY_PROXY_ENTRY__VALUE);
 
-		stateContainerEntryEClass = createEClass(STATE_CONTAINER_ENTRY);
-		createEReference(stateContainerEntryEClass, STATE_CONTAINER_ENTRY__STATE_CONTAINER);
-		createEReference(stateContainerEntryEClass, STATE_CONTAINER_ENTRY__CURRENT_STATE);
+		compositeStateEntryEClass = createEClass(COMPOSITE_STATE_ENTRY);
+		createEReference(compositeStateEntryEClass, COMPOSITE_STATE_ENTRY__COMPOSITE_STATE);
+		createEReference(compositeStateEntryEClass, COMPOSITE_STATE_ENTRY__CURRENT_STATE);
 	}
 
 	/**
@@ -492,7 +492,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		// Initialize classes, features, and operations; add parameters
 		initEClass(instanceContextEClass, InstanceContext.class, "InstanceContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstanceContext_PropertyEntries(), this.getPropertyEntry(), null, "propertyEntries", null, 0, -1, InstanceContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInstanceContext_StateContainerEntries(), this.getStateContainerEntry(), null, "stateContainerEntries", null, 0, -1, InstanceContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstanceContext_StateContainerEntries(), this.getCompositeStateEntry(), null, "stateContainerEntries", null, 0, -1, InstanceContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyEntryEClass, PropertyEntry.class, "PropertyEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyEntry_Property(), theThingMLPackage_1.getProperty(), null, "property", null, 1, 1, PropertyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -521,9 +521,9 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getArrayProxyEntry_Index(), theThingMLPackage_1.getExpression(), null, "index", null, 1, 1, ArrayProxyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArrayProxyEntry_Value(), this.getValue(), null, "value", null, 1, 1, ArrayProxyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(stateContainerEntryEClass, StateContainerEntry.class, "StateContainerEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStateContainerEntry_StateContainer(), theThingMLPackage_1.getStateContainer(), null, "stateContainer", null, 1, 1, StateContainerEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStateContainerEntry_CurrentState(), theThingMLPackage_1.getState(), null, "currentState", null, 1, 1, StateContainerEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(compositeStateEntryEClass, CompositeStateEntry.class, "CompositeStateEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompositeStateEntry_CompositeState(), theThingMLPackage_1.getCompositeState(), null, "compositeState", null, 1, 1, CompositeStateEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeStateEntry_CurrentState(), theThingMLPackage_1.getState(), null, "currentState", null, 1, 1, CompositeStateEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

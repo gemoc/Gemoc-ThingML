@@ -22,6 +22,15 @@ public interface ThingMLFactory extends EFactory {
 	ThingMLFactory eINSTANCE = thingML.impl.ThingMLFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Instance Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Instance Context</em>'.
+	 * @generated
+	 */
+	InstanceContext createInstanceContext();
+
+	/**
 	 * Returns a new object of class '<em>Property Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -29,6 +38,15 @@ public interface ThingMLFactory extends EFactory {
 	 * @generated
 	 */
 	PropertyEntry createPropertyEntry();
+
+	/**
+	 * Returns a new object of class '<em>Null Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Null Value</em>'.
+	 * @generated
+	 */
+	NullValue createNullValue();
 
 	/**
 	 * Returns a new object of class '<em>Integer Value</em>'.
@@ -58,24 +76,6 @@ public interface ThingMLFactory extends EFactory {
 	ArrayValue createArrayValue();
 
 	/**
-	 * Returns a new object of class '<em>Instance Context</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instance Context</em>'.
-	 * @generated
-	 */
-	InstanceContext createInstanceContext();
-
-	/**
-	 * Returns a new object of class '<em>Null Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Null Value</em>'.
-	 * @generated
-	 */
-	NullValue createNullValue();
-
-	/**
 	 * Returns a new object of class '<em>Proxy Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,13 +103,13 @@ public interface ThingMLFactory extends EFactory {
 	ArrayProxyEntry createArrayProxyEntry();
 
 	/**
-	 * Returns a new object of class '<em>State Container Entry</em>'.
+	 * Returns a new object of class '<em>Composite State Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>State Container Entry</em>'.
+	 * @return a new object of class '<em>Composite State Entry</em>'.
 	 * @generated
 	 */
-	StateContainerEntry createStateContainerEntry();
+	CompositeStateEntry createCompositeStateEntry();
 
 	/**
 	 * Returns the package supported by this factory.

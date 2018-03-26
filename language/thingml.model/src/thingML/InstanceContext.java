@@ -42,7 +42,7 @@ public interface InstanceContext extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>State Container Entries</b></em>' containment reference list.
-	 * The list contents are of type {@link thingML.StateContainerEntry}.
+	 * The list contents are of type {@link thingML.CompositeStateEntry}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>State Container Entries</em>' containment reference list isn't clear,
@@ -54,6 +54,6 @@ public interface InstanceContext extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<StateContainerEntry> getStateContainerEntries();
+	EList<CompositeStateEntry> getStateContainerEntries();
 
 } // InstanceContext
