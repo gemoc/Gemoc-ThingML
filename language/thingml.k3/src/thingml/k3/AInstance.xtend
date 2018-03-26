@@ -7,6 +7,8 @@ import org.thingml.xtext.thingML.Expression
 import org.thingml.xtext.thingML.Instance
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyAssign
+import org.thingml.xtext.thingML.State
+import org.thingml.xtext.thingML.StateContainer
 import org.thingml.xtext.thingML.Thing
 import thingML.ArrayProxyEntry
 import thingML.ArrayProxyValue
@@ -106,10 +108,39 @@ class AInstance {
 		}
 	}
 
+	def public StateContainer get_behaviour() {
+		var behaviour = _self.type.behaviour
+		var i = _self.type.includes.iterator
+		while (behaviour === null && i.hasNext()) {
+			behaviour = i.next().behaviour
+		}
+		if (behaviour === null) {
+			throw new Exception("Instance " + _self.name + " doesn't have any behaviour!")
+		}
+		return behaviour
+	}
+
+	def public void init_state_containers(StateContainer stateContainer, boolean initial) {
+		val entry = ThingMLFactory.eINSTANCE.createStateContainerEntry()
+		entry.stateContainer = stateContainer
+		if (stateContainer.history || initial) {
+			entry.currentState = stateContainer.initial
+		} else {
+			entry.currentState = null
+		}
+		_self.context.stateContainerEntries.add(entry)
+		for (State sub_state : stateContainer.substate) {
+			if (sub_state instanceof StateContainer) {
+				_self.init_state_containers(sub_state, sub_state == stateContainer.initial)
+			}
+		}
+	}
+
 	def public void init() {
 		_self.context = ThingMLFactory.eINSTANCE.createInstanceContext()
 		_self.init_properties(_self.type)
 		_self.init_property_assigns(_self.type)
+		_self.init_state_containers(_self.get_behaviour(), true)
 	}
 
 	def public void assign(ConfigPropertyAssign assign) {

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link thingML.InstanceContext#getPropertyEntries <em>Property Entries</em>}</li>
+ *   <li>{@link thingML.InstanceContext#getStateContainerEntries <em>State Container Entries</em>}</li>
  * </ul>
  *
  * @see thingML.ThingMLPackage#getInstanceContext()
@@ -38,5 +39,21 @@ public interface InstanceContext extends EObject {
 	 * @generated
 	 */
 	EList<PropertyEntry> getPropertyEntries();
+
+	/**
+	 * Returns the value of the '<em><b>State Container Entries</b></em>' containment reference list.
+	 * The list contents are of type {@link thingML.StateContainerEntry}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>State Container Entries</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>State Container Entries</em>' containment reference list.
+	 * @see thingML.ThingMLPackage#getInstanceContext_StateContainerEntries()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<StateContainerEntry> getStateContainerEntries();
 
 } // InstanceContext

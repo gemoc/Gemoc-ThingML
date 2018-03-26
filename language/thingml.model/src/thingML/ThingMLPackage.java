@@ -126,13 +126,22 @@ public interface ThingMLPackage extends EPackage {
 	int INSTANCE_CONTEXT__PROPERTY_ENTRIES = 0;
 
 	/**
+	 * The feature id for the '<em><b>State Container Entries</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES = 1;
+
+	/**
 	 * The number of structural features of the '<em>Instance Context</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_CONTEXT_FEATURE_COUNT = 1;
+	int INSTANCE_CONTEXT_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Instance Context</em>' class.
@@ -441,6 +450,53 @@ public interface ThingMLPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link thingML.impl.StateContainerEntryImpl <em>State Container Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.StateContainerEntryImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getStateContainerEntry()
+	 * @generated
+	 */
+	int STATE_CONTAINER_ENTRY = 10;
+
+	/**
+	 * The feature id for the '<em><b>State Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_CONTAINER_ENTRY__STATE_CONTAINER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Current State</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_CONTAINER_ENTRY__CURRENT_STATE = 1;
+
+	/**
+	 * The number of structural features of the '<em>State Container Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_CONTAINER_ENTRY_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>State Container Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_CONTAINER_ENTRY_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link thingML.PropertyEntry <em>Property Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -567,6 +623,17 @@ public interface ThingMLPackage extends EPackage {
 	EReference getInstanceContext_PropertyEntries();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link thingML.InstanceContext#getStateContainerEntries <em>State Container Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>State Container Entries</em>'.
+	 * @see thingML.InstanceContext#getStateContainerEntries()
+	 * @see #getInstanceContext()
+	 * @generated
+	 */
+	EReference getInstanceContext_StateContainerEntries();
+
+	/**
 	 * Returns the meta object for class '{@link thingML.NullValue <em>Null Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -649,6 +716,38 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getArrayProxyEntry_Value();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.StateContainerEntry <em>State Container Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>State Container Entry</em>'.
+	 * @see thingML.StateContainerEntry
+	 * @generated
+	 */
+	EClass getStateContainerEntry();
+
+	/**
+	 * Returns the meta object for the reference '{@link thingML.StateContainerEntry#getStateContainer <em>State Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>State Container</em>'.
+	 * @see thingML.StateContainerEntry#getStateContainer()
+	 * @see #getStateContainerEntry()
+	 * @generated
+	 */
+	EReference getStateContainerEntry_StateContainer();
+
+	/**
+	 * Returns the meta object for the reference '{@link thingML.StateContainerEntry#getCurrentState <em>Current State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Current State</em>'.
+	 * @see thingML.StateContainerEntry#getCurrentState()
+	 * @see #getStateContainerEntry()
+	 * @generated
+	 */
+	EReference getStateContainerEntry_CurrentState();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -782,6 +881,14 @@ public interface ThingMLPackage extends EPackage {
 		EReference INSTANCE_CONTEXT__PROPERTY_ENTRIES = eINSTANCE.getInstanceContext_PropertyEntries();
 
 		/**
+		 * The meta object literal for the '<em><b>State Container Entries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES = eINSTANCE.getInstanceContext_StateContainerEntries();
+
+		/**
 		 * The meta object literal for the '{@link thingML.impl.NullValueImpl <em>Null Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -852,6 +959,32 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ARRAY_PROXY_ENTRY__VALUE = eINSTANCE.getArrayProxyEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.StateContainerEntryImpl <em>State Container Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.StateContainerEntryImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getStateContainerEntry()
+		 * @generated
+		 */
+		EClass STATE_CONTAINER_ENTRY = eINSTANCE.getStateContainerEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>State Container</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE_CONTAINER_ENTRY__STATE_CONTAINER = eINSTANCE.getStateContainerEntry_StateContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Current State</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE_CONTAINER_ENTRY__CURRENT_STATE = eINSTANCE.getStateContainerEntry_CurrentState();
 
 	}
 

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import thingML.InstanceContext;
 import thingML.PropertyEntry;
+import thingML.StateContainerEntry;
 import thingML.ThingMLPackage;
 
 /**
@@ -29,6 +30,7 @@ import thingML.ThingMLPackage;
  * </p>
  * <ul>
  *   <li>{@link thingML.impl.InstanceContextImpl#getPropertyEntries <em>Property Entries</em>}</li>
+ *   <li>{@link thingML.impl.InstanceContextImpl#getStateContainerEntries <em>State Container Entries</em>}</li>
  * </ul>
  *
  * @generated
@@ -43,6 +45,16 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected EList<PropertyEntry> propertyEntries;
+
+	/**
+	 * The cached value of the '{@link #getStateContainerEntries() <em>State Container Entries</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStateContainerEntries()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StateContainerEntry> stateContainerEntries;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,11 +92,25 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<StateContainerEntry> getStateContainerEntries() {
+		if (stateContainerEntries == null) {
+			stateContainerEntries = new EObjectContainmentEList<StateContainerEntry>(StateContainerEntry.class, this, ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES);
+		}
+		return stateContainerEntries;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ThingMLPackage.INSTANCE_CONTEXT__PROPERTY_ENTRIES:
 				return ((InternalEList<?>)getPropertyEntries()).basicRemove(otherEnd, msgs);
+			case ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES:
+				return ((InternalEList<?>)getStateContainerEntries()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -99,6 +125,8 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 		switch (featureID) {
 			case ThingMLPackage.INSTANCE_CONTEXT__PROPERTY_ENTRIES:
 				return getPropertyEntries();
+			case ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES:
+				return getStateContainerEntries();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -116,6 +144,10 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 				getPropertyEntries().clear();
 				getPropertyEntries().addAll((Collection<? extends PropertyEntry>)newValue);
 				return;
+			case ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES:
+				getStateContainerEntries().clear();
+				getStateContainerEntries().addAll((Collection<? extends StateContainerEntry>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -131,6 +163,9 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 			case ThingMLPackage.INSTANCE_CONTEXT__PROPERTY_ENTRIES:
 				getPropertyEntries().clear();
 				return;
+			case ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES:
+				getStateContainerEntries().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -145,6 +180,8 @@ public class InstanceContextImpl extends MinimalEObjectImpl.Container implements
 		switch (featureID) {
 			case ThingMLPackage.INSTANCE_CONTEXT__PROPERTY_ENTRIES:
 				return propertyEntries != null && !propertyEntries.isEmpty();
+			case ThingMLPackage.INSTANCE_CONTEXT__STATE_CONTAINER_ENTRIES:
+				return stateContainerEntries != null && !stateContainerEntries.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
