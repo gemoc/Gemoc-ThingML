@@ -9,24 +9,37 @@ import thingML.Value
 
 @Aspect(className=Value)
 class AValue {
-	def public Value times(Value other) {
-		throw new Exception("Can only multiply numbers")
+	def public String print() {
+		throw new Exception("Operation 'print' is not defined for class " + _self.class.simpleName)
+	}
+
+	def public Value plus(Value other) {
+		throw new Exception("Operation 'plus' is not defined for class " + _self.class.simpleName)
 	}
 
 	def public Value minus(Value other) {
-		throw new Exception("Can only subtract numbers")
+		throw new Exception("Operation 'minus' is not defined for class " + _self.class.simpleName)
+	}
+
+	def public Value times(Value other) {
+		throw new Exception("Operation 'times' is not defined for class " + _self.class.simpleName)
 	}
 }
 
 @Aspect(className=ProxyValue)
 class AProxyValue extends AValue {
 	@OverrideAspectMethod
-	def public Value times(Value other) {
+	def public Value plus(Value other) {
 		return _self
 	}
 
 	@OverrideAspectMethod
 	def public Value minus(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value times(Value other) {
 		return _self
 	}
 }
@@ -34,15 +47,20 @@ class AProxyValue extends AValue {
 @Aspect(className=IntegerValue)
 class AIntegerValue extends AValue {
 	@OverrideAspectMethod
-	def public Value times(Value other) {
+	def public String print() {
+		return _self.value.toString()
+	}
+
+	@OverrideAspectMethod
+	def public Value plus(Value other) {
 		if (other instanceof IntegerValue) {
 			val result = ThingMLFactory.eINSTANCE.createIntegerValue()
-			result.value = _self.value * other.value
+			result.value = _self.value + other.value
 			return result
 		} else if (other instanceof ProxyValue) {
 			return other
 		} else {
-			throw new Exception("Cannot multiply " + other.class)
+			throw new Exception("Operation 'plus' is not defined for class " + other.class.simpleName)
 		}
 	}
 
@@ -55,7 +73,20 @@ class AIntegerValue extends AValue {
 		} else if (other instanceof ProxyValue) {
 			return other
 		} else {
-			throw new Exception("Cannot subtract " + other.class)
+			throw new Exception("Operation 'minus' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
+	def public Value times(Value other) {
+		if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createIntegerValue()
+			result.value = _self.value * other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'times' is not defined for class " + other.class.simpleName)
 		}
 	}
 }

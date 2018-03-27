@@ -32,13 +32,22 @@ class AConfiguration {
 
 	@Main
 	def public void main() {
-		var running = true
+		var running = false
+
+		// first run
+		for (Instance instance : _self.instances) {
+			instance.enter_initial_state()
+			running = running || instance.run()
+		}
+
+		// other runs
 		while (running) {
 			running = false
 			for (Instance instance : _self.instances) {
 				running = running || instance.run()
 			}
 		}
+
 		_self.end()
 	}
 

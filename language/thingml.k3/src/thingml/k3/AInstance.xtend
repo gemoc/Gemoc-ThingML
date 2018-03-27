@@ -22,8 +22,8 @@ import thingML.ThingMLFactory
 import thingML.Value
 
 import static extension thingml.k3.AExpression.value
-import static extension thingml.k3.AInstanceContext.get_property_entry
-import static extension thingml.k3.AState.run
+import static extension thingml.k3.AInstanceContext.*
+import static extension thingml.k3.AState.*
 
 @Aspect(className=Instance)
 class AInstance {
@@ -62,7 +62,7 @@ class AInstance {
 	}
 
 	def public void _assign(Property property, EList<Expression> index_list, Expression init) {
-		val entry = _self.context.get_property_entry(property)
+		val entry = _self.context.getPropertyEntry(property)
 		if (index_list.length == 0) {
 			entry.value = init.value(_self.context, true)
 		} else if (index_list.length == 1) {
@@ -230,7 +230,25 @@ class AInstance {
 	}
 
 	@Step
+	def public void enter_initial_state() {
+		var compositeState = _self.get_behaviour()
+		compositeState.onEntry(_self.context)
+		while (compositeState !== null) {
+			var entry = _self.context.getStateContainerEntry(compositeState)
+			entry.currentState = compositeState.initial
+			compositeState.initial.onEntry(_self.context)
+			if (compositeState.initial instanceof CompositeState) {
+				compositeState = compositeState.initial as CompositeState
+			} else {
+				compositeState = null
+			}
+		}
+	}
+
+	@Step
 	def public boolean run() {
-		return _self.get_behaviour().run(_self.context)
+		var has_changed = false
+		has_changed = has_changed || _self.get_behaviour().run(_self.context)
+		return has_changed
 	}
 }

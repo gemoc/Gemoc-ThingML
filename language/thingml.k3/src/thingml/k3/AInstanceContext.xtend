@@ -9,7 +9,7 @@ import thingML.PropertyEntry
 
 @Aspect(className=InstanceContext)
 class AInstanceContext {
-	def public PropertyEntry get_property_entry(Property property) {
+	def public PropertyEntry getPropertyEntry(Property property) {
 		val candidate_entries = _self.propertyEntries.filter[e|e.property == property]
 		if (candidate_entries.length == 1) {
 			return candidate_entries.get(0)
@@ -18,7 +18,7 @@ class AInstanceContext {
 		}
 	}
 
-	def public CompositeStateEntry get_state_container_entry(CompositeState compositeState) {
+	def public CompositeStateEntry getStateContainerEntry(CompositeState compositeState) {
 		val candidate_entries = _self.stateContainerEntries.filter[e|e.compositeState == compositeState]
 		if (candidate_entries.length == 1) {
 			return candidate_entries.get(0)

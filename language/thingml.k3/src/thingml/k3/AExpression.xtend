@@ -5,6 +5,7 @@ import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import org.thingml.xtext.thingML.Expression
 import org.thingml.xtext.thingML.IntegerLiteral
 import org.thingml.xtext.thingML.MinusExpression
+import org.thingml.xtext.thingML.PlusExpression
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyReference
 import org.thingml.xtext.thingML.StringLiteral
@@ -14,13 +15,25 @@ import thingML.ProxyValue
 import thingML.ThingMLFactory
 import thingML.Value
 
-import static extension thingml.k3.AInstanceContext.get_property_entry
+import static extension thingml.k3.AInstanceContext.getPropertyEntry
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=Expression)
 class AExpression {
 	def public Value value(InstanceContext context, boolean createProxies) {
-		throw new Exception("Expression type " + _self.class + " is not supported in semantics yet")
+		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
+	}
+}
+
+@Aspect(className=PlusExpression)
+class APlusExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(InstanceContext context, boolean createProxies) {
+		val value = _self.lhs.value(context, createProxies).plus(_self.rhs.value(context, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
 	}
 }
 
@@ -77,8 +90,12 @@ class APropertyReference extends AExpression {
 			proxy.expression = _self
 			return proxy
 		} else {
-			val entry = context.get_property_entry(_self.property as Property)
-			return entry.value
+			if (_self.property instanceof Property) {
+				val entry = context.getPropertyEntry(_self.property as Property)
+				return entry.value
+			} else {
+				// TODO!!! It's a local variable
+			}
 		}
 	}
 }
