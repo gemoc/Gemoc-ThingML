@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link thingML.Frame#getChildFrame <em>Child Frame</em>}</li>
  *   <li>{@link thingML.Frame#getParentFrame <em>Parent Frame</em>}</li>
  *   <li>{@link thingML.Frame#getRootContext <em>Root Context</em>}</li>
- *   <li>{@link thingML.Frame#getDynamicInstance <em>Dynamic Instance</em>}</li>
+ *   <li>{@link thingML.Frame#getTopContext <em>Top Context</em>}</li>
  * </ul>
  *
  * @see thingML.ThingMLPackage#getFrame()
@@ -107,29 +107,29 @@ public interface Frame extends EObject {
 	void setRootContext(Context value);
 
 	/**
-	 * Returns the value of the '<em><b>Dynamic Instance</b></em>' reference.
+	 * Returns the value of the '<em><b>Top Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dynamic Instance</em>' reference isn't clear,
+	 * If the meaning of the '<em>Top Context</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dynamic Instance</em>' reference.
-	 * @see #setDynamicInstance(DynamicInstance)
-	 * @see thingML.ThingMLPackage#getFrame_DynamicInstance()
+	 * @return the value of the '<em>Top Context</em>' reference.
+	 * @see #setTopContext(Context)
+	 * @see thingML.ThingMLPackage#getFrame_TopContext()
 	 * @model required="true"
 	 * @generated
 	 */
-	DynamicInstance getDynamicInstance();
+	Context getTopContext();
 
 	/**
-	 * Sets the value of the '{@link thingML.Frame#getDynamicInstance <em>Dynamic Instance</em>}' reference.
+	 * Sets the value of the '{@link thingML.Frame#getTopContext <em>Top Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dynamic Instance</em>' reference.
-	 * @see #getDynamicInstance()
+	 * @param value the new value of the '<em>Top Context</em>' reference.
+	 * @see #getTopContext()
 	 * @generated
 	 */
-	void setDynamicInstance(DynamicInstance value);
+	void setTopContext(Context value);
 
 } // Frame

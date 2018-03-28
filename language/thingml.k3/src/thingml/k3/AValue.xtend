@@ -4,6 +4,7 @@ import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import thingML.IntegerValue
 import thingML.ProxyValue
+import thingML.StringValue
 import thingML.ThingMLFactory
 import thingML.Value
 
@@ -41,6 +42,27 @@ class AProxyValue extends AValue {
 	@OverrideAspectMethod
 	def public Value times(Value other) {
 		return _self
+	}
+}
+
+@Aspect(className=StringValue)
+class AStringValue extends AValue {
+	@OverrideAspectMethod
+	def public String print() {
+		return _self.value.replace("\\n", "\n")
+	}
+
+	@OverrideAspectMethod
+	def public Value plus(Value other) {
+		if (other instanceof StringValue) {
+			val result = ThingMLFactory.eINSTANCE.createStringValue()
+			result.value = _self.value + other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'plus' it not defined for class " + other.class.simpleName)
+		}
 	}
 }
 

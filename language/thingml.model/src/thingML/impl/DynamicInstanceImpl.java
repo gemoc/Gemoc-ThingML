@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.thingml.xtext.thingML.Instance;
+
 import thingML.DynamicCompositeState;
 import thingML.DynamicInstance;
 import thingML.DynamicProperty;
@@ -35,6 +37,8 @@ import thingML.ThingMLPackage;
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getDynamicProperties <em>Dynamic Properties</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getDynamicCompositeStates <em>Dynamic Composite States</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getExecutionFrame <em>Execution Frame</em>}</li>
+ *   <li>{@link thingML.impl.DynamicInstanceImpl#getInstance <em>Instance</em>}</li>
+ *   <li>{@link thingML.impl.DynamicInstanceImpl#getActiveFrame <em>Active Frame</em>}</li>
  * </ul>
  *
  * @generated
@@ -69,6 +73,26 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected Frame executionFrame;
+
+	/**
+	 * The cached value of the '{@link #getInstance() <em>Instance</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstance()
+	 * @generated
+	 * @ordered
+	 */
+	protected Instance instance;
+
+	/**
+	 * The cached value of the '{@link #getActiveFrame() <em>Active Frame</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActiveFrame()
+	 * @generated
+	 * @ordered
+	 */
+	protected Frame activeFrame;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,6 +185,82 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Instance getInstance() {
+		if (instance != null && instance.eIsProxy()) {
+			InternalEObject oldInstance = (InternalEObject)instance;
+			instance = (Instance)eResolveProxy(oldInstance);
+			if (instance != oldInstance) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.DYNAMIC_INSTANCE__INSTANCE, oldInstance, instance));
+			}
+		}
+		return instance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Instance basicGetInstance() {
+		return instance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInstance(Instance newInstance) {
+		Instance oldInstance = instance;
+		instance = newInstance;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_INSTANCE__INSTANCE, oldInstance, instance));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Frame getActiveFrame() {
+		if (activeFrame != null && activeFrame.eIsProxy()) {
+			InternalEObject oldActiveFrame = (InternalEObject)activeFrame;
+			activeFrame = (Frame)eResolveProxy(oldActiveFrame);
+			if (activeFrame != oldActiveFrame) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME, oldActiveFrame, activeFrame));
+			}
+		}
+		return activeFrame;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Frame basicGetActiveFrame() {
+		return activeFrame;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActiveFrame(Frame newActiveFrame) {
+		Frame oldActiveFrame = activeFrame;
+		activeFrame = newActiveFrame;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME, oldActiveFrame, activeFrame));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -188,6 +288,12 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 				return getDynamicCompositeStates();
 			case ThingMLPackage.DYNAMIC_INSTANCE__EXECUTION_FRAME:
 				return getExecutionFrame();
+			case ThingMLPackage.DYNAMIC_INSTANCE__INSTANCE:
+				if (resolve) return getInstance();
+				return basicGetInstance();
+			case ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME:
+				if (resolve) return getActiveFrame();
+				return basicGetActiveFrame();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -212,6 +318,12 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 			case ThingMLPackage.DYNAMIC_INSTANCE__EXECUTION_FRAME:
 				setExecutionFrame((Frame)newValue);
 				return;
+			case ThingMLPackage.DYNAMIC_INSTANCE__INSTANCE:
+				setInstance((Instance)newValue);
+				return;
+			case ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME:
+				setActiveFrame((Frame)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -233,6 +345,12 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 			case ThingMLPackage.DYNAMIC_INSTANCE__EXECUTION_FRAME:
 				setExecutionFrame((Frame)null);
 				return;
+			case ThingMLPackage.DYNAMIC_INSTANCE__INSTANCE:
+				setInstance((Instance)null);
+				return;
+			case ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME:
+				setActiveFrame((Frame)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -251,6 +369,10 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 				return dynamicCompositeStates != null && !dynamicCompositeStates.isEmpty();
 			case ThingMLPackage.DYNAMIC_INSTANCE__EXECUTION_FRAME:
 				return executionFrame != null;
+			case ThingMLPackage.DYNAMIC_INSTANCE__INSTANCE:
+				return instance != null;
+			case ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME:
+				return activeFrame != null;
 		}
 		return super.eIsSet(featureID);
 	}

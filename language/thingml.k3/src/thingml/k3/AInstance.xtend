@@ -134,7 +134,7 @@ class AInstance {
 
 	def public void init() {
 		_self.dynamicInstance = ThingMLFactory.eINSTANCE.createDynamicInstance()
-		_self.dynamicInstance.init()
+		_self.dynamicInstance.init(_self)
 		_self.init_properties(_self.type)
 		_self.init_property_assigns(_self.type)
 		_self.init_state_containers(_self.get_behaviour())

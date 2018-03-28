@@ -236,6 +236,24 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDynamicInstance_Instance() {
+		return (EReference)dynamicInstanceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicInstance_ActiveFrame() {
+		return (EReference)dynamicInstanceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDynamicProperty() {
 		return dynamicPropertyEClass;
 	}
@@ -461,7 +479,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFrame_DynamicInstance() {
+	public EReference getFrame_TopContext() {
 		return (EReference)frameEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -560,6 +578,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES);
 		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__DYNAMIC_COMPOSITE_STATES);
 		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__EXECUTION_FRAME);
+		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__INSTANCE);
+		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__ACTIVE_FRAME);
 
 		dynamicPropertyEClass = createEClass(DYNAMIC_PROPERTY);
 		createEReference(dynamicPropertyEClass, DYNAMIC_PROPERTY__PROPERTY);
@@ -596,7 +616,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		createEReference(frameEClass, FRAME__CHILD_FRAME);
 		createEReference(frameEClass, FRAME__PARENT_FRAME);
 		createEReference(frameEClass, FRAME__ROOT_CONTEXT);
-		createEReference(frameEClass, FRAME__DYNAMIC_INSTANCE);
+		createEReference(frameEClass, FRAME__TOP_CONTEXT);
 
 		contextEClass = createEClass(CONTEXT);
 		createEReference(contextEClass, CONTEXT__CHILD_CONTEXT);
@@ -651,6 +671,8 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getDynamicInstance_DynamicProperties(), this.getDynamicProperty(), null, "dynamicProperties", null, 0, -1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDynamicInstance_DynamicCompositeStates(), this.getDynamicCompositeState(), null, "dynamicCompositeStates", null, 0, -1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDynamicInstance_ExecutionFrame(), this.getFrame(), null, "executionFrame", null, 1, 1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicInstance_Instance(), theThingMLPackage_1.getInstance(), null, "instance", null, 1, 1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicInstance_ActiveFrame(), this.getFrame(), null, "activeFrame", null, 1, 1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dynamicPropertyEClass, DynamicProperty.class, "DynamicProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDynamicProperty_Property(), theThingMLPackage_1.getProperty(), null, "property", null, 1, 1, DynamicProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -687,7 +709,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getFrame_ChildFrame(), this.getFrame(), this.getFrame_ParentFrame(), "childFrame", null, 0, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFrame_ParentFrame(), this.getFrame(), this.getFrame_ChildFrame(), "parentFrame", null, 0, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFrame_RootContext(), this.getContext(), null, "rootContext", null, 1, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFrame_DynamicInstance(), this.getDynamicInstance(), null, "dynamicInstance", null, 1, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFrame_TopContext(), this.getContext(), null, "topContext", null, 1, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(contextEClass, Context.class, "Context", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContext_ChildContext(), this.getContext(), this.getContext_ParentContext(), "childContext", null, 0, 1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

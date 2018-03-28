@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import thingML.Context;
-import thingML.DynamicInstance;
 import thingML.Frame;
 import thingML.ThingMLPackage;
 
@@ -29,7 +28,7 @@ import thingML.ThingMLPackage;
  *   <li>{@link thingML.impl.FrameImpl#getChildFrame <em>Child Frame</em>}</li>
  *   <li>{@link thingML.impl.FrameImpl#getParentFrame <em>Parent Frame</em>}</li>
  *   <li>{@link thingML.impl.FrameImpl#getRootContext <em>Root Context</em>}</li>
- *   <li>{@link thingML.impl.FrameImpl#getDynamicInstance <em>Dynamic Instance</em>}</li>
+ *   <li>{@link thingML.impl.FrameImpl#getTopContext <em>Top Context</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,14 +55,14 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	protected Context rootContext;
 
 	/**
-	 * The cached value of the '{@link #getDynamicInstance() <em>Dynamic Instance</em>}' reference.
+	 * The cached value of the '{@link #getTopContext() <em>Top Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDynamicInstance()
+	 * @see #getTopContext()
 	 * @generated
 	 * @ordered
 	 */
-	protected DynamicInstance dynamicInstance;
+	protected Context topContext;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -216,16 +215,16 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DynamicInstance getDynamicInstance() {
-		if (dynamicInstance != null && dynamicInstance.eIsProxy()) {
-			InternalEObject oldDynamicInstance = (InternalEObject)dynamicInstance;
-			dynamicInstance = (DynamicInstance)eResolveProxy(oldDynamicInstance);
-			if (dynamicInstance != oldDynamicInstance) {
+	public Context getTopContext() {
+		if (topContext != null && topContext.eIsProxy()) {
+			InternalEObject oldTopContext = (InternalEObject)topContext;
+			topContext = (Context)eResolveProxy(oldTopContext);
+			if (topContext != oldTopContext) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.FRAME__DYNAMIC_INSTANCE, oldDynamicInstance, dynamicInstance));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.FRAME__TOP_CONTEXT, oldTopContext, topContext));
 			}
 		}
-		return dynamicInstance;
+		return topContext;
 	}
 
 	/**
@@ -233,8 +232,8 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DynamicInstance basicGetDynamicInstance() {
-		return dynamicInstance;
+	public Context basicGetTopContext() {
+		return topContext;
 	}
 
 	/**
@@ -242,11 +241,11 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDynamicInstance(DynamicInstance newDynamicInstance) {
-		DynamicInstance oldDynamicInstance = dynamicInstance;
-		dynamicInstance = newDynamicInstance;
+	public void setTopContext(Context newTopContext) {
+		Context oldTopContext = topContext;
+		topContext = newTopContext;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.FRAME__DYNAMIC_INSTANCE, oldDynamicInstance, dynamicInstance));
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.FRAME__TOP_CONTEXT, oldTopContext, topContext));
 	}
 
 	/**
@@ -315,9 +314,9 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 				return getParentFrame();
 			case ThingMLPackage.FRAME__ROOT_CONTEXT:
 				return getRootContext();
-			case ThingMLPackage.FRAME__DYNAMIC_INSTANCE:
-				if (resolve) return getDynamicInstance();
-				return basicGetDynamicInstance();
+			case ThingMLPackage.FRAME__TOP_CONTEXT:
+				if (resolve) return getTopContext();
+				return basicGetTopContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -339,8 +338,8 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 			case ThingMLPackage.FRAME__ROOT_CONTEXT:
 				setRootContext((Context)newValue);
 				return;
-			case ThingMLPackage.FRAME__DYNAMIC_INSTANCE:
-				setDynamicInstance((DynamicInstance)newValue);
+			case ThingMLPackage.FRAME__TOP_CONTEXT:
+				setTopContext((Context)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -363,8 +362,8 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 			case ThingMLPackage.FRAME__ROOT_CONTEXT:
 				setRootContext((Context)null);
 				return;
-			case ThingMLPackage.FRAME__DYNAMIC_INSTANCE:
-				setDynamicInstance((DynamicInstance)null);
+			case ThingMLPackage.FRAME__TOP_CONTEXT:
+				setTopContext((Context)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -384,8 +383,8 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 				return getParentFrame() != null;
 			case ThingMLPackage.FRAME__ROOT_CONTEXT:
 				return rootContext != null;
-			case ThingMLPackage.FRAME__DYNAMIC_INSTANCE:
-				return dynamicInstance != null;
+			case ThingMLPackage.FRAME__TOP_CONTEXT:
+				return topContext != null;
 		}
 		return super.eIsSet(featureID);
 	}

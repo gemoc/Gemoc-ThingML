@@ -8,6 +8,8 @@
         upperBound="-1" eType="#//DynamicCompositeState" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="executionFrame" lowerBound="1"
         eType="#//Frame" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Instance"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicProperty">
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
@@ -54,8 +56,6 @@
         eOpposite="#//Frame/childFrame"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rootContext" lowerBound="1"
         eType="#//Context" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicInstance" lowerBound="1"
-        eType="#//DynamicInstance"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Context">
     <eStructuralFeatures xsi:type="ecore:EReference" name="childContext" eType="#//Context"

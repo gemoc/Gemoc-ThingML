@@ -15,7 +15,7 @@ import thingML.ProxyValue
 import thingML.ThingMLFactory
 import thingML.Value
 
-import static extension thingml.k3.ADynamicInstance.getDynamicProperty
+import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=Expression)
@@ -94,10 +94,15 @@ class APropertyReference extends AExpression {
 			return proxy
 		} else {
 			if (_self.property instanceof Property) {
-				val entry = dynamicInstance.getDynamicProperty(_self.property as Property)
-				return entry.value
+				val dynamicProperty = dynamicInstance.getDynamicProperty(_self.property as Property)
+				return dynamicProperty.value
 			} else {
-				// TODO!!! It's a local variable
+				val dynamicVariable = dynamicInstance.getDynamicVariable(_self.property)
+				if (dynamicVariable !== null) {
+					return dynamicVariable.value
+				} else {
+					throw new Exception("Variable '" + _self.property.name + "' is undefined")
+				}
 			}
 		}
 	}

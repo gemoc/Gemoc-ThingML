@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.thingml.xtext.thingML.Instance;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Dynamic Instance</b></em>'.
@@ -18,6 +20,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link thingML.DynamicInstance#getDynamicProperties <em>Dynamic Properties</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getDynamicCompositeStates <em>Dynamic Composite States</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getExecutionFrame <em>Execution Frame</em>}</li>
+ *   <li>{@link thingML.DynamicInstance#getInstance <em>Instance</em>}</li>
+ *   <li>{@link thingML.DynamicInstance#getActiveFrame <em>Active Frame</em>}</li>
  * </ul>
  *
  * @see thingML.ThingMLPackage#getDynamicInstance()
@@ -82,5 +86,57 @@ public interface DynamicInstance extends EObject {
 	 * @generated
 	 */
 	void setExecutionFrame(Frame value);
+
+	/**
+	 * Returns the value of the '<em><b>Instance</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Instance</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Instance</em>' reference.
+	 * @see #setInstance(Instance)
+	 * @see thingML.ThingMLPackage#getDynamicInstance_Instance()
+	 * @model required="true"
+	 * @generated
+	 */
+	Instance getInstance();
+
+	/**
+	 * Sets the value of the '{@link thingML.DynamicInstance#getInstance <em>Instance</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Instance</em>' reference.
+	 * @see #getInstance()
+	 * @generated
+	 */
+	void setInstance(Instance value);
+
+	/**
+	 * Returns the value of the '<em><b>Active Frame</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Active Frame</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Active Frame</em>' reference.
+	 * @see #setActiveFrame(Frame)
+	 * @see thingML.ThingMLPackage#getDynamicInstance_ActiveFrame()
+	 * @model required="true"
+	 * @generated
+	 */
+	Frame getActiveFrame();
+
+	/**
+	 * Sets the value of the '{@link thingML.DynamicInstance#getActiveFrame <em>Active Frame</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Active Frame</em>' reference.
+	 * @see #getActiveFrame()
+	 * @generated
+	 */
+	void setActiveFrame(Frame value);
 
 } // DynamicInstance

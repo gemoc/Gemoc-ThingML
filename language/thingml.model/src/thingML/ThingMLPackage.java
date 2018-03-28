@@ -94,13 +94,31 @@ public interface ThingMLPackage extends EPackage {
 	int DYNAMIC_INSTANCE__EXECUTION_FRAME = 2;
 
 	/**
+	 * The feature id for the '<em><b>Instance</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_INSTANCE__INSTANCE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Active Frame</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_INSTANCE__ACTIVE_FRAME = 4;
+
+	/**
 	 * The number of structural features of the '<em>Dynamic Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_INSTANCE_FEATURE_COUNT = 3;
+	int DYNAMIC_INSTANCE_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Dynamic Instance</em>' class.
@@ -537,13 +555,13 @@ public interface ThingMLPackage extends EPackage {
 	int FRAME__ROOT_CONTEXT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic Instance</b></em>' reference.
+	 * The feature id for the '<em><b>Top Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME__DYNAMIC_INSTANCE = 3;
+	int FRAME__TOP_CONTEXT = 3;
 
 	/**
 	 * The number of structural features of the '<em>Frame</em>' class.
@@ -707,6 +725,28 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDynamicInstance_ExecutionFrame();
+
+	/**
+	 * Returns the meta object for the reference '{@link thingML.DynamicInstance#getInstance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Instance</em>'.
+	 * @see thingML.DynamicInstance#getInstance()
+	 * @see #getDynamicInstance()
+	 * @generated
+	 */
+	EReference getDynamicInstance_Instance();
+
+	/**
+	 * Returns the meta object for the reference '{@link thingML.DynamicInstance#getActiveFrame <em>Active Frame</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Active Frame</em>'.
+	 * @see thingML.DynamicInstance#getActiveFrame()
+	 * @see #getDynamicInstance()
+	 * @generated
+	 */
+	EReference getDynamicInstance_ActiveFrame();
 
 	/**
 	 * Returns the meta object for class '{@link thingML.DynamicProperty <em>Dynamic Property</em>}'.
@@ -973,15 +1013,15 @@ public interface ThingMLPackage extends EPackage {
 	EReference getFrame_RootContext();
 
 	/**
-	 * Returns the meta object for the reference '{@link thingML.Frame#getDynamicInstance <em>Dynamic Instance</em>}'.
+	 * Returns the meta object for the reference '{@link thingML.Frame#getTopContext <em>Top Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Dynamic Instance</em>'.
-	 * @see thingML.Frame#getDynamicInstance()
+	 * @return the meta object for the reference '<em>Top Context</em>'.
+	 * @see thingML.Frame#getTopContext()
 	 * @see #getFrame()
 	 * @generated
 	 */
-	EReference getFrame_DynamicInstance();
+	EReference getFrame_TopContext();
 
 	/**
 	 * Returns the meta object for class '{@link thingML.Context <em>Context</em>}'.
@@ -1114,6 +1154,22 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DYNAMIC_INSTANCE__EXECUTION_FRAME = eINSTANCE.getDynamicInstance_ExecutionFrame();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_INSTANCE__INSTANCE = eINSTANCE.getDynamicInstance_Instance();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Frame</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_INSTANCE__ACTIVE_FRAME = eINSTANCE.getDynamicInstance_ActiveFrame();
 
 		/**
 		 * The meta object literal for the '{@link thingML.impl.DynamicPropertyImpl <em>Dynamic Property</em>}' class.
@@ -1338,12 +1394,12 @@ public interface ThingMLPackage extends EPackage {
 		EReference FRAME__ROOT_CONTEXT = eINSTANCE.getFrame_RootContext();
 
 		/**
-		 * The meta object literal for the '<em><b>Dynamic Instance</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Top Context</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FRAME__DYNAMIC_INSTANCE = eINSTANCE.getFrame_DynamicInstance();
+		EReference FRAME__TOP_CONTEXT = eINSTANCE.getFrame_TopContext();
 
 		/**
 		 * The meta object literal for the '{@link thingML.impl.ContextImpl <em>Context</em>}' class.

@@ -17,6 +17,7 @@ class AState {
 
 	def public void onEntry(DynamicInstance dynamicInstance) {
 		if (_self.entry !== null) {
+			println("Executing 'on entry' for instance '" + dynamicInstance.instance.name + "'")
 			_self.entry.execute(dynamicInstance)
 		}
 	}

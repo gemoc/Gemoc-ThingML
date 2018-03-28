@@ -8,6 +8,7 @@ import org.thingml.xtext.thingML.FunctionCallStatement
 import org.thingml.xtext.thingML.PrintAction
 import thingML.DynamicInstance
 
+import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AExpression.value
 import static extension thingml.k3.AValue.print
 
@@ -22,7 +23,10 @@ class AAction {
 class AFunctionCallStatement extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
+		println("Calling function '" + _self.function.name + "'")
+		dynamicInstance.enterExecutionFrame(_self.function.parameters, _self.parameters)
 		_self.function.body.execute(dynamicInstance)
+		dynamicInstance.leaveExecutionFrame()
 	}
 }
 
@@ -30,7 +34,9 @@ class AFunctionCallStatement extends AAction {
 class AActionBlock extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
+		dynamicInstance.stackExecutionContext()
 		_self.actions.forEach[a|a.execute(dynamicInstance)]
+		dynamicInstance.unstackExecutionContext()
 	}
 }
 
@@ -38,6 +44,7 @@ class AActionBlock extends AAction {
 class APrintAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
+		println("This is a print action")
 		print(_self.msg.get(0).value(dynamicInstance, false).print())
 	}
 }
