@@ -14,30 +14,30 @@ import org.thingml.xtext.thingML.Thing
 import thingML.ArrayProxyEntry
 import thingML.ArrayProxyValue
 import thingML.ArrayValue
-import thingML.InstanceContext
+import thingML.DynamicInstance
+import thingML.DynamicProperty
 import thingML.IntegerValue
-import thingML.PropertyEntry
 import thingML.ProxyValue
 import thingML.ThingMLFactory
 import thingML.Value
 
+import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AExpression.value
-import static extension thingml.k3.AInstanceContext.*
 import static extension thingml.k3.AState.*
 
 @Aspect(className=Instance)
 class AInstance {
-	public InstanceContext context
+	public DynamicInstance dynamicInstance
 
 	def public void init_properties(Thing thing) {
 		for (Thing fragment : thing.includes) {
 			_self.init_properties(fragment)
 		}
 		for (Property property : thing.properties) {
-			val entry = ThingMLFactory.eINSTANCE.createPropertyEntry()
+			val entry = ThingMLFactory.eINSTANCE.createDynamicProperty()
 			entry.property = property
 			if (property.typeRef.isArray) {
-				val length_value = property.typeRef.cardinality.value(_self.context, true)
+				val length_value = property.typeRef.cardinality.value(_self.dynamicInstance, true)
 				if (length_value instanceof ProxyValue) {
 					entry.value = ThingMLFactory.eINSTANCE.createArrayProxyValue()
 					val proxy = (entry.value as ProxyValue)
@@ -55,40 +55,40 @@ class AInstance {
 			} else if (property.init === null) {
 				entry.value = ThingMLFactory.eINSTANCE.createNullValue()
 			} else {
-				entry.value = property.init.value(_self.context, true)
+				entry.value = property.init.value(_self.dynamicInstance, true)
 			}
-			_self.context.propertyEntries.add(entry)
+			_self.dynamicInstance.dynamicProperties.add(entry)
 		}
 	}
 
-	def public void _assign(Property property, EList<Expression> index_list, Expression init) {
-		val entry = _self.context.getPropertyEntry(property)
+	def public void _assign_properties(Property property, EList<Expression> index_list, Expression init) {
+		val entry = _self.dynamicInstance.getDynamicProperty(property)
 		if (index_list.length == 0) {
-			entry.value = init.value(_self.context, true)
+			entry.value = init.value(_self.dynamicInstance, true)
 		} else if (index_list.length == 1) {
 			val index_exp = index_list.get(0)
 			if (entry.value instanceof ArrayProxyValue) {
 				val array_proxy = entry.value as ArrayProxyValue
-				val candidate_entries = array_proxy.arrayProxyEntries.filter[e|e.index == index_exp]
+				val candidate_entries = array_proxy.arrayProxyEntries.filter[e|e.indexExpression == index_exp]
 				if (candidate_entries.length == 1) {
-					candidate_entries.get(0).value = init.value(_self.context, true)
+					candidate_entries.get(0).value = init.value(_self.dynamicInstance, true)
 				} else if (candidate_entries.length == 0) {
 					val proxy_entry = ThingMLFactory.eINSTANCE.createArrayProxyEntry()
-					proxy_entry.index = index_exp
-					proxy_entry.value = init.value(_self.context, true)
+					proxy_entry.indexExpression = index_exp
+					proxy_entry.value = init.value(_self.dynamicInstance, true)
 					array_proxy.arrayProxyEntries.add(proxy_entry)
 				} else {
 					throw new Exception("Wut?")
 				}
 			} else {
 				val array_property = entry.value as ArrayValue
-				val index_value = index_exp.value(_self.context, true)
+				val index_value = index_exp.value(_self.dynamicInstance, true)
 				if (index_value instanceof ProxyValue) {
 					// TODO
 					throw new Exception("I don't know what to do")
 				} else if (index_value instanceof IntegerValue) {
 					val index = index_value.value as int
-					val value = init.value(_self.context, true)
+					val value = init.value(_self.dynamicInstance, true)
 					array_property.values.set(index, value)
 				} else {
 					throw new Exception("Cardinality has to be an IntegerValue")
@@ -104,7 +104,7 @@ class AInstance {
 			_self.init_property_assigns(fragment)
 		}
 		for (PropertyAssign assign : thing.assign) {
-			_self._assign(assign.property, assign.index, assign.init)
+			_self._assign_properties(assign.property, assign.index, assign.init)
 		}
 	}
 
@@ -121,10 +121,10 @@ class AInstance {
 	}
 
 	def public void init_state_containers(CompositeState compositeState) {
-		val entry = ThingMLFactory.eINSTANCE.createCompositeStateEntry()
+		val entry = ThingMLFactory.eINSTANCE.createDynamicCompositeState()
 		entry.compositeState = compositeState
 		entry.currentState = null
-		_self.context.stateContainerEntries.add(entry)
+		_self.dynamicInstance.dynamicCompositeStates.add(entry)
 		for (State sub_state : compositeState.substate) {
 			if (sub_state instanceof CompositeState) {
 				_self.init_state_containers(sub_state)
@@ -133,29 +133,30 @@ class AInstance {
 	}
 
 	def public void init() {
-		_self.context = ThingMLFactory.eINSTANCE.createInstanceContext()
+		_self.dynamicInstance = ThingMLFactory.eINSTANCE.createDynamicInstance()
+		_self.dynamicInstance.init()
 		_self.init_properties(_self.type)
 		_self.init_property_assigns(_self.type)
 		_self.init_state_containers(_self.get_behaviour())
 	}
 
 	def public void assign(ConfigPropertyAssign assign) {
-		_self._assign(assign.property, assign.index, assign.init)
+		_self._assign_properties(assign.property, assign.index, assign.init)
 	}
 
 	def public void resolve() {
 		var proxy_counter = 0
 		var proxy_resolved = 0
 
-		for (PropertyEntry entry : _self.context.propertyEntries) {
+		for (DynamicProperty dynamicProperty : _self.dynamicInstance.dynamicProperties) {
 
-			if (entry.value instanceof ArrayProxyValue) {
-				val array_proxy = (entry.value as ArrayProxyValue)
+			if (dynamicProperty.value instanceof ArrayProxyValue) {
+				val array_proxy = (dynamicProperty.value as ArrayProxyValue)
 
-				println("Entering ArrayProxyValue of property '" + entry.property.name + "'")
+				println("Entering ArrayProxyValue of property '" + dynamicProperty.property.name + "'")
 				proxy_counter++
 
-				val cardinality = array_proxy.expression.value(_self.context, false)
+				val cardinality = array_proxy.expression.value(_self.dynamicInstance, false)
 
 				var continue = !(cardinality instanceof ProxyValue)
 
@@ -163,7 +164,7 @@ class AInstance {
 					println("Cardinality is not a Proxy anymore!")
 
 					for (ArrayProxyEntry array_entry : array_proxy.arrayProxyEntries) {
-						val index = array_entry.index.value(_self.context, false)
+						val index = array_entry.indexExpression.value(_self.dynamicInstance, false)
 						continue = continue && !(index instanceof ProxyValue)
 					}
 				}
@@ -179,7 +180,7 @@ class AInstance {
 							new_value.values.add(ThingMLFactory.eINSTANCE.createNullValue())
 						}
 						for (ArrayProxyEntry array_entry : array_proxy.arrayProxyEntries) {
-							val index = array_entry.index.value(_self.context, false)
+							val index = array_entry.indexExpression.value(_self.dynamicInstance, false)
 							if (index instanceof IntegerValue) {
 								new_value.values.set(index.value as int, array_entry.value)
 								if (array_entry.value instanceof ProxyValue) {
@@ -191,22 +192,22 @@ class AInstance {
 							}
 						}
 
-						entry.value = new_value
+						dynamicProperty.value = new_value
 					} else {
 						throw new Exception("Cardinality has to be an IntegerValue")
 					}
 				}
-			} else if (entry.value instanceof ProxyValue) {
-				println("Entering ProxyValue of property '" + entry.property.name + "'")
+			} else if (dynamicProperty.value instanceof ProxyValue) {
+				println("Entering ProxyValue of property '" + dynamicProperty.property.name + "'")
 				proxy_counter++
 				// TODO
 				throw new Exception("This is to be done")
-			} else if (entry.value instanceof ArrayValue) {
-				println("Analysing ArrayValue of property '" + entry.property.name + "'")
+			} else if (dynamicProperty.value instanceof ArrayValue) {
+				println("Analysing ArrayValue of property '" + dynamicProperty.property.name + "'")
 				var i = 0
-				for (Value value : (entry.value as ArrayValue).values) {
+				for (Value value : (dynamicProperty.value as ArrayValue).values) {
 					if (value instanceof ProxyValue) {
-						println("Entering ProxyValue of property '" + entry.property.name + "[" + i + "]'")
+						println("Entering ProxyValue of property '" + dynamicProperty.property.name + "[" + i + "]'")
 						proxy_counter++
 						// TODO
 						throw new Exception("This is to be done")
@@ -232,11 +233,11 @@ class AInstance {
 	@Step
 	def public void enter_initial_state() {
 		var compositeState = _self.get_behaviour()
-		compositeState.onEntry(_self.context)
+		compositeState.onEntry(_self.dynamicInstance)
 		while (compositeState !== null) {
-			var entry = _self.context.getStateContainerEntry(compositeState)
+			var entry = _self.dynamicInstance.getDynamicCompositeState(compositeState)
 			entry.currentState = compositeState.initial
-			compositeState.initial.onEntry(_self.context)
+			compositeState.initial.onEntry(_self.dynamicInstance)
 			if (compositeState.initial instanceof CompositeState) {
 				compositeState = compositeState.initial as CompositeState
 			} else {
@@ -248,7 +249,7 @@ class AInstance {
 	@Step
 	def public boolean run() {
 		var has_changed = false
-		has_changed = has_changed || _self.get_behaviour().run(_self.context)
+		has_changed = has_changed || _self.get_behaviour().run(_self.dynamicInstance)
 		return has_changed
 	}
 }

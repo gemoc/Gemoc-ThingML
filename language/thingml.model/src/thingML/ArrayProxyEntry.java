@@ -15,7 +15,7 @@ import org.thingml.xtext.thingML.Expression;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link thingML.ArrayProxyEntry#getIndex <em>Index</em>}</li>
+ *   <li>{@link thingML.ArrayProxyEntry#getIndexExpression <em>Index Expression</em>}</li>
  *   <li>{@link thingML.ArrayProxyEntry#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -25,30 +25,30 @@ import org.thingml.xtext.thingML.Expression;
  */
 public interface ArrayProxyEntry extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Index</b></em>' reference.
+	 * Returns the value of the '<em><b>Index Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Index</em>' reference isn't clear,
+	 * If the meaning of the '<em>Index Expression</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Index</em>' reference.
-	 * @see #setIndex(Expression)
-	 * @see thingML.ThingMLPackage#getArrayProxyEntry_Index()
+	 * @return the value of the '<em>Index Expression</em>' reference.
+	 * @see #setIndexExpression(Expression)
+	 * @see thingML.ThingMLPackage#getArrayProxyEntry_IndexExpression()
 	 * @model required="true"
 	 * @generated
 	 */
-	Expression getIndex();
+	Expression getIndexExpression();
 
 	/**
-	 * Sets the value of the '{@link thingML.ArrayProxyEntry#getIndex <em>Index</em>}' reference.
+	 * Sets the value of the '{@link thingML.ArrayProxyEntry#getIndexExpression <em>Index Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Index</em>' reference.
-	 * @see #getIndex()
+	 * @param value the new value of the '<em>Index Expression</em>' reference.
+	 * @see #getIndexExpression()
 	 * @generated
 	 */
-	void setIndex(Expression value);
+	void setIndexExpression(Expression value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.

@@ -68,12 +68,12 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	protected ThingMLSwitch<Adapter> modelSwitch =
 		new ThingMLSwitch<Adapter>() {
 			@Override
-			public Adapter caseInstanceContext(InstanceContext object) {
-				return createInstanceContextAdapter();
+			public Adapter caseDynamicInstance(DynamicInstance object) {
+				return createDynamicInstanceAdapter();
 			}
 			@Override
-			public Adapter casePropertyEntry(PropertyEntry object) {
-				return createPropertyEntryAdapter();
+			public Adapter caseDynamicProperty(DynamicProperty object) {
+				return createDynamicPropertyAdapter();
 			}
 			@Override
 			public Adapter caseValue(Value object) {
@@ -108,8 +108,20 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 				return createArrayProxyEntryAdapter();
 			}
 			@Override
-			public Adapter caseCompositeStateEntry(CompositeStateEntry object) {
-				return createCompositeStateEntryAdapter();
+			public Adapter caseDynamicCompositeState(DynamicCompositeState object) {
+				return createDynamicCompositeStateAdapter();
+			}
+			@Override
+			public Adapter caseFrame(Frame object) {
+				return createFrameAdapter();
+			}
+			@Override
+			public Adapter caseContext(Context object) {
+				return createContextAdapter();
+			}
+			@Override
+			public Adapter caseDynamicVariable(DynamicVariable object) {
+				return createDynamicVariableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -132,30 +144,30 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link thingML.InstanceContext <em>Instance Context</em>}'.
+	 * Creates a new adapter for an object of class '{@link thingML.DynamicInstance <em>Dynamic Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see thingML.InstanceContext
+	 * @see thingML.DynamicInstance
 	 * @generated
 	 */
-	public Adapter createInstanceContextAdapter() {
+	public Adapter createDynamicInstanceAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link thingML.PropertyEntry <em>Property Entry</em>}'.
+	 * Creates a new adapter for an object of class '{@link thingML.DynamicProperty <em>Dynamic Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see thingML.PropertyEntry
+	 * @see thingML.DynamicProperty
 	 * @generated
 	 */
-	public Adapter createPropertyEntryAdapter() {
+	public Adapter createDynamicPropertyAdapter() {
 		return null;
 	}
 
@@ -272,16 +284,58 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link thingML.CompositeStateEntry <em>Composite State Entry</em>}'.
+	 * Creates a new adapter for an object of class '{@link thingML.DynamicCompositeState <em>Dynamic Composite State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see thingML.CompositeStateEntry
+	 * @see thingML.DynamicCompositeState
 	 * @generated
 	 */
-	public Adapter createCompositeStateEntryAdapter() {
+	public Adapter createDynamicCompositeStateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.Frame <em>Frame</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.Frame
+	 * @generated
+	 */
+	public Adapter createFrameAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.Context <em>Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.Context
+	 * @generated
+	 */
+	public Adapter createContextAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.DynamicVariable <em>Dynamic Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.DynamicVariable
+	 * @generated
+	 */
+	public Adapter createDynamicVariableAdapter() {
 		return null;
 	}
 

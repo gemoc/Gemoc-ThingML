@@ -66,15 +66,15 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ThingMLPackage.INSTANCE_CONTEXT: {
-				InstanceContext instanceContext = (InstanceContext)theEObject;
-				T result = caseInstanceContext(instanceContext);
+			case ThingMLPackage.DYNAMIC_INSTANCE: {
+				DynamicInstance dynamicInstance = (DynamicInstance)theEObject;
+				T result = caseDynamicInstance(dynamicInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ThingMLPackage.PROPERTY_ENTRY: {
-				PropertyEntry propertyEntry = (PropertyEntry)theEObject;
-				T result = casePropertyEntry(propertyEntry);
+			case ThingMLPackage.DYNAMIC_PROPERTY: {
+				DynamicProperty dynamicProperty = (DynamicProperty)theEObject;
+				T result = caseDynamicProperty(dynamicProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -133,9 +133,27 @@ public class ThingMLSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ThingMLPackage.COMPOSITE_STATE_ENTRY: {
-				CompositeStateEntry compositeStateEntry = (CompositeStateEntry)theEObject;
-				T result = caseCompositeStateEntry(compositeStateEntry);
+			case ThingMLPackage.DYNAMIC_COMPOSITE_STATE: {
+				DynamicCompositeState dynamicCompositeState = (DynamicCompositeState)theEObject;
+				T result = caseDynamicCompositeState(dynamicCompositeState);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ThingMLPackage.FRAME: {
+				Frame frame = (Frame)theEObject;
+				T result = caseFrame(frame);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ThingMLPackage.CONTEXT: {
+				Context context = (Context)theEObject;
+				T result = caseContext(context);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ThingMLPackage.DYNAMIC_VARIABLE: {
+				DynamicVariable dynamicVariable = (DynamicVariable)theEObject;
+				T result = caseDynamicVariable(dynamicVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -144,32 +162,32 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance Context</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance Context</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Instance</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInstanceContext(InstanceContext object) {
+	public T caseDynamicInstance(DynamicInstance object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Property Entry</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Property Entry</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Property</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePropertyEntry(PropertyEntry object) {
+	public T caseDynamicProperty(DynamicProperty object) {
 		return null;
 	}
 
@@ -294,17 +312,62 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composite State Entry</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Composite State</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composite State Entry</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Composite State</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCompositeStateEntry(CompositeStateEntry object) {
+	public T caseDynamicCompositeState(DynamicCompositeState object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Frame</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Frame</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFrame(Frame object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Context</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContext(Context object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDynamicVariable(DynamicVariable object) {
 		return null;
 	}
 

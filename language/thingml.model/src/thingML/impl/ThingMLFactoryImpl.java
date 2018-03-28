@@ -56,8 +56,8 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ThingMLPackage.INSTANCE_CONTEXT: return createInstanceContext();
-			case ThingMLPackage.PROPERTY_ENTRY: return createPropertyEntry();
+			case ThingMLPackage.DYNAMIC_INSTANCE: return createDynamicInstance();
+			case ThingMLPackage.DYNAMIC_PROPERTY: return createDynamicProperty();
 			case ThingMLPackage.NULL_VALUE: return createNullValue();
 			case ThingMLPackage.INTEGER_VALUE: return createIntegerValue();
 			case ThingMLPackage.STRING_VALUE: return createStringValue();
@@ -65,7 +65,10 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 			case ThingMLPackage.PROXY_VALUE: return createProxyValue();
 			case ThingMLPackage.ARRAY_PROXY_VALUE: return createArrayProxyValue();
 			case ThingMLPackage.ARRAY_PROXY_ENTRY: return createArrayProxyEntry();
-			case ThingMLPackage.COMPOSITE_STATE_ENTRY: return createCompositeStateEntry();
+			case ThingMLPackage.DYNAMIC_COMPOSITE_STATE: return createDynamicCompositeState();
+			case ThingMLPackage.FRAME: return createFrame();
+			case ThingMLPackage.CONTEXT: return createContext();
+			case ThingMLPackage.DYNAMIC_VARIABLE: return createDynamicVariable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -76,9 +79,9 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstanceContext createInstanceContext() {
-		InstanceContextImpl instanceContext = new InstanceContextImpl();
-		return instanceContext;
+	public DynamicInstance createDynamicInstance() {
+		DynamicInstanceImpl dynamicInstance = new DynamicInstanceImpl();
+		return dynamicInstance;
 	}
 
 	/**
@@ -86,9 +89,9 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PropertyEntry createPropertyEntry() {
-		PropertyEntryImpl propertyEntry = new PropertyEntryImpl();
-		return propertyEntry;
+	public DynamicProperty createDynamicProperty() {
+		DynamicPropertyImpl dynamicProperty = new DynamicPropertyImpl();
+		return dynamicProperty;
 	}
 
 	/**
@@ -166,9 +169,39 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CompositeStateEntry createCompositeStateEntry() {
-		CompositeStateEntryImpl compositeStateEntry = new CompositeStateEntryImpl();
-		return compositeStateEntry;
+	public DynamicCompositeState createDynamicCompositeState() {
+		DynamicCompositeStateImpl dynamicCompositeState = new DynamicCompositeStateImpl();
+		return dynamicCompositeState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Frame createFrame() {
+		FrameImpl frame = new FrameImpl();
+		return frame;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Context createContext() {
+		ContextImpl context = new ContextImpl();
+		return context;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DynamicVariable createDynamicVariable() {
+		DynamicVariableImpl dynamicVariable = new DynamicVariableImpl();
+		return dynamicVariable;
 	}
 
 	/**

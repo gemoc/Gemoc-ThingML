@@ -10,17 +10,17 @@ import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyReference
 import org.thingml.xtext.thingML.StringLiteral
 import org.thingml.xtext.thingML.TimesExpression
-import thingML.InstanceContext
+import thingML.DynamicInstance
 import thingML.ProxyValue
 import thingML.ThingMLFactory
 import thingML.Value
 
-import static extension thingml.k3.AInstanceContext.getPropertyEntry
+import static extension thingml.k3.ADynamicInstance.getDynamicProperty
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=Expression)
 class AExpression {
-	def public Value value(InstanceContext context, boolean createProxies) {
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
 		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
 	}
 }
@@ -28,8 +28,9 @@ class AExpression {
 @Aspect(className=PlusExpression)
 class APlusExpression extends AExpression {
 	@OverrideAspectMethod
-	def public Value value(InstanceContext context, boolean createProxies) {
-		val value = _self.lhs.value(context, createProxies).plus(_self.rhs.value(context, createProxies))
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).plus(
+			_self.rhs.value(dynamicInstance, createProxies))
 		if (value instanceof ProxyValue) {
 			value.expression = _self
 		}
@@ -40,8 +41,9 @@ class APlusExpression extends AExpression {
 @Aspect(className=MinusExpression)
 class AMinusExpression extends AExpression {
 	@OverrideAspectMethod
-	def public Value value(InstanceContext context, boolean createProxies) {
-		val value = _self.lhs.value(context, createProxies).minus(_self.rhs.value(context, createProxies))
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).minus(
+			_self.rhs.value(dynamicInstance, createProxies))
 		if (value instanceof ProxyValue) {
 			value.expression = _self
 		}
@@ -52,8 +54,9 @@ class AMinusExpression extends AExpression {
 @Aspect(className=TimesExpression)
 class ATimesExpression extends AExpression {
 	@OverrideAspectMethod
-	def public Value value(InstanceContext context, boolean createProxies) {
-		val value = _self.lhs.value(context, createProxies).times(_self.rhs.value(context, createProxies))
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).times(
+			_self.rhs.value(dynamicInstance, createProxies))
 		if (value instanceof ProxyValue) {
 			value.expression = _self
 		}
@@ -64,7 +67,7 @@ class ATimesExpression extends AExpression {
 @Aspect(className=IntegerLiteral)
 class AIntegerLiteral extends AExpression {
 	@OverrideAspectMethod
-	def public Value value(InstanceContext context, boolean createProxies) {
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
 		val integerValue = ThingMLFactory.eINSTANCE.createIntegerValue()
 		integerValue.value = _self.intValue
 		return integerValue
@@ -74,7 +77,7 @@ class AIntegerLiteral extends AExpression {
 @Aspect(className=StringLiteral)
 class AStringLiteral extends AExpression {
 	@OverrideAspectMethod
-	def public Value value(InstanceContext context, boolean createProxies) {
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
 		val stringValue = ThingMLFactory.eINSTANCE.createStringValue()
 		stringValue.value = _self.stringValue
 		return stringValue
@@ -84,14 +87,14 @@ class AStringLiteral extends AExpression {
 @Aspect(className=PropertyReference)
 class APropertyReference extends AExpression {
 	@OverrideAspectMethod
-	def public Value value(InstanceContext context, boolean createProxies) {
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
 		if (createProxies) {
 			val proxy = ThingMLFactory.eINSTANCE.createProxyValue()
 			proxy.expression = _self
 			return proxy
 		} else {
 			if (_self.property instanceof Property) {
-				val entry = context.getPropertyEntry(_self.property as Property)
+				val entry = dynamicInstance.getDynamicProperty(_self.property as Property)
 				return entry.value
 			} else {
 				// TODO!!! It's a local variable

@@ -22,22 +22,22 @@ public interface ThingMLFactory extends EFactory {
 	ThingMLFactory eINSTANCE = thingML.impl.ThingMLFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Instance Context</em>'.
+	 * Returns a new object of class '<em>Dynamic Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instance Context</em>'.
+	 * @return a new object of class '<em>Dynamic Instance</em>'.
 	 * @generated
 	 */
-	InstanceContext createInstanceContext();
+	DynamicInstance createDynamicInstance();
 
 	/**
-	 * Returns a new object of class '<em>Property Entry</em>'.
+	 * Returns a new object of class '<em>Dynamic Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Property Entry</em>'.
+	 * @return a new object of class '<em>Dynamic Property</em>'.
 	 * @generated
 	 */
-	PropertyEntry createPropertyEntry();
+	DynamicProperty createDynamicProperty();
 
 	/**
 	 * Returns a new object of class '<em>Null Value</em>'.
@@ -103,13 +103,40 @@ public interface ThingMLFactory extends EFactory {
 	ArrayProxyEntry createArrayProxyEntry();
 
 	/**
-	 * Returns a new object of class '<em>Composite State Entry</em>'.
+	 * Returns a new object of class '<em>Dynamic Composite State</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Composite State Entry</em>'.
+	 * @return a new object of class '<em>Dynamic Composite State</em>'.
 	 * @generated
 	 */
-	CompositeStateEntry createCompositeStateEntry();
+	DynamicCompositeState createDynamicCompositeState();
+
+	/**
+	 * Returns a new object of class '<em>Frame</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Frame</em>'.
+	 * @generated
+	 */
+	Frame createFrame();
+
+	/**
+	 * Returns a new object of class '<em>Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Context</em>'.
+	 * @generated
+	 */
+	Context createContext();
+
+	/**
+	 * Returns a new object of class '<em>Dynamic Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dynamic Variable</em>'.
+	 * @generated
+	 */
+	DynamicVariable createDynamicVariable();
 
 	/**
 	 * Returns the package supported by this factory.

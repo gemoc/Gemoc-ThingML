@@ -9,22 +9,22 @@ import org.thingml.xtext.thingML.State;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Composite State Entry</b></em>'.
+ * A representation of the model object '<em><b>Dynamic Composite State</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link thingML.CompositeStateEntry#getCompositeState <em>Composite State</em>}</li>
- *   <li>{@link thingML.CompositeStateEntry#getCurrentState <em>Current State</em>}</li>
+ *   <li>{@link thingML.DynamicCompositeState#getCompositeState <em>Composite State</em>}</li>
+ *   <li>{@link thingML.DynamicCompositeState#getCurrentState <em>Current State</em>}</li>
  * </ul>
  *
- * @see thingML.ThingMLPackage#getCompositeStateEntry()
+ * @see thingML.ThingMLPackage#getDynamicCompositeState()
  * @model
  * @generated
  */
-public interface CompositeStateEntry extends EObject {
+public interface DynamicCompositeState extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Composite State</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -35,14 +35,14 @@ public interface CompositeStateEntry extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Composite State</em>' reference.
 	 * @see #setCompositeState(CompositeState)
-	 * @see thingML.ThingMLPackage#getCompositeStateEntry_CompositeState()
+	 * @see thingML.ThingMLPackage#getDynamicCompositeState_CompositeState()
 	 * @model required="true"
 	 * @generated
 	 */
 	CompositeState getCompositeState();
 
 	/**
-	 * Sets the value of the '{@link thingML.CompositeStateEntry#getCompositeState <em>Composite State</em>}' reference.
+	 * Sets the value of the '{@link thingML.DynamicCompositeState#getCompositeState <em>Composite State</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Composite State</em>' reference.
@@ -61,14 +61,14 @@ public interface CompositeStateEntry extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Current State</em>' reference.
 	 * @see #setCurrentState(State)
-	 * @see thingML.ThingMLPackage#getCompositeStateEntry_CurrentState()
+	 * @see thingML.ThingMLPackage#getDynamicCompositeState_CurrentState()
 	 * @model required="true"
 	 * @generated
 	 */
 	State getCurrentState();
 
 	/**
-	 * Sets the value of the '{@link thingML.CompositeStateEntry#getCurrentState <em>Current State</em>}' reference.
+	 * Sets the value of the '{@link thingML.DynamicCompositeState#getCurrentState <em>Current State</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Current State</em>' reference.
@@ -77,4 +77,4 @@ public interface CompositeStateEntry extends EObject {
 	 */
 	void setCurrentState(State value);
 
-} // CompositeStateEntry
+} // DynamicCompositeState

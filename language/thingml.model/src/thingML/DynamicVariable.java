@@ -4,51 +4,51 @@ package thingML;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.thingml.xtext.thingML.Property;
+import org.thingml.xtext.thingML.Variable;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Property Entry</b></em>'.
+ * A representation of the model object '<em><b>Dynamic Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link thingML.PropertyEntry#getProperty <em>Property</em>}</li>
- *   <li>{@link thingML.PropertyEntry#getValue <em>Value</em>}</li>
+ *   <li>{@link thingML.DynamicVariable#getVariable <em>Variable</em>}</li>
+ *   <li>{@link thingML.DynamicVariable#getValue <em>Value</em>}</li>
  * </ul>
  *
- * @see thingML.ThingMLPackage#getPropertyEntry()
+ * @see thingML.ThingMLPackage#getDynamicVariable()
  * @model
  * @generated
  */
-public interface PropertyEntry extends EObject {
+public interface DynamicVariable extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Property</b></em>' reference.
+	 * Returns the value of the '<em><b>Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property</em>' reference isn't clear,
+	 * If the meaning of the '<em>Variable</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property</em>' reference.
-	 * @see #setProperty(Property)
-	 * @see thingML.ThingMLPackage#getPropertyEntry_Property()
+	 * @return the value of the '<em>Variable</em>' reference.
+	 * @see #setVariable(Variable)
+	 * @see thingML.ThingMLPackage#getDynamicVariable_Variable()
 	 * @model required="true"
 	 * @generated
 	 */
-	Property getProperty();
+	Variable getVariable();
 
 	/**
-	 * Sets the value of the '{@link thingML.PropertyEntry#getProperty <em>Property</em>}' reference.
+	 * Sets the value of the '{@link thingML.DynamicVariable#getVariable <em>Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Property</em>' reference.
-	 * @see #getProperty()
+	 * @param value the new value of the '<em>Variable</em>' reference.
+	 * @see #getVariable()
 	 * @generated
 	 */
-	void setProperty(Property value);
+	void setVariable(Variable value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
@@ -60,14 +60,14 @@ public interface PropertyEntry extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(Value)
-	 * @see thingML.ThingMLPackage#getPropertyEntry_Value()
+	 * @see thingML.ThingMLPackage#getDynamicVariable_Value()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Value getValue();
 
 	/**
-	 * Sets the value of the '{@link thingML.PropertyEntry#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link thingML.DynamicVariable#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' containment reference.
@@ -76,4 +76,4 @@ public interface PropertyEntry extends EObject {
 	 */
 	void setValue(Value value);
 
-} // PropertyEntry
+} // DynamicVariable

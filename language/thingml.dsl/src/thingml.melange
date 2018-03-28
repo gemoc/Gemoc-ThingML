@@ -6,15 +6,5 @@ external language ThingML {
 
 language XThingML inherits ThingML {
 	syntax "platform:/resource/thingml.model/model/xthingml.ecore"
-	with thingml.k3.AConfiguration
-	with thingml.k3.AExpression
-	with thingml.k3.ATimesExpression
-	with thingml.k3.AIntegerLiteral
-	with thingml.k3.AStringLiteral
-	with thingml.k3.APropertyReference
-	with thingml.k3.AInstance
-	with thingml.k3.AInstanceContext
-	with thingml.k3.AValue
-	with thingml.k3.AProxyValue
-	with thingml.k3.AIntegerValue
+	with thingml.k3.*
 }

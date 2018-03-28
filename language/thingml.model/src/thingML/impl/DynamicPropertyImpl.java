@@ -13,25 +13,25 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.thingml.xtext.thingML.Property;
 
-import thingML.PropertyEntry;
+import thingML.DynamicProperty;
 import thingML.ThingMLPackage;
 import thingML.Value;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Property Entry</b></em>'.
+ * An implementation of the model object '<em><b>Dynamic Property</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link thingML.impl.PropertyEntryImpl#getProperty <em>Property</em>}</li>
- *   <li>{@link thingML.impl.PropertyEntryImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link thingML.impl.DynamicPropertyImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link thingML.impl.DynamicPropertyImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements PropertyEntry {
+public class DynamicPropertyImpl extends MinimalEObjectImpl.Container implements DynamicProperty {
 	/**
 	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -57,7 +57,7 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PropertyEntryImpl() {
+	protected DynamicPropertyImpl() {
 		super();
 	}
 
@@ -68,7 +68,7 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ThingMLPackage.Literals.PROPERTY_ENTRY;
+		return ThingMLPackage.Literals.DYNAMIC_PROPERTY;
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 			property = (Property)eResolveProxy(oldProperty);
 			if (property != oldProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.PROPERTY_ENTRY__PROPERTY, oldProperty, property));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY, oldProperty, property));
 			}
 		}
 		return property;
@@ -106,7 +106,7 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 		Property oldProperty = property;
 		property = newProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.PROPERTY_ENTRY__PROPERTY, oldProperty, property));
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY, oldProperty, property));
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 		Value oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ThingMLPackage.PROPERTY_ENTRY__VALUE, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_PROPERTY__VALUE, oldValue, newValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -142,14 +142,14 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ThingMLPackage.PROPERTY_ENTRY__VALUE, null, msgs);
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ThingMLPackage.DYNAMIC_PROPERTY__VALUE, null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ThingMLPackage.PROPERTY_ENTRY__VALUE, null, msgs);
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ThingMLPackage.DYNAMIC_PROPERTY__VALUE, null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.PROPERTY_ENTRY__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_PROPERTY__VALUE, newValue, newValue));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ThingMLPackage.PROPERTY_ENTRY__VALUE:
+			case ThingMLPackage.DYNAMIC_PROPERTY__VALUE:
 				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -174,10 +174,10 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ThingMLPackage.PROPERTY_ENTRY__PROPERTY:
+			case ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY:
 				if (resolve) return getProperty();
 				return basicGetProperty();
-			case ThingMLPackage.PROPERTY_ENTRY__VALUE:
+			case ThingMLPackage.DYNAMIC_PROPERTY__VALUE:
 				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -191,10 +191,10 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ThingMLPackage.PROPERTY_ENTRY__PROPERTY:
+			case ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY:
 				setProperty((Property)newValue);
 				return;
-			case ThingMLPackage.PROPERTY_ENTRY__VALUE:
+			case ThingMLPackage.DYNAMIC_PROPERTY__VALUE:
 				setValue((Value)newValue);
 				return;
 		}
@@ -209,10 +209,10 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.PROPERTY_ENTRY__PROPERTY:
+			case ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY:
 				setProperty((Property)null);
 				return;
-			case ThingMLPackage.PROPERTY_ENTRY__VALUE:
+			case ThingMLPackage.DYNAMIC_PROPERTY__VALUE:
 				setValue((Value)null);
 				return;
 		}
@@ -227,12 +227,12 @@ public class PropertyEntryImpl extends MinimalEObjectImpl.Container implements P
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.PROPERTY_ENTRY__PROPERTY:
+			case ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY:
 				return property != null;
-			case ThingMLPackage.PROPERTY_ENTRY__VALUE:
+			case ThingMLPackage.DYNAMIC_PROPERTY__VALUE:
 				return value != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //PropertyEntryImpl
+} //DynamicPropertyImpl
