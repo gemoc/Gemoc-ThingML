@@ -58,6 +58,10 @@ class AStringValue extends AValue {
 			val result = ThingMLFactory.eINSTANCE.createStringValue()
 			result.value = _self.value + other.value
 			return result
+		} else if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createStringValue()
+			result.value = _self.value + other.value
+			return result
 		} else if (other instanceof ProxyValue) {
 			return other
 		} else {
@@ -77,6 +81,10 @@ class AIntegerValue extends AValue {
 	def public Value plus(Value other) {
 		if (other instanceof IntegerValue) {
 			val result = ThingMLFactory.eINSTANCE.createIntegerValue()
+			result.value = _self.value + other.value
+			return result
+		} else if (other instanceof StringValue) {
+			val result = ThingMLFactory.eINSTANCE.createStringValue()
 			result.value = _self.value + other.value
 			return result
 		} else if (other instanceof ProxyValue) {
