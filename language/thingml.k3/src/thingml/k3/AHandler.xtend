@@ -49,7 +49,6 @@ class ATransition extends AHandler {
 			_self.action.execute(dynamicInstance)
 		}
 		_self.target.onEntry(dynamicInstance)
-		Thread.sleep(500)
 		return _self.target
 	}
 }

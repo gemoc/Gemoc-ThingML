@@ -29,9 +29,9 @@ import static extension thingml.k3.AState.*
 class AInstance {
 	public DynamicInstance dynamicInstance
 
-	def public void init_properties(Thing thing) {
+	def public void initProperties(Thing thing) {
 		for (Thing fragment : thing.includes) {
-			_self.init_properties(fragment)
+			_self.initProperties(fragment)
 		}
 		for (Property property : thing.properties) {
 			val entry = ThingMLFactory.eINSTANCE.createDynamicProperty()
@@ -61,7 +61,7 @@ class AInstance {
 		}
 	}
 
-	def public void _assign_properties(Property property, EList<Expression> index_list, Expression init) {
+	def public void _assignProperties(Property property, EList<Expression> index_list, Expression init) {
 		val entry = _self.dynamicInstance.getDynamicProperty(property)
 		if (index_list.length == 0) {
 			entry.value = init.value(_self.dynamicInstance, true)
@@ -99,16 +99,16 @@ class AInstance {
 		}
 	}
 
-	def public void init_property_assigns(Thing thing) {
+	def public void initPropertyAssigns(Thing thing) {
 		for (Thing fragment : thing.includes) {
-			_self.init_property_assigns(fragment)
+			_self.initPropertyAssigns(fragment)
 		}
 		for (PropertyAssign assign : thing.assign) {
-			_self._assign_properties(assign.property, assign.index, assign.init)
+			_self._assignProperties(assign.property, assign.index, assign.init)
 		}
 	}
 
-	def public CompositeState get_behaviour() {
+	def public CompositeState getBehaviour() {
 		var behaviour = _self.type.behaviour
 		var i = _self.type.includes.iterator
 		while (behaviour === null && i.hasNext()) {
@@ -120,14 +120,14 @@ class AInstance {
 		return behaviour
 	}
 
-	def public void init_state_containers(CompositeState compositeState) {
+	def public void initStateContainers(CompositeState compositeState) {
 		val entry = ThingMLFactory.eINSTANCE.createDynamicCompositeState()
 		entry.compositeState = compositeState
 		entry.currentState = null
 		_self.dynamicInstance.dynamicCompositeStates.add(entry)
 		for (State sub_state : compositeState.substate) {
 			if (sub_state instanceof CompositeState) {
-				_self.init_state_containers(sub_state)
+				_self.initStateContainers(sub_state)
 			}
 		}
 	}
@@ -135,13 +135,13 @@ class AInstance {
 	def public void init() {
 		_self.dynamicInstance = ThingMLFactory.eINSTANCE.createDynamicInstance()
 		_self.dynamicInstance.init(_self)
-		_self.init_properties(_self.type)
-		_self.init_property_assigns(_self.type)
-		_self.init_state_containers(_self.get_behaviour())
+		_self.initProperties(_self.type)
+		_self.initPropertyAssigns(_self.type)
+		_self.initStateContainers(_self.getBehaviour())
 	}
 
 	def public void assign(ConfigPropertyAssign assign) {
-		_self._assign_properties(assign.property, assign.index, assign.init)
+		_self._assignProperties(assign.property, assign.index, assign.init)
 	}
 
 	def public void resolve() {
@@ -231,8 +231,8 @@ class AInstance {
 	}
 
 	@Step
-	def public void enter_initial_state() {
-		var compositeState = _self.get_behaviour()
+	def public void enterInitialState() {
+		var compositeState = _self.getBehaviour()
 		compositeState.onEntry(_self.dynamicInstance)
 		while (compositeState !== null) {
 			var entry = _self.dynamicInstance.getDynamicCompositeState(compositeState)
@@ -248,8 +248,13 @@ class AInstance {
 
 	@Step
 	def public boolean run() {
-		var has_changed = false
-		has_changed = has_changed || _self.get_behaviour().run(_self.dynamicInstance)
-		return has_changed
+		val behaviour = _self.getBehaviour()
+		var hasMoved = false
+		var hasSpontaneouslyMoved = true
+		while (hasSpontaneouslyMoved) {
+			hasSpontaneouslyMoved = behaviour.runSpontaneousTransitions(_self.dynamicInstance)
+			hasMoved = hasMoved || hasSpontaneouslyMoved
+		}
+		return hasMoved
 	}
 }

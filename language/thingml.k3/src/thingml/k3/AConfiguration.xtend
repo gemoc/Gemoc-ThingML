@@ -36,7 +36,7 @@ class AConfiguration {
 
 		// first run
 		for (Instance instance : _self.instances) {
-			instance.enter_initial_state()
+			instance.enterInitialState()
 			running = running || instance.run()
 		}
 
