@@ -3,7 +3,6 @@ package thingml.k3
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import org.eclipse.emf.common.util.EList
 import org.thingml.xtext.thingML.CompositeState
-import org.thingml.xtext.thingML.Expression
 import org.thingml.xtext.thingML.Instance
 import org.thingml.xtext.thingML.Parameter
 import org.thingml.xtext.thingML.Property
@@ -14,8 +13,9 @@ import thingML.DynamicInstance
 import thingML.DynamicProperty
 import thingML.DynamicVariable
 import thingML.ThingMLFactory
+import thingML.Value
 
-import static extension thingml.k3.AExpression.value
+import static extension thingml.k3.AValue.print
 
 @Aspect(className=DynamicInstance)
 class ADynamicInstance {
@@ -68,21 +68,20 @@ class ADynamicInstance {
 			dynamicVariable = _self._searchContext(context, variable)
 			context = context.parentContext
 		}
+		if (dynamicVariable === null) {
+			throw new Exception("Undefined variable '" + variable.name + "'")
+		}
 		return dynamicVariable
 	}
 
-	def public void enterExecutionFrame(EList<Parameter> parameterDefinitions, EList<Expression> parameters) {
+	def public void enterExecutionFrame(EList<Parameter> parameters, EList<Value> parameterValues) {
 		println("Entering new execution frame")
 		_self.activeFrame.childFrame = ThingMLFactory.eINSTANCE.createFrame()
 		_self.activeFrame = _self.activeFrame.childFrame
 		_self.activeFrame.rootContext = ThingMLFactory.eINSTANCE.createContext()
 		_self.activeFrame.topContext = _self.activeFrame.rootContext
-		for (var i = 0; i < parameterDefinitions.length; i++) {
-			println("Adding variable '" + parameterDefinitions.get(i).name + "' to the active execution context")
-			val dynamicVariable = ThingMLFactory.eINSTANCE.createDynamicVariable()
-			dynamicVariable.variable = parameterDefinitions.get(i)
-			dynamicVariable.value = parameters.get(i).value(_self, false)
-			_self.activeFrame.topContext.dynamicVariables.add(dynamicVariable)
+		for (var i = 0; i < parameters.length; i++) {
+			_self.addVariable(parameters.get(i), parameterValues.get(i))
 		}
 	}
 
@@ -102,5 +101,13 @@ class ADynamicInstance {
 		println("Unstacking last execution context")
 		_self.activeFrame.topContext = _self.activeFrame.topContext.parentContext
 		_self.activeFrame.topContext.childContext = null
+	}
+
+	def public void addVariable(Variable variable, Value value) {
+		println("Adding variable '" + variable.name + "' with value '" + value.print() + "' to the active execution context")
+		val dynamicVariable = ThingMLFactory.eINSTANCE.createDynamicVariable()
+		dynamicVariable.variable = variable
+		dynamicVariable.value = value
+		_self.activeFrame.topContext.dynamicVariables.add(dynamicVariable)
 	}
 }

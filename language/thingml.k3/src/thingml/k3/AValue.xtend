@@ -14,6 +14,10 @@ class AValue {
 		throw new Exception("Operation 'print' is not defined for class " + _self.class.simpleName)
 	}
 
+	def public void increment() {
+		throw new Exception("Operation 'increment' is not defined for class " + _self.class.simpleName)
+	}
+
 	def public Value plus(Value other) {
 		throw new Exception("Operation 'plus' is not defined for class " + _self.class.simpleName)
 	}
@@ -24,6 +28,18 @@ class AValue {
 
 	def public Value times(Value other) {
 		throw new Exception("Operation 'times' is not defined for class " + _self.class.simpleName)
+	}
+
+	def public Value lower(Value other) {
+		throw new Exception("Operation 'lower' is not defined for class " + _self.class.simpleName)
+	}
+
+	def public Value greaterOrEqual(Value other) {
+		throw new Exception("Operation 'greaterOrEqual' is not defined for class " + _self.class.simpleName)
+	}
+
+	def public String toString() {
+		throw new Exception("Method 'toString' is not defined for class " + _self.class.simpleName)
 	}
 }
 
@@ -43,13 +59,29 @@ class AProxyValue extends AValue {
 	def public Value times(Value other) {
 		return _self
 	}
+
+	@OverrideAspectMethod
+	def public Value lower(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value greaterOrEqual(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public String toString() {
+		return "<" + _self.expression.toString() + ">"
+	}
 }
 
 @Aspect(className=StringValue)
 class AStringValue extends AValue {
 	@OverrideAspectMethod
 	def public String print() {
-		return _self.value.replace("\\n", "\n")
+		// since there is no 'unescaping' tool in native Java...
+		return _self.value.replace("\\n", "\n").replace("\\\"", "\"")
 	}
 
 	@OverrideAspectMethod
@@ -68,6 +100,11 @@ class AStringValue extends AValue {
 			throw new Exception("Operation 'plus' it not defined for class " + other.class.simpleName)
 		}
 	}
+
+	@OverrideAspectMethod
+	def public String toString() {
+		return "\"" + _self.value + "\""
+	}
 }
 
 @Aspect(className=IntegerValue)
@@ -75,6 +112,11 @@ class AIntegerValue extends AValue {
 	@OverrideAspectMethod
 	def public String print() {
 		return _self.value.toString()
+	}
+
+	@OverrideAspectMethod
+	def public void increment() {
+		_self.value = _self.value + 1
 	}
 
 	@OverrideAspectMethod
@@ -118,5 +160,36 @@ class AIntegerValue extends AValue {
 		} else {
 			throw new Exception("Operation 'times' is not defined for class " + other.class.simpleName)
 		}
+	}
+
+	@OverrideAspectMethod
+	def public Value lower(Value other) {
+		if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
+			result.value = _self.value < other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'lower' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
+	def public Value greaterOrEqual(Value other) {
+		if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
+			result.value = _self.value >= other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'greaterOrEqual' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
+	def public String toString() {
+		return _self.value.toString()
 	}
 }

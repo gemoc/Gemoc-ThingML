@@ -4,15 +4,11 @@ package thingML.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import thingML.ArrayValue;
 import thingML.ThingMLPackage;
@@ -33,7 +29,7 @@ import thingML.Value;
  */
 public class ArrayValueImpl extends ValueImpl implements ArrayValue {
 	/**
-	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValues()
@@ -68,23 +64,9 @@ public class ArrayValueImpl extends ValueImpl implements ArrayValue {
 	 */
 	public EList<Value> getValues() {
 		if (values == null) {
-			values = new EObjectContainmentEList<Value>(Value.class, this, ThingMLPackage.ARRAY_VALUE__VALUES);
+			values = new EObjectResolvingEList<Value>(Value.class, this, ThingMLPackage.ARRAY_VALUE__VALUES);
 		}
 		return values;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ThingMLPackage.ARRAY_VALUE__VALUES:
-				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

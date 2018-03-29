@@ -69,6 +69,7 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 			case ThingMLPackage.FRAME: return createFrame();
 			case ThingMLPackage.CONTEXT: return createContext();
 			case ThingMLPackage.DYNAMIC_VARIABLE: return createDynamicVariable();
+			case ThingMLPackage.BOOLEAN_VALUE: return createBooleanValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -202,6 +203,16 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	public DynamicVariable createDynamicVariable() {
 		DynamicVariableImpl dynamicVariable = new DynamicVariableImpl();
 		return dynamicVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanValue createBooleanValue() {
+		BooleanValueImpl booleanValue = new BooleanValueImpl();
+		return booleanValue;
 	}
 
 	/**

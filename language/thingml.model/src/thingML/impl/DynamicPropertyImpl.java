@@ -3,7 +3,6 @@
 package thingML.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -43,7 +42,7 @@ public class DynamicPropertyImpl extends MinimalEObjectImpl.Container implements
 	protected Property property;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValue()
@@ -115,6 +114,14 @@ public class DynamicPropertyImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	public Value getValue() {
+		if (value != null && value.eIsProxy()) {
+			InternalEObject oldValue = (InternalEObject)value;
+			value = (Value)eResolveProxy(oldValue);
+			if (value != oldValue) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.DYNAMIC_PROPERTY__VALUE, oldValue, value));
+			}
+		}
 		return value;
 	}
 
@@ -123,14 +130,8 @@ public class DynamicPropertyImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(Value newValue, NotificationChain msgs) {
-		Value oldValue = value;
-		value = newValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_PROPERTY__VALUE, oldValue, newValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Value basicGetValue() {
+		return value;
 	}
 
 	/**
@@ -139,31 +140,10 @@ public class DynamicPropertyImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	public void setValue(Value newValue) {
-		if (newValue != value) {
-			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ThingMLPackage.DYNAMIC_PROPERTY__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ThingMLPackage.DYNAMIC_PROPERTY__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_PROPERTY__VALUE, newValue, newValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_PROPERTY__VALUE:
-				return basicSetValue(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		Value oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_PROPERTY__VALUE, oldValue, value));
 	}
 
 	/**
@@ -178,7 +158,8 @@ public class DynamicPropertyImpl extends MinimalEObjectImpl.Container implements
 				if (resolve) return getProperty();
 				return basicGetProperty();
 			case ThingMLPackage.DYNAMIC_PROPERTY__VALUE:
-				return getValue();
+				if (resolve) return getValue();
+				return basicGetValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

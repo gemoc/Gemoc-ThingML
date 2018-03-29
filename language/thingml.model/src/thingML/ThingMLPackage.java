@@ -149,7 +149,7 @@ public interface ThingMLPackage extends EPackage {
 	int DYNAMIC_PROPERTY__PROPERTY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -316,7 +316,7 @@ public interface ThingMLPackage extends EPackage {
 	int ARRAY_VALUE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Values</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -445,7 +445,7 @@ public interface ThingMLPackage extends EPackage {
 	int ARRAY_PROXY_ENTRY__INDEX_EXPRESSION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -656,7 +656,7 @@ public interface ThingMLPackage extends EPackage {
 	int DYNAMIC_VARIABLE__VARIABLE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -681,6 +681,43 @@ public interface ThingMLPackage extends EPackage {
 	 * @ordered
 	 */
 	int DYNAMIC_VARIABLE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.BooleanValueImpl <em>Boolean Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.BooleanValueImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getBooleanValue()
+	 * @generated
+	 */
+	int BOOLEAN_VALUE = 14;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_VALUE__VALUE = VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Boolean Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Boolean Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 
 	/**
@@ -770,10 +807,10 @@ public interface ThingMLPackage extends EPackage {
 	EReference getDynamicProperty_Property();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link thingML.DynamicProperty#getValue <em>Value</em>}'.
+	 * Returns the meta object for the reference '{@link thingML.DynamicProperty#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @return the meta object for the reference '<em>Value</em>'.
 	 * @see thingML.DynamicProperty#getValue()
 	 * @see #getDynamicProperty()
 	 * @generated
@@ -853,10 +890,10 @@ public interface ThingMLPackage extends EPackage {
 	EClass getArrayValue();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link thingML.ArrayValue#getValues <em>Values</em>}'.
+	 * Returns the meta object for the reference list '{@link thingML.ArrayValue#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Values</em>'.
+	 * @return the meta object for the reference list '<em>Values</em>'.
 	 * @see thingML.ArrayValue#getValues()
 	 * @see #getArrayValue()
 	 * @generated
@@ -927,10 +964,10 @@ public interface ThingMLPackage extends EPackage {
 	EReference getArrayProxyEntry_IndexExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link thingML.ArrayProxyEntry#getValue <em>Value</em>}'.
+	 * Returns the meta object for the reference '{@link thingML.ArrayProxyEntry#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @return the meta object for the reference '<em>Value</em>'.
 	 * @see thingML.ArrayProxyEntry#getValue()
 	 * @see #getArrayProxyEntry()
 	 * @generated
@@ -1088,15 +1125,36 @@ public interface ThingMLPackage extends EPackage {
 	EReference getDynamicVariable_Variable();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link thingML.DynamicVariable#getValue <em>Value</em>}'.
+	 * Returns the meta object for the reference '{@link thingML.DynamicVariable#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @return the meta object for the reference '<em>Value</em>'.
 	 * @see thingML.DynamicVariable#getValue()
 	 * @see #getDynamicVariable()
 	 * @generated
 	 */
 	EReference getDynamicVariable_Value();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.BooleanValue <em>Boolean Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Boolean Value</em>'.
+	 * @see thingML.BooleanValue
+	 * @generated
+	 */
+	EClass getBooleanValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link thingML.BooleanValue#isValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see thingML.BooleanValue#isValue()
+	 * @see #getBooleanValue()
+	 * @generated
+	 */
+	EAttribute getBooleanValue_Value();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1190,7 +1248,7 @@ public interface ThingMLPackage extends EPackage {
 		EReference DYNAMIC_PROPERTY__PROPERTY = eINSTANCE.getDynamicProperty_Property();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1264,7 +1322,7 @@ public interface ThingMLPackage extends EPackage {
 		EClass ARRAY_VALUE = eINSTANCE.getArrayValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Values</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1326,7 +1384,7 @@ public interface ThingMLPackage extends EPackage {
 		EReference ARRAY_PROXY_ENTRY__INDEX_EXPRESSION = eINSTANCE.getArrayProxyEntry_IndexExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1454,12 +1512,30 @@ public interface ThingMLPackage extends EPackage {
 		EReference DYNAMIC_VARIABLE__VARIABLE = eINSTANCE.getDynamicVariable_Variable();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference DYNAMIC_VARIABLE__VALUE = eINSTANCE.getDynamicVariable_Value();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.BooleanValueImpl <em>Boolean Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.BooleanValueImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getBooleanValue()
+		 * @generated
+		 */
+		EClass BOOLEAN_VALUE = eINSTANCE.getBooleanValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOOLEAN_VALUE__VALUE = eINSTANCE.getBooleanValue_Value();
 
 	}
 

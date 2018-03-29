@@ -2,15 +2,20 @@ package thingml.k3
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
+import org.thingml.xtext.thingML.ArrayIndex
 import org.thingml.xtext.thingML.Expression
+import org.thingml.xtext.thingML.GreaterOrEqualExpression
 import org.thingml.xtext.thingML.IntegerLiteral
+import org.thingml.xtext.thingML.LowerExpression
 import org.thingml.xtext.thingML.MinusExpression
 import org.thingml.xtext.thingML.PlusExpression
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyReference
 import org.thingml.xtext.thingML.StringLiteral
 import org.thingml.xtext.thingML.TimesExpression
+import thingML.ArrayValue
 import thingML.DynamicInstance
+import thingML.IntegerValue
 import thingML.ProxyValue
 import thingML.ThingMLFactory
 import thingML.Value
@@ -21,6 +26,10 @@ import static extension thingml.k3.AValue.*
 @Aspect(className=Expression)
 class AExpression {
 	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
+	}
+
+	def public String toString() {
 		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
 	}
 }
@@ -36,6 +45,10 @@ class APlusExpression extends AExpression {
 		}
 		return value
 	}
+
+	def public String toString() {
+		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	}
 }
 
 @Aspect(className=MinusExpression)
@@ -48,6 +61,10 @@ class AMinusExpression extends AExpression {
 			value.expression = _self
 		}
 		return value
+	}
+
+	def public String toString() {
+		return _self.lhs.toString() + " + " + _self.rhs.toString()
 	}
 }
 
@@ -62,6 +79,44 @@ class ATimesExpression extends AExpression {
 		}
 		return value
 	}
+
+	def public String toString() {
+		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	}
+}
+
+@Aspect(className=LowerExpression)
+class ALowerExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).lower(
+			_self.rhs.value(dynamicInstance, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	def public String toString() {
+		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	}
+}
+
+@Aspect(className=GreaterOrEqualExpression)
+class AGreaterOrEqualExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).greaterOrEqual(
+			_self.rhs.value(dynamicInstance, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	def public String toString() {
+		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	}
 }
 
 @Aspect(className=IntegerLiteral)
@@ -72,6 +127,10 @@ class AIntegerLiteral extends AExpression {
 		integerValue.value = _self.intValue
 		return integerValue
 	}
+
+	def public String toString() {
+		return _self.intValue.toString()
+	}
 }
 
 @Aspect(className=StringLiteral)
@@ -81,6 +140,36 @@ class AStringLiteral extends AExpression {
 		val stringValue = ThingMLFactory.eINSTANCE.createStringValue()
 		stringValue.value = _self.stringValue
 		return stringValue
+	}
+
+	def public String toString() {
+		return _self.stringValue
+	}
+}
+
+@Aspect(className=ArrayIndex)
+class AArrayIndex extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val arrayValue = _self.array.value(dynamicInstance, createProxies)
+		val indexValue = _self.index.value(dynamicInstance, createProxies)
+		if (arrayValue instanceof ProxyValue || indexValue instanceof ProxyValue) {
+			val proxy = ThingMLFactory.eINSTANCE.createProxyValue()
+			proxy.expression = _self
+			return proxy
+		} else if (!(arrayValue instanceof ArrayValue)) {
+			throw new Exception("Expression '" + _self.array.toString() + "' has to correspond to an Array")
+		} else if (!(indexValue instanceof IntegerValue)) {
+			throw new Exception("Expression '" + _self.index.toString() + "' has to correspond to an Integer")
+		} else {
+			val array = arrayValue as ArrayValue
+			val index = (indexValue as IntegerValue).value as int
+			return array.values.get(index)
+		}
+	}
+
+	def public String toString() {
+		return _self.array.toString() + "[" + _self.index.toString() + "]"
 	}
 }
 
@@ -101,9 +190,13 @@ class APropertyReference extends AExpression {
 				if (dynamicVariable !== null) {
 					return dynamicVariable.value
 				} else {
-					throw new Exception("Variable '" + _self.property.name + "' is undefined")
+					throw new Exception("Variable '" + _self.toString() + "' is undefined")
 				}
 			}
 		}
+	}
+
+	def public String toString() {
+		return _self.property.name
 	}
 }

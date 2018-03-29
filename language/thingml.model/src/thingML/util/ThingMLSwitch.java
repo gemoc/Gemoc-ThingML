@@ -157,6 +157,13 @@ public class ThingMLSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ThingMLPackage.BOOLEAN_VALUE: {
+				BooleanValue booleanValue = (BooleanValue)theEObject;
+				T result = caseBooleanValue(booleanValue);
+				if (result == null) result = caseValue(booleanValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -368,6 +375,21 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDynamicVariable(DynamicVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBooleanValue(BooleanValue object) {
 		return null;
 	}
 

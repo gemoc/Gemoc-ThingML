@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import thingML.ArrayProxyEntry;
 import thingML.ArrayProxyValue;
 import thingML.ArrayValue;
+import thingML.BooleanValue;
 import thingML.Context;
 import thingML.DynamicCompositeState;
 import thingML.DynamicInstance;
@@ -130,6 +131,13 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * @generated
 	 */
 	private EClass dynamicVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass booleanValueEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -551,6 +559,24 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBooleanValue() {
+		return booleanValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBooleanValue_Value() {
+		return (EAttribute)booleanValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ThingMLFactory getThingMLFactory() {
 		return (ThingMLFactory)getEFactoryInstance();
 	}
@@ -626,6 +652,9 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		dynamicVariableEClass = createEClass(DYNAMIC_VARIABLE);
 		createEReference(dynamicVariableEClass, DYNAMIC_VARIABLE__VARIABLE);
 		createEReference(dynamicVariableEClass, DYNAMIC_VARIABLE__VALUE);
+
+		booleanValueEClass = createEClass(BOOLEAN_VALUE);
+		createEAttribute(booleanValueEClass, BOOLEAN_VALUE__VALUE);
 	}
 
 	/**
@@ -665,6 +694,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		arrayValueEClass.getESuperTypes().add(this.getValue());
 		proxyValueEClass.getESuperTypes().add(this.getValue());
 		arrayProxyValueEClass.getESuperTypes().add(this.getProxyValue());
+		booleanValueEClass.getESuperTypes().add(this.getValue());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dynamicInstanceEClass, DynamicInstance.class, "DynamicInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -676,7 +706,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		initEClass(dynamicPropertyEClass, DynamicProperty.class, "DynamicProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDynamicProperty_Property(), theThingMLPackage_1.getProperty(), null, "property", null, 1, 1, DynamicProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDynamicProperty_Value(), this.getValue(), null, "value", null, 1, 1, DynamicProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicProperty_Value(), this.getValue(), null, "value", null, 1, 1, DynamicProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -689,7 +719,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEAttribute(getStringValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(arrayValueEClass, ArrayValue.class, "ArrayValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArrayValue_Values(), this.getValue(), null, "values", null, 0, -1, ArrayValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArrayValue_Values(), this.getValue(), null, "values", null, 0, -1, ArrayValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(proxyValueEClass, ProxyValue.class, "ProxyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProxyValue_Expression(), theThingMLPackage_1.getExpression(), null, "expression", null, 1, 1, ProxyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -699,7 +729,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		initEClass(arrayProxyEntryEClass, ArrayProxyEntry.class, "ArrayProxyEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArrayProxyEntry_IndexExpression(), theThingMLPackage_1.getExpression(), null, "indexExpression", null, 1, 1, ArrayProxyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getArrayProxyEntry_Value(), this.getValue(), null, "value", null, 1, 1, ArrayProxyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArrayProxyEntry_Value(), this.getValue(), null, "value", null, 1, 1, ArrayProxyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dynamicCompositeStateEClass, DynamicCompositeState.class, "DynamicCompositeState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDynamicCompositeState_CompositeState(), theThingMLPackage_1.getCompositeState(), null, "compositeState", null, 1, 1, DynamicCompositeState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -718,7 +748,10 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		initEClass(dynamicVariableEClass, DynamicVariable.class, "DynamicVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDynamicVariable_Variable(), theThingMLPackage_1.getVariable(), null, "variable", null, 1, 1, DynamicVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDynamicVariable_Value(), this.getValue(), null, "value", null, 1, 1, DynamicVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicVariable_Value(), this.getValue(), null, "value", null, 1, 1, DynamicVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(booleanValueEClass, BooleanValue.class, "BooleanValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBooleanValue_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, BooleanValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
