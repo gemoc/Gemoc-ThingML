@@ -128,6 +128,14 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 				return createBooleanValueAdapter();
 			}
 			@Override
+			public Adapter caseDynamicPort(DynamicPort object) {
+				return createDynamicPortAdapter();
+			}
+			@Override
+			public Adapter caseDynamicMessage(DynamicMessage object) {
+				return createDynamicMessageAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -354,6 +362,34 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBooleanValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.DynamicPort <em>Dynamic Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.DynamicPort
+	 * @generated
+	 */
+	public Adapter createDynamicPortAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.DynamicMessage <em>Dynamic Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.DynamicMessage
+	 * @generated
+	 */
+	public Adapter createDynamicMessageAdapter() {
 		return null;
 	}
 

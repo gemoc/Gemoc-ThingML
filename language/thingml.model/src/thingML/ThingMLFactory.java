@@ -148,6 +148,24 @@ public interface ThingMLFactory extends EFactory {
 	BooleanValue createBooleanValue();
 
 	/**
+	 * Returns a new object of class '<em>Dynamic Port</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dynamic Port</em>'.
+	 * @generated
+	 */
+	DynamicPort createDynamicPort();
+
+	/**
+	 * Returns a new object of class '<em>Dynamic Message</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dynamic Message</em>'.
+	 * @generated
+	 */
+	DynamicMessage createDynamicMessage();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

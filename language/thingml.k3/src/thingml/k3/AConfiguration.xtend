@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EList
 import org.thingml.xtext.thingML.AbstractConnector
 import org.thingml.xtext.thingML.ConfigPropertyAssign
 import org.thingml.xtext.thingML.Configuration
+import org.thingml.xtext.thingML.Connector
 import org.thingml.xtext.thingML.Instance
 
 import static extension thingml.k3.AInstance.*
@@ -26,7 +27,9 @@ class AConfiguration {
 			instance.resolve()
 		}
 		for (AbstractConnector connector : _self.connectors) {
-			println("Initializing connectors?")
+			if (connector instanceof Connector) {
+				connector.cli.connect(connector)
+			}
 		}
 	}
 

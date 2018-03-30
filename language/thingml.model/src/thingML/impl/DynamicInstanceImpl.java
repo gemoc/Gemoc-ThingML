@@ -22,6 +22,7 @@ import org.thingml.xtext.thingML.Instance;
 
 import thingML.DynamicCompositeState;
 import thingML.DynamicInstance;
+import thingML.DynamicPort;
 import thingML.DynamicProperty;
 import thingML.Frame;
 import thingML.ThingMLPackage;
@@ -39,6 +40,7 @@ import thingML.ThingMLPackage;
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getExecutionFrame <em>Execution Frame</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getInstance <em>Instance</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getActiveFrame <em>Active Frame</em>}</li>
+ *   <li>{@link thingML.impl.DynamicInstanceImpl#getDynamicPorts <em>Dynamic Ports</em>}</li>
  * </ul>
  *
  * @generated
@@ -93,6 +95,16 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected Frame activeFrame;
+
+	/**
+	 * The cached value of the '{@link #getDynamicPorts() <em>Dynamic Ports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDynamicPorts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DynamicPort> dynamicPorts;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,6 +273,18 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DynamicPort> getDynamicPorts() {
+		if (dynamicPorts == null) {
+			dynamicPorts = new EObjectContainmentEList<DynamicPort>(DynamicPort.class, this, ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS);
+		}
+		return dynamicPorts;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -270,6 +294,8 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 				return ((InternalEList<?>)getDynamicCompositeStates()).basicRemove(otherEnd, msgs);
 			case ThingMLPackage.DYNAMIC_INSTANCE__EXECUTION_FRAME:
 				return basicSetExecutionFrame(null, msgs);
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
+				return ((InternalEList<?>)getDynamicPorts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -294,6 +320,8 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 			case ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME:
 				if (resolve) return getActiveFrame();
 				return basicGetActiveFrame();
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
+				return getDynamicPorts();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -324,6 +352,10 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 			case ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME:
 				setActiveFrame((Frame)newValue);
 				return;
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
+				getDynamicPorts().clear();
+				getDynamicPorts().addAll((Collection<? extends DynamicPort>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -351,6 +383,9 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 			case ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME:
 				setActiveFrame((Frame)null);
 				return;
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
+				getDynamicPorts().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -373,6 +408,8 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 				return instance != null;
 			case ThingMLPackage.DYNAMIC_INSTANCE__ACTIVE_FRAME:
 				return activeFrame != null;
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
+				return dynamicPorts != null && !dynamicPorts.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

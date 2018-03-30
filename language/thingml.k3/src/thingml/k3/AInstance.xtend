@@ -5,8 +5,10 @@ import fr.inria.diverse.k3.al.annotationprocessor.Step
 import org.eclipse.emf.common.util.EList
 import org.thingml.xtext.thingML.CompositeState
 import org.thingml.xtext.thingML.ConfigPropertyAssign
+import org.thingml.xtext.thingML.Connector
 import org.thingml.xtext.thingML.Expression
 import org.thingml.xtext.thingML.Instance
+import org.thingml.xtext.thingML.Port
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyAssign
 import org.thingml.xtext.thingML.State
@@ -132,12 +134,24 @@ class AInstance {
 		}
 	}
 
+	def public void initPorts(Thing thing) {
+		for (Thing fragment : thing.includes) {
+			_self.initPorts(fragment)
+		}
+		for (Port port : thing.ports) {
+			val dynamicPort = ThingMLFactory.eINSTANCE.createDynamicPort()
+			dynamicPort.port = port
+			_self.dynamicInstance.dynamicPorts.add(dynamicPort)
+		}
+	}
+
 	def public void init() {
 		_self.dynamicInstance = ThingMLFactory.eINSTANCE.createDynamicInstance()
 		_self.dynamicInstance.init(_self)
 		_self.initProperties(_self.type)
 		_self.initPropertyAssigns(_self.type)
 		_self.initStateContainers(_self.getBehaviour())
+		_self.initPorts(_self.type)
 	}
 
 	def public void assign(ConfigPropertyAssign assign) {
@@ -228,6 +242,13 @@ class AInstance {
 				_self.resolve()
 			}
 		}
+	}
+
+	def public void connect(Connector connector) {
+		val dynamicRequired = _self.dynamicInstance.getDynamicPort(connector.required)
+		val dynamicProvided = connector.srv.dynamicInstance.getDynamicPort(connector.provided)
+		dynamicRequired.connectedPorts.add(dynamicProvided)
+		dynamicProvided.connectedPorts.add(dynamicRequired)
 	}
 
 	@Step

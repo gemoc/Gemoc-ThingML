@@ -22,6 +22,7 @@ import org.thingml.xtext.thingML.Instance;
  *   <li>{@link thingML.DynamicInstance#getExecutionFrame <em>Execution Frame</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getInstance <em>Instance</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getActiveFrame <em>Active Frame</em>}</li>
+ *   <li>{@link thingML.DynamicInstance#getDynamicPorts <em>Dynamic Ports</em>}</li>
  * </ul>
  *
  * @see thingML.ThingMLPackage#getDynamicInstance()
@@ -138,5 +139,21 @@ public interface DynamicInstance extends EObject {
 	 * @generated
 	 */
 	void setActiveFrame(Frame value);
+
+	/**
+	 * Returns the value of the '<em><b>Dynamic Ports</b></em>' containment reference list.
+	 * The list contents are of type {@link thingML.DynamicPort}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dynamic Ports</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dynamic Ports</em>' containment reference list.
+	 * @see thingML.ThingMLPackage#getDynamicInstance_DynamicPorts()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DynamicPort> getDynamicPorts();
 
 } // DynamicInstance

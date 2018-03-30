@@ -5,11 +5,13 @@ import org.eclipse.emf.common.util.EList
 import org.thingml.xtext.thingML.CompositeState
 import org.thingml.xtext.thingML.Instance
 import org.thingml.xtext.thingML.Parameter
+import org.thingml.xtext.thingML.Port
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.Variable
 import thingML.Context
 import thingML.DynamicCompositeState
 import thingML.DynamicInstance
+import thingML.DynamicPort
 import thingML.DynamicProperty
 import thingML.DynamicVariable
 import thingML.ThingMLFactory
@@ -42,6 +44,15 @@ class ADynamicInstance {
 			return candidate_entries.get(0)
 		} else {
 			throw new Exception("Wut? More than one entry for a stateContainer?")
+		}
+	}
+
+	def public DynamicPort getDynamicPort(Port port) {
+		val dynamicPortCandidates = _self.dynamicPorts.filter[dp|dp.port == port].toList
+		if (dynamicPortCandidates.length == 1) {
+			return dynamicPortCandidates.get(0)
+		} else {
+			throw new Exception("More than one DynamicPort for Port '" + port.name + "'")
 		}
 	}
 

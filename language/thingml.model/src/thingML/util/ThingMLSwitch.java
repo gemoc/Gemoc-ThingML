@@ -164,6 +164,18 @@ public class ThingMLSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ThingMLPackage.DYNAMIC_PORT: {
+				DynamicPort dynamicPort = (DynamicPort)theEObject;
+				T result = caseDynamicPort(dynamicPort);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ThingMLPackage.DYNAMIC_MESSAGE: {
+				DynamicMessage dynamicMessage = (DynamicMessage)theEObject;
+				T result = caseDynamicMessage(dynamicMessage);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -390,6 +402,36 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBooleanValue(BooleanValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Port</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Port</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDynamicPort(DynamicPort object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Message</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Message</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDynamicMessage(DynamicMessage object) {
 		return null;
 	}
 

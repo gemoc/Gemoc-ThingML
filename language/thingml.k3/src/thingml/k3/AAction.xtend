@@ -13,10 +13,12 @@ import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.SendAction
 import org.thingml.xtext.thingML.VariableAssignment
 import thingML.DynamicInstance
+import thingML.DynamicPort
+import thingML.ThingMLFactory
 import thingML.Value
 
 import static extension thingml.k3.ADynamicInstance.*
-import static extension thingml.k3.AExpression.value
+import static extension thingml.k3.AExpression.*
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=Action)
@@ -95,7 +97,26 @@ class AVariableAssignment extends AAction {
 class ASendAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		// TODO implement this
-		println("/!\\ WARNING /!\\ SEND ACTION IS NOT IMPLEMENTED YET !!")
+		val paramValues = _self.parameters.map[e|e.value(dynamicInstance, false)].immutableCopy
+		var paramsString = paramValues.fold("", [str, v|str + v._str() + ", "])
+		if (paramsString.length >= 2) {
+			paramsString = paramsString.substring(0, paramsString.length - 2)
+		}
+		println(
+			"Sending message '" + _self.message.name + "' with parameters [" + paramsString + "] through port '" +
+				_self.port.name + "'")
+		val dynamicMessage = ThingMLFactory.eINSTANCE.createDynamicMessage()
+		dynamicMessage.message = _self.message
+		for (Value value : paramValues) {
+			dynamicMessage.parameters.add(value.deepCopy())
+		}
+		for (DynamicPort recipient : dynamicInstance.getDynamicPort(_self.port).connectedPorts) {
+			if (recipient.port.receives.contains(_self.message)) {
+				println(
+					"Message sent to port '" + recipient.port.name + "' of '" +
+						(recipient.eContainer as DynamicInstance).instance.name + "'")
+				recipient.receivedMessages.add(dynamicMessage)
+			}
+		}
 	}
 }

@@ -112,13 +112,22 @@ public interface ThingMLPackage extends EPackage {
 	int DYNAMIC_INSTANCE__ACTIVE_FRAME = 4;
 
 	/**
+	 * The feature id for the '<em><b>Dynamic Ports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_INSTANCE__DYNAMIC_PORTS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Dynamic Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_INSTANCE_FEATURE_COUNT = 5;
+	int DYNAMIC_INSTANCE_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Dynamic Instance</em>' class.
@@ -719,6 +728,107 @@ public interface ThingMLPackage extends EPackage {
 	 */
 	int BOOLEAN_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
+	/**
+	 * The meta object id for the '{@link thingML.impl.DynamicPortImpl <em>Dynamic Port</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.DynamicPortImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getDynamicPort()
+	 * @generated
+	 */
+	int DYNAMIC_PORT = 15;
+
+	/**
+	 * The feature id for the '<em><b>Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PORT__PORT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Received Messages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PORT__RECEIVED_MESSAGES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Connected Ports</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PORT__CONNECTED_PORTS = 2;
+
+	/**
+	 * The number of structural features of the '<em>Dynamic Port</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PORT_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Dynamic Port</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_PORT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link thingML.impl.DynamicMessageImpl <em>Dynamic Message</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thingML.impl.DynamicMessageImpl
+	 * @see thingML.impl.ThingMLPackageImpl#getDynamicMessage()
+	 * @generated
+	 */
+	int DYNAMIC_MESSAGE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Message</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_MESSAGE__MESSAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_MESSAGE__PARAMETERS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Dynamic Message</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_MESSAGE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Dynamic Message</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_MESSAGE_OPERATION_COUNT = 0;
+
 
 	/**
 	 * Returns the meta object for class '{@link thingML.DynamicInstance <em>Dynamic Instance</em>}'.
@@ -784,6 +894,17 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDynamicInstance_ActiveFrame();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link thingML.DynamicInstance#getDynamicPorts <em>Dynamic Ports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Dynamic Ports</em>'.
+	 * @see thingML.DynamicInstance#getDynamicPorts()
+	 * @see #getDynamicInstance()
+	 * @generated
+	 */
+	EReference getDynamicInstance_DynamicPorts();
 
 	/**
 	 * Returns the meta object for class '{@link thingML.DynamicProperty <em>Dynamic Property</em>}'.
@@ -1157,6 +1278,81 @@ public interface ThingMLPackage extends EPackage {
 	EAttribute getBooleanValue_Value();
 
 	/**
+	 * Returns the meta object for class '{@link thingML.DynamicPort <em>Dynamic Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dynamic Port</em>'.
+	 * @see thingML.DynamicPort
+	 * @generated
+	 */
+	EClass getDynamicPort();
+
+	/**
+	 * Returns the meta object for the reference '{@link thingML.DynamicPort#getPort <em>Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Port</em>'.
+	 * @see thingML.DynamicPort#getPort()
+	 * @see #getDynamicPort()
+	 * @generated
+	 */
+	EReference getDynamicPort_Port();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link thingML.DynamicPort#getReceivedMessages <em>Received Messages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Received Messages</em>'.
+	 * @see thingML.DynamicPort#getReceivedMessages()
+	 * @see #getDynamicPort()
+	 * @generated
+	 */
+	EReference getDynamicPort_ReceivedMessages();
+
+	/**
+	 * Returns the meta object for the reference list '{@link thingML.DynamicPort#getConnectedPorts <em>Connected Ports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Connected Ports</em>'.
+	 * @see thingML.DynamicPort#getConnectedPorts()
+	 * @see #getDynamicPort()
+	 * @generated
+	 */
+	EReference getDynamicPort_ConnectedPorts();
+
+	/**
+	 * Returns the meta object for class '{@link thingML.DynamicMessage <em>Dynamic Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dynamic Message</em>'.
+	 * @see thingML.DynamicMessage
+	 * @generated
+	 */
+	EClass getDynamicMessage();
+
+	/**
+	 * Returns the meta object for the reference '{@link thingML.DynamicMessage#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Message</em>'.
+	 * @see thingML.DynamicMessage#getMessage()
+	 * @see #getDynamicMessage()
+	 * @generated
+	 */
+	EReference getDynamicMessage_Message();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link thingML.DynamicMessage#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see thingML.DynamicMessage#getParameters()
+	 * @see #getDynamicMessage()
+	 * @generated
+	 */
+	EReference getDynamicMessage_Parameters();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1228,6 +1424,14 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DYNAMIC_INSTANCE__ACTIVE_FRAME = eINSTANCE.getDynamicInstance_ActiveFrame();
+
+		/**
+		 * The meta object literal for the '<em><b>Dynamic Ports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_INSTANCE__DYNAMIC_PORTS = eINSTANCE.getDynamicInstance_DynamicPorts();
 
 		/**
 		 * The meta object literal for the '{@link thingML.impl.DynamicPropertyImpl <em>Dynamic Property</em>}' class.
@@ -1536,6 +1740,66 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOOLEAN_VALUE__VALUE = eINSTANCE.getBooleanValue_Value();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.DynamicPortImpl <em>Dynamic Port</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.DynamicPortImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getDynamicPort()
+		 * @generated
+		 */
+		EClass DYNAMIC_PORT = eINSTANCE.getDynamicPort();
+
+		/**
+		 * The meta object literal for the '<em><b>Port</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_PORT__PORT = eINSTANCE.getDynamicPort_Port();
+
+		/**
+		 * The meta object literal for the '<em><b>Received Messages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_PORT__RECEIVED_MESSAGES = eINSTANCE.getDynamicPort_ReceivedMessages();
+
+		/**
+		 * The meta object literal for the '<em><b>Connected Ports</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_PORT__CONNECTED_PORTS = eINSTANCE.getDynamicPort_ConnectedPorts();
+
+		/**
+		 * The meta object literal for the '{@link thingML.impl.DynamicMessageImpl <em>Dynamic Message</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thingML.impl.DynamicMessageImpl
+		 * @see thingML.impl.ThingMLPackageImpl#getDynamicMessage()
+		 * @generated
+		 */
+		EClass DYNAMIC_MESSAGE = eINSTANCE.getDynamicMessage();
+
+		/**
+		 * The meta object literal for the '<em><b>Message</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_MESSAGE__MESSAGE = eINSTANCE.getDynamicMessage_Message();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_MESSAGE__PARAMETERS = eINSTANCE.getDynamicMessage_Parameters();
 
 	}
 

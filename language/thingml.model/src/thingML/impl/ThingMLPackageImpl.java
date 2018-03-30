@@ -16,6 +16,8 @@ import thingML.BooleanValue;
 import thingML.Context;
 import thingML.DynamicCompositeState;
 import thingML.DynamicInstance;
+import thingML.DynamicMessage;
+import thingML.DynamicPort;
 import thingML.DynamicProperty;
 import thingML.DynamicVariable;
 import thingML.Frame;
@@ -140,6 +142,20 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	private EClass booleanValueEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dynamicPortEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dynamicMessageEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -255,6 +271,15 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 */
 	public EReference getDynamicInstance_ActiveFrame() {
 		return (EReference)dynamicInstanceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicInstance_DynamicPorts() {
+		return (EReference)dynamicInstanceEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -577,6 +602,69 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDynamicPort() {
+		return dynamicPortEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicPort_Port() {
+		return (EReference)dynamicPortEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicPort_ReceivedMessages() {
+		return (EReference)dynamicPortEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicPort_ConnectedPorts() {
+		return (EReference)dynamicPortEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDynamicMessage() {
+		return dynamicMessageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicMessage_Message() {
+		return (EReference)dynamicMessageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDynamicMessage_Parameters() {
+		return (EReference)dynamicMessageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ThingMLFactory getThingMLFactory() {
 		return (ThingMLFactory)getEFactoryInstance();
 	}
@@ -606,6 +694,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__EXECUTION_FRAME);
 		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__INSTANCE);
 		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__ACTIVE_FRAME);
+		createEReference(dynamicInstanceEClass, DYNAMIC_INSTANCE__DYNAMIC_PORTS);
 
 		dynamicPropertyEClass = createEClass(DYNAMIC_PROPERTY);
 		createEReference(dynamicPropertyEClass, DYNAMIC_PROPERTY__PROPERTY);
@@ -655,6 +744,15 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		booleanValueEClass = createEClass(BOOLEAN_VALUE);
 		createEAttribute(booleanValueEClass, BOOLEAN_VALUE__VALUE);
+
+		dynamicPortEClass = createEClass(DYNAMIC_PORT);
+		createEReference(dynamicPortEClass, DYNAMIC_PORT__PORT);
+		createEReference(dynamicPortEClass, DYNAMIC_PORT__RECEIVED_MESSAGES);
+		createEReference(dynamicPortEClass, DYNAMIC_PORT__CONNECTED_PORTS);
+
+		dynamicMessageEClass = createEClass(DYNAMIC_MESSAGE);
+		createEReference(dynamicMessageEClass, DYNAMIC_MESSAGE__MESSAGE);
+		createEReference(dynamicMessageEClass, DYNAMIC_MESSAGE__PARAMETERS);
 	}
 
 	/**
@@ -703,6 +801,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getDynamicInstance_ExecutionFrame(), this.getFrame(), null, "executionFrame", null, 1, 1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDynamicInstance_Instance(), theThingMLPackage_1.getInstance(), null, "instance", null, 1, 1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDynamicInstance_ActiveFrame(), this.getFrame(), null, "activeFrame", null, 1, 1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicInstance_DynamicPorts(), this.getDynamicPort(), null, "dynamicPorts", null, 0, -1, DynamicInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dynamicPropertyEClass, DynamicProperty.class, "DynamicProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDynamicProperty_Property(), theThingMLPackage_1.getProperty(), null, "property", null, 1, 1, DynamicProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -752,6 +851,15 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		initEClass(booleanValueEClass, BooleanValue.class, "BooleanValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanValue_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, BooleanValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dynamicPortEClass, DynamicPort.class, "DynamicPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDynamicPort_Port(), theThingMLPackage_1.getPort(), null, "port", null, 1, 1, DynamicPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicPort_ReceivedMessages(), this.getDynamicMessage(), null, "receivedMessages", null, 0, -1, DynamicPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicPort_ConnectedPorts(), this.getDynamicPort(), null, "connectedPorts", null, 0, -1, DynamicPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dynamicMessageEClass, DynamicMessage.class, "DynamicMessage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDynamicMessage_Message(), theThingMLPackage_1.getMessage(), null, "message", null, 1, 1, DynamicMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicMessage_Parameters(), this.getValue(), null, "parameters", null, 0, -1, DynamicMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -43,6 +43,9 @@ class AValue {
 	def public String _str() {
 		throw new Exception("Method '_str' is not defined for class " + _self.class.simpleName)
 	}
+
+	def public Value deepCopy() {
+	}
 }
 
 @Aspect(className=ProxyValue)
@@ -106,6 +109,13 @@ class AStringValue extends AValue {
 	@OverrideAspectMethod
 	def public String _str() {
 		return "\"" + _self.value + "\""
+	}
+
+	@OverrideAspectMethod
+	def public Value deepCopy() {
+		val newValue = ThingMLFactory.eINSTANCE.createStringValue()
+		newValue.value = _self.value
+		return newValue
 	}
 }
 
@@ -193,5 +203,12 @@ class AIntegerValue extends AValue {
 	@OverrideAspectMethod
 	def public String _str() {
 		return _self.value.toString()
+	}
+
+	@OverrideAspectMethod
+	def public Value deepCopy() {
+		val newValue = ThingMLFactory.eINSTANCE.createIntegerValue()
+		newValue.value = _self.value
+		return newValue
 	}
 }
