@@ -61,7 +61,7 @@ class ADynamicInstance {
 		if (contextVariablesString.length >= 2) {
 			contextVariablesString = contextVariablesString.substring(0, contextVariablesString.length - 2)
 		}
-		println("Searching '" + variable.name + "' in context [" + contextVariablesString + "]")
+		println("   Searching '" + variable.name + "' in context [" + contextVariablesString + "]")
 		val dynamicVariableCandidates = context.dynamicVariables.filter[dv|dv.variable == variable].toList
 		if (dynamicVariableCandidates.length == 0) {
 			return null
@@ -86,7 +86,7 @@ class ADynamicInstance {
 	}
 
 	def public void enterExecutionFrame(EList<Parameter> parameters, EList<Value> parameterValues) {
-		println("Entering new execution frame")
+		println("   Entering new execution frame")
 		_self.activeFrame.childFrame = ThingMLFactory.eINSTANCE.createFrame()
 		_self.activeFrame = _self.activeFrame.childFrame
 		_self.activeFrame.rootContext = ThingMLFactory.eINSTANCE.createContext()
@@ -97,25 +97,25 @@ class ADynamicInstance {
 	}
 
 	def public void leaveExecutionFrame() {
-		println("Leaving last execution frame")
+		println("   Leaving last execution frame")
 		_self.activeFrame = _self.activeFrame.parentFrame
 		_self.activeFrame.childFrame = null
 	}
 
 	def public void stackExecutionContext() {
-		println("Stacking new execution context")
+		println("   Stacking new execution context")
 		_self.activeFrame.topContext.childContext = ThingMLFactory.eINSTANCE.createContext()
 		_self.activeFrame.topContext = _self.activeFrame.topContext.childContext
 	}
 
 	def public void unstackExecutionContext() {
-		println("Unstacking last execution context")
+		println("   Unstacking last execution context")
 		_self.activeFrame.topContext = _self.activeFrame.topContext.parentContext
 		_self.activeFrame.topContext.childContext = null
 	}
 
 	def public void addVariable(Variable variable, Value value) {
-		println("Adding variable '" + variable.name + "' with value '" + value.print() +
+		println("   Adding variable '" + variable.name + "' with value '" + value.print() +
 			"' to the active execution context")
 		val dynamicVariable = ThingMLFactory.eINSTANCE.createDynamicVariable()
 		dynamicVariable.variable = variable

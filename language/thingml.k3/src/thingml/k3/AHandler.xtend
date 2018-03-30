@@ -43,9 +43,9 @@ class AHandler {
 
 	def public void _consumeEvent(DynamicInstance dynamicInstance) {
 		if (_self.event !== null) {
-			println("Event '" + _self.event.name + "' is responsible of triggering this transition")
+			println("   Event '" + _self.event.name + "' is responsible of triggering this transition")
 			if (_self.event instanceof ReceiveMessage) {
-				println("This is a message!")
+				println("   This is a message!")
 				val messageEvent = _self.event as ReceiveMessage
 				val dynamicPort = dynamicInstance.getDynamicPort(messageEvent.port)
 				val dynamicMessage = dynamicPort.receivedMessages.findFirst[dm|dm.message == messageEvent.message]
@@ -59,13 +59,13 @@ class AHandler {
 				throw new Exception("What can it be?")
 			}
 		} else {
-			println("Spontaneous transition")
+			println("   Spontaneous transition")
 		}
 	}
 
 	@Step
 	def public State fire(State state, DynamicInstance dynamicInstance) {
-		println("Firing Internal transition '" + _self.name + "'")
+		println("   Firing Internal transition '" + _self.name + "'")
 		_self._consumeEvent(dynamicInstance)
 		_self.action.execute(dynamicInstance)
 		dynamicInstance.clearContext()
@@ -78,7 +78,7 @@ class ATransition extends AHandler {
 	@OverrideAspectMethod
 	@Step
 	def public State fire(State state, DynamicInstance dynamicInstance) {
-		println("Firing Transition '" + _self.name + "' (-> '" + _self.target.name + "')")
+		println("   Firing Transition '" + _self.name + "' (-> '" + _self.target.name + "')")
 		_self._consumeEvent(dynamicInstance)
 		state.onExit(dynamicInstance)
 		if (_self.action !== null) {

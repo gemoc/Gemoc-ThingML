@@ -169,7 +169,7 @@ class AInstance {
 			if (dynamicProperty.value instanceof ArrayProxyValue) {
 				val array_proxy = (dynamicProperty.value as ArrayProxyValue)
 
-				println("Entering ArrayProxyValue of property '" + dynamicProperty.property.name + "'")
+				println("   Entering ArrayProxyValue of property '" + dynamicProperty.property.name + "'")
 				proxy_counter++
 
 				val cardinality = array_proxy.expression.value(_self.dynamicInstance, false)
@@ -177,7 +177,7 @@ class AInstance {
 				var continue = !(cardinality instanceof ProxyValue)
 
 				if (continue) {
-					println("Cardinality is not a Proxy anymore!")
+					println("   Cardinality is not a Proxy anymore!")
 
 					for (ArrayProxyEntry array_entry : array_proxy.arrayProxyEntries) {
 						val index = array_entry.indexExpression.value(_self.dynamicInstance, false)
@@ -186,7 +186,7 @@ class AInstance {
 				}
 
 				if (continue) {
-					println("All indexes have been resolved!")
+					println("   All indexes have been resolved!")
 					proxy_resolved++
 
 					if (cardinality instanceof IntegerValue) {
@@ -200,7 +200,7 @@ class AInstance {
 							if (index instanceof IntegerValue) {
 								new_value.values.set(index.value as int, array_entry.value)
 								if (array_entry.value instanceof ProxyValue) {
-									println("Discovering a new ProxyValue!")
+									println("   Discovering a new ProxyValue!")
 									proxy_counter++
 								}
 							} else {
@@ -214,16 +214,16 @@ class AInstance {
 					}
 				}
 			} else if (dynamicProperty.value instanceof ProxyValue) {
-				println("Entering ProxyValue of property '" + dynamicProperty.property.name + "'")
+				println("   Entering ProxyValue of property '" + dynamicProperty.property.name + "'")
 				proxy_counter++
 				// TODO
 				throw new Exception("This is to be done")
 			} else if (dynamicProperty.value instanceof ArrayValue) {
-				println("Analysing ArrayValue of property '" + dynamicProperty.property.name + "'")
+				println("   Analysing ArrayValue of property '" + dynamicProperty.property.name + "'")
 				var i = 0
 				for (Value value : (dynamicProperty.value as ArrayValue).values) {
 					if (value instanceof ProxyValue) {
-						println("Entering ProxyValue of property '" + dynamicProperty.property.name + "[" + i + "]'")
+						println("   Entering ProxyValue of property '" + dynamicProperty.property.name + "[" + i + "]'")
 						proxy_counter++
 						// TODO
 						throw new Exception("This is to be done")
@@ -233,9 +233,9 @@ class AInstance {
 			}
 		}
 
-		println("Counters:")
-		println(" - proxies:  " + proxy_counter)
-		println(" - resolved: " + proxy_resolved)
+		println("   Counters:")
+		println("    - proxies:  " + proxy_counter)
+		println("    - resolved: " + proxy_resolved)
 
 		if (proxy_counter > 0) {
 			if (proxy_resolved == 0) {

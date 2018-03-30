@@ -34,7 +34,7 @@ class AAction {
 class AFunctionCallStatement extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		println("Calling function '" + _self.function.name + "'")
+		println("   Calling function '" + _self.function.name + "'")
 		val parameterValues = new BasicEList<Value>()
 		_self.parameters.forEach[p|parameterValues.add(p.value(dynamicInstance, false))]
 		dynamicInstance.enterExecutionFrame(_self.function.parameters, parameterValues)
@@ -76,7 +76,7 @@ class AConditionalAction extends AAction {
 class APrintAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		println("This is a print action")
+		println("   This is a print action")
 		print(_self.msg.get(0).value(dynamicInstance, false).print())
 	}
 }
@@ -124,7 +124,7 @@ class ASendAction extends AAction {
 			paramsString = paramsString.substring(0, paramsString.length - 2)
 		}
 		println(
-			"Sending message '" + _self.message.name + "' with parameters [" + paramsString + "] through port '" +
+			"   Sending message '" + _self.message.name + "' with parameters [" + paramsString + "] through port '" +
 				_self.port.name + "'")
 		for (DynamicPort recipient : dynamicInstance.getDynamicPort(_self.port).connectedPorts) {
 			val dynamicMessage = ThingMLFactory.eINSTANCE.createDynamicMessage()
@@ -134,7 +134,7 @@ class ASendAction extends AAction {
 			}
 			if (recipient.port.receives.contains(_self.message)) {
 				println(
-					"Message sent to port '" + recipient.port.name + "' of '" +
+					"   Message sent to port '" + recipient.port.name + "' of '" +
 						(recipient.eContainer as DynamicInstance).instance.name + "'")
 				recipient.receivedMessages.add(dynamicMessage)
 			}
