@@ -40,14 +40,14 @@ class AConfiguration {
 		// first run
 		for (Instance instance : _self.instances) {
 			instance.enterInitialState()
-			running = running || instance.run()
+			running = instance.run() || running
 		}
 
 		// other runs
 		while (running) {
 			running = false
 			for (Instance instance : _self.instances) {
-				running = running || instance.run()
+				running = instance.run() || running
 			}
 		}
 
