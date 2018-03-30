@@ -51,6 +51,8 @@ class AState {
 			compositeState = ancestorToNewState.remove(0)
 		}
 		dynamicInstance.getDynamicCompositeState(compositeState).currentState = newState
+		// TODO remove the events from ports that cannot be used in this state
+		println("/!\\ WARNING /!\\ BAD EVENTS ARE KEPT WHEN SWITCHING STATE !!")
 	}
 
 	@Step
@@ -67,6 +69,12 @@ class AState {
 			return true
 		}
 		println("It didn't move...")
+		return false
+	}
+
+	def public boolean runATransition(DynamicInstance dynamicInstance) {
+		// TODO implement this
+		println("/!\\ WARNING /!\\ NO TRANSITION CAN BE PASSED !!")
 		return false
 	}
 
@@ -96,5 +104,12 @@ class ACompositeState extends AState {
 				runSpontaneousTransitions(dynamicInstance)
 		}
 		return hasMoved
+	}
+
+	@OverrideAspectMethod
+	def public boolean runATransition(DynamicInstance dynamicInstance) {
+		// TODO implement this
+		println("/!\\ WARNING /!\\ NO TRANSITION CAN BE PASSED !!")
+		return false
 	}
 }

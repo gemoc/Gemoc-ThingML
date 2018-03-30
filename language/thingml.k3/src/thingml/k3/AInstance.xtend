@@ -271,10 +271,15 @@ class AInstance {
 	def public boolean run() {
 		val behaviour = _self.getBehaviour()
 		var hasMoved = false
-		var hasSpontaneouslyMoved = true
-		while (hasSpontaneouslyMoved) {
-			hasSpontaneouslyMoved = behaviour.runSpontaneousTransitions(_self.dynamicInstance)
-			hasMoved = hasMoved || hasSpontaneouslyMoved
+		var reRun = true
+		while (reRun) {
+			var hasSpontaneouslyMoved = true
+			while (hasSpontaneouslyMoved) {
+				hasSpontaneouslyMoved = behaviour.runSpontaneousTransitions(_self.dynamicInstance)
+				hasMoved = hasMoved || hasSpontaneouslyMoved
+			}
+			reRun = behaviour.runATransition(_self.dynamicInstance)
+			hasMoved = hasMoved || reRun
 		}
 		return hasMoved
 	}
