@@ -8,6 +8,8 @@ import thingML.StringValue
 import thingML.ThingMLFactory
 import thingML.Value
 
+import static extension thingml.k3.AExpression._str
+
 @Aspect(className=Value)
 class AValue {
 	def public String print() {
@@ -38,8 +40,8 @@ class AValue {
 		throw new Exception("Operation 'greaterOrEqual' is not defined for class " + _self.class.simpleName)
 	}
 
-	def public String toString() {
-		throw new Exception("Method 'toString' is not defined for class " + _self.class.simpleName)
+	def public String _str() {
+		throw new Exception("Method '_str' is not defined for class " + _self.class.simpleName)
 	}
 }
 
@@ -71,8 +73,8 @@ class AProxyValue extends AValue {
 	}
 
 	@OverrideAspectMethod
-	def public String toString() {
-		return "<" + _self.expression.toString() + ">"
+	def public String _str() {
+		return "<" + _self.expression._str() + ">"
 	}
 }
 
@@ -102,7 +104,7 @@ class AStringValue extends AValue {
 	}
 
 	@OverrideAspectMethod
-	def public String toString() {
+	def public String _str() {
 		return "\"" + _self.value + "\""
 	}
 }
@@ -111,7 +113,7 @@ class AStringValue extends AValue {
 class AIntegerValue extends AValue {
 	@OverrideAspectMethod
 	def public String print() {
-		return _self.value.toString()
+		return _self._str()
 	}
 
 	@OverrideAspectMethod
@@ -189,7 +191,7 @@ class AIntegerValue extends AValue {
 	}
 
 	@OverrideAspectMethod
-	def public String toString() {
+	def public String _str() {
 		return _self.value.toString()
 	}
 }

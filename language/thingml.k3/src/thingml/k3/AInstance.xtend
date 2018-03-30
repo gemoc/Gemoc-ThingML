@@ -69,7 +69,7 @@ class AInstance {
 			val index_exp = index_list.get(0)
 			if (entry.value instanceof ArrayProxyValue) {
 				val array_proxy = entry.value as ArrayProxyValue
-				val candidate_entries = array_proxy.arrayProxyEntries.filter[e|e.indexExpression == index_exp]
+				val candidate_entries = array_proxy.arrayProxyEntries.filter[e|e.indexExpression == index_exp].toList
 				if (candidate_entries.length == 1) {
 					candidate_entries.get(0).value = init.value(_self.dynamicInstance, true)
 				} else if (candidate_entries.length == 0) {

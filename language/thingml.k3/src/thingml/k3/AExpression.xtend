@@ -29,7 +29,7 @@ class AExpression {
 		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
 	}
 
-	def public String toString() {
+	def public String _str() {
 		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
 	}
 }
@@ -46,8 +46,9 @@ class APlusExpression extends AExpression {
 		return value
 	}
 
-	def public String toString() {
-		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " + " + _self.rhs._str()
 	}
 }
 
@@ -63,8 +64,9 @@ class AMinusExpression extends AExpression {
 		return value
 	}
 
-	def public String toString() {
-		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " + " + _self.rhs._str()
 	}
 }
 
@@ -80,8 +82,9 @@ class ATimesExpression extends AExpression {
 		return value
 	}
 
-	def public String toString() {
-		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " + " + _self.rhs._str()
 	}
 }
 
@@ -97,8 +100,9 @@ class ALowerExpression extends AExpression {
 		return value
 	}
 
-	def public String toString() {
-		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " + " + _self.rhs._str()
 	}
 }
 
@@ -114,8 +118,9 @@ class AGreaterOrEqualExpression extends AExpression {
 		return value
 	}
 
-	def public String toString() {
-		return _self.lhs.toString() + " + " + _self.rhs.toString()
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " + " + _self.rhs._str()
 	}
 }
 
@@ -128,7 +133,8 @@ class AIntegerLiteral extends AExpression {
 		return integerValue
 	}
 
-	def public String toString() {
+	@OverrideAspectMethod
+	def public String _str() {
 		return _self.intValue.toString()
 	}
 }
@@ -142,7 +148,8 @@ class AStringLiteral extends AExpression {
 		return stringValue
 	}
 
-	def public String toString() {
+	@OverrideAspectMethod
+	def public String _str() {
 		return _self.stringValue
 	}
 }
@@ -158,9 +165,9 @@ class AArrayIndex extends AExpression {
 			proxy.expression = _self
 			return proxy
 		} else if (!(arrayValue instanceof ArrayValue)) {
-			throw new Exception("Expression '" + _self.array.toString() + "' has to correspond to an Array")
+			throw new Exception("Expression '" + _self.array._str() + "' has to correspond to an Array")
 		} else if (!(indexValue instanceof IntegerValue)) {
-			throw new Exception("Expression '" + _self.index.toString() + "' has to correspond to an Integer")
+			throw new Exception("Expression '" + _self.index._str() + "' has to correspond to an Integer")
 		} else {
 			val array = arrayValue as ArrayValue
 			val index = (indexValue as IntegerValue).value as int
@@ -168,8 +175,9 @@ class AArrayIndex extends AExpression {
 		}
 	}
 
-	def public String toString() {
-		return _self.array.toString() + "[" + _self.index.toString() + "]"
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.array._str() + "[" + _self.index._str() + "]"
 	}
 }
 
@@ -190,13 +198,14 @@ class APropertyReference extends AExpression {
 				if (dynamicVariable !== null) {
 					return dynamicVariable.value
 				} else {
-					throw new Exception("Variable '" + _self.toString() + "' is undefined")
+					throw new Exception("Variable '" + _self._str() + "' is undefined")
 				}
 			}
 		}
 	}
 
-	def public String toString() {
+	@OverrideAspectMethod
+	def public String _str() {
 		return _self.property.name
 	}
 }

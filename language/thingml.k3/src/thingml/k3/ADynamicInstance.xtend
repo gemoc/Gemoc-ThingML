@@ -28,7 +28,7 @@ class ADynamicInstance {
 	}
 
 	def public DynamicProperty getDynamicProperty(Property property) {
-		val candidate_entries = _self.dynamicProperties.filter[e|e.property == property]
+		val candidate_entries = _self.dynamicProperties.filter[e|e.property == property].toList
 		if (candidate_entries.length == 1) {
 			return candidate_entries.get(0)
 		} else {
@@ -37,7 +37,7 @@ class ADynamicInstance {
 	}
 
 	def public DynamicCompositeState getDynamicCompositeState(CompositeState compositeState) {
-		val candidate_entries = _self.dynamicCompositeStates.filter[e|e.compositeState == compositeState]
+		val candidate_entries = _self.dynamicCompositeStates.filter[e|e.compositeState == compositeState].toList
 		if (candidate_entries.length == 1) {
 			return candidate_entries.get(0)
 		} else {
@@ -51,7 +51,7 @@ class ADynamicInstance {
 			contextVariablesString = contextVariablesString.substring(0, contextVariablesString.length - 2)
 		}
 		println("Searching '" + variable.name + "' in context [" + contextVariablesString + "]")
-		val dynamicVariableCandidates = context.dynamicVariables.filter[dv|dv.variable == variable]
+		val dynamicVariableCandidates = context.dynamicVariables.filter[dv|dv.variable == variable].toList
 		if (dynamicVariableCandidates.length == 0) {
 			return null
 		} else if (dynamicVariableCandidates.length == 1) {
@@ -104,7 +104,8 @@ class ADynamicInstance {
 	}
 
 	def public void addVariable(Variable variable, Value value) {
-		println("Adding variable '" + variable.name + "' with value '" + value.print() + "' to the active execution context")
+		println("Adding variable '" + variable.name + "' with value '" + value.print() +
+			"' to the active execution context")
 		val dynamicVariable = ThingMLFactory.eINSTANCE.createDynamicVariable()
 		dynamicVariable.variable = variable
 		dynamicVariable.value = value

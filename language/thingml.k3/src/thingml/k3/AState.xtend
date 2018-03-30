@@ -59,7 +59,7 @@ class AState {
 		val spontaneousOutgoings = _self.outgoing.filter[t|t.event === null]
 		val spontaneousInternals = _self.internal.filter[i|i.event === null]
 		val spontaneousTransitions = spontaneousOutgoings + spontaneousInternals
-		val validSpontaneousTransitions = spontaneousTransitions.filter[h|h.isValid(dynamicInstance)].toList()
+		val validSpontaneousTransitions = spontaneousTransitions.filter[h|h.isValid(dynamicInstance)].toList
 		if (!validSpontaneousTransitions.empty) {
 			val transition = validSpontaneousTransitions.get(0)
 			val newState = transition.fire(_self, dynamicInstance)
