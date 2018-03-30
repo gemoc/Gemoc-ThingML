@@ -45,6 +45,7 @@ class AValue {
 	}
 
 	def public Value deepCopy() {
+		throw new Exception("Method 'deepCopy' is not defined for class " + _self.class.simpleName)
 	}
 }
 
