@@ -66,7 +66,7 @@ class AMinusExpression extends AExpression {
 
 	@OverrideAspectMethod
 	def public String _str() {
-		return _self.lhs._str() + " + " + _self.rhs._str()
+		return _self.lhs._str() + " - " + _self.rhs._str()
 	}
 }
 
@@ -84,7 +84,7 @@ class ATimesExpression extends AExpression {
 
 	@OverrideAspectMethod
 	def public String _str() {
-		return _self.lhs._str() + " + " + _self.rhs._str()
+		return _self.lhs._str() + " x " + _self.rhs._str()
 	}
 }
 
@@ -102,7 +102,7 @@ class ALowerExpression extends AExpression {
 
 	@OverrideAspectMethod
 	def public String _str() {
-		return _self.lhs._str() + " + " + _self.rhs._str()
+		return _self.lhs._str() + " < " + _self.rhs._str()
 	}
 }
 
@@ -120,7 +120,7 @@ class AGreaterOrEqualExpression extends AExpression {
 
 	@OverrideAspectMethod
 	def public String _str() {
-		return _self.lhs._str() + " + " + _self.rhs._str()
+		return _self.lhs._str() + " >= " + _self.rhs._str()
 	}
 }
 
