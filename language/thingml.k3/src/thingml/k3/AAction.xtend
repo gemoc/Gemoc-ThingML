@@ -105,12 +105,12 @@ class ASendAction extends AAction {
 		println(
 			"Sending message '" + _self.message.name + "' with parameters [" + paramsString + "] through port '" +
 				_self.port.name + "'")
-		val dynamicMessage = ThingMLFactory.eINSTANCE.createDynamicMessage()
-		dynamicMessage.message = _self.message
-		for (Value value : paramValues) {
-			dynamicMessage.parameters.add(value.deepCopy())
-		}
 		for (DynamicPort recipient : dynamicInstance.getDynamicPort(_self.port).connectedPorts) {
+			val dynamicMessage = ThingMLFactory.eINSTANCE.createDynamicMessage()
+			dynamicMessage.message = _self.message
+			for (Value value : paramValues) {
+				dynamicMessage.parameters.add(value.deepCopy())
+			}
 			if (recipient.port.receives.contains(_self.message)) {
 				println(
 					"Message sent to port '" + recipient.port.name + "' of '" +
