@@ -30,6 +30,7 @@ import static extension thingml.k3.AState.*
 @Aspect(className=Instance)
 class AInstance {
 	public DynamicInstance dynamicInstance
+	public boolean running
 
 	def public void initProperties(Thing thing) {
 		for (Thing fragment : thing.includes) {
@@ -146,6 +147,7 @@ class AInstance {
 	}
 
 	def public void init() {
+		_self.running = true
 		_self.dynamicInstance = ThingMLFactory.eINSTANCE.createDynamicInstance()
 		_self.dynamicInstance.init(_self)
 		_self.initProperties(_self.type)
@@ -272,14 +274,16 @@ class AInstance {
 		val behaviour = _self.getBehaviour()
 		var hasMoved = false
 		var reRun = true
-		while (reRun) {
+		while (reRun && _self.running) {
 			var hasSpontaneouslyMoved = true
-			while (hasSpontaneouslyMoved) {
+			while (hasSpontaneouslyMoved && _self.running) {
 				hasSpontaneouslyMoved = behaviour.runSpontaneousTransitions(_self.dynamicInstance)
 				hasMoved = hasMoved || hasSpontaneouslyMoved
 			}
-			reRun = behaviour.runATransition(_self.dynamicInstance)
-			hasMoved = hasMoved || reRun
+			if (_self.running) {
+				reRun = behaviour.runATransition(_self.dynamicInstance)
+				hasMoved = hasMoved || reRun
+			}
 		}
 		return hasMoved
 	}

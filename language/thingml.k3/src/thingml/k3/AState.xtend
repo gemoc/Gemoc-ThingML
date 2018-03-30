@@ -6,12 +6,14 @@ import fr.inria.diverse.k3.al.annotationprocessor.Step
 import java.util.LinkedList
 import java.util.List
 import org.thingml.xtext.thingML.CompositeState
+import org.thingml.xtext.thingML.FinalState
 import org.thingml.xtext.thingML.State
 import thingML.DynamicInstance
 
 import static extension thingml.k3.AAction.execute
 import static extension thingml.k3.ADynamicInstance.getDynamicCompositeState
 import static extension thingml.k3.AHandler.*
+import static extension thingml.k3.AInstance.running
 
 @Aspect(className=State)
 class AState {
@@ -67,6 +69,10 @@ class AState {
 			val newState = transition.fire(_self, dynamicInstance)
 			if (_self !== newState) {
 				_self._switchState(dynamicInstance, newState)
+				if (newState instanceof FinalState) {
+					println("'" + dynamicInstance.instance.name + "' entered final state")
+					dynamicInstance.instance.running = false
+				}
 			} else {
 				println("Staying in state '" + _self.name + "'")
 			}
@@ -87,6 +93,10 @@ class AState {
 			val newState = transition.fire(_self, dynamicInstance)
 			if (_self !== newState) {
 				_self._switchState(dynamicInstance, newState)
+				if (newState instanceof FinalState) {
+					println("'" + dynamicInstance.instance.name + "' entered final state")
+					dynamicInstance.instance.running = false
+				}
 			} else {
 				println("Staying in state '" + _self.name + "'")
 			}
