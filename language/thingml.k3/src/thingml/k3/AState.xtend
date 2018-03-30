@@ -77,8 +77,22 @@ class AState {
 	}
 
 	def public boolean runATransition(DynamicInstance dynamicInstance) {
-		// TODO implement this
-		println("/!\\ WARNING /!\\ NO TRANSITION CAN BE PASSED !!")
+		println(dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
+		val nonSpontaneousOutgoings = _self.outgoing.filter[t|t.event !== null]
+		val nonSpontaneousInternals = _self.internal.filter[i|i.event !== null]
+		val nonSpontaneousTransitions = nonSpontaneousOutgoings + nonSpontaneousInternals
+		val validNonSpontaneousTransitions = nonSpontaneousTransitions.filter[h|h.isValid(dynamicInstance)].toList
+		if (!validNonSpontaneousTransitions.empty) {
+			val transition = validNonSpontaneousTransitions.get(0)
+			val newState = transition.fire(_self, dynamicInstance)
+			if (_self !== newState) {
+				_self._switchState(dynamicInstance, newState)
+			} else {
+				println("Staying in state '" + _self.name + "'")
+			}
+			return true
+		}
+		println("It didn't move...")
 		return false
 	}
 

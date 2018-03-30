@@ -5,6 +5,7 @@ import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import org.eclipse.emf.common.util.BasicEList
 import org.thingml.xtext.thingML.Action
 import org.thingml.xtext.thingML.ActionBlock
+import org.thingml.xtext.thingML.ConditionalAction
 import org.thingml.xtext.thingML.FunctionCallStatement
 import org.thingml.xtext.thingML.Increment
 import org.thingml.xtext.thingML.LocalVariable
@@ -12,6 +13,7 @@ import org.thingml.xtext.thingML.PrintAction
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.SendAction
 import org.thingml.xtext.thingML.VariableAssignment
+import thingML.BooleanValue
 import thingML.DynamicInstance
 import thingML.DynamicPort
 import thingML.ThingMLFactory
@@ -48,6 +50,25 @@ class AActionBlock extends AAction {
 		dynamicInstance.stackExecutionContext()
 		_self.actions.forEach[a|a.execute(dynamicInstance)]
 		dynamicInstance.unstackExecutionContext()
+	}
+}
+
+@Aspect(className=ConditionalAction)
+class AConditionalAction extends AAction {
+	@OverrideAspectMethod
+	def public void execute(DynamicInstance dynamicInstance) {
+		val condition = _self.condition.value(dynamicInstance, false)
+		if (condition instanceof BooleanValue) {
+			dynamicInstance.stackExecutionContext()
+			if (condition.value) {
+				_self.action.execute(dynamicInstance)
+			} else {
+				_self.elseAction.execute(dynamicInstance)
+			}
+			dynamicInstance.unstackExecutionContext()
+		} else {
+			throw new Exception("Condition has to be a BooleanValue")
+		}
 	}
 }
 

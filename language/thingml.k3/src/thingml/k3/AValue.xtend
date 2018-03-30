@@ -2,6 +2,7 @@ package thingml.k3
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
+import thingML.BooleanValue
 import thingML.IntegerValue
 import thingML.ProxyValue
 import thingML.StringValue
@@ -36,8 +37,20 @@ class AValue {
 		throw new Exception("Operation 'lower' is not defined for class " + _self.class.simpleName)
 	}
 
+	def public Value greater(Value other) {
+		throw new Exception("Operation 'greater' is not defined for class " + _self.class.simpleName)
+	}
+
 	def public Value greaterOrEqual(Value other) {
 		throw new Exception("Operation 'greaterOrEqual' is not defined for class " + _self.class.simpleName)
+	}
+
+	def public Value equal(Value other) {
+		throw new Exception("Operation 'equal' is not defined for class " + _self.class.simpleName)
+	}
+
+	def public Value and(Value other) {
+		throw new Exception("Operation 'and' is not defined for class " + _self.class.simpleName)
 	}
 
 	def public String _str() {
@@ -73,6 +86,21 @@ class AProxyValue extends AValue {
 
 	@OverrideAspectMethod
 	def public Value greaterOrEqual(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value greater(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value equal(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value and(Value other) {
 		return _self
 	}
 
@@ -189,6 +217,19 @@ class AIntegerValue extends AValue {
 	}
 
 	@OverrideAspectMethod
+	def public Value greater(Value other) {
+		if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
+			result.value = _self.value > other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'greater' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
 	def public Value greaterOrEqual(Value other) {
 		if (other instanceof IntegerValue) {
 			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
@@ -202,6 +243,19 @@ class AIntegerValue extends AValue {
 	}
 
 	@OverrideAspectMethod
+	def public Value equal(Value other) {
+		if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
+			result.value = _self.value == other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'equal' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
 	def public String _str() {
 		return _self.value.toString()
 	}
@@ -211,5 +265,21 @@ class AIntegerValue extends AValue {
 		val newValue = ThingMLFactory.eINSTANCE.createIntegerValue()
 		newValue.value = _self.value
 		return newValue
+	}
+}
+
+@Aspect(className=BooleanValue)
+class ABooleanValue extends AValue {
+	@OverrideAspectMethod
+	def public Value and(Value other) {
+		if (other instanceof BooleanValue) {
+			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
+			result.value = _self.value && other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'and' is not defined for class " + other.class.simpleName)
+		}
 	}
 }

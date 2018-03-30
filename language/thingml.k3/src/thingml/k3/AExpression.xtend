@@ -2,8 +2,13 @@ package thingml.k3
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
+import org.thingml.xtext.thingML.AndExpression
 import org.thingml.xtext.thingML.ArrayIndex
+import org.thingml.xtext.thingML.EqualsExpression
+import org.thingml.xtext.thingML.EventReference
 import org.thingml.xtext.thingML.Expression
+import org.thingml.xtext.thingML.ExpressionGroup
+import org.thingml.xtext.thingML.GreaterExpression
 import org.thingml.xtext.thingML.GreaterOrEqualExpression
 import org.thingml.xtext.thingML.IntegerLiteral
 import org.thingml.xtext.thingML.LowerExpression
@@ -31,6 +36,40 @@ class AExpression {
 
 	def public String _str() {
 		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
+	}
+}
+
+@Aspect(className=ExpressionGroup)
+class AExpressionGroup extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.term.value(dynamicInstance, createProxies)
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return "(" + _self.term._str() + ")"
+	}
+}
+
+@Aspect(className=AndExpression)
+class AAndExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).and(_self.rhs.value(dynamicInstance, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " + " + _self.rhs._str()
 	}
 }
 
@@ -106,6 +145,24 @@ class ALowerExpression extends AExpression {
 	}
 }
 
+@Aspect(className=GreaterExpression)
+class AGreaterExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).greater(
+			_self.rhs.value(dynamicInstance, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " > " + _self.rhs._str()
+	}
+}
+
 @Aspect(className=GreaterOrEqualExpression)
 class AGreaterOrEqualExpression extends AExpression {
 	@OverrideAspectMethod
@@ -121,6 +178,24 @@ class AGreaterOrEqualExpression extends AExpression {
 	@OverrideAspectMethod
 	def public String _str() {
 		return _self.lhs._str() + " >= " + _self.rhs._str()
+	}
+}
+
+@Aspect(className=EqualsExpression)
+class AEqualExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).equal(
+			_self.rhs.value(dynamicInstance, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " == " + _self.rhs._str()
 	}
 }
 
@@ -207,5 +282,18 @@ class APropertyReference extends AExpression {
 	@OverrideAspectMethod
 	def public String _str() {
 		return _self.property.name
+	}
+}
+
+@Aspect(className=EventReference)
+class AEventReference extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		return dynamicInstance.getDynamicVariable(_self.parameter).value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.receiveMsg.name + "." + _self.parameter.name
 	}
 }

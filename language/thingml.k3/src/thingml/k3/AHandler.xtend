@@ -11,7 +11,7 @@ import thingML.BooleanValue
 import thingML.DynamicInstance
 
 import static extension thingml.k3.AAction.execute
-import static extension thingml.k3.ADynamicInstance.getDynamicPort
+import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AExpression.value
 import static extension thingml.k3.AState.*
 
@@ -41,10 +41,34 @@ class AHandler {
 		return eventOK && guardOK
 	}
 
+	def public void _consumeEvent(DynamicInstance dynamicInstance) {
+		if (_self.event !== null) {
+			println("Event '" + _self.event.name + "' is responsible of triggering this transition")
+			if (_self.event instanceof ReceiveMessage) {
+				println("This is a message!")
+				val messageEvent = _self.event as ReceiveMessage
+				val dynamicPort = dynamicInstance.getDynamicPort(messageEvent.port)
+				val dynamicMessage = dynamicPort.receivedMessages.findFirst[dm|dm.message == messageEvent.message]
+				dynamicPort.receivedMessages.remove(dynamicMessage)
+				for (var i = 0; i < messageEvent.message.parameters.length; i++) {
+					val parameter = messageEvent.message.parameters.get(i)
+					val value = dynamicMessage.parameters.get(i)
+					dynamicInstance.addVariable(parameter, value)
+				}
+			} else {
+				throw new Exception("What can it be?")
+			}
+		} else {
+			println("Spontaneous transition")
+		}
+	}
+
 	@Step
 	def public State fire(State state, DynamicInstance dynamicInstance) {
 		println("Firing Internal transition '" + _self.name + "'")
+		_self._consumeEvent(dynamicInstance)
 		_self.action.execute(dynamicInstance)
+		dynamicInstance.clearContext()
 		return state
 	}
 }
@@ -55,6 +79,7 @@ class ATransition extends AHandler {
 	@Step
 	def public State fire(State state, DynamicInstance dynamicInstance) {
 		println("Firing Transition '" + _self.name + "' (-> '" + _self.target.name + "')")
+		_self._consumeEvent(dynamicInstance)
 		state.onExit(dynamicInstance)
 		if (_self.action !== null) {
 			_self.action.execute(dynamicInstance)

@@ -122,4 +122,8 @@ class ADynamicInstance {
 		dynamicVariable.value = value
 		_self.activeFrame.topContext.dynamicVariables.add(dynamicVariable)
 	}
+
+	def public void clearContext() {
+		_self.activeFrame.topContext.dynamicVariables.clear()
+	}
 }
