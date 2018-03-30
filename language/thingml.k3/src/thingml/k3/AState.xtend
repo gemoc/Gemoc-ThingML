@@ -108,8 +108,13 @@ class ACompositeState extends AState {
 
 	@OverrideAspectMethod
 	def public boolean runATransition(DynamicInstance dynamicInstance) {
-		// TODO implement this
-		println("/!\\ WARNING /!\\ NO TRANSITION CAN BE PASSED !!")
-		return false
+		println(dynamicInstance.instance.name + ": '" + _self.name +
+			"' is a CompositeState, trying to move child first")
+		var hasMoved = dynamicInstance.getDynamicCompositeState(_self).currentState.runATransition(dynamicInstance)
+		if (!hasMoved) {
+			println("Now trying with '" + _self.name + "'")
+			hasMoved = _self.super_runATransition(dynamicInstance)
+		}
+		return hasMoved
 	}
 }
