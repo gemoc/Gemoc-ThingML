@@ -65,7 +65,11 @@ class AState {
 		if (!validSpontaneousTransitions.empty) {
 			val transition = validSpontaneousTransitions.get(0)
 			val newState = transition.fire(_self, dynamicInstance)
-			_self._switchState(dynamicInstance, newState)
+			if (_self !== newState) {
+				_self._switchState(dynamicInstance, newState)
+			} else {
+				println("Staying in state '" + _self.name + "'")
+			}
 			return true
 		}
 		println("It didn't move...")
