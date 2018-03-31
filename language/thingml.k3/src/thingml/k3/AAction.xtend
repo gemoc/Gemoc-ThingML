@@ -12,6 +12,7 @@ import org.thingml.xtext.thingML.LocalVariable
 import org.thingml.xtext.thingML.LoopAction
 import org.thingml.xtext.thingML.PrintAction
 import org.thingml.xtext.thingML.Property
+import org.thingml.xtext.thingML.ReturnAction
 import org.thingml.xtext.thingML.SendAction
 import org.thingml.xtext.thingML.VariableAssignment
 import thingML.ArrayValue
@@ -44,6 +45,16 @@ class AFunctionCallStatement extends AAction {
 		dynamicInstance.enterExecutionFrame(_self.function.parameters, parameterValues)
 		_self.function.body.execute(dynamicInstance)
 		dynamicInstance.leaveExecutionFrame()
+	}
+}
+
+@Aspect(className=ReturnAction)
+class AReturnAction extends AAction {
+	@OverrideAspectMethod
+	def public void execute(DynamicInstance dynamicInstance) {
+		val value = _self.exp.value(dynamicInstance, false)
+		println("   Adding '" + value._str() + "' as a return value")
+		dynamicInstance.activeFrame.returnValue = value
 	}
 }
 
