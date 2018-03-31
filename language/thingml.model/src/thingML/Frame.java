@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link thingML.Frame#getParentFrame <em>Parent Frame</em>}</li>
  *   <li>{@link thingML.Frame#getRootContext <em>Root Context</em>}</li>
  *   <li>{@link thingML.Frame#getTopContext <em>Top Context</em>}</li>
+ *   <li>{@link thingML.Frame#getReturnValue <em>Return Value</em>}</li>
  * </ul>
  *
  * @see thingML.ThingMLPackage#getFrame()
@@ -131,5 +132,31 @@ public interface Frame extends EObject {
 	 * @generated
 	 */
 	void setTopContext(Context value);
+
+	/**
+	 * Returns the value of the '<em><b>Return Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Return Value</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Return Value</em>' reference.
+	 * @see #setReturnValue(Value)
+	 * @see thingML.ThingMLPackage#getFrame_ReturnValue()
+	 * @model
+	 * @generated
+	 */
+	Value getReturnValue();
+
+	/**
+	 * Sets the value of the '{@link thingML.Frame#getReturnValue <em>Return Value</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Return Value</em>' reference.
+	 * @see #getReturnValue()
+	 * @generated
+	 */
+	void setReturnValue(Value value);
 
 } // Frame

@@ -96,10 +96,12 @@ class ADynamicInstance {
 		}
 	}
 
-	def public void leaveExecutionFrame() {
+	def public Value leaveExecutionFrame() {
 		println("   Leaving last execution frame")
+		val returnValue = _self.activeFrame.returnValue
 		_self.activeFrame = _self.activeFrame.parentFrame
 		_self.activeFrame.childFrame = null
+		return returnValue
 	}
 
 	def public void stackExecutionContext() {

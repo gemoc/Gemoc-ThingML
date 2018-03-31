@@ -610,13 +610,22 @@ public interface ThingMLPackage extends EPackage {
 	int FRAME__TOP_CONTEXT = 3;
 
 	/**
+	 * The feature id for the '<em><b>Return Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__RETURN_VALUE = 4;
+
+	/**
 	 * The number of structural features of the '<em>Frame</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME_FEATURE_COUNT = 4;
+	int FRAME_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Frame</em>' class.
@@ -1208,6 +1217,17 @@ public interface ThingMLPackage extends EPackage {
 	EReference getFrame_TopContext();
 
 	/**
+	 * Returns the meta object for the reference '{@link thingML.Frame#getReturnValue <em>Return Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Return Value</em>'.
+	 * @see thingML.Frame#getReturnValue()
+	 * @see #getFrame()
+	 * @generated
+	 */
+	EReference getFrame_ReturnValue();
+
+	/**
 	 * Returns the meta object for class '{@link thingML.Context <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1690,6 +1710,14 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FRAME__TOP_CONTEXT = eINSTANCE.getFrame_TopContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Return Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FRAME__RETURN_VALUE = eINSTANCE.getFrame_ReturnValue();
 
 		/**
 		 * The meta object literal for the '{@link thingML.impl.ContextImpl <em>Context</em>}' class.

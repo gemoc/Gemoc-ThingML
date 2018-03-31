@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import thingML.Context;
 import thingML.Frame;
 import thingML.ThingMLPackage;
+import thingML.Value;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +30,7 @@ import thingML.ThingMLPackage;
  *   <li>{@link thingML.impl.FrameImpl#getParentFrame <em>Parent Frame</em>}</li>
  *   <li>{@link thingML.impl.FrameImpl#getRootContext <em>Root Context</em>}</li>
  *   <li>{@link thingML.impl.FrameImpl#getTopContext <em>Top Context</em>}</li>
+ *   <li>{@link thingML.impl.FrameImpl#getReturnValue <em>Return Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,6 +65,16 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	 * @ordered
 	 */
 	protected Context topContext;
+
+	/**
+	 * The cached value of the '{@link #getReturnValue() <em>Return Value</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReturnValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected Value returnValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -253,6 +265,44 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Value getReturnValue() {
+		if (returnValue != null && returnValue.eIsProxy()) {
+			InternalEObject oldReturnValue = (InternalEObject)returnValue;
+			returnValue = (Value)eResolveProxy(oldReturnValue);
+			if (returnValue != oldReturnValue) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.FRAME__RETURN_VALUE, oldReturnValue, returnValue));
+			}
+		}
+		return returnValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Value basicGetReturnValue() {
+		return returnValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReturnValue(Value newReturnValue) {
+		Value oldReturnValue = returnValue;
+		returnValue = newReturnValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.FRAME__RETURN_VALUE, oldReturnValue, returnValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -317,6 +367,9 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 			case ThingMLPackage.FRAME__TOP_CONTEXT:
 				if (resolve) return getTopContext();
 				return basicGetTopContext();
+			case ThingMLPackage.FRAME__RETURN_VALUE:
+				if (resolve) return getReturnValue();
+				return basicGetReturnValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -340,6 +393,9 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 				return;
 			case ThingMLPackage.FRAME__TOP_CONTEXT:
 				setTopContext((Context)newValue);
+				return;
+			case ThingMLPackage.FRAME__RETURN_VALUE:
+				setReturnValue((Value)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -365,6 +421,9 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 			case ThingMLPackage.FRAME__TOP_CONTEXT:
 				setTopContext((Context)null);
 				return;
+			case ThingMLPackage.FRAME__RETURN_VALUE:
+				setReturnValue((Value)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -385,6 +444,8 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 				return rootContext != null;
 			case ThingMLPackage.FRAME__TOP_CONTEXT:
 				return topContext != null;
+			case ThingMLPackage.FRAME__RETURN_VALUE:
+				return returnValue != null;
 		}
 		return super.eIsSet(featureID);
 	}
