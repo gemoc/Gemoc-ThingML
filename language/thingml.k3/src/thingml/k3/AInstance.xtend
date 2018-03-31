@@ -214,10 +214,14 @@ class AInstance {
 					}
 				}
 			} else if (dynamicProperty.value instanceof ProxyValue) {
-				println("   Entering ProxyValue of property '" + dynamicProperty.property.name + "'")
+				println("   Analysing ProxyValue of property '" + dynamicProperty.property.name + "'")
 				proxy_counter++
-				// TODO
-				throw new Exception("This is to be done")
+				val proxyValue = dynamicProperty.value as ProxyValue
+				dynamicProperty.value = proxyValue.expression.value(_self.dynamicInstance, false)
+				if (!(dynamicProperty instanceof ProxyValue)) {
+					println("   It has been resolved")
+					proxy_resolved++
+				}
 			} else if (dynamicProperty.value instanceof ArrayValue) {
 				println("   Analysing ArrayValue of property '" + dynamicProperty.property.name + "'")
 				var i = 0
