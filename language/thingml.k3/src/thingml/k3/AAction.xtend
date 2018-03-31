@@ -65,7 +65,7 @@ class AConditionalAction extends AAction {
 		if (condition instanceof BooleanValue) {
 			if (condition.value) {
 				_self.action.execute(dynamicInstance)
-			} else {
+			} else if (_self.elseAction !== null) {
 				_self.elseAction.execute(dynamicInstance)
 			}
 		} else {
