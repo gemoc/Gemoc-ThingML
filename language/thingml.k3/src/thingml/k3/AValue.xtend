@@ -282,4 +282,9 @@ class ABooleanValue extends AValue {
 			throw new Exception("Operation 'and' is not defined for class " + other.class.simpleName)
 		}
 	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.value.toString()
+	}
 }
