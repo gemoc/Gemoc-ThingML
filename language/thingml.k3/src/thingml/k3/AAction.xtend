@@ -104,6 +104,9 @@ class AVariableAssignment extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
 		val value = _self.expression.value(dynamicInstance, false)
+		if (!_self.index.empty) {
+			throw new Exception("WARNING!! We do not take array assignment into account!!!!")
+		}
 		if (_self.property instanceof Property) {
 			dynamicInstance.getDynamicProperty(_self.property as Property).value = value
 		} else {
