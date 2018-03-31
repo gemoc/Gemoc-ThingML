@@ -8,42 +8,42 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.thingml.xtext.thingML.Property;
-
-import thingML.DynamicProperty;
 import thingML.ThingMLPackage;
+import thingML.Value;
+import thingML.ValueContainer;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Dynamic Property</b></em>'.
+ * An implementation of the model object '<em><b>Value Container</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link thingML.impl.DynamicPropertyImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link thingML.impl.ValueContainerImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicProperty {
+public abstract class ValueContainerImpl extends MinimalEObjectImpl.Container implements ValueContainer {
 	/**
-	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getProperty()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected Property property;
+	protected Value value;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DynamicPropertyImpl() {
+	protected ValueContainerImpl() {
 		super();
 	}
 
@@ -54,7 +54,7 @@ public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicPr
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ThingMLPackage.Literals.DYNAMIC_PROPERTY;
+		return ThingMLPackage.Literals.VALUE_CONTAINER;
 	}
 
 	/**
@@ -62,16 +62,16 @@ public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicPr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property getProperty() {
-		if (property != null && property.eIsProxy()) {
-			InternalEObject oldProperty = (InternalEObject)property;
-			property = (Property)eResolveProxy(oldProperty);
-			if (property != oldProperty) {
+	public Value getValue() {
+		if (value != null && value.eIsProxy()) {
+			InternalEObject oldValue = (InternalEObject)value;
+			value = (Value)eResolveProxy(oldValue);
+			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY, oldProperty, property));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.VALUE_CONTAINER__VALUE, oldValue, value));
 			}
 		}
-		return property;
+		return value;
 	}
 
 	/**
@@ -79,8 +79,8 @@ public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicPr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property basicGetProperty() {
-		return property;
+	public Value basicGetValue() {
+		return value;
 	}
 
 	/**
@@ -88,11 +88,11 @@ public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicPr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setProperty(Property newProperty) {
-		Property oldProperty = property;
-		property = newProperty;
+	public void setValue(Value newValue) {
+		Value oldValue = value;
+		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY, oldProperty, property));
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.VALUE_CONTAINER__VALUE, oldValue, value));
 	}
 
 	/**
@@ -103,9 +103,9 @@ public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicPr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY:
-				if (resolve) return getProperty();
-				return basicGetProperty();
+			case ThingMLPackage.VALUE_CONTAINER__VALUE:
+				if (resolve) return getValue();
+				return basicGetValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,8 +118,8 @@ public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicPr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY:
-				setProperty((Property)newValue);
+			case ThingMLPackage.VALUE_CONTAINER__VALUE:
+				setValue((Value)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,8 +133,8 @@ public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicPr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY:
-				setProperty((Property)null);
+			case ThingMLPackage.VALUE_CONTAINER__VALUE:
+				setValue((Value)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -148,10 +148,10 @@ public class DynamicPropertyImpl extends ValueContainerImpl implements DynamicPr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_PROPERTY__PROPERTY:
-				return property != null;
+			case ThingMLPackage.VALUE_CONTAINER__VALUE:
+				return value != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //DynamicPropertyImpl
+} //ValueContainerImpl

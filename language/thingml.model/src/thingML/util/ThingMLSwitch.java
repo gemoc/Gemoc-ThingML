@@ -75,6 +75,7 @@ public class ThingMLSwitch<T> extends Switch<T> {
 			case ThingMLPackage.DYNAMIC_PROPERTY: {
 				DynamicProperty dynamicProperty = (DynamicProperty)theEObject;
 				T result = caseDynamicProperty(dynamicProperty);
+				if (result == null) result = caseValueContainer(dynamicProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -154,6 +155,7 @@ public class ThingMLSwitch<T> extends Switch<T> {
 			case ThingMLPackage.DYNAMIC_VARIABLE: {
 				DynamicVariable dynamicVariable = (DynamicVariable)theEObject;
 				T result = caseDynamicVariable(dynamicVariable);
+				if (result == null) result = caseValueContainer(dynamicVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -173,6 +175,12 @@ public class ThingMLSwitch<T> extends Switch<T> {
 			case ThingMLPackage.DYNAMIC_MESSAGE: {
 				DynamicMessage dynamicMessage = (DynamicMessage)theEObject;
 				T result = caseDynamicMessage(dynamicMessage);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ThingMLPackage.VALUE_CONTAINER: {
+				ValueContainer valueContainer = (ValueContainer)theEObject;
+				T result = caseValueContainer(valueContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -432,6 +440,21 @@ public class ThingMLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDynamicMessage(DynamicMessage object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Value Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Value Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValueContainer(ValueContainer object) {
 		return null;
 	}
 

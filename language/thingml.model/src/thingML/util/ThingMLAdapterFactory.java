@@ -136,6 +136,10 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 				return createDynamicMessageAdapter();
 			}
 			@Override
+			public Adapter caseValueContainer(ValueContainer object) {
+				return createValueContainerAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -390,6 +394,20 @@ public class ThingMLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDynamicMessageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thingML.ValueContainer <em>Value Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thingML.ValueContainer
+	 * @generated
+	 */
+	public Adapter createValueContainerAdapter() {
 		return null;
 	}
 

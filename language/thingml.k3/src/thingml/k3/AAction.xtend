@@ -19,6 +19,7 @@ import thingML.DynamicInstance
 import thingML.DynamicPort
 import thingML.ThingMLFactory
 import thingML.Value
+import thingML.ValueContainer
 
 import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AExpression.*
@@ -124,13 +125,18 @@ class AVariableAssignment extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
 		val value = _self.expression.value(dynamicInstance, false)
-		if (!_self.index.empty) {
-			throw new Exception("WARNING!! We do not take array assignment into account!!!!")
-		}
+		var ValueContainer valueContainer
 		if (_self.property instanceof Property) {
-			dynamicInstance.getDynamicProperty(_self.property as Property).value = value
+			valueContainer = dynamicInstance.getDynamicProperty(_self.property as Property)
 		} else {
-			dynamicInstance.getDynamicVariable(_self.property).value = value
+			valueContainer = dynamicInstance.getDynamicVariable(_self.property)
+		}
+		if (_self.index.empty) {
+			valueContainer.value = value
+		} else if (_self.index.length == 1) {
+			throw new Exception("WARNING!! We do not take array assignment into account!!!!")
+		} else {
+			throw new Exception("How can?!")
 		}
 	}
 }
