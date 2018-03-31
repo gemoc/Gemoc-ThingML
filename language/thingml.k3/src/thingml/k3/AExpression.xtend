@@ -2,12 +2,14 @@ package thingml.k3
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
+import org.eclipse.emf.common.util.BasicEList
 import org.thingml.xtext.thingML.AndExpression
 import org.thingml.xtext.thingML.ArrayIndex
 import org.thingml.xtext.thingML.EqualsExpression
 import org.thingml.xtext.thingML.EventReference
 import org.thingml.xtext.thingML.Expression
 import org.thingml.xtext.thingML.ExpressionGroup
+import org.thingml.xtext.thingML.FunctionCallExpression
 import org.thingml.xtext.thingML.GreaterExpression
 import org.thingml.xtext.thingML.GreaterOrEqualExpression
 import org.thingml.xtext.thingML.IntegerLiteral
@@ -25,6 +27,7 @@ import thingML.ProxyValue
 import thingML.ThingMLFactory
 import thingML.Value
 
+import static extension thingml.k3.AAction.execute
 import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AValue.*
 
@@ -36,6 +39,28 @@ class AExpression {
 
 	def public String _str() {
 		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
+	}
+}
+
+@Aspect(className=FunctionCallExpression)
+class AFunctionCallExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		println("   Calling function '" + _self.function.name + "'")
+		val parameterValues = new BasicEList<Value>()
+		_self.parameters.forEach[p|parameterValues.add(p.value(dynamicInstance, false))]
+		dynamicInstance.enterExecutionFrame(_self.function.parameters, parameterValues)
+		_self.function.body.execute(dynamicInstance)
+		return dynamicInstance.leaveExecutionFrame()
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		var params = _self.parameters.fold("", [str, e|str + e._str() + ", "])
+		if (params.length > 1) {
+			params = params.substring(0, params.length - 2)
+		}
+		return _self.function.name + "(" + params + ")"
 	}
 }
 
