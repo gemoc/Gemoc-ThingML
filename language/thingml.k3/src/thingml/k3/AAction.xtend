@@ -14,9 +14,11 @@ import org.thingml.xtext.thingML.PrintAction
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.SendAction
 import org.thingml.xtext.thingML.VariableAssignment
+import thingML.ArrayValue
 import thingML.BooleanValue
 import thingML.DynamicInstance
 import thingML.DynamicPort
+import thingML.IntegerValue
 import thingML.ThingMLFactory
 import thingML.Value
 import thingML.ValueContainer
@@ -134,7 +136,17 @@ class AVariableAssignment extends AAction {
 		if (_self.index.empty) {
 			valueContainer.value = value
 		} else if (_self.index.length == 1) {
-			throw new Exception("WARNING!! We do not take array assignment into account!!!!")
+			val index = _self.index.get(0).value(dynamicInstance, false)
+			if (index instanceof IntegerValue) {
+				if (valueContainer.value instanceof ArrayValue) {
+					val arrayValue = valueContainer.value as ArrayValue
+					arrayValue.values.set(index.value as int, value)
+				} else {
+					throw new Exception("Trying to access cell of a non array variable")
+				}
+			} else {
+				throw new Exception("Index has to be an IntegerValue")
+			}
 		} else {
 			throw new Exception("How can?!")
 		}
