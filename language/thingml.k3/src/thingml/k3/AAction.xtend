@@ -9,6 +9,7 @@ import org.thingml.xtext.thingML.ConditionalAction
 import org.thingml.xtext.thingML.FunctionCallStatement
 import org.thingml.xtext.thingML.Increment
 import org.thingml.xtext.thingML.LocalVariable
+import org.thingml.xtext.thingML.LoopAction
 import org.thingml.xtext.thingML.PrintAction
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.SendAction
@@ -66,6 +67,25 @@ class AConditionalAction extends AAction {
 			}
 		} else {
 			throw new Exception("Condition has to be a BooleanValue")
+		}
+	}
+}
+
+@Aspect(className=LoopAction)
+class ALoopAction extends AAction {
+	def public boolean evaluateLoopCondition(DynamicInstance dynamicInstance) {
+		val condition = _self.condition.value(dynamicInstance, false)
+		if (condition instanceof BooleanValue) {
+			return condition.value
+		} else {
+			throw new Exception("Condition has to be a BooleanValue")
+		}
+	}
+
+	@OverrideAspectMethod
+	def public void execute(DynamicInstance dynamicInstance) {
+		while (_self.evaluateLoopCondition(dynamicInstance)) {
+			_self.action.execute(dynamicInstance)
 		}
 	}
 }
