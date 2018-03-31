@@ -59,13 +59,11 @@ class AConditionalAction extends AAction {
 	def public void execute(DynamicInstance dynamicInstance) {
 		val condition = _self.condition.value(dynamicInstance, false)
 		if (condition instanceof BooleanValue) {
-			dynamicInstance.stackExecutionContext()
 			if (condition.value) {
 				_self.action.execute(dynamicInstance)
 			} else {
 				_self.elseAction.execute(dynamicInstance)
 			}
-			dynamicInstance.unstackExecutionContext()
 		} else {
 			throw new Exception("Condition has to be a BooleanValue")
 		}
