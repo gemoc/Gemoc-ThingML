@@ -83,6 +83,7 @@ class ATransition extends AHandler {
 		state.onExit(dynamicInstance)
 		if (_self.action !== null) {
 			_self.action.execute(dynamicInstance)
+			dynamicInstance.clearContext()
 		}
 		_self.target.onEntry(dynamicInstance)
 		return _self.target
