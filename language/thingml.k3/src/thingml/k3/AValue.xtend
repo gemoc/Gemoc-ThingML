@@ -45,6 +45,10 @@ class AValue {
 		throw new Exception("Operation 'greater' is not defined for class " + _self.class.simpleName)
 	}
 
+	def public Value lowerOrEqual(Value other) {
+		throw new Exception("Operation 'lowerOrEqual' is not defined for class " + _self.class.simpleName)
+	}
+
 	def public Value greaterOrEqual(Value other) {
 		throw new Exception("Operation 'greaterOrEqual' is not defined for class " + _self.class.simpleName)
 	}
@@ -85,6 +89,11 @@ class AProxyValue extends AValue {
 
 	@OverrideAspectMethod
 	def public Value lower(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value lowerOrEqual(Value other) {
 		return _self
 	}
 
@@ -235,6 +244,19 @@ class AIntegerValue extends AValue {
 			return other
 		} else {
 			throw new Exception("Operation 'greater' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
+	def public Value lowerOrEqual(Value other) {
+		if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
+			result.value = _self.value <= other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'lowerOrEqual' is not defined for class " + other.class.simpleName)
 		}
 	}
 

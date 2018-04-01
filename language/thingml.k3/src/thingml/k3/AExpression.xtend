@@ -14,6 +14,7 @@ import org.thingml.xtext.thingML.GreaterExpression
 import org.thingml.xtext.thingML.GreaterOrEqualExpression
 import org.thingml.xtext.thingML.IntegerLiteral
 import org.thingml.xtext.thingML.LowerExpression
+import org.thingml.xtext.thingML.LowerOrEqualExpression
 import org.thingml.xtext.thingML.MinusExpression
 import org.thingml.xtext.thingML.PlusExpression
 import org.thingml.xtext.thingML.Property
@@ -203,6 +204,24 @@ class AGreaterOrEqualExpression extends AExpression {
 	@OverrideAspectMethod
 	def public String _str() {
 		return _self.lhs._str() + " >= " + _self.rhs._str()
+	}
+}
+
+@Aspect(className=LowerOrEqualExpression)
+class ALowerOrEqualExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).lowerOrEqual(
+			_self.rhs.value(dynamicInstance, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " <= " + _self.rhs._str()
 	}
 }
 
