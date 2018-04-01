@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.BasicEList
 import org.thingml.xtext.thingML.Action
 import org.thingml.xtext.thingML.ActionBlock
 import org.thingml.xtext.thingML.ConditionalAction
+import org.thingml.xtext.thingML.Decrement
 import org.thingml.xtext.thingML.FunctionCallStatement
 import org.thingml.xtext.thingML.Increment
 import org.thingml.xtext.thingML.LocalVariable
@@ -129,6 +130,18 @@ class AIncrement extends AAction {
 			dynamicInstance.getDynamicProperty(_self.^var as Property).value.increment()
 		} else {
 			dynamicInstance.getDynamicVariable(_self.^var).value.increment()
+		}
+	}
+}
+
+@Aspect(className=Decrement)
+class ADecrement extends AAction {
+	@OverrideAspectMethod
+	def public void execute(DynamicInstance dynamicInstance) {
+		if (_self.^var instanceof Property) {
+			dynamicInstance.getDynamicProperty(_self.^var as Property).value.decrement()
+		} else {
+			dynamicInstance.getDynamicVariable(_self.^var).value.decrement()
 		}
 	}
 }

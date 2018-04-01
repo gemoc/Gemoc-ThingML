@@ -21,6 +21,10 @@ class AValue {
 		throw new Exception("Operation 'increment' is not defined for class " + _self.class.simpleName)
 	}
 
+	def public void decrement() {
+		throw new Exception("Operation 'decrement' is not defined for class " + _self.class.simpleName)
+	}
+
 	def public Value plus(Value other) {
 		throw new Exception("Operation 'plus' is not defined for class " + _self.class.simpleName)
 	}
@@ -158,6 +162,11 @@ class AIntegerValue extends AValue {
 	@OverrideAspectMethod
 	def public void increment() {
 		_self.value = _self.value + 1
+	}
+
+	@OverrideAspectMethod
+	def public void decrement() {
+		_self.value = _self.value - 1
 	}
 
 	@OverrideAspectMethod
