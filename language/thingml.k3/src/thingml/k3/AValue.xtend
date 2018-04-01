@@ -61,6 +61,10 @@ class AValue {
 		throw new Exception("Operation 'equal' is not defined for class " + _self.class.simpleName)
 	}
 
+	def public Value notEqual(Value other) {
+		throw new Exception("Operation 'notEqual' is not defined for class " + _self.class.simpleName)
+	}
+
 	def public Value and(Value other) {
 		throw new Exception("Operation 'and' is not defined for class " + _self.class.simpleName)
 	}
@@ -128,6 +132,11 @@ class AProxyValue extends AValue {
 
 	@OverrideAspectMethod
 	def public Value equal(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value notEqual(Value other) {
 		return _self
 	}
 
@@ -332,6 +341,19 @@ class AIntegerValue extends AValue {
 			return other
 		} else {
 			throw new Exception("Operation 'equal' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
+	def public Value notEqual(Value other) {
+		if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
+			result.value = _self.value != other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'notEqual' is not defined for class " + other.class.simpleName)
 		}
 	}
 

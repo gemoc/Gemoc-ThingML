@@ -17,6 +17,7 @@ import org.thingml.xtext.thingML.LowerExpression
 import org.thingml.xtext.thingML.LowerOrEqualExpression
 import org.thingml.xtext.thingML.MinusExpression
 import org.thingml.xtext.thingML.ModExpression
+import org.thingml.xtext.thingML.NotEqualsExpression
 import org.thingml.xtext.thingML.PlusExpression
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyReference
@@ -259,6 +260,24 @@ class AEqualExpression extends AExpression {
 	@OverrideAspectMethod
 	def public String _str() {
 		return _self.lhs._str() + " == " + _self.rhs._str()
+	}
+}
+
+@Aspect(className=NotEqualsExpression)
+class ANotEqualsExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).notEqual(
+			_self.rhs.value(dynamicInstance, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " != " + _self.rhs._str()
 	}
 }
 
