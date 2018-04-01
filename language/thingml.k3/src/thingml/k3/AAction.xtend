@@ -126,11 +126,13 @@ class ALocalVariable extends AAction {
 class AIncrement extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
+		var ValueContainer valueContainer
 		if (_self.^var instanceof Property) {
-			dynamicInstance.getDynamicProperty(_self.^var as Property).value.increment()
+			valueContainer = dynamicInstance.getDynamicProperty(_self.^var as Property)
 		} else {
-			dynamicInstance.getDynamicVariable(_self.^var).value.increment()
+			valueContainer = dynamicInstance.getDynamicVariable(_self.^var)
 		}
+		valueContainer.value = valueContainer.value.increment()
 	}
 }
 
@@ -138,11 +140,13 @@ class AIncrement extends AAction {
 class ADecrement extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
+		var ValueContainer valueContainer
 		if (_self.^var instanceof Property) {
-			dynamicInstance.getDynamicProperty(_self.^var as Property).value.decrement()
+			valueContainer = dynamicInstance.getDynamicProperty(_self.^var as Property)
 		} else {
-			dynamicInstance.getDynamicVariable(_self.^var).value.decrement()
+			valueContainer = dynamicInstance.getDynamicVariable(_self.^var)
 		}
+		valueContainer.value = valueContainer.value.decrement()
 	}
 }
 

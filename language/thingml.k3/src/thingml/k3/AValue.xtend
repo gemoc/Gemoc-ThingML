@@ -17,11 +17,11 @@ class AValue {
 		throw new Exception("Operation 'print' is not defined for class " + _self.class.simpleName)
 	}
 
-	def public void increment() {
+	def public Value increment() {
 		throw new Exception("Operation 'increment' is not defined for class " + _self.class.simpleName)
 	}
 
-	def public void decrement() {
+	def public Value decrement() {
 		throw new Exception("Operation 'decrement' is not defined for class " + _self.class.simpleName)
 	}
 
@@ -76,6 +76,16 @@ class AValue {
 
 @Aspect(className=ProxyValue)
 class AProxyValue extends AValue {
+	@OverrideAspectMethod
+	def public Value increment() {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value decrement() {
+		return _self
+	}
+
 	@OverrideAspectMethod
 	def public Value plus(Value other) {
 		return _self
@@ -178,13 +188,17 @@ class AIntegerValue extends AValue {
 	}
 
 	@OverrideAspectMethod
-	def public void increment() {
-		_self.value = _self.value + 1
+	def public Value increment() {
+		val result = ThingMLFactory.eINSTANCE.createIntegerValue()
+		result.value = _self.value + 1
+		return result
 	}
 
 	@OverrideAspectMethod
-	def public void decrement() {
-		_self.value = _self.value - 1
+	def public Value decrement() {
+		val result = ThingMLFactory.eINSTANCE.createIntegerValue()
+		result.value = _self.value - 1
+		return result
 	}
 
 	@OverrideAspectMethod
