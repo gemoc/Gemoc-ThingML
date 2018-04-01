@@ -37,6 +37,10 @@ class AValue {
 		throw new Exception("Operation 'times' is not defined for class " + _self.class.simpleName)
 	}
 
+	def public Value modulo(Value other) {
+		throw new Exception("Operation 'modulo' is not defined for class " + _self.class.simpleName)
+	}
+
 	def public Value lower(Value other) {
 		throw new Exception("Operation 'lower' is not defined for class " + _self.class.simpleName)
 	}
@@ -84,6 +88,11 @@ class AProxyValue extends AValue {
 
 	@OverrideAspectMethod
 	def public Value times(Value other) {
+		return _self
+	}
+
+	@OverrideAspectMethod
+	def public Value modulo(Value other) {
 		return _self
 	}
 
@@ -218,6 +227,19 @@ class AIntegerValue extends AValue {
 			return other
 		} else {
 			throw new Exception("Operation 'times' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
+	def public Value modulo(Value other) {
+		if (other instanceof IntegerValue) {
+			val result = ThingMLFactory.eINSTANCE.createIntegerValue()
+			result.value = _self.value % other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'modulo' is not defined for class " + other.class.simpleName)
 		}
 	}
 

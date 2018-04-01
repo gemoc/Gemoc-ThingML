@@ -16,6 +16,7 @@ import org.thingml.xtext.thingML.IntegerLiteral
 import org.thingml.xtext.thingML.LowerExpression
 import org.thingml.xtext.thingML.LowerOrEqualExpression
 import org.thingml.xtext.thingML.MinusExpression
+import org.thingml.xtext.thingML.ModExpression
 import org.thingml.xtext.thingML.PlusExpression
 import org.thingml.xtext.thingML.Property
 import org.thingml.xtext.thingML.PropertyReference
@@ -150,6 +151,24 @@ class ATimesExpression extends AExpression {
 	@OverrideAspectMethod
 	def public String _str() {
 		return _self.lhs._str() + " x " + _self.rhs._str()
+	}
+}
+
+@Aspect(className=ModExpression)
+class AModExpression extends AExpression {
+	@OverrideAspectMethod
+	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
+		val value = _self.lhs.value(dynamicInstance, createProxies).modulo(
+			_self.rhs.value(dynamicInstance, createProxies))
+		if (value instanceof ProxyValue) {
+			value.expression = _self
+		}
+		return value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.lhs._str() + " % " + _self.rhs._str()
 	}
 }
 
