@@ -168,6 +168,19 @@ class AStringValue extends AValue {
 	}
 
 	@OverrideAspectMethod
+	def public Value equal(Value other) {
+		if (other instanceof StringValue) {
+			val result = ThingMLFactory.eINSTANCE.createBooleanValue()
+			result.value = _self.value == other.value
+			return result
+		} else if (other instanceof ProxyValue) {
+			return other
+		} else {
+			throw new Exception("Operation 'equal' is not defined for class " + other.class.simpleName)
+		}
+	}
+
+	@OverrideAspectMethod
 	def public String _str() {
 		return "\"" + _self.value + "\""
 	}
