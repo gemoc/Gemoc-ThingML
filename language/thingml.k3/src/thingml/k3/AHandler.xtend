@@ -26,6 +26,11 @@ class AHandler {
 				for (var i = 0; !eventOK && i < dynamicPort.receivedMessages.length; i++) {
 					val dynamicMessage = dynamicPort.receivedMessages.get(i)
 					if (dynamicMessage.message == messageEvent.message) {
+						for (var j = 0; j < messageEvent.message.parameters.length; j++) {
+							val parameter = messageEvent.message.parameters.get(j)
+							val value = dynamicMessage.parameters.get(j)
+							dynamicInstance.addVariable(parameter, value)
+						}
 						eventOK = true
 					}
 				}
@@ -34,10 +39,11 @@ class AHandler {
 			}
 		}
 		var guardOK = _self.guard === null
-		if (!guardOK) {
+		if ((!guardOK) && eventOK) {
 			val guardValue = _self.guard.value(dynamicInstance, false)
 			guardOK = (guardValue as BooleanValue).value
 		}
+		dynamicInstance.clearContext()
 		return eventOK && guardOK
 	}
 
