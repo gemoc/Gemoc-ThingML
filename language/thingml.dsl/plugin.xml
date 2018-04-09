@@ -1,17 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.4"?>
-<plugin>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse version="3.4"?><plugin>
   <extension point="org.eclipse.gemoc.gemoc_language_workbench.sequential.xdsml">
-    <XDSML_Definition modelLoader_class="org.eclipse.gemoc.executionframework.extensions.sirius.modelloader.DefaultModelLoader" name="thingml.XThingML" xdsmlFilePath="/thingml.dsl/src/thingml.melange" />
+    <XDSML_Definition modelLoader_class="org.eclipse.gemoc.executionframework.extensions.sirius.modelloader.DefaultModelLoader" name="thingml.XThingML" xdsmlFilePath="/thingml.dsl/src/thingml.melange"/>
   </extension>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <!-- @generated XThingMLMT -->
-    <package class="thingml.xthingmlmt.thingML.ThingMLPackage" genModel="model-gen/XThingMLMT.genmodel" uri="http://thingml.xthingmlmt/thingML/" />
+    <package class="thingml.xthingmlmt.thingML.ThingMLPackage" genModel="model-gen/XThingMLMT.genmodel" uri="http://thingml.xthingmlmt/thingML/"/>
   </extension>
-  <extension point="fr.inria.diverse.melange.modeltype">
-    <modeltype id="thingml.ThingMLMT" uri="http://thingml.thingmlmt/" />
+  
+<extension point="fr.inria.diverse.melange.modeltype">
+    <modeltype id="thingml.ThingMLMT" uri="http://thingml.thingmlmt/"/>
+    <modeltype id="thingml.XThingMLMT" uri="http://thingml.xthingmlmt/">
+      <subtyping modeltypeId="thingml.ThingMLMT"/>
+    </modeltype>
   </extension>
   <extension point="fr.inria.diverse.melange.language">
-    <language aspects="" entryPoints="" exactType="thingml.ThingMLMT" id="thingml.ThingML" uri="http://www.thingml.org/xtext/ThingML" />
+    <language aspects="" entryPoints="" exactType="thingml.ThingMLMT" id="thingml.ThingML" uri="http://www.thingml.org/xtext/ThingML"/>
+    <language aspects="Action:thingml.xthingml.aspects.AAction;Configuration:thingml.xthingml.aspects.AConfiguration;PrintAction:thingml.xthingml.aspects.APrintAction;Instance:thingml.xthingml.aspects.AInstance;NotEqualsExpression:thingml.xthingml.aspects.ANotEqualsExpression;LocalVariable:thingml.xthingml.aspects.ALocalVariable;ModExpression:thingml.xthingml.aspects.AModExpression;ArrayIndex:thingml.xthingml.aspects.AArrayIndex;FunctionCallExpression:thingml.xthingml.aspects.AFunctionCallExpression;ReturnAction:thingml.xthingml.aspects.AReturnAction;ConditionalAction:thingml.xthingml.aspects.AConditionalAction;AndExpression:thingml.xthingml.aspects.AAndExpression;Increment:thingml.xthingml.aspects.AIncrement;GreaterExpression:thingml.xthingml.aspects.AGreaterExpression;BooleanValue:thingml.xthingml.aspects.ABooleanValue;CompositeState:thingml.xthingml.aspects.ACompositeState;ProxyValue:thingml.xthingml.aspects.AProxyValue;StringValue:thingml.xthingml.aspects.AStringValue;IntegerLiteral:thingml.xthingml.aspects.AIntegerLiteral;PlusExpression:thingml.xthingml.aspects.APlusExpression;ActionBlock:thingml.xthingml.aspects.AActionBlock;Decrement:thingml.xthingml.aspects.ADecrement;ExpressionGroup:thingml.xthingml.aspects.AExpressionGroup;VariableAssignment:thingml.xthingml.aspects.AVariableAssignment;IntegerValue:thingml.xthingml.aspects.AIntegerValue;LowerExpression:thingml.xthingml.aspects.ALowerExpression;Handler:thingml.xthingml.aspects.AHandler;SendAction:thingml.xthingml.aspects.ASendAction;GreaterOrEqualExpression:thingml.xthingml.aspects.AGreaterOrEqualExpression;EventReference:thingml.xthingml.aspects.AEventReference;LoopAction:thingml.xthingml.aspects.ALoopAction;PropertyReference:thingml.xthingml.aspects.APropertyReference;DynamicInstance:thingml.xthingml.aspects.ADynamicInstance;StringLiteral:thingml.xthingml.aspects.AStringLiteral;Expression:thingml.xthingml.aspects.AExpression;MinusExpression:thingml.xthingml.aspects.AMinusExpression;State:thingml.xthingml.aspects.AState;FunctionCallStatement:thingml.xthingml.aspects.AFunctionCallStatement;Transition:thingml.xthingml.aspects.ATransition;Value:thingml.xthingml.aspects.AValue;LowerOrEqualExpression:thingml.xthingml.aspects.ALowerOrEqualExpression;TimesExpression:thingml.xthingml.aspects.ATimesExpression;EqualsExpression:thingml.xthingml.aspects.AEqualExpression" entryPoints="thingml.xthingml.aspects.AConfiguration.main(thingml.xthingml.thingML.Configuration)" exactType="thingml.XThingMLMT" id="thingml.XThingML" uri="http://thingml.xthingml/thingML/">
+      <adapter class="thingml.xthingml.adapters.thingmlmt.XThingMLAdapter" modeltypeId="thingml.ThingMLMT"/>
+      <adapter class="thingml.xthingml.adapters.xthingmlmt.XThingMLAdapter" modeltypeId="thingml.XThingMLMT"/>
+    </language>
   </extension>
 </plugin>

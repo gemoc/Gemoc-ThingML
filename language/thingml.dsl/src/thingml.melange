@@ -6,5 +6,47 @@ external language ThingML {
 
 language XThingML inherits ThingML {
 	syntax "platform:/resource/thingml.model/model/xthingml.ecore"
-	with thingml.k3.*
+	with thingml.k3.AAction
+	with thingml.k3.AFunctionCallStatement
+	with thingml.k3.AReturnAction
+	with thingml.k3.AActionBlock
+	with thingml.k3.AConditionalAction
+	with thingml.k3.ALoopAction
+	with thingml.k3.APrintAction
+	with thingml.k3.ALocalVariable
+	with thingml.k3.AIncrement
+	with thingml.k3.ADecrement
+	with thingml.k3.AVariableAssignment
+	with thingml.k3.ASendAction
+	with thingml.k3.AConfiguration
+	with thingml.k3.ADynamicInstance
+	with thingml.k3.AExpression
+	with thingml.k3.AFunctionCallExpression
+	with thingml.k3.AExpressionGroup
+	with thingml.k3.AAndExpression
+	with thingml.k3.APlusExpression
+	with thingml.k3.AMinusExpression
+	with thingml.k3.ATimesExpression
+	with thingml.k3.AModExpression
+	with thingml.k3.ALowerExpression
+	with thingml.k3.AGreaterExpression
+	with thingml.k3.AGreaterOrEqualExpression
+	with thingml.k3.ALowerOrEqualExpression
+	with thingml.k3.AEqualExpression
+	with thingml.k3.ANotEqualsExpression
+	with thingml.k3.AIntegerLiteral
+	with thingml.k3.AStringLiteral
+	with thingml.k3.AArrayIndex
+	with thingml.k3.APropertyReference
+	with thingml.k3.AEventReference
+	with thingml.k3.AHandler
+	with thingml.k3.ATransition
+	with thingml.k3.AInstance
+	with thingml.k3.AState
+	with thingml.k3.ACompositeState
+	with thingml.k3.AValue
+	with thingml.k3.AProxyValue
+	with thingml.k3.AStringValue
+	with thingml.k3.AIntegerValue
+	with thingml.k3.ABooleanValue
 }

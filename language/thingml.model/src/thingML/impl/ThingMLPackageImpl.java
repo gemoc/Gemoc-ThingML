@@ -886,6 +886,110 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// aspect
+		createAspectAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>aspect</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createAspectAnnotations() {
+		String source = "aspect";	
+		addAnnotation
+		  (dynamicInstanceEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (dynamicPropertyEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (valueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (nullValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (integerValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (stringValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (arrayValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (proxyValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (arrayProxyValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (arrayProxyEntryEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (dynamicCompositeStateEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (frameEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (contextEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (dynamicVariableEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (booleanValueEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (dynamicPortEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (dynamicMessageEClass, 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (valueContainerEClass, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //ThingMLPackageImpl

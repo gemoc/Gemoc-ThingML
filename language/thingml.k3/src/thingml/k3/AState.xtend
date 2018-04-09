@@ -3,8 +3,8 @@ package thingml.k3
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import fr.inria.diverse.k3.al.annotationprocessor.Step
-import java.util.LinkedList
-import java.util.List
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.common.util.EList
 import org.thingml.xtext.thingML.CompositeState
 import org.thingml.xtext.thingML.FinalState
 import org.thingml.xtext.thingML.State
@@ -17,17 +17,17 @@ import static extension thingml.k3.AInstance.running
 
 @Aspect(className=State)
 class AState {
-	def public List<CompositeState> _getRootPath(State state) {
-		val path = new LinkedList<CompositeState>()
+	def public EList<CompositeState> _getRootPath(State state) {
+		val path = new BasicEList<CompositeState>()
 		var parent = state.eContainer
 		while (parent instanceof CompositeState) {
-			path.addFirst(state.eContainer as CompositeState)
+			path.add(0, state.eContainer as CompositeState)
 			parent = parent.eContainer
 		}
 		return path
 	}
 
-	def public List<CompositeState> _getPathToState(DynamicInstance dynamicInstance, State state1, State state2) {
+	def public EList<CompositeState> _getPathToState(DynamicInstance dynamicInstance, State state1, State state2) {
 		var CompositeState ancestor
 		val path1 = _self._getRootPath(state1)
 		val path2 = _self._getRootPath(state2)

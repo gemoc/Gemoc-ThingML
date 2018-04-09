@@ -168,7 +168,12 @@ class AVariableAssignment extends AAction {
 			if (index instanceof IntegerValue) {
 				if (valueContainer.value instanceof ArrayValue) {
 					val arrayValue = valueContainer.value as ArrayValue
-					arrayValue.values.set(index.value as int, value)
+					// TODO fix that bullshit: we want an EList to have duplicates
+					try {
+						arrayValue.values.set(index.value as int, value)
+					} catch (IllegalArgumentException e) {
+						arrayValue.values.set(index.value as int, value.deepCopy())
+					}
 				} else {
 					throw new Exception("Trying to access cell of a non array variable")
 				}
