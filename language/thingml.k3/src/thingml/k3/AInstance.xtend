@@ -161,6 +161,8 @@ class AInstance {
 	}
 
 	def public void resolve() {
+		_self.log(_self.name + ": Start resolution", 2)
+
 		var proxy_counter = 0
 		var proxy_resolved = 0
 
@@ -169,7 +171,7 @@ class AInstance {
 			if (dynamicProperty.value instanceof ArrayProxyValue) {
 				val array_proxy = (dynamicProperty.value as ArrayProxyValue)
 
-				println("   Entering ArrayProxyValue of property '" + dynamicProperty.property.name + "'")
+				_self.log("Entering ArrayProxyValue of property '" + dynamicProperty.property.name + "'", 2)
 				proxy_counter++
 
 				val cardinality = array_proxy.expression.value(_self.dynamicInstance, false)
@@ -177,7 +179,7 @@ class AInstance {
 				var continue = !(cardinality instanceof ProxyValue)
 
 				if (continue) {
-					println("   Cardinality is not a Proxy anymore!")
+					_self.log("Cardinality is not a Proxy anymore!", 2)
 
 					for (ArrayProxyEntry array_entry : array_proxy.arrayProxyEntries) {
 						val index = array_entry.indexExpression.value(_self.dynamicInstance, false)
@@ -186,7 +188,7 @@ class AInstance {
 				}
 
 				if (continue) {
-					println("   All indexes have been resolved!")
+					_self.log("All indexes have been resolved!", 2)
 					proxy_resolved++
 
 					if (cardinality instanceof IntegerValue) {
@@ -200,7 +202,7 @@ class AInstance {
 							if (index instanceof IntegerValue) {
 								new_value.values.set(index.value as int, array_entry.value)
 								if (array_entry.value instanceof ProxyValue) {
-									println("   Discovering a new ProxyValue!")
+									_self.log("Discovering a new ProxyValue!", 2)
 									proxy_counter++
 								}
 							} else {
@@ -214,20 +216,20 @@ class AInstance {
 					}
 				}
 			} else if (dynamicProperty.value instanceof ProxyValue) {
-				println("   Analysing ProxyValue of property '" + dynamicProperty.property.name + "'")
+				_self.log("Analysing ProxyValue of property '" + dynamicProperty.property.name + "'", 2)
 				proxy_counter++
 				val proxyValue = dynamicProperty.value as ProxyValue
 				dynamicProperty.value = proxyValue.expression.value(_self.dynamicInstance, false)
 				if (!(dynamicProperty instanceof ProxyValue)) {
-					println("   It has been resolved")
+					_self.log("It has been resolved", 2)
 					proxy_resolved++
 				}
 			} else if (dynamicProperty.value instanceof ArrayValue) {
-				println("   Analysing ArrayValue of property '" + dynamicProperty.property.name + "'")
+				_self.log("Analysing ArrayValue of property '" + dynamicProperty.property.name + "'", 2)
 				var i = 0
 				for (Value value : (dynamicProperty.value as ArrayValue).values) {
 					if (value instanceof ProxyValue) {
-						println("   Entering ProxyValue of property '" + dynamicProperty.property.name + "[" + i + "]'")
+						_self.log("Entering ProxyValue of property '" + dynamicProperty.property.name + "[" + i + "]'", 2)
 						proxy_counter++
 						// TODO
 						throw new Exception("This is to be done")
@@ -237,9 +239,9 @@ class AInstance {
 			}
 		}
 
-		println("   Counters:")
-		println("    - proxies:  " + proxy_counter)
-		println("    - resolved: " + proxy_resolved)
+		_self.log("Counters:", 2)
+		_self.log(" - proxies:  " + proxy_counter, 2)
+		_self.log(" - resolved: " + proxy_resolved, 2)
 
 		if (proxy_counter > 0) {
 			if (proxy_resolved == 0) {
@@ -248,6 +250,8 @@ class AInstance {
 				_self.resolve()
 			}
 		}
+
+		_self.log(_self.name + ": End resolution", 2)
 	}
 
 	def public void connect(Connector connector) {
@@ -281,11 +285,17 @@ class AInstance {
 		while (reRun && _self.running) {
 			var hasSpontaneouslyMoved = true
 			while (hasSpontaneouslyMoved && _self.running) {
-				hasSpontaneouslyMoved = behaviour.runSpontaneousTransitions(_self.dynamicInstance)
+				_self.log(_self.name + ": Run a spontaneous transition")
+				_self.tab
+				hasSpontaneouslyMoved = behaviour.runATransition(_self.dynamicInstance, true)
+				_self.detab
 				hasMoved = hasMoved || hasSpontaneouslyMoved
 			}
 			if (_self.running) {
-				reRun = behaviour.runATransition(_self.dynamicInstance)
+				_self.log(_self.name + ": Run a non spontaneous transition")
+				_self.tab
+				reRun = behaviour.runATransition(_self.dynamicInstance, false)
+				_self.detab
 				hasMoved = hasMoved || reRun
 			}
 		}

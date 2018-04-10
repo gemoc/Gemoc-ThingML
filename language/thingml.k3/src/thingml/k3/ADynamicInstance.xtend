@@ -17,16 +17,18 @@ import thingML.DynamicVariable
 import thingML.ThingMLFactory
 import thingML.Value
 
-import static extension thingml.k3.AValue.print
+import static extension thingml.k3.AValue.*
 
 @Aspect(className=DynamicInstance)
-class ADynamicInstance {
+class ADynamicInstance extends AEObject {
 	def public void init(Instance instance) {
+		_self.log("DynIns: Start initialization of dynamic instance '" + instance.name + "'")
 		_self.instance = instance
 		_self.executionFrame = ThingMLFactory.eINSTANCE.createFrame()
 		_self.activeFrame = _self.executionFrame
 		_self.activeFrame.rootContext = ThingMLFactory.eINSTANCE.createContext()
 		_self.activeFrame.topContext = _self.activeFrame.rootContext
+		_self.log("DynIns: End initialization of dynamic instance '" + instance.name + "'")
 	}
 
 	def public DynamicProperty getDynamicProperty(Property property) {
@@ -57,11 +59,11 @@ class ADynamicInstance {
 	}
 
 	def public DynamicVariable _searchContext(Context context, Variable variable) {
-		var contextVariablesString = context.dynamicVariables.fold("", [l, dv|l + dv.variable.name + ", "])
+		var contextVariablesString = context.dynamicVariables.fold("", [l, dv|l + "(" + dv.variable.name + ":" + dv.value._str + "), "])
 		if (contextVariablesString.length >= 2) {
 			contextVariablesString = contextVariablesString.substring(0, contextVariablesString.length - 2)
 		}
-		println("   Searching '" + variable.name + "' in context [" + contextVariablesString + "]")
+		_self.log("[" + contextVariablesString + "]...", false, true, 2)
 		val dynamicVariableCandidates = context.dynamicVariables.filter[dv|dv.variable == variable].toList
 		if (dynamicVariableCandidates.length == 0) {
 			return null
@@ -75,6 +77,7 @@ class ADynamicInstance {
 	def public DynamicVariable getDynamicVariable(Variable variable) {
 		var context = _self.activeFrame.topContext
 		var DynamicVariable dynamicVariable = null
+		_self.log("Searching '" + variable.name + "' in contexts: ", false, false, 2)
 		while (dynamicVariable === null && context !== null) {
 			dynamicVariable = _self._searchContext(context, variable)
 			context = context.parentContext
@@ -82,11 +85,11 @@ class ADynamicInstance {
 		if (dynamicVariable === null) {
 			throw new Exception("Undefined variable '" + variable.name + "'")
 		}
+		_self.log("Found!", true, true, 2)
 		return dynamicVariable
 	}
 
 	def public void enterExecutionFrame(EList<Parameter> parameters, EList<Value> parameterValues) {
-		println("   Entering new execution frame")
 		_self.activeFrame.childFrame = ThingMLFactory.eINSTANCE.createFrame()
 		_self.activeFrame = _self.activeFrame.childFrame
 		_self.activeFrame.rootContext = ThingMLFactory.eINSTANCE.createContext()
@@ -97,7 +100,6 @@ class ADynamicInstance {
 	}
 
 	def public Value leaveExecutionFrame() {
-		println("   Leaving last execution frame")
 		val returnValue = _self.activeFrame.returnValue
 		_self.activeFrame = _self.activeFrame.parentFrame
 		_self.activeFrame.childFrame = null
@@ -105,20 +107,16 @@ class ADynamicInstance {
 	}
 
 	def public void stackExecutionContext() {
-		println("   Stacking new execution context")
 		_self.activeFrame.topContext.childContext = ThingMLFactory.eINSTANCE.createContext()
 		_self.activeFrame.topContext = _self.activeFrame.topContext.childContext
 	}
 
 	def public void unstackExecutionContext() {
-		println("   Unstacking last execution context")
 		_self.activeFrame.topContext = _self.activeFrame.topContext.parentContext
 		_self.activeFrame.topContext.childContext = null
 	}
 
 	def public void addVariable(Variable variable, Value value) {
-		println("   Adding variable '" + variable.name + "' with value '" + value.print() +
-			"' to the active execution context")
 		val dynamicVariable = ThingMLFactory.eINSTANCE.createDynamicVariable()
 		dynamicVariable.variable = variable
 		dynamicVariable.value = value

@@ -30,8 +30,12 @@ import static extension thingml.k3.AExpression.*
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=Action)
-class AAction {
+class AAction extends AEObject {
 	def public void execute(DynamicInstance dynamicInstance) {
+		throw new Exception("Action type " + _self.class.simpleName + " is not supported in semantics yet")
+	}
+
+	def public String _str() {
 		throw new Exception("Action type " + _self.class.simpleName + " is not supported in semantics yet")
 	}
 }
@@ -40,12 +44,30 @@ class AAction {
 class AFunctionCallStatement extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		println("   Calling function '" + _self.function.name + "'")
+		var params = _self.parameters.fold("", [s,p|s + p._str + ", "])
+		if (params.length > 2) {
+			params = params.substring(0, params.length - 2)
+		}
+		_self.log("Preparing procedure call: " + _self.function.name + "(" + params + ")")
+		_self.tab
 		val parameterValues = new BasicEList<Value>()
 		_self.parameters.forEach[p|parameterValues.add(p.value(dynamicInstance, false))]
 		dynamicInstance.enterExecutionFrame(_self.function.parameters, parameterValues)
+		_self.detab
+		_self.log("Execute procedure '" + _self.function.name + "'")
+		_self.tab
 		_self.function.body.execute(dynamicInstance)
 		dynamicInstance.leaveExecutionFrame()
+		_self.detab
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		var params = _self.parameters.fold("", [str, e|str + e._str() + ", "])
+		if (params.length > 1) {
+			params = params.substring(0, params.length - 2)
+		}
+		return _self.function.name + "(" + params + ")"
 	}
 }
 
@@ -54,8 +76,13 @@ class AReturnAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
 		val value = _self.exp.value(dynamicInstance, false)
-		println("   Adding '" + value._str() + "' as a return value")
+		_self.log("Return value (" + _self.exp._str + ":" + value._str + ")")
 		dynamicInstance.activeFrame.returnValue = value
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return "return " + _self.exp._str
 	}
 }
 
@@ -67,29 +94,61 @@ class AActionBlock extends AAction {
 		_self.actions.forEach[a|a.execute(dynamicInstance)]
 		dynamicInstance.unstackExecutionContext()
 	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		var str = _self.actions.fold("", [s,a|s + a._str + " >>> "])
+		if (str.length >= 5) {
+			str = str.substring(0, str.length - 5)
+		}
+		return "{ " + str + " }"
+	}
 }
 
 @Aspect(className=ConditionalAction)
 class AConditionalAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
+		_self.log("Evaluate condition '" + _self.condition._str + "'")
+		_self.tab
 		val condition = _self.condition.value(dynamicInstance, false)
+		_self.detab
 		if (condition instanceof BooleanValue) {
 			if (condition.value) {
+				_self.log("Condition valid")
+				_self.tab
 				_self.action.execute(dynamicInstance)
-			} else if (_self.elseAction !== null) {
-				_self.elseAction.execute(dynamicInstance)
+				_self.detab
+			} else {
+				_self.log("Condition invalid")
+				if (_self.elseAction !== null) {
+					_self.tab
+					_self.elseAction.execute(dynamicInstance)
+					_self.detab
+				}
 			}
 		} else {
 			throw new Exception("Condition has to be a BooleanValue")
 		}
 	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		var str = "if (" + _self.condition._str + ") " + _self.action._str
+		if (_self.elseAction !== null) {
+			str += " else " + _self.action._str
+		}
+		return str
+	}
 }
 
 @Aspect(className=LoopAction)
 class ALoopAction extends AAction {
-	def public boolean evaluateLoopCondition(DynamicInstance dynamicInstance) {
+	def public boolean _evaluateLoopCondition(DynamicInstance dynamicInstance) {
+		_self.log("Evaluate condition '" + _self.condition._str + "'")
+		_self.tab
 		val condition = _self.condition.value(dynamicInstance, false)
+		_self.detab
 		if (condition instanceof BooleanValue) {
 			return condition.value
 		} else {
@@ -99,9 +158,18 @@ class ALoopAction extends AAction {
 
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		while (_self.evaluateLoopCondition(dynamicInstance)) {
+		while (_self._evaluateLoopCondition(dynamicInstance)) {
+			_self.log("Condition still valid")
+			_self.tab
 			_self.action.execute(dynamicInstance)
+			_self.detab
 		}
+		_self.log("Condition not valid anymore")
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return "while (" + _self.condition._str + ") " + _self.action._str
 	}
 }
 
@@ -109,8 +177,14 @@ class ALoopAction extends AAction {
 class APrintAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		println("   This is a print action")
-		print(_self.msg.get(0).value(dynamicInstance, false).print())
+		val messValue = _self.msg.get(0).value(dynamicInstance, false)
+		_self.log("Print '" + messValue._str + "'")
+		print(messValue.print)
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return "print " + _self.msg.get(0)._str
 	}
 }
 
@@ -118,7 +192,14 @@ class APrintAction extends AAction {
 class ALocalVariable extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		dynamicInstance.addVariable(_self, _self.init.value(dynamicInstance, false))
+		val value = _self.init.value(dynamicInstance, false)
+		_self.log("Add (" + _self.name + "," + value._str + ")")
+		dynamicInstance.addVariable(_self, value)
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return "var " + _self.name + " : " + _self.typeRef.type.name + " = " + _self.init._str
 	}
 }
 
@@ -133,6 +214,12 @@ class AIncrement extends AAction {
 			valueContainer = dynamicInstance.getDynamicVariable(_self.^var)
 		}
 		valueContainer.value = valueContainer.value.increment()
+		_self.log("Assign (" + _self.^var.name + "," + valueContainer.value._str + ")")
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.^var.name + "++"
 	}
 }
 
@@ -147,6 +234,12 @@ class ADecrement extends AAction {
 			valueContainer = dynamicInstance.getDynamicVariable(_self.^var)
 		}
 		valueContainer.value = valueContainer.value.decrement()
+		_self.log("Assign (" + _self.^var.name + "," + valueContainer.value._str + ")")
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		return _self.^var.name + "--"
 	}
 }
 
@@ -162,11 +255,13 @@ class AVariableAssignment extends AAction {
 			valueContainer = dynamicInstance.getDynamicVariable(_self.property)
 		}
 		if (_self.index.empty) {
+			_self.log("Assign (" + _self.property.name + "," + value._str + ")")
 			valueContainer.value = value
 		} else if (_self.index.length == 1) {
 			val index = _self.index.get(0).value(dynamicInstance, false)
 			if (index instanceof IntegerValue) {
 				if (valueContainer.value instanceof ArrayValue) {
+					_self.log("Assign (" + _self.property.name + "[" + index._str + "]," + value._str + ")")
 					val arrayValue = valueContainer.value as ArrayValue
 					// TODO fix that bullshit: we want an EList to have duplicates
 					try {
@@ -184,6 +279,15 @@ class AVariableAssignment extends AAction {
 			throw new Exception("How can?!")
 		}
 	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		var str = _self.property.name
+		if (!_self.index.empty) {
+			str += "[" + _self.index.get(0)._str + "]"
+		}
+		return str + " = " + _self.expression._str
+	}
 }
 
 @Aspect(className=SendAction)
@@ -195,9 +299,7 @@ class ASendAction extends AAction {
 		if (paramsString.length >= 2) {
 			paramsString = paramsString.substring(0, paramsString.length - 2)
 		}
-		println(
-			"   Sending message '" + _self.message.name + "' with parameters [" + paramsString + "] through port '" +
-				_self.port.name + "'")
+		var recipients = ""
 		for (DynamicPort recipient : dynamicInstance.getDynamicPort(_self.port).connectedPorts) {
 			val dynamicMessage = ThingMLFactory.eINSTANCE.createDynamicMessage()
 			dynamicMessage.message = _self.message
@@ -205,11 +307,22 @@ class ASendAction extends AAction {
 				dynamicMessage.parameters.add(value.deepCopy())
 			}
 			if (recipient.port.receives.contains(_self.message)) {
-				println(
-					"   Message sent to port '" + recipient.port.name + "' of '" +
-						(recipient.eContainer as DynamicInstance).instance.name + "'")
+				recipients += (recipient.eContainer as DynamicInstance).instance.name + "." + recipient.port.name + ", "
 				recipient.receivedMessages.add(dynamicMessage)
 			}
 		}
+		if (recipients.length > 2) {
+			recipients = recipients.substring(0, recipients.length - 2)
+		}
+		_self.log(dynamicInstance.instance.name + "." + _self._str + " -> [" + recipients + "]")
+	}
+
+	@OverrideAspectMethod
+	def public String _str() {
+		var params = _self.parameters.fold("", [s,p|s + p._str + ", "])
+		if (params.length > 2) {
+			params = params.substring(0, params.length - 2)
+		}
+		return _self.port.name + "!" + _self.message.name + "(" + params + ")"
 	}
 }

@@ -40,6 +40,7 @@ language XThingML inherits ThingML {
 	with thingml.k3.APropertyReference
 	with thingml.k3.AEventReference
 	with thingml.k3.AHandler
+	with thingml.k3.AInternalTransition
 	with thingml.k3.ATransition
 	with thingml.k3.AInstance
 	with thingml.k3.AState

@@ -14,9 +14,10 @@ import org.thingml.xtext.thingML.Instance
 import static extension thingml.k3.AInstance.*
 
 @Aspect(className=Configuration)
-class AConfiguration {
+class AConfiguration extends AEObject {
 	@InitializeModel
 	def public void init(EList<String> p) {
+		_self.log("Config: Start initialization")
 		for (Instance instance : _self.instances) {
 			instance.init()
 		}
@@ -31,10 +32,12 @@ class AConfiguration {
 				connector.cli.connect(connector)
 			}
 		}
+		_self.log("Config: End initialization")
 	}
 
 	@Main
 	def public void main() {
+		_self.log("Config: Start main")
 		var running = false
 
 		// first run
@@ -42,6 +45,8 @@ class AConfiguration {
 			instance.enterInitialState()
 			running = instance.run() || running
 		}
+
+		_self.log("Config: End of the first runs")
 
 		// other runs
 		while (running) {
@@ -55,7 +60,8 @@ class AConfiguration {
 	}
 
 	@Step
-	def private void end() {
+	def public void end() {
 		// Do nothing
+		_self.log("Config: End")
 	}
 }

@@ -35,7 +35,7 @@ import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=Expression)
-class AExpression {
+class AExpression extends AEObject {
 	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
 		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
 	}
@@ -49,12 +49,22 @@ class AExpression {
 class AFunctionCallExpression extends AExpression {
 	@OverrideAspectMethod
 	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
-		println("   Calling function '" + _self.function.name + "'")
+		var params = _self.parameters.fold("", [s,p|s + p._str + ", "])
+		if (params.length > 2) {
+			params = params.substring(0, params.length - 2)
+		}
+		_self.log("Preparing function call: " + _self.function.name + "(" + params + ")")
+		_self.tab
 		val parameterValues = new BasicEList<Value>()
 		_self.parameters.forEach[p|parameterValues.add(p.value(dynamicInstance, false))]
 		dynamicInstance.enterExecutionFrame(_self.function.parameters, parameterValues)
+		_self.detab
+		_self.log("Execute function '" + _self.function.name + "'")
+		_self.tab
 		_self.function.body.execute(dynamicInstance)
-		return dynamicInstance.leaveExecutionFrame()
+		val returnValue = dynamicInstance.leaveExecutionFrame
+		_self.detab
+		return returnValue
 	}
 
 	@OverrideAspectMethod
@@ -307,7 +317,7 @@ class AStringLiteral extends AExpression {
 
 	@OverrideAspectMethod
 	def public String _str() {
-		return _self.stringValue
+		return "\"" + _self.stringValue + "\""
 	}
 }
 

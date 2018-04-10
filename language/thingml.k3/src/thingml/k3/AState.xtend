@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.common.util.EList
 import org.thingml.xtext.thingML.CompositeState
 import org.thingml.xtext.thingML.FinalState
+import org.thingml.xtext.thingML.Handler
 import org.thingml.xtext.thingML.State
 import thingML.DynamicInstance
 
@@ -16,7 +17,7 @@ import static extension thingml.k3.AHandler.*
 import static extension thingml.k3.AInstance.running
 
 @Aspect(className=State)
-class AState {
+class AState extends AEObject {
 	def public EList<CompositeState> _getRootPath(State state) {
 		val path = new BasicEList<CompositeState>()
 		var parent = state.eContainer
@@ -41,7 +42,7 @@ class AState {
 
 	def public void _switchState(DynamicInstance dynamicInstance, State newState) {
 		val ancestorToNewState = _self._getPathToState(dynamicInstance, _self, newState)
-		println("   Common ancestor is : " + ancestorToNewState.head.name)
+		_self.log("Common ancestor is : " + ancestorToNewState.head.name, 2)
 		var compositeState = _self.eContainer as CompositeState
 		while (compositeState !== ancestorToNewState.head) {
 			dynamicInstance.getDynamicCompositeState(compositeState as CompositeState).currentState = null
@@ -58,91 +59,71 @@ class AState {
 	}
 
 	@Step
-	def public boolean runSpontaneousTransitions(DynamicInstance dynamicInstance) {
-		println("   " + dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
-		val spontaneousOutgoings = _self.outgoing.filter[t|t.event === null]
-		val spontaneousInternals = _self.internal.filter[i|i.event === null]
-		val spontaneousTransitions = spontaneousOutgoings + spontaneousInternals
-		val validSpontaneousTransitions = spontaneousTransitions.filter[h|h.isValid(dynamicInstance)].toList
-		if (!validSpontaneousTransitions.empty) {
-			val transition = validSpontaneousTransitions.get(0)
-			val newState = transition.fire(_self, dynamicInstance)
-			if (_self !== newState) {
-				_self._switchState(dynamicInstance, newState)
-				if (newState instanceof FinalState) {
-					println("   '" + dynamicInstance.instance.name + "' entered final state")
-					dynamicInstance.instance.running = false
-				}
-			} else {
-				println("   Staying in state '" + _self.name + "'")
-			}
-			return true
+	def public boolean runATransition(DynamicInstance dynamicInstance, boolean spontaneous) {
+		_self.log(dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
+		_self.tab
+		var Iterable<Handler> transitions
+		if (spontaneous) {
+			transitions = _self.internal.filter[i|i.event === null] + _self.outgoing.filter[t|t.event === null]
+		} else {
+			transitions = _self.internal.filter[i|i.event !== null] + _self.outgoing.filter[t|t.event !== null]
 		}
-		println("   It didn't move...")
-		return false
-	}
-
-	def public boolean runATransition(DynamicInstance dynamicInstance) {
-		println("   " + dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
-		val nonSpontaneousOutgoings = _self.outgoing.filter[t|t.event !== null]
-		val nonSpontaneousInternals = _self.internal.filter[i|i.event !== null]
-		val nonSpontaneousTransitions = nonSpontaneousOutgoings + nonSpontaneousInternals
-		val validNonSpontaneousTransitions = nonSpontaneousTransitions.filter[h|h.isValid(dynamicInstance)].toList
-		if (!validNonSpontaneousTransitions.empty) {
-			val transition = validNonSpontaneousTransitions.get(0)
-			val newState = transition.fire(_self, dynamicInstance)
-			if (_self !== newState) {
-				_self._switchState(dynamicInstance, newState)
-				if (newState instanceof FinalState) {
-					println("   '" + dynamicInstance.instance.name + "' entered final state")
-					dynamicInstance.instance.running = false
+		for (Handler transition : transitions) {
+			if (transition.isValid(dynamicInstance)) {
+				val newState = transition.fire(_self, dynamicInstance)
+				if (_self !== newState) {
+					_self.log(dynamicInstance.instance.name + ": Switching state -> " + newState.name)
+					_self.tab
+					_self._switchState(dynamicInstance, newState)
+					_self.detab
+					if (newState instanceof FinalState) {
+						_self.log(dynamicInstance.instance.name + ": Entered final state")
+						dynamicInstance.instance.running = false
+					}
+				} else {
+					_self.log("Staying in state '" + _self.name + "'")
 				}
-			} else {
-				println("   Staying in state '" + _self.name + "'")
+				_self.detab
+				return true
 			}
-			return true
 		}
-		println("   It didn't move...")
+		_self.detab
 		return false
 	}
 
 	def public void onEntry(DynamicInstance dynamicInstance) {
 		if (_self.entry !== null) {
-			println("   Executing '" + _self.name + ".entry' for instance '" + dynamicInstance.instance.name + "'")
+			_self.log(dynamicInstance.instance.name + ": " + _self.name + ".entry")
+			_self.tab
 			_self.entry.execute(dynamicInstance)
+			_self.detab
 		}
 	}
 
 	def public void onExit(DynamicInstance dynamicInstance) {
 		if (_self.exit !== null) {
-			println("   Executing '" + _self.name + ".exit' for instance '" + dynamicInstance.instance.name + "'")
+			_self.log(dynamicInstance.instance.name + ": " + _self.name + ".exit")
+			_self.tab
 			_self.exit.execute(dynamicInstance)
+			_self.detab
 		}
 	}
 }
 
 @Aspect(className=CompositeState)
 class ACompositeState extends AState {
+	@Step
 	@OverrideAspectMethod
-	def public boolean runSpontaneousTransitions(DynamicInstance dynamicInstance) {
-		var hasMoved = _self.super_runSpontaneousTransitions(dynamicInstance)
-		if (!hasMoved) {
-			println("   But was a CompositeState! Then, trying with child")
-			hasMoved = dynamicInstance.getDynamicCompositeState(_self).currentState.
-				runSpontaneousTransitions(dynamicInstance)
-		}
-		return hasMoved
-	}
+	def public boolean runATransition(DynamicInstance dynamicInstance, boolean spontaneous) {
+		var boolean hasMoved
 
-	@OverrideAspectMethod
-	def public boolean runATransition(DynamicInstance dynamicInstance) {
-		println("   " + dynamicInstance.instance.name + ": '" + _self.name +
-			"' is a CompositeState, trying to move child first")
-		var hasMoved = dynamicInstance.getDynamicCompositeState(_self).currentState.runATransition(dynamicInstance)
-		if (!hasMoved) {
-			println("   Now trying with '" + _self.name + "'")
-			hasMoved = _self.super_runATransition(dynamicInstance)
+		val currentState = dynamicInstance.getDynamicCompositeState(_self).currentState
+		if (spontaneous) {
+			hasMoved = _self.super_runATransition(dynamicInstance, spontaneous) || currentState.runATransition(dynamicInstance, spontaneous)
+		} else {
+			hasMoved = currentState.runATransition(dynamicInstance, spontaneous) || _self.super_runATransition(dynamicInstance, spontaneous)
 		}
+
 		return hasMoved
 	}
 }

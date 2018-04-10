@@ -25,6 +25,7 @@ abstract class ThingmlTestSuite {
 	@Test
 	def void fullTest() {
 		println(">>> EXECUTING FULL TEST FOR MODEL '" + modelName + "'")
+		config.setLogLevel(1)
 		config.init(new BasicEList<String>())
 		config.main()
 	}
