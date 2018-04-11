@@ -8,8 +8,10 @@ import org.eclipse.emf.common.util.EList
 import org.thingml.xtext.thingML.CompositeState
 import org.thingml.xtext.thingML.FinalState
 import org.thingml.xtext.thingML.Handler
+import org.thingml.xtext.thingML.ReceiveMessage
 import org.thingml.xtext.thingML.State
 import thingML.DynamicInstance
+import thingML.DynamicMessage
 
 import static extension thingml.k3.AAction.execute
 import static extension thingml.k3.ADynamicInstance.getDynamicCompositeState
@@ -59,15 +61,44 @@ class AState extends AEObject {
 	}
 
 	@Step
-	def public boolean runATransition(DynamicInstance dynamicInstance, boolean spontaneous) {
+	def public boolean runASpontaneousTransition(DynamicInstance dynamicInstance) {
 		_self.log(dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
 		_self.tab
-		var Iterable<Handler> transitions
-		if (spontaneous) {
-			transitions = _self.internal.filter[i|i.event === null] + _self.outgoing.filter[t|t.event === null]
-		} else {
-			transitions = _self.internal.filter[i|i.event !== null] + _self.outgoing.filter[t|t.event !== null]
+		val transitions = _self.internal.filter[i|i.event === null] + _self.outgoing.filter[t|t.event === null]
+		for (Handler transition : transitions) {
+			if (transition.isValid(dynamicInstance)) {
+				val newState = transition.fire(_self, dynamicInstance)
+				if (_self !== newState) {
+					_self.log(dynamicInstance.instance.name + ": Switching state -> " + newState.name)
+					_self.tab
+					_self._switchState(dynamicInstance, newState)
+					_self.detab
+					if (newState instanceof FinalState) {
+						_self.log(dynamicInstance.instance.name + ": Entered final state")
+						dynamicInstance.instance.running = false
+					}
+				} else {
+					_self.log("Staying in state '" + _self.name + "'")
+				}
+				_self.detab
+				return true
+			}
 		}
+		_self.detab
+		return false
+	}
+
+	@Step
+	def public boolean runAEventDrivenTransition(DynamicInstance dynamicInstance, DynamicMessage dynamicMessage) {
+		_self.log(dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
+		_self.tab
+		val internals = _self.internal.filter [i|
+			i.event instanceof ReceiveMessage && (i.event as ReceiveMessage).message === dynamicMessage.message
+		]
+		val outgoings = _self.outgoing.filter [o|
+			o.event instanceof ReceiveMessage && (o.event as ReceiveMessage).message === dynamicMessage.message
+		]
+		val transitions = internals + outgoings
 		for (Handler transition : transitions) {
 			if (transition.isValid(dynamicInstance)) {
 				val newState = transition.fire(_self, dynamicInstance)
@@ -114,16 +145,17 @@ class AState extends AEObject {
 class ACompositeState extends AState {
 	@Step
 	@OverrideAspectMethod
-	def public boolean runATransition(DynamicInstance dynamicInstance, boolean spontaneous) {
-		var boolean hasMoved
-
+	def public boolean runASpontaneousTransition(DynamicInstance dynamicInstance) {
 		val currentState = dynamicInstance.getDynamicCompositeState(_self).currentState
-		if (spontaneous) {
-			hasMoved = _self.super_runATransition(dynamicInstance, spontaneous) || currentState.runATransition(dynamicInstance, spontaneous)
-		} else {
-			hasMoved = currentState.runATransition(dynamicInstance, spontaneous) || _self.super_runATransition(dynamicInstance, spontaneous)
-		}
+		return _self.super_runASpontaneousTransition(dynamicInstance) ||
+			currentState.runASpontaneousTransition(dynamicInstance)
+	}
 
-		return hasMoved
+	@Step
+	@OverrideAspectMethod
+	def public boolean runAEventDrivenTransition(DynamicInstance dynamicInstance, DynamicMessage dynamicMessage) {
+		val currentState = dynamicInstance.getDynamicCompositeState(_self).currentState
+		return currentState.runAEventDrivenTransition(dynamicInstance, dynamicMessage) ||
+			_self.super_runAEventDrivenTransition(dynamicInstance, dynamicMessage)
 	}
 }

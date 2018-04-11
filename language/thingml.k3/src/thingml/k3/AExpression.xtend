@@ -49,7 +49,7 @@ class AExpression extends AEObject {
 class AFunctionCallExpression extends AExpression {
 	@OverrideAspectMethod
 	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
-		var params = _self.parameters.fold("", [s,p|s + p._str + ", "])
+		var params = _self.parameters.fold("", [s, p|s + p._str + ", "])
 		if (params.length > 2) {
 			params = params.substring(0, params.length - 2)
 		}

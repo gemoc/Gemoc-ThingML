@@ -17,6 +17,8 @@ import thingML.ArrayProxyEntry
 import thingML.ArrayProxyValue
 import thingML.ArrayValue
 import thingML.DynamicInstance
+import thingML.DynamicMessage
+import thingML.DynamicPort
 import thingML.DynamicProperty
 import thingML.IntegerValue
 import thingML.ProxyValue
@@ -24,8 +26,10 @@ import thingML.ThingMLFactory
 import thingML.Value
 
 import static extension thingml.k3.ADynamicInstance.*
+import static extension thingml.k3.AEObject.*
 import static extension thingml.k3.AExpression.value
 import static extension thingml.k3.AState.*
+import static extension thingml.k3.AValue._str
 
 @Aspect(className=Instance)
 class AInstance {
@@ -229,7 +233,8 @@ class AInstance {
 				var i = 0
 				for (Value value : (dynamicProperty.value as ArrayValue).values) {
 					if (value instanceof ProxyValue) {
-						_self.log("Entering ProxyValue of property '" + dynamicProperty.property.name + "[" + i + "]'", 2)
+						_self.log("Entering ProxyValue of property '" + dynamicProperty.property.name + "[" + i + "]'",
+							2)
 						proxy_counter++
 						// TODO
 						throw new Exception("This is to be done")
@@ -277,6 +282,24 @@ class AInstance {
 		}
 	}
 
+	def public boolean _hasMessage() {
+		for (DynamicPort dynamicPort : _self.dynamicInstance.dynamicPorts) {
+			if (!dynamicPort.receivedMessages.empty) {
+				return true
+			}
+		}
+		return false
+	}
+
+	def public DynamicMessage _nextMessage() {
+		for (DynamicPort dynamicPort : _self.dynamicInstance.dynamicPorts) {
+			if (!dynamicPort.receivedMessages.empty) {
+				return dynamicPort.receivedMessages.remove(0)
+			}
+		}
+		throw new Exception("Not possible")
+	}
+
 	@Step
 	def public boolean run() {
 		val behaviour = _self.getBehaviour()
@@ -287,15 +310,33 @@ class AInstance {
 			while (hasSpontaneouslyMoved && _self.running) {
 				_self.log(_self.name + ": Run a spontaneous transition")
 				_self.tab
-				hasSpontaneouslyMoved = behaviour.runATransition(_self.dynamicInstance, true)
+				hasSpontaneouslyMoved = behaviour.runASpontaneousTransition(_self.dynamicInstance)
 				_self.detab
 				hasMoved = hasMoved || hasSpontaneouslyMoved
 			}
-			if (_self.running) {
-				_self.log(_self.name + ": Run a non spontaneous transition")
+			reRun = false
+			while (!reRun && _self._hasMessage && _self.running) {
+				val dynamicMessage = _self._nextMessage
+
+				for (var i = 0; i < dynamicMessage.message.parameters.length; i++) {
+					val parameter = dynamicMessage.message.parameters.get(i)
+					val value = dynamicMessage.parameters.get(i)
+					_self.dynamicInstance.addVariable(parameter, value)
+				}
+
+				var messageString = dynamicMessage.message.name + dynamicMessage.parameters.fold("", [s,v|
+					s + v._str + ", "
+				])
+				if (messageString.length > 2) {
+					messageString = messageString.substring(0, messageString.length - 2)
+				}
+				_self.log(_self.name + ": Manage message '" + messageString + "'")
 				_self.tab
-				reRun = behaviour.runATransition(_self.dynamicInstance, false)
+				reRun = behaviour.runAEventDrivenTransition(_self.dynamicInstance, dynamicMessage)
 				_self.detab
+
+				_self.dynamicInstance.clearContext
+
 				hasMoved = hasMoved || reRun
 			}
 		}

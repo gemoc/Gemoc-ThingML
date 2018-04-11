@@ -44,7 +44,7 @@ class AAction extends AEObject {
 class AFunctionCallStatement extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		var params = _self.parameters.fold("", [s,p|s + p._str + ", "])
+		var params = _self.parameters.fold("", [s, p|s + p._str + ", "])
 		if (params.length > 2) {
 			params = params.substring(0, params.length - 2)
 		}
@@ -97,7 +97,7 @@ class AActionBlock extends AAction {
 
 	@OverrideAspectMethod
 	def public String _str() {
-		var str = _self.actions.fold("", [s,a|s + a._str + " >>> "])
+		var str = _self.actions.fold("", [s, a|s + a._str + " >>> "])
 		if (str.length >= 5) {
 			str = str.substring(0, str.length - 5)
 		}
@@ -319,7 +319,7 @@ class ASendAction extends AAction {
 
 	@OverrideAspectMethod
 	def public String _str() {
-		var params = _self.parameters.fold("", [s,p|s + p._str + ", "])
+		var params = _self.parameters.fold("", [s, p|s + p._str + ", "])
 		if (params.length > 2) {
 			params = params.substring(0, params.length - 2)
 		}

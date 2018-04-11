@@ -59,7 +59,9 @@ class ADynamicInstance extends AEObject {
 	}
 
 	def public DynamicVariable _searchContext(Context context, Variable variable) {
-		var contextVariablesString = context.dynamicVariables.fold("", [l, dv|l + "(" + dv.variable.name + ":" + dv.value._str + "), "])
+		var contextVariablesString = context.dynamicVariables.fold("", [l, dv|
+			l + "(" + dv.variable.name + ":" + dv.value._str + "), "
+		])
 		if (contextVariablesString.length >= 2) {
 			contextVariablesString = contextVariablesString.substring(0, contextVariablesString.length - 2)
 		}
