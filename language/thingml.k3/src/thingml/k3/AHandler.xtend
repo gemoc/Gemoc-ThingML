@@ -9,35 +9,36 @@ import org.thingml.xtext.thingML.State
 import org.thingml.xtext.thingML.Transition
 import thingML.BooleanValue
 import thingML.DynamicInstance
+import thingml.utils.Log
 
 import static extension thingml.k3.AAction.execute
 import static extension thingml.k3.AExpression.*
 import static extension thingml.k3.AState.*
 
 @Aspect(className=Handler)
-class AHandler extends AEObject {
+class AHandler {
 	def public boolean isValid(DynamicInstance dynamicInstance) {
-		_self.tab
+		Log.tab
 
 		var guardOK = _self.guard === null
 		if (!guardOK) {
-			_self.log("Evaluate guard '" + _self.guard._str + "'")
-			_self.tab
+			Log.log("Evaluate guard '" + _self.guard._str + "'")
+			Log.tab
 			val guardValue = _self.guard.value(dynamicInstance, false)
-			_self.detab
+			Log.detab
 			guardOK = (guardValue as BooleanValue).value
 		}
 
-		_self.detab
+		Log.detab
 		return guardOK
 	}
 
 	@Step
 	def public State fire(State state, DynamicInstance dynamicInstance) {
-		_self.log("Firing Internal transition '" + _self.name + "'")
-		_self.tab
+		Log.log("Firing Internal transition '" + _self.name + "'")
+		Log.tab
 		_self.action.execute(dynamicInstance)
-		_self.detab
+		Log.detab
 		return state
 	}
 }
@@ -46,7 +47,7 @@ class AHandler extends AEObject {
 class AInternalTransition extends AHandler {
 	@OverrideAspectMethod
 	def public boolean isValid(DynamicInstance dynamicInstance) {
-		_self.log("Test Internal Transition '" + _self.name + "'")
+		Log.log("Test Internal Transition '" + _self.name + "'")
 		return _self.super_isValid(dynamicInstance)
 	}
 }
@@ -55,24 +56,24 @@ class AInternalTransition extends AHandler {
 class ATransition extends AHandler {
 	@OverrideAspectMethod
 	def public boolean isValid(DynamicInstance dynamicInstance) {
-		_self.log("Test Transition '" + _self.name + "' (-> '" + _self.target.name + "')")
+		Log.log("Test Transition '" + _self.name + "' (-> '" + _self.target.name + "')")
 		return _self.super_isValid(dynamicInstance)
 	}
 
 	@OverrideAspectMethod
 	@Step
 	def public State fire(State state, DynamicInstance dynamicInstance) {
-		_self.log("Firing Transition '" + _self.name + "' (-> '" + _self.target.name + "')")
-		_self.tab
+		Log.log("Firing Transition '" + _self.name + "' (-> '" + _self.target.name + "')")
+		Log.tab
 		state.onExit(dynamicInstance)
 		if (_self.action !== null) {
-			_self.log("Execute transition body")
-			_self.tab
+			Log.log("Execute transition body")
+			Log.tab
 			_self.action.execute(dynamicInstance)
-			_self.detab
+			Log.detab
 		}
 		_self.target.onEntry(dynamicInstance)
-		_self.detab
+		Log.detab
 		return _self.target
 	}
 }

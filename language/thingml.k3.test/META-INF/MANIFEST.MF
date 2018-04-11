@@ -9,4 +9,5 @@ Require-Bundle: thingml;bundle-version="2.0.0",
  thingml.k3;bundle-version="1.0.0",
  thingml.model;bundle-version="0.1.0",
  org.junit;bundle-version="4.12.0",
- thingml.samples;bundle-version="1.0.0"
+ thingml.samples;bundle-version="1.0.0",
+ thingml.utils;bundle-version="1.0.0"

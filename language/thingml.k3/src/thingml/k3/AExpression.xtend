@@ -29,13 +29,14 @@ import thingML.IntegerValue
 import thingML.ProxyValue
 import thingML.ThingMLFactory
 import thingML.Value
+import thingml.utils.Log
 
 import static extension thingml.k3.AAction.execute
 import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=Expression)
-class AExpression extends AEObject {
+class AExpression {
 	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
 		throw new Exception("Expression type " + _self.class.simpleName + " is not supported in semantics yet")
 	}
@@ -53,17 +54,17 @@ class AFunctionCallExpression extends AExpression {
 		if (params.length > 2) {
 			params = params.substring(0, params.length - 2)
 		}
-		_self.log("Preparing function call: " + _self.function.name + "(" + params + ")")
-		_self.tab
+		Log.log("Preparing function call: " + _self.function.name + "(" + params + ")")
+		Log.tab
 		val parameterValues = new BasicEList<Value>()
 		_self.parameters.forEach[p|parameterValues.add(p.value(dynamicInstance, false))]
 		dynamicInstance.enterExecutionFrame(_self.function.parameters, parameterValues)
-		_self.detab
-		_self.log("Execute function '" + _self.function.name + "'")
-		_self.tab
+		Log.detab
+		Log.log("Execute function '" + _self.function.name + "'")
+		Log.tab
 		_self.function.body.execute(dynamicInstance)
 		val returnValue = dynamicInstance.leaveExecutionFrame
-		_self.detab
+		Log.detab
 		return returnValue
 	}
 

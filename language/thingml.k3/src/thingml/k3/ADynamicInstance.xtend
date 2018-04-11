@@ -16,19 +16,20 @@ import thingML.DynamicProperty
 import thingML.DynamicVariable
 import thingML.ThingMLFactory
 import thingML.Value
+import thingml.utils.Log
 
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=DynamicInstance)
-class ADynamicInstance extends AEObject {
+class ADynamicInstance {
 	def public void init(Instance instance) {
-		_self.log("DynIns: Start initialization of dynamic instance '" + instance.name + "'")
+		Log.log("DynIns: Start initialization of dynamic instance '" + instance.name + "'")
 		_self.instance = instance
 		_self.executionFrame = ThingMLFactory.eINSTANCE.createFrame()
 		_self.activeFrame = _self.executionFrame
 		_self.activeFrame.rootContext = ThingMLFactory.eINSTANCE.createContext()
 		_self.activeFrame.topContext = _self.activeFrame.rootContext
-		_self.log("DynIns: End initialization of dynamic instance '" + instance.name + "'")
+		Log.log("DynIns: End initialization of dynamic instance '" + instance.name + "'")
 	}
 
 	def public DynamicProperty getDynamicProperty(Property property) {
@@ -59,13 +60,13 @@ class ADynamicInstance extends AEObject {
 	}
 
 	def public DynamicVariable _searchContext(Context context, Variable variable) {
-		var contextVariablesString = context.dynamicVariables.fold("", [l, dv|
+		var contextVariablesString = context.dynamicVariables.fold("", [ l, dv |
 			l + "(" + dv.variable.name + ":" + dv.value._str + "), "
 		])
 		if (contextVariablesString.length >= 2) {
 			contextVariablesString = contextVariablesString.substring(0, contextVariablesString.length - 2)
 		}
-		_self.log("[" + contextVariablesString + "]...", false, true, 2)
+		Log.log("[" + contextVariablesString + "]...", false, true, 2)
 		val dynamicVariableCandidates = context.dynamicVariables.filter[dv|dv.variable == variable].toList
 		if (dynamicVariableCandidates.length == 0) {
 			return null
@@ -79,7 +80,7 @@ class ADynamicInstance extends AEObject {
 	def public DynamicVariable getDynamicVariable(Variable variable) {
 		var context = _self.activeFrame.topContext
 		var DynamicVariable dynamicVariable = null
-		_self.log("Searching '" + variable.name + "' in contexts: ", false, false, 2)
+		Log.log("Searching '" + variable.name + "' in contexts: ", false, false, 2)
 		while (dynamicVariable === null && context !== null) {
 			dynamicVariable = _self._searchContext(context, variable)
 			context = context.parentContext
@@ -87,7 +88,7 @@ class ADynamicInstance extends AEObject {
 		if (dynamicVariable === null) {
 			throw new Exception("Undefined variable '" + variable.name + "'")
 		}
-		_self.log("Found!", true, true, 2)
+		Log.log("Found!", true, true, 2)
 		return dynamicVariable
 	}
 

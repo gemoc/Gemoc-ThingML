@@ -24,13 +24,14 @@ import thingML.IntegerValue
 import thingML.ThingMLFactory
 import thingML.Value
 import thingML.ValueContainer
+import thingml.utils.Log
 
 import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AExpression.*
 import static extension thingml.k3.AValue.*
 
 @Aspect(className=Action)
-class AAction extends AEObject {
+class AAction {
 	def public void execute(DynamicInstance dynamicInstance) {
 		throw new Exception("Action type " + _self.class.simpleName + " is not supported in semantics yet")
 	}
@@ -48,17 +49,17 @@ class AFunctionCallStatement extends AAction {
 		if (params.length > 2) {
 			params = params.substring(0, params.length - 2)
 		}
-		_self.log("Preparing procedure call: " + _self.function.name + "(" + params + ")")
-		_self.tab
+		Log.log("Preparing procedure call: " + _self.function.name + "(" + params + ")")
+		Log.tab
 		val parameterValues = new BasicEList<Value>()
 		_self.parameters.forEach[p|parameterValues.add(p.value(dynamicInstance, false))]
 		dynamicInstance.enterExecutionFrame(_self.function.parameters, parameterValues)
-		_self.detab
-		_self.log("Execute procedure '" + _self.function.name + "'")
-		_self.tab
+		Log.detab
+		Log.log("Execute procedure '" + _self.function.name + "'")
+		Log.tab
 		_self.function.body.execute(dynamicInstance)
 		dynamicInstance.leaveExecutionFrame()
-		_self.detab
+		Log.detab
 	}
 
 	@OverrideAspectMethod
@@ -76,7 +77,7 @@ class AReturnAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
 		val value = _self.exp.value(dynamicInstance, false)
-		_self.log("Return value (" + _self.exp._str + ":" + value._str + ")")
+		Log.log("Return value (" + _self.exp._str + ":" + value._str + ")")
 		dynamicInstance.activeFrame.returnValue = value
 	}
 
@@ -109,22 +110,22 @@ class AActionBlock extends AAction {
 class AConditionalAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		_self.log("Evaluate condition '" + _self.condition._str + "'")
-		_self.tab
+		Log.log("Evaluate condition '" + _self.condition._str + "'")
+		Log.tab
 		val condition = _self.condition.value(dynamicInstance, false)
-		_self.detab
+		Log.detab
 		if (condition instanceof BooleanValue) {
 			if (condition.value) {
-				_self.log("Condition valid")
-				_self.tab
+				Log.log("Condition valid")
+				Log.tab
 				_self.action.execute(dynamicInstance)
-				_self.detab
+				Log.detab
 			} else {
-				_self.log("Condition invalid")
+				Log.log("Condition invalid")
 				if (_self.elseAction !== null) {
-					_self.tab
+					Log.tab
 					_self.elseAction.execute(dynamicInstance)
-					_self.detab
+					Log.detab
 				}
 			}
 		} else {
@@ -145,10 +146,10 @@ class AConditionalAction extends AAction {
 @Aspect(className=LoopAction)
 class ALoopAction extends AAction {
 	def public boolean _evaluateLoopCondition(DynamicInstance dynamicInstance) {
-		_self.log("Evaluate condition '" + _self.condition._str + "'")
-		_self.tab
+		Log.log("Evaluate condition '" + _self.condition._str + "'")
+		Log.tab
 		val condition = _self.condition.value(dynamicInstance, false)
-		_self.detab
+		Log.detab
 		if (condition instanceof BooleanValue) {
 			return condition.value
 		} else {
@@ -159,12 +160,12 @@ class ALoopAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
 		while (_self._evaluateLoopCondition(dynamicInstance)) {
-			_self.log("Condition still valid")
-			_self.tab
+			Log.log("Condition still valid")
+			Log.tab
 			_self.action.execute(dynamicInstance)
-			_self.detab
+			Log.detab
 		}
-		_self.log("Condition not valid anymore")
+		Log.log("Condition not valid anymore")
 	}
 
 	@OverrideAspectMethod
@@ -178,7 +179,7 @@ class APrintAction extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
 		val messValue = _self.msg.get(0).value(dynamicInstance, false)
-		_self.log("Print '" + messValue._str + "'")
+		Log.log("Print '" + messValue._str + "'")
 		print(messValue.print)
 	}
 
@@ -193,7 +194,7 @@ class ALocalVariable extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
 		val value = _self.init.value(dynamicInstance, false)
-		_self.log("Add (" + _self.name + "," + value._str + ")")
+		Log.log("Add (" + _self.name + "," + value._str + ")")
 		dynamicInstance.addVariable(_self, value)
 	}
 
@@ -214,7 +215,7 @@ class AIncrement extends AAction {
 			valueContainer = dynamicInstance.getDynamicVariable(_self.^var)
 		}
 		valueContainer.value = valueContainer.value.increment()
-		_self.log("Assign (" + _self.^var.name + "," + valueContainer.value._str + ")")
+		Log.log("Assign (" + _self.^var.name + "," + valueContainer.value._str + ")")
 	}
 
 	@OverrideAspectMethod
@@ -234,7 +235,7 @@ class ADecrement extends AAction {
 			valueContainer = dynamicInstance.getDynamicVariable(_self.^var)
 		}
 		valueContainer.value = valueContainer.value.decrement()
-		_self.log("Assign (" + _self.^var.name + "," + valueContainer.value._str + ")")
+		Log.log("Assign (" + _self.^var.name + "," + valueContainer.value._str + ")")
 	}
 
 	@OverrideAspectMethod
@@ -255,13 +256,13 @@ class AVariableAssignment extends AAction {
 			valueContainer = dynamicInstance.getDynamicVariable(_self.property)
 		}
 		if (_self.index.empty) {
-			_self.log("Assign (" + _self.property.name + "," + value._str + ")")
+			Log.log("Assign (" + _self.property.name + "," + value._str + ")")
 			valueContainer.value = value
 		} else if (_self.index.length == 1) {
 			val index = _self.index.get(0).value(dynamicInstance, false)
 			if (index instanceof IntegerValue) {
 				if (valueContainer.value instanceof ArrayValue) {
-					_self.log("Assign (" + _self.property.name + "[" + index._str + "]," + value._str + ")")
+					Log.log("Assign (" + _self.property.name + "[" + index._str + "]," + value._str + ")")
 					val arrayValue = valueContainer.value as ArrayValue
 					// TODO fix that bullshit: we want an EList to have duplicates
 					try {
@@ -314,7 +315,7 @@ class ASendAction extends AAction {
 		if (recipients.length > 2) {
 			recipients = recipients.substring(0, recipients.length - 2)
 		}
-		_self.log(dynamicInstance.instance.name + "." + _self._str + " -> [" + recipients + "]")
+		Log.log(dynamicInstance.instance.name + "." + _self._str + " -> [" + recipients + "]")
 	}
 
 	@OverrideAspectMethod

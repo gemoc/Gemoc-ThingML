@@ -12,6 +12,7 @@ import org.thingml.xtext.thingML.ReceiveMessage
 import org.thingml.xtext.thingML.State
 import thingML.DynamicInstance
 import thingML.DynamicMessage
+import thingml.utils.Log
 
 import static extension thingml.k3.AAction.execute
 import static extension thingml.k3.ADynamicInstance.getDynamicCompositeState
@@ -19,7 +20,7 @@ import static extension thingml.k3.AHandler.*
 import static extension thingml.k3.AInstance.running
 
 @Aspect(className=State)
-class AState extends AEObject {
+class AState {
 	def public EList<CompositeState> _getRootPath(State state) {
 		val path = new BasicEList<CompositeState>()
 		var parent = state.eContainer
@@ -44,7 +45,7 @@ class AState extends AEObject {
 
 	def public void _switchState(DynamicInstance dynamicInstance, State newState) {
 		val ancestorToNewState = _self._getPathToState(dynamicInstance, _self, newState)
-		_self.log("Common ancestor is : " + ancestorToNewState.head.name, 2)
+		Log.log("Common ancestor is : " + ancestorToNewState.head.name, 2)
 		var compositeState = _self.eContainer as CompositeState
 		while (compositeState !== ancestorToNewState.head) {
 			dynamicInstance.getDynamicCompositeState(compositeState as CompositeState).currentState = null
@@ -62,36 +63,36 @@ class AState extends AEObject {
 
 	@Step
 	def public boolean runASpontaneousTransition(DynamicInstance dynamicInstance) {
-		_self.log(dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
-		_self.tab
+		Log.log(dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
+		Log.tab
 		val transitions = _self.internal.filter[i|i.event === null] + _self.outgoing.filter[t|t.event === null]
 		for (Handler transition : transitions) {
 			if (transition.isValid(dynamicInstance)) {
 				val newState = transition.fire(_self, dynamicInstance)
 				if (_self !== newState) {
-					_self.log(dynamicInstance.instance.name + ": Switching state -> " + newState.name)
-					_self.tab
+					Log.log(dynamicInstance.instance.name + ": Switching state -> " + newState.name)
+					Log.tab
 					_self._switchState(dynamicInstance, newState)
-					_self.detab
+					Log.detab
 					if (newState instanceof FinalState) {
-						_self.log(dynamicInstance.instance.name + ": Entered final state")
+						Log.log(dynamicInstance.instance.name + ": Entered final state")
 						dynamicInstance.instance.running = false
 					}
 				} else {
-					_self.log("Staying in state '" + _self.name + "'")
+					Log.log("Staying in state '" + _self.name + "'")
 				}
-				_self.detab
+				Log.detab
 				return true
 			}
 		}
-		_self.detab
+		Log.detab
 		return false
 	}
 
 	@Step
 	def public boolean runAEventDrivenTransition(DynamicInstance dynamicInstance, DynamicMessage dynamicMessage) {
-		_self.log(dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
-		_self.tab
+		Log.log(dynamicInstance.instance.name + ": Trying to move from State '" + _self.name + "'")
+		Log.tab
 		val internals = _self.internal.filter [i|
 			i.event instanceof ReceiveMessage && (i.event as ReceiveMessage).message === dynamicMessage.message
 		]
@@ -103,40 +104,40 @@ class AState extends AEObject {
 			if (transition.isValid(dynamicInstance)) {
 				val newState = transition.fire(_self, dynamicInstance)
 				if (_self !== newState) {
-					_self.log(dynamicInstance.instance.name + ": Switching state -> " + newState.name)
-					_self.tab
+					Log.log(dynamicInstance.instance.name + ": Switching state -> " + newState.name)
+					Log.tab
 					_self._switchState(dynamicInstance, newState)
-					_self.detab
+					Log.detab
 					if (newState instanceof FinalState) {
-						_self.log(dynamicInstance.instance.name + ": Entered final state")
+						Log.log(dynamicInstance.instance.name + ": Entered final state")
 						dynamicInstance.instance.running = false
 					}
 				} else {
-					_self.log("Staying in state '" + _self.name + "'")
+					Log.log("Staying in state '" + _self.name + "'")
 				}
-				_self.detab
+				Log.detab
 				return true
 			}
 		}
-		_self.detab
+		Log.detab
 		return false
 	}
 
 	def public void onEntry(DynamicInstance dynamicInstance) {
 		if (_self.entry !== null) {
-			_self.log(dynamicInstance.instance.name + ": " + _self.name + ".entry")
-			_self.tab
+			Log.log(dynamicInstance.instance.name + ": " + _self.name + ".entry")
+			Log.tab
 			_self.entry.execute(dynamicInstance)
-			_self.detab
+			Log.detab
 		}
 	}
 
 	def public void onExit(DynamicInstance dynamicInstance) {
 		if (_self.exit !== null) {
-			_self.log(dynamicInstance.instance.name + ": " + _self.name + ".exit")
-			_self.tab
+			Log.log(dynamicInstance.instance.name + ": " + _self.name + ".exit")
+			Log.tab
 			_self.exit.execute(dynamicInstance)
-			_self.detab
+			Log.detab
 		}
 	}
 }

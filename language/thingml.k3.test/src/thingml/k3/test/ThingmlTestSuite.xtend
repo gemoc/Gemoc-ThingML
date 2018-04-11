@@ -7,6 +7,7 @@ import org.junit.Before
 import org.junit.Test
 import org.thingml.xtext.thingML.Configuration
 import org.thingml.xtext.thingML.ThingMLModel
+import thingml.utils.Log
 
 import static extension thingml.k3.AConfiguration.*
 
@@ -25,7 +26,7 @@ abstract class ThingmlTestSuite {
 	@Test
 	def void fullTest() {
 		println(">>> EXECUTING FULL TEST FOR MODEL '" + modelName + "'")
-		config.setLogLevel(0)
+		Log.setLogLevel(1)
 		config.init(new BasicEList<String>())
 		config.main()
 	}

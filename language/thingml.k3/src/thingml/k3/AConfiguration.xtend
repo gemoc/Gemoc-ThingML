@@ -10,14 +10,15 @@ import org.thingml.xtext.thingML.ConfigPropertyAssign
 import org.thingml.xtext.thingML.Configuration
 import org.thingml.xtext.thingML.Connector
 import org.thingml.xtext.thingML.Instance
+import thingml.utils.Log
 
 import static extension thingml.k3.AInstance.*
 
 @Aspect(className=Configuration)
-class AConfiguration extends AEObject {
+class AConfiguration {
 	@InitializeModel
 	def public void init(EList<String> p) {
-		_self.log("Config: Start initialization")
+		Log.log("Config: Start initialization")
 		for (Instance instance : _self.instances) {
 			instance.init()
 		}
@@ -32,12 +33,12 @@ class AConfiguration extends AEObject {
 				connector.cli.connect(connector)
 			}
 		}
-		_self.log("Config: End initialization")
+		Log.log("Config: End initialization")
 	}
 
 	@Main
 	def public void main() {
-		_self.log("Config: Start main")
+		Log.log("Config: Start main")
 		var running = false
 
 		// first run
@@ -46,7 +47,7 @@ class AConfiguration extends AEObject {
 			running = instance.run() || running
 		}
 
-		_self.log("Config: End of the first runs")
+		Log.log("Config: End of the first runs")
 
 		// other runs
 		while (running) {
@@ -62,6 +63,6 @@ class AConfiguration extends AEObject {
 	@Step
 	def public void end() {
 		// Do nothing
-		_self.log("Config: End")
+		Log.log("Config: End")
 	}
 }
