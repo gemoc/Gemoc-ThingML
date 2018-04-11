@@ -107,7 +107,7 @@ class AAndExpression extends AExpression {
 
 	@OverrideAspectMethod
 	def public String _str() {
-		return _self.lhs._str() + " + " + _self.rhs._str()
+		return _self.lhs._str() + " and " + _self.rhs._str()
 	}
 }
 
