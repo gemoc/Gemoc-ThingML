@@ -57,7 +57,6 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ThingMLPackage.DYNAMIC_INSTANCE: return createDynamicInstance();
-			case ThingMLPackage.DYNAMIC_PROPERTY: return createDynamicProperty();
 			case ThingMLPackage.NULL_VALUE: return createNullValue();
 			case ThingMLPackage.INTEGER_VALUE: return createIntegerValue();
 			case ThingMLPackage.STRING_VALUE: return createStringValue();
@@ -85,16 +84,6 @@ public class ThingMLFactoryImpl extends EFactoryImpl implements ThingMLFactory {
 	public DynamicInstance createDynamicInstance() {
 		DynamicInstanceImpl dynamicInstance = new DynamicInstanceImpl();
 		return dynamicInstance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DynamicProperty createDynamicProperty() {
-		DynamicPropertyImpl dynamicProperty = new DynamicPropertyImpl();
-		return dynamicProperty;
 	}
 
 	/**

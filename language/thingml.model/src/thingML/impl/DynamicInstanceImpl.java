@@ -23,7 +23,7 @@ import org.thingml.xtext.thingML.Instance;
 import thingML.DynamicCompositeState;
 import thingML.DynamicInstance;
 import thingML.DynamicPort;
-import thingML.DynamicProperty;
+import thingML.DynamicVariable;
 import thingML.Frame;
 import thingML.ThingMLPackage;
 
@@ -35,27 +35,17 @@ import thingML.ThingMLPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link thingML.impl.DynamicInstanceImpl#getDynamicProperties <em>Dynamic Properties</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getDynamicCompositeStates <em>Dynamic Composite States</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getExecutionFrame <em>Execution Frame</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getInstance <em>Instance</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getActiveFrame <em>Active Frame</em>}</li>
  *   <li>{@link thingML.impl.DynamicInstanceImpl#getDynamicPorts <em>Dynamic Ports</em>}</li>
+ *   <li>{@link thingML.impl.DynamicInstanceImpl#getDynamicProperties <em>Dynamic Properties</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements DynamicInstance {
-	/**
-	 * The cached value of the '{@link #getDynamicProperties() <em>Dynamic Properties</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDynamicProperties()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DynamicProperty> dynamicProperties;
-
 	/**
 	 * The cached value of the '{@link #getDynamicCompositeStates() <em>Dynamic Composite States</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -107,6 +97,16 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	protected EList<DynamicPort> dynamicPorts;
 
 	/**
+	 * The cached value of the '{@link #getDynamicProperties() <em>Dynamic Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDynamicProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DynamicVariable> dynamicProperties;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -123,18 +123,6 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	protected EClass eStaticClass() {
 		return ThingMLPackage.Literals.DYNAMIC_INSTANCE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<DynamicProperty> getDynamicProperties() {
-		if (dynamicProperties == null) {
-			dynamicProperties = new EObjectContainmentEList<DynamicProperty>(DynamicProperty.class, this, ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES);
-		}
-		return dynamicProperties;
 	}
 
 	/**
@@ -285,17 +273,29 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DynamicVariable> getDynamicProperties() {
+		if (dynamicProperties == null) {
+			dynamicProperties = new EObjectContainmentEList<DynamicVariable>(DynamicVariable.class, this, ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES);
+		}
+		return dynamicProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
-				return ((InternalEList<?>)getDynamicProperties()).basicRemove(otherEnd, msgs);
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_COMPOSITE_STATES:
 				return ((InternalEList<?>)getDynamicCompositeStates()).basicRemove(otherEnd, msgs);
 			case ThingMLPackage.DYNAMIC_INSTANCE__EXECUTION_FRAME:
 				return basicSetExecutionFrame(null, msgs);
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
 				return ((InternalEList<?>)getDynamicPorts()).basicRemove(otherEnd, msgs);
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
+				return ((InternalEList<?>)getDynamicProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -308,8 +308,6 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
-				return getDynamicProperties();
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_COMPOSITE_STATES:
 				return getDynamicCompositeStates();
 			case ThingMLPackage.DYNAMIC_INSTANCE__EXECUTION_FRAME:
@@ -322,6 +320,8 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 				return basicGetActiveFrame();
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
 				return getDynamicPorts();
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
+				return getDynamicProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -335,10 +335,6 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
-				getDynamicProperties().clear();
-				getDynamicProperties().addAll((Collection<? extends DynamicProperty>)newValue);
-				return;
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_COMPOSITE_STATES:
 				getDynamicCompositeStates().clear();
 				getDynamicCompositeStates().addAll((Collection<? extends DynamicCompositeState>)newValue);
@@ -356,6 +352,10 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 				getDynamicPorts().clear();
 				getDynamicPorts().addAll((Collection<? extends DynamicPort>)newValue);
 				return;
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
+				getDynamicProperties().clear();
+				getDynamicProperties().addAll((Collection<? extends DynamicVariable>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -368,9 +368,6 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
-				getDynamicProperties().clear();
-				return;
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_COMPOSITE_STATES:
 				getDynamicCompositeStates().clear();
 				return;
@@ -386,6 +383,9 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
 				getDynamicPorts().clear();
 				return;
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
+				getDynamicProperties().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -398,8 +398,6 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
-				return dynamicProperties != null && !dynamicProperties.isEmpty();
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_COMPOSITE_STATES:
 				return dynamicCompositeStates != null && !dynamicCompositeStates.isEmpty();
 			case ThingMLPackage.DYNAMIC_INSTANCE__EXECUTION_FRAME:
@@ -410,6 +408,8 @@ public class DynamicInstanceImpl extends MinimalEObjectImpl.Container implements
 				return activeFrame != null;
 			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PORTS:
 				return dynamicPorts != null && !dynamicPorts.isEmpty();
+			case ThingMLPackage.DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES:
+				return dynamicProperties != null && !dynamicProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

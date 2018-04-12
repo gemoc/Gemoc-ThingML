@@ -31,15 +31,6 @@ public interface ThingMLFactory extends EFactory {
 	DynamicInstance createDynamicInstance();
 
 	/**
-	 * Returns a new object of class '<em>Dynamic Property</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dynamic Property</em>'.
-	 * @generated
-	 */
-	DynamicProperty createDynamicProperty();
-
-	/**
 	 * Returns a new object of class '<em>Null Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

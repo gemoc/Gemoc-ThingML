@@ -67,22 +67,13 @@ public interface ThingMLPackage extends EPackage {
 	int DYNAMIC_INSTANCE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Dynamic Properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES = 0;
-
-	/**
 	 * The feature id for the '<em><b>Dynamic Composite States</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_INSTANCE__DYNAMIC_COMPOSITE_STATES = 1;
+	int DYNAMIC_INSTANCE__DYNAMIC_COMPOSITE_STATES = 0;
 
 	/**
 	 * The feature id for the '<em><b>Execution Frame</b></em>' containment reference.
@@ -91,7 +82,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_INSTANCE__EXECUTION_FRAME = 2;
+	int DYNAMIC_INSTANCE__EXECUTION_FRAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Instance</b></em>' reference.
@@ -100,7 +91,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_INSTANCE__INSTANCE = 3;
+	int DYNAMIC_INSTANCE__INSTANCE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Active Frame</b></em>' reference.
@@ -109,7 +100,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_INSTANCE__ACTIVE_FRAME = 4;
+	int DYNAMIC_INSTANCE__ACTIVE_FRAME = 3;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic Ports</b></em>' containment reference list.
@@ -118,7 +109,16 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_INSTANCE__DYNAMIC_PORTS = 5;
+	int DYNAMIC_INSTANCE__DYNAMIC_PORTS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Dynamic Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES = 5;
 
 	/**
 	 * The number of structural features of the '<em>Dynamic Instance</em>' class.
@@ -139,89 +139,6 @@ public interface ThingMLPackage extends EPackage {
 	int DYNAMIC_INSTANCE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link thingML.impl.ValueContainerImpl <em>Value Container</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.ValueContainerImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getValueContainer()
-	 * @generated
-	 */
-	int VALUE_CONTAINER = 17;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_CONTAINER__VALUE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Value Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_CONTAINER_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Value Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_CONTAINER_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link thingML.impl.DynamicPropertyImpl <em>Dynamic Property</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thingML.impl.DynamicPropertyImpl
-	 * @see thingML.impl.ThingMLPackageImpl#getDynamicProperty()
-	 * @generated
-	 */
-	int DYNAMIC_PROPERTY = 1;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_PROPERTY__VALUE = VALUE_CONTAINER__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_PROPERTY__PROPERTY = VALUE_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Dynamic Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_PROPERTY_FEATURE_COUNT = VALUE_CONTAINER_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Dynamic Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_PROPERTY_OPERATION_COUNT = VALUE_CONTAINER_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link thingML.impl.ValueImpl <em>Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -229,7 +146,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getValue()
 	 * @generated
 	 */
-	int VALUE = 2;
+	int VALUE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Value</em>' class.
@@ -257,7 +174,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getNullValue()
 	 * @generated
 	 */
-	int NULL_VALUE = 3;
+	int NULL_VALUE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Null Value</em>' class.
@@ -285,7 +202,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getIntegerValue()
 	 * @generated
 	 */
-	int INTEGER_VALUE = 4;
+	int INTEGER_VALUE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -322,7 +239,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getStringValue()
 	 * @generated
 	 */
-	int STRING_VALUE = 5;
+	int STRING_VALUE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -359,7 +276,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getArrayValue()
 	 * @generated
 	 */
-	int ARRAY_VALUE = 6;
+	int ARRAY_VALUE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' reference list.
@@ -396,7 +313,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getProxyValue()
 	 * @generated
 	 */
-	int PROXY_VALUE = 7;
+	int PROXY_VALUE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' reference.
@@ -433,7 +350,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getArrayProxyValue()
 	 * @generated
 	 */
-	int ARRAY_PROXY_VALUE = 8;
+	int ARRAY_PROXY_VALUE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' reference.
@@ -479,7 +396,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getArrayProxyEntry()
 	 * @generated
 	 */
-	int ARRAY_PROXY_ENTRY = 9;
+	int ARRAY_PROXY_ENTRY = 8;
 
 	/**
 	 * The feature id for the '<em><b>Index Expression</b></em>' reference.
@@ -525,7 +442,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getDynamicCompositeState()
 	 * @generated
 	 */
-	int DYNAMIC_COMPOSITE_STATE = 10;
+	int DYNAMIC_COMPOSITE_STATE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Composite State</b></em>' reference.
@@ -571,7 +488,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getFrame()
 	 * @generated
 	 */
-	int FRAME = 11;
+	int FRAME = 10;
 
 	/**
 	 * The feature id for the '<em><b>Child Frame</b></em>' containment reference.
@@ -644,7 +561,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getContext()
 	 * @generated
 	 */
-	int CONTEXT = 12;
+	int CONTEXT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Child Context</b></em>' containment reference.
@@ -699,16 +616,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getDynamicVariable()
 	 * @generated
 	 */
-	int DYNAMIC_VARIABLE = 13;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_VARIABLE__VALUE = VALUE_CONTAINER__VALUE;
+	int DYNAMIC_VARIABLE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -717,7 +625,16 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_VARIABLE__VARIABLE = VALUE_CONTAINER_FEATURE_COUNT + 0;
+	int DYNAMIC_VARIABLE__VARIABLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_VARIABLE__VALUE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Dynamic Variable</em>' class.
@@ -726,7 +643,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_VARIABLE_FEATURE_COUNT = VALUE_CONTAINER_FEATURE_COUNT + 1;
+	int DYNAMIC_VARIABLE_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Dynamic Variable</em>' class.
@@ -735,7 +652,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_VARIABLE_OPERATION_COUNT = VALUE_CONTAINER_OPERATION_COUNT + 0;
+	int DYNAMIC_VARIABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link thingML.impl.BooleanValueImpl <em>Boolean Value</em>}' class.
@@ -745,7 +662,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getBooleanValue()
 	 * @generated
 	 */
-	int BOOLEAN_VALUE = 14;
+	int BOOLEAN_VALUE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -782,7 +699,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getDynamicPort()
 	 * @generated
 	 */
-	int DYNAMIC_PORT = 15;
+	int DYNAMIC_PORT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Port</b></em>' reference.
@@ -837,7 +754,7 @@ public interface ThingMLPackage extends EPackage {
 	 * @see thingML.impl.ThingMLPackageImpl#getDynamicMessage()
 	 * @generated
 	 */
-	int DYNAMIC_MESSAGE = 16;
+	int DYNAMIC_MESSAGE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' reference.
@@ -885,17 +802,6 @@ public interface ThingMLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDynamicInstance();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link thingML.DynamicInstance#getDynamicProperties <em>Dynamic Properties</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Dynamic Properties</em>'.
-	 * @see thingML.DynamicInstance#getDynamicProperties()
-	 * @see #getDynamicInstance()
-	 * @generated
-	 */
-	EReference getDynamicInstance_DynamicProperties();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link thingML.DynamicInstance#getDynamicCompositeStates <em>Dynamic Composite States</em>}'.
@@ -953,25 +859,15 @@ public interface ThingMLPackage extends EPackage {
 	EReference getDynamicInstance_DynamicPorts();
 
 	/**
-	 * Returns the meta object for class '{@link thingML.DynamicProperty <em>Dynamic Property</em>}'.
+	 * Returns the meta object for the containment reference list '{@link thingML.DynamicInstance#getDynamicProperties <em>Dynamic Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Dynamic Property</em>'.
-	 * @see thingML.DynamicProperty
+	 * @return the meta object for the containment reference list '<em>Dynamic Properties</em>'.
+	 * @see thingML.DynamicInstance#getDynamicProperties()
+	 * @see #getDynamicInstance()
 	 * @generated
 	 */
-	EClass getDynamicProperty();
-
-	/**
-	 * Returns the meta object for the reference '{@link thingML.DynamicProperty#getProperty <em>Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property</em>'.
-	 * @see thingML.DynamicProperty#getProperty()
-	 * @see #getDynamicProperty()
-	 * @generated
-	 */
-	EReference getDynamicProperty_Property();
+	EReference getDynamicInstance_DynamicProperties();
 
 	/**
 	 * Returns the meta object for class '{@link thingML.Value <em>Value</em>}'.
@@ -1292,6 +1188,17 @@ public interface ThingMLPackage extends EPackage {
 	EReference getDynamicVariable_Variable();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link thingML.DynamicVariable#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see thingML.DynamicVariable#getValue()
+	 * @see #getDynamicVariable()
+	 * @generated
+	 */
+	EReference getDynamicVariable_Value();
+
+	/**
 	 * Returns the meta object for class '{@link thingML.BooleanValue <em>Boolean Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1388,27 +1295,6 @@ public interface ThingMLPackage extends EPackage {
 	EReference getDynamicMessage_Parameters();
 
 	/**
-	 * Returns the meta object for class '{@link thingML.ValueContainer <em>Value Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Value Container</em>'.
-	 * @see thingML.ValueContainer
-	 * @generated
-	 */
-	EClass getValueContainer();
-
-	/**
-	 * Returns the meta object for the reference '{@link thingML.ValueContainer#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value</em>'.
-	 * @see thingML.ValueContainer#getValue()
-	 * @see #getValueContainer()
-	 * @generated
-	 */
-	EReference getValueContainer_Value();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1440,14 +1326,6 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DYNAMIC_INSTANCE = eINSTANCE.getDynamicInstance();
-
-		/**
-		 * The meta object literal for the '<em><b>Dynamic Properties</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES = eINSTANCE.getDynamicInstance_DynamicProperties();
 
 		/**
 		 * The meta object literal for the '<em><b>Dynamic Composite States</b></em>' containment reference list feature.
@@ -1490,22 +1368,12 @@ public interface ThingMLPackage extends EPackage {
 		EReference DYNAMIC_INSTANCE__DYNAMIC_PORTS = eINSTANCE.getDynamicInstance_DynamicPorts();
 
 		/**
-		 * The meta object literal for the '{@link thingML.impl.DynamicPropertyImpl <em>Dynamic Property</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see thingML.impl.DynamicPropertyImpl
-		 * @see thingML.impl.ThingMLPackageImpl#getDynamicProperty()
-		 * @generated
-		 */
-		EClass DYNAMIC_PROPERTY = eINSTANCE.getDynamicProperty();
-
-		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Dynamic Properties</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DYNAMIC_PROPERTY__PROPERTY = eINSTANCE.getDynamicProperty_Property();
+		EReference DYNAMIC_INSTANCE__DYNAMIC_PROPERTIES = eINSTANCE.getDynamicInstance_DynamicProperties();
 
 		/**
 		 * The meta object literal for the '{@link thingML.impl.ValueImpl <em>Value</em>}' class.
@@ -1772,6 +1640,14 @@ public interface ThingMLPackage extends EPackage {
 		EReference DYNAMIC_VARIABLE__VARIABLE = eINSTANCE.getDynamicVariable_Variable();
 
 		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DYNAMIC_VARIABLE__VALUE = eINSTANCE.getDynamicVariable_Value();
+
+		/**
 		 * The meta object literal for the '{@link thingML.impl.BooleanValueImpl <em>Boolean Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1848,24 +1724,6 @@ public interface ThingMLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DYNAMIC_MESSAGE__PARAMETERS = eINSTANCE.getDynamicMessage_Parameters();
-
-		/**
-		 * The meta object literal for the '{@link thingML.impl.ValueContainerImpl <em>Value Container</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see thingML.impl.ValueContainerImpl
-		 * @see thingML.impl.ThingMLPackageImpl#getValueContainer()
-		 * @generated
-		 */
-		EClass VALUE_CONTAINER = eINSTANCE.getValueContainer();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VALUE_CONTAINER__VALUE = eINSTANCE.getValueContainer_Value();
 
 	}
 

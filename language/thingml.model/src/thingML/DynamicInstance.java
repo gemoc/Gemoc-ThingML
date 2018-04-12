@@ -17,12 +17,12 @@ import org.thingml.xtext.thingML.Instance;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link thingML.DynamicInstance#getDynamicProperties <em>Dynamic Properties</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getDynamicCompositeStates <em>Dynamic Composite States</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getExecutionFrame <em>Execution Frame</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getInstance <em>Instance</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getActiveFrame <em>Active Frame</em>}</li>
  *   <li>{@link thingML.DynamicInstance#getDynamicPorts <em>Dynamic Ports</em>}</li>
+ *   <li>{@link thingML.DynamicInstance#getDynamicProperties <em>Dynamic Properties</em>}</li>
  * </ul>
  *
  * @see thingML.ThingMLPackage#getDynamicInstance()
@@ -30,22 +30,6 @@ import org.thingml.xtext.thingML.Instance;
  * @generated
  */
 public interface DynamicInstance extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Dynamic Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link thingML.DynamicProperty}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dynamic Properties</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dynamic Properties</em>' containment reference list.
-	 * @see thingML.ThingMLPackage#getDynamicInstance_DynamicProperties()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<DynamicProperty> getDynamicProperties();
-
 	/**
 	 * Returns the value of the '<em><b>Dynamic Composite States</b></em>' containment reference list.
 	 * The list contents are of type {@link thingML.DynamicCompositeState}.
@@ -155,5 +139,21 @@ public interface DynamicInstance extends EObject {
 	 * @generated
 	 */
 	EList<DynamicPort> getDynamicPorts();
+
+	/**
+	 * Returns the value of the '<em><b>Dynamic Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link thingML.DynamicVariable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dynamic Properties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dynamic Properties</em>' containment reference list.
+	 * @see thingML.ThingMLPackage#getDynamicInstance_DynamicProperties()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DynamicVariable> getDynamicProperties();
 
 } // DynamicInstance
