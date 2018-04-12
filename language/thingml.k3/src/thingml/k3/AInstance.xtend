@@ -323,13 +323,11 @@ class AInstance {
 					_self.dynamicInstance.addVariable(parameter, value)
 				}
 
-				var messageString = dynamicMessage.message.name + dynamicMessage.parameters.fold("", [ s, v |
-					s + v._str + ", "
-				])
-				if (messageString.length > 2) {
-					messageString = messageString.substring(0, messageString.length - 2)
+				var params = dynamicMessage.parameters.fold("", [s, v|s + v._str + ", "])
+				if (params.length > 2) {
+					params = params.substring(0, params.length - 2)
 				}
-				Log.log(_self.name + ": Manage message '" + messageString + "'")
+				Log.log(_self.name + ": Manage message '" + dynamicMessage.message.name + params + "'")
 				Log.tab
 				reRun = behaviour.runAEventDrivenTransition(_self.dynamicInstance, dynamicMessage)
 				Log.detab
