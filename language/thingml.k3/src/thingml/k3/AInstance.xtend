@@ -19,7 +19,7 @@ import thingML.ArrayValue
 import thingML.DynamicInstance
 import thingML.DynamicMessage
 import thingML.DynamicPort
-import thingML.DynamicProperty
+import thingML.DynamicVariable
 import thingML.IntegerValue
 import thingML.ProxyValue
 import thingML.ThingMLFactory
@@ -41,8 +41,8 @@ class AInstance {
 			_self.initProperties(fragment)
 		}
 		for (Property property : thing.properties) {
-			val entry = ThingMLFactory.eINSTANCE.createDynamicProperty()
-			entry.property = property
+			val entry = ThingMLFactory.eINSTANCE.createDynamicVariable()
+			entry.variable = property
 			if (property.typeRef.isArray) {
 				val length_value = property.typeRef.cardinality.value(_self.dynamicInstance, true)
 				if (length_value instanceof ProxyValue) {
@@ -69,7 +69,7 @@ class AInstance {
 	}
 
 	def public void _assignProperties(Property property, EList<Expression> index_list, Expression init) {
-		val entry = _self.dynamicInstance.getDynamicProperty(property)
+		val entry = _self.dynamicInstance.getDynamicVariable(property)
 		if (index_list.length == 0) {
 			entry.value = init.value(_self.dynamicInstance, true)
 		} else if (index_list.length == 1) {
@@ -170,12 +170,12 @@ class AInstance {
 		var proxy_counter = 0
 		var proxy_resolved = 0
 
-		for (DynamicProperty dynamicProperty : _self.dynamicInstance.dynamicProperties) {
+		for (DynamicVariable dynamicProperty : _self.dynamicInstance.dynamicProperties) {
 
 			if (dynamicProperty.value instanceof ArrayProxyValue) {
 				val array_proxy = (dynamicProperty.value as ArrayProxyValue)
 
-				Log.log("Entering ArrayProxyValue of property '" + dynamicProperty.property.name + "'", 2)
+				Log.log("Entering ArrayProxyValue of property '" + dynamicProperty.variable.name + "'", 2)
 				proxy_counter++
 
 				val cardinality = array_proxy.expression.value(_self.dynamicInstance, false)
@@ -220,7 +220,7 @@ class AInstance {
 					}
 				}
 			} else if (dynamicProperty.value instanceof ProxyValue) {
-				Log.log("Analysing ProxyValue of property '" + dynamicProperty.property.name + "'", 2)
+				Log.log("Analysing ProxyValue of property '" + dynamicProperty.variable.name + "'", 2)
 				proxy_counter++
 				val proxyValue = dynamicProperty.value as ProxyValue
 				dynamicProperty.value = proxyValue.expression.value(_self.dynamicInstance, false)
@@ -229,11 +229,11 @@ class AInstance {
 					proxy_resolved++
 				}
 			} else if (dynamicProperty.value instanceof ArrayValue) {
-				Log.log("Analysing ArrayValue of property '" + dynamicProperty.property.name + "'", 2)
+				Log.log("Analysing ArrayValue of property '" + dynamicProperty.variable.name + "'", 2)
 				var i = 0
 				for (Value value : (dynamicProperty.value as ArrayValue).values) {
 					if (value instanceof ProxyValue) {
-						Log.log("Entering ProxyValue of property '" + dynamicProperty.property.name + "[" + i + "]'", 2)
+						Log.log("Entering ProxyValue of property '" + dynamicProperty.variable.name + "[" + i + "]'", 2)
 						proxy_counter++
 						// TODO
 						throw new Exception("This is to be done")

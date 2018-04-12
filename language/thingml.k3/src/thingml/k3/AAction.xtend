@@ -20,10 +20,10 @@ import thingML.ArrayValue
 import thingML.BooleanValue
 import thingML.DynamicInstance
 import thingML.DynamicPort
+import thingML.DynamicVariable
 import thingML.IntegerValue
 import thingML.ThingMLFactory
 import thingML.Value
-import thingML.ValueContainer
 import thingml.utils.Log
 
 import static extension thingml.k3.ADynamicInstance.*
@@ -208,14 +208,14 @@ class ALocalVariable extends AAction {
 class AIncrement extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		var ValueContainer valueContainer
+		var DynamicVariable dynamicVariable
 		if (_self.^var instanceof Property) {
-			valueContainer = dynamicInstance.getDynamicProperty(_self.^var as Property)
+			dynamicVariable = dynamicInstance.getDynamicVariable(_self.^var as Property)
 		} else {
-			valueContainer = dynamicInstance.getDynamicVariable(_self.^var)
+			dynamicVariable = dynamicInstance.getDynamicVariable(_self.^var)
 		}
-		valueContainer.value = valueContainer.value.increment()
-		Log.log("Assign (" + _self.^var.name + "," + valueContainer.value._str + ")")
+		dynamicVariable.value = dynamicVariable.value.increment()
+		Log.log("Assign (" + _self.^var.name + "," + dynamicVariable.value._str + ")")
 	}
 
 	@OverrideAspectMethod
@@ -228,14 +228,14 @@ class AIncrement extends AAction {
 class ADecrement extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
-		var ValueContainer valueContainer
+		var DynamicVariable dynamicVariable
 		if (_self.^var instanceof Property) {
-			valueContainer = dynamicInstance.getDynamicProperty(_self.^var as Property)
+			dynamicVariable = dynamicInstance.getDynamicVariable(_self.^var as Property)
 		} else {
-			valueContainer = dynamicInstance.getDynamicVariable(_self.^var)
+			dynamicVariable = dynamicInstance.getDynamicVariable(_self.^var)
 		}
-		valueContainer.value = valueContainer.value.decrement()
-		Log.log("Assign (" + _self.^var.name + "," + valueContainer.value._str + ")")
+		dynamicVariable.value = dynamicVariable.value.decrement()
+		Log.log("Assign (" + _self.^var.name + "," + dynamicVariable.value._str + ")")
 	}
 
 	@OverrideAspectMethod
@@ -249,21 +249,21 @@ class AVariableAssignment extends AAction {
 	@OverrideAspectMethod
 	def public void execute(DynamicInstance dynamicInstance) {
 		val value = _self.expression.value(dynamicInstance, false)
-		var ValueContainer valueContainer
+		var DynamicVariable dynamicVariable
 		if (_self.property instanceof Property) {
-			valueContainer = dynamicInstance.getDynamicProperty(_self.property as Property)
+			dynamicVariable = dynamicInstance.getDynamicVariable(_self.property as Property)
 		} else {
-			valueContainer = dynamicInstance.getDynamicVariable(_self.property)
+			dynamicVariable = dynamicInstance.getDynamicVariable(_self.property)
 		}
 		if (_self.index.empty) {
 			Log.log("Assign (" + _self.property.name + "," + value._str + ")")
-			valueContainer.value = value
+			dynamicVariable.value = value
 		} else if (_self.index.length == 1) {
 			val index = _self.index.get(0).value(dynamicInstance, false)
 			if (index instanceof IntegerValue) {
-				if (valueContainer.value instanceof ArrayValue) {
+				if (dynamicVariable.value instanceof ArrayValue) {
 					Log.log("Assign (" + _self.property.name + "[" + index._str + "]," + value._str + ")")
-					val arrayValue = valueContainer.value as ArrayValue
+					val arrayValue = dynamicVariable.value as ArrayValue
 					// TODO fix that bullshit: we want an EList to have duplicates
 					try {
 						arrayValue.values.set(index.value as int, value)

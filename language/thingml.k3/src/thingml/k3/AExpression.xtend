@@ -358,17 +358,7 @@ class APropertyReference extends AExpression {
 			proxy.expression = _self
 			return proxy
 		} else {
-			if (_self.property instanceof Property) {
-				val dynamicProperty = dynamicInstance.getDynamicProperty(_self.property as Property)
-				return dynamicProperty.value
-			} else {
-				val dynamicVariable = dynamicInstance.getDynamicVariable(_self.property)
-				if (dynamicVariable !== null) {
-					return dynamicVariable.value
-				} else {
-					throw new Exception("Variable '" + _self._str() + "' is undefined")
-				}
-			}
+			return dynamicInstance.getDynamicVariable(_self.property).value
 		}
 	}
 

@@ -12,7 +12,6 @@ import thingML.Context
 import thingML.DynamicCompositeState
 import thingML.DynamicInstance
 import thingML.DynamicPort
-import thingML.DynamicProperty
 import thingML.DynamicVariable
 import thingML.ThingMLFactory
 import thingML.Value
@@ -32,8 +31,8 @@ class ADynamicInstance {
 		Log.log("DynIns: End initialization of dynamic instance '" + instance.name + "'")
 	}
 
-	def public DynamicProperty getDynamicProperty(Property property) {
-		val candidate_entries = _self.dynamicProperties.filter[e|e.property == property].toList
+	def public DynamicVariable _searchDynamicProperties(Property property) {
+		val candidate_entries = _self.dynamicProperties.filter[e|e.variable == property].toList
 		if (candidate_entries.length == 1) {
 			return candidate_entries.get(0)
 		} else {
@@ -77,7 +76,7 @@ class ADynamicInstance {
 		}
 	}
 
-	def public DynamicVariable getDynamicVariable(Variable variable) {
+	def public DynamicVariable _searchContexts(Variable variable) {
 		var context = _self.activeFrame.topContext
 		var DynamicVariable dynamicVariable = null
 		Log.log("Searching '" + variable.name + "' in contexts: ", false, false, 2)
@@ -90,6 +89,14 @@ class ADynamicInstance {
 		}
 		Log.log("Found!", true, true, 2)
 		return dynamicVariable
+	}
+
+	def public DynamicVariable getDynamicVariable(Variable variable) {
+		if (variable instanceof Property) {
+			return _self._searchDynamicProperties(variable)
+		} else {
+			return _self._searchContexts(variable)
+		}
 	}
 
 	def public void enterExecutionFrame(EList<Parameter> parameters, EList<Value> parameterValues) {
