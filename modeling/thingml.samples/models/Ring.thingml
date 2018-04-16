@@ -348,7 +348,7 @@ thing Server includes SynchroMsgs, DataMsgs {
 
 			state Wait {
 				internal not_delivered
-					guard waiting() > 0 and target > 0
+					guard target > 0
 					action do
 						switch_side()
 						deliver()

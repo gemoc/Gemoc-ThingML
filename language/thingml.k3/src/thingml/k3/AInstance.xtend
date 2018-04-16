@@ -29,7 +29,7 @@ import thingml.utils.Log
 import static extension thingml.k3.ADynamicInstance.*
 import static extension thingml.k3.AExpression.value
 import static extension thingml.k3.AState.*
-import static extension thingml.k3.AValue._str
+import static extension thingml.k3.AValue.*
 
 @Aspect(className=Instance)
 class AInstance {
@@ -300,12 +300,18 @@ class AInstance {
 	}
 
 	@Step
-	def public boolean run() {
+	def public boolean run(boolean firstRun) {
 		val behaviour = _self.getBehaviour()
 		var hasMoved = false
 		var reRun = true
+		var evaluateFirstRun = true
 		while (reRun && _self.running) {
-			var hasSpontaneouslyMoved = true
+			var boolean hasSpontaneouslyMoved
+			if (evaluateFirstRun) {
+				hasSpontaneouslyMoved = firstRun
+			} else {
+				hasSpontaneouslyMoved = true
+			}
 			while (hasSpontaneouslyMoved && _self.running) {
 				Log.log(_self.name + ": Run a spontaneous transition")
 				Log.tab
@@ -317,25 +323,26 @@ class AInstance {
 			while (!reRun && _self._hasMessage && _self.running) {
 				val dynamicMessage = _self._nextMessage
 
-				for (var i = 0; i < dynamicMessage.message.parameters.length; i++) {
-					val parameter = dynamicMessage.message.parameters.get(i)
-					val value = dynamicMessage.parameters.get(i)
-					_self.dynamicInstance.addVariable(parameter, value)
-				}
-
 				var params = dynamicMessage.parameters.fold("", [s, v|s + v._str + ", "])
 				if (params.length > 2) {
 					params = params.substring(0, params.length - 2)
 				}
-				Log.log(_self.name + ": Manage message '" + dynamicMessage.message.name + params + "'")
+				Log.log(_self.name + ": Manage message '" + dynamicMessage.message.name + "(" + params + ")'")
 				Log.tab
-				reRun = behaviour.runAEventDrivenTransition(_self.dynamicInstance, dynamicMessage)
-				Log.detab
 
+				for (var i = 0; i < dynamicMessage.message.parameters.length; i++) {
+					val parameter = dynamicMessage.message.parameters.get(i)
+					val value = dynamicMessage.parameters.get(i).copy
+					_self.dynamicInstance.addVariable(parameter, value)
+				}
+				reRun = behaviour.runAEventDrivenTransition(_self.dynamicInstance, dynamicMessage)
 				_self.dynamicInstance.clearContext
+
+				Log.detab
 
 				hasMoved = hasMoved || reRun
 			}
+			evaluateFirstRun = false
 		}
 		return hasMoved
 	}

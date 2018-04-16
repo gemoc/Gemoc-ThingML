@@ -33,7 +33,7 @@ class Log {
 			var msg = message
 			if (!following) {
 				for (var i = 0; i < LOG_TAB; i++) {
-					msg = "   " + msg
+					msg = "    " + msg
 				}
 			}
 			if (end) {

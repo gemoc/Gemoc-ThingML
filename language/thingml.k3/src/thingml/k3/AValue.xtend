@@ -2,6 +2,8 @@ package thingml.k3
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
+import thingML.ArrayProxyValue
+import thingML.ArrayValue
 import thingML.BooleanValue
 import thingML.IntegerValue
 import thingML.ProxyValue
@@ -76,6 +78,10 @@ class AValue {
 	def public Value deepCopy() {
 		throw new Exception("Method 'deepCopy' is not defined for class " + _self.class.simpleName)
 	}
+
+	def public Value copy() {
+		throw new Exception("Method 'copy' is not defined for class " + _self.class.simpleName)
+	}
 }
 
 @Aspect(className=ProxyValue)
@@ -92,62 +98,90 @@ class AProxyValue extends AValue {
 
 	@OverrideAspectMethod
 	def public Value plus(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value minus(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value times(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value modulo(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value lower(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value lowerOrEqual(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value greaterOrEqual(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value greater(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value equal(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value notEqual(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public Value and(Value other) {
-		return _self
+		return _self.copy
 	}
 
 	@OverrideAspectMethod
 	def public String _str() {
 		return "<" + _self.expression._str() + ">"
+	}
+
+	@OverrideAspectMethod
+	def public Value copy() {
+		val value = ThingMLFactory.eINSTANCE.createProxyValue()
+		value.expression = _self.expression
+		return value
+	}
+}
+
+@Aspect(className=ArrayProxyValue)
+class AArrayProxyValue extends AValue {
+	@OverrideAspectMethod
+	def public Value copy() {
+		val value = ThingMLFactory.eINSTANCE.createArrayProxyValue()
+		value.expression = _self.expression
+		value.arrayProxyEntries.addAll(_self.arrayProxyEntries)
+		return value
+	}
+}
+
+@Aspect(className=ArrayValue)
+class AArrayValue extends AValue {
+	@OverrideAspectMethod
+	def public Value copy() {
+		val value = ThingMLFactory.eINSTANCE.createArrayValue()
+		value.values.addAll(_self.values)
+		return value
 	}
 }
 
@@ -196,6 +230,11 @@ class AStringValue extends AValue {
 
 	@OverrideAspectMethod
 	def public Value deepCopy() {
+		return _self.copy
+	}
+
+	@OverrideAspectMethod
+	def public Value copy() {
 		val newValue = ThingMLFactory.eINSTANCE.createStringValue()
 		newValue.value = _self.value
 		return newValue
@@ -364,6 +403,11 @@ class AIntegerValue extends AValue {
 
 	@OverrideAspectMethod
 	def public Value deepCopy() {
+		return _self.copy
+	}
+
+	@OverrideAspectMethod
+	def public Value copy() {
 		val newValue = ThingMLFactory.eINSTANCE.createIntegerValue()
 		newValue.value = _self.value
 		return newValue

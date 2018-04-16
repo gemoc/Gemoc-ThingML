@@ -339,7 +339,7 @@ class AArrayIndex extends AExpression {
 		} else {
 			val array = arrayValue as ArrayValue
 			val index = (indexValue as IntegerValue).value as int
-			return array.values.get(index)
+			return array.values.get(index).copy
 		}
 	}
 
@@ -358,7 +358,7 @@ class APropertyReference extends AExpression {
 			proxy.expression = _self
 			return proxy
 		} else {
-			return dynamicInstance.getDynamicVariable(_self.property).value
+			return dynamicInstance.getDynamicVariable(_self.property).value.copy
 		}
 	}
 
@@ -372,7 +372,7 @@ class APropertyReference extends AExpression {
 class AEventReference extends AExpression {
 	@OverrideAspectMethod
 	def public Value value(DynamicInstance dynamicInstance, boolean createProxies) {
-		return dynamicInstance.getDynamicVariable(_self.parameter).value
+		return dynamicInstance.getDynamicVariable(_self.parameter).value.copy
 	}
 
 	@OverrideAspectMethod

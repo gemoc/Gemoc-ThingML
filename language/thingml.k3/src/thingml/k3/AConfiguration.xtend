@@ -19,6 +19,7 @@ class AConfiguration {
 	@InitializeModel
 	def public void init(EList<String> p) {
 		Log.log("Config: Start initialization")
+		Log.tab
 		for (Instance instance : _self.instances) {
 			instance.init()
 		}
@@ -33,30 +34,35 @@ class AConfiguration {
 				connector.cli.connect(connector)
 			}
 		}
+		Log.detab
 		Log.log("Config: End initialization")
 	}
 
 	@Main
 	def public void main() {
 		Log.log("Config: Start main")
+		Log.tab
 		var running = false
 
 		// first run
 		for (Instance instance : _self.instances) {
 			instance.enterInitialState()
-			running = instance.run() || running
+			running = instance.run(true) || running
 		}
 
+		Log.detab
 		Log.log("Config: End of the first runs")
+		Log.tab
 
 		// other runs
 		while (running) {
 			running = false
 			for (Instance instance : _self.instances) {
-				running = instance.run() || running
+				running = instance.run(false) || running
 			}
 		}
 
+		Log.detab
 		_self.end()
 	}
 
