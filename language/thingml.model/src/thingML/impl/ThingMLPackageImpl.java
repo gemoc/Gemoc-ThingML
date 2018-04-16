@@ -806,7 +806,7 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 		initEReference(getFrame_ParentFrame(), this.getFrame(), this.getFrame_ChildFrame(), "parentFrame", null, 0, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFrame_RootContext(), this.getContext(), null, "rootContext", null, 1, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFrame_TopContext(), this.getContext(), null, "topContext", null, 1, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFrame_ReturnValue(), this.getValue(), null, "returnValue", null, 0, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFrame_ReturnValue(), this.getValue(), null, "returnValue", null, 0, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(contextEClass, Context.class, "Context", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContext_ChildContext(), this.getContext(), this.getContext_ParentContext(), "childContext", null, 0, 1, Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -845,6 +845,46 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	 */
 	protected void createAspectAnnotations() {
 		String source = "aspect";	
+		addAnnotation
+		  (getDynamicInstance_DynamicProperties(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getIntegerValue_Value(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getStringValue_Value(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getArrayValue_Values(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getProxyValue_Expression(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getArrayProxyValue_ArrayProxyEntries(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getArrayProxyEntry_IndexExpression(), 
+		   source, 
+		   new String[] {
+		   });	
+		addAnnotation
+		  (getArrayProxyEntry_Value(), 
+		   source, 
+		   new String[] {
+		   });	
 		addAnnotation
 		  (getDynamicVariable_Value(), 
 		   source, 

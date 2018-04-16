@@ -47,6 +47,8 @@ language XThingML inherits ThingML {
 	with thingml.k3.ACompositeState
 	with thingml.k3.AValue
 	with thingml.k3.AProxyValue
+	with thingml.k3.AArrayProxyValue
+	with thingml.k3.AArrayValue
 	with thingml.k3.AStringValue
 	with thingml.k3.AIntegerValue
 	with thingml.k3.ABooleanValue

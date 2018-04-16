@@ -67,7 +67,7 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	protected Context topContext;
 
 	/**
-	 * The cached value of the '{@link #getReturnValue() <em>Return Value</em>}' reference.
+	 * The cached value of the '{@link #getReturnValue() <em>Return Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReturnValue()
@@ -266,14 +266,6 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	 * @generated
 	 */
 	public Value getReturnValue() {
-		if (returnValue != null && returnValue.eIsProxy()) {
-			InternalEObject oldReturnValue = (InternalEObject)returnValue;
-			returnValue = (Value)eResolveProxy(oldReturnValue);
-			if (returnValue != oldReturnValue) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ThingMLPackage.FRAME__RETURN_VALUE, oldReturnValue, returnValue));
-			}
-		}
 		return returnValue;
 	}
 
@@ -282,8 +274,14 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Value basicGetReturnValue() {
-		return returnValue;
+	public NotificationChain basicSetReturnValue(Value newReturnValue, NotificationChain msgs) {
+		Value oldReturnValue = returnValue;
+		returnValue = newReturnValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ThingMLPackage.FRAME__RETURN_VALUE, oldReturnValue, newReturnValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -292,10 +290,17 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 	 * @generated
 	 */
 	public void setReturnValue(Value newReturnValue) {
-		Value oldReturnValue = returnValue;
-		returnValue = newReturnValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.FRAME__RETURN_VALUE, oldReturnValue, returnValue));
+		if (newReturnValue != returnValue) {
+			NotificationChain msgs = null;
+			if (returnValue != null)
+				msgs = ((InternalEObject)returnValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ThingMLPackage.FRAME__RETURN_VALUE, null, msgs);
+			if (newReturnValue != null)
+				msgs = ((InternalEObject)newReturnValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ThingMLPackage.FRAME__RETURN_VALUE, null, msgs);
+			msgs = basicSetReturnValue(newReturnValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ThingMLPackage.FRAME__RETURN_VALUE, newReturnValue, newReturnValue));
 	}
 
 	/**
@@ -332,6 +337,8 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 				return basicSetParentFrame(null, msgs);
 			case ThingMLPackage.FRAME__ROOT_CONTEXT:
 				return basicSetRootContext(null, msgs);
+			case ThingMLPackage.FRAME__RETURN_VALUE:
+				return basicSetReturnValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -368,8 +375,7 @@ public class FrameImpl extends MinimalEObjectImpl.Container implements Frame {
 				if (resolve) return getTopContext();
 				return basicGetTopContext();
 			case ThingMLPackage.FRAME__RETURN_VALUE:
-				if (resolve) return getReturnValue();
-				return basicGetReturnValue();
+				return getReturnValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

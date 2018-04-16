@@ -13,32 +13,48 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicPorts" upperBound="-1"
         eType="#//DynamicPort" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicProperties" upperBound="-1"
-        eType="#//DynamicVariable" containment="true"/>
+        eType="#//DynamicVariable" containment="true">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayValue" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" unique="false"
-        upperBound="-1" eType="#//Value"/>
+        upperBound="-1" eType="#//Value">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProxyValue" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Expression"/>
+        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Expression">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayProxyValue" eSuperTypes="#//ProxyValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arrayProxyEntries" upperBound="-1"
-        eType="#//ArrayProxyEntry" containment="true"/>
+        eType="#//ArrayProxyEntry" containment="true">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayProxyEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="indexExpression" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Expression"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value"/>
+        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Expression">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicCompositeState">
     <eStructuralFeatures xsi:type="ecore:EReference" name="compositeState" lowerBound="1"
@@ -55,7 +71,8 @@
         eType="#//Context" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="topContext" lowerBound="1"
         eType="#//Context"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue" eType="#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue" eType="#//Value"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Context">
     <eStructuralFeatures xsi:type="ecore:EReference" name="childContext" eType="#//Context"

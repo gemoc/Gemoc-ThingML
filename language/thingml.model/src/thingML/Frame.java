@@ -134,26 +134,26 @@ public interface Frame extends EObject {
 	void setTopContext(Context value);
 
 	/**
-	 * Returns the value of the '<em><b>Return Value</b></em>' reference.
+	 * Returns the value of the '<em><b>Return Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Return Value</em>' reference isn't clear,
+	 * If the meaning of the '<em>Return Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Return Value</em>' reference.
+	 * @return the value of the '<em>Return Value</em>' containment reference.
 	 * @see #setReturnValue(Value)
 	 * @see thingML.ThingMLPackage#getFrame_ReturnValue()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Value getReturnValue();
 
 	/**
-	 * Sets the value of the '{@link thingML.Frame#getReturnValue <em>Return Value</em>}' reference.
+	 * Sets the value of the '{@link thingML.Frame#getReturnValue <em>Return Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Return Value</em>' reference.
+	 * @param value the new value of the '<em>Return Value</em>' containment reference.
 	 * @see #getReturnValue()
 	 * @generated
 	 */
