@@ -1,109 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="thingML" nsURI="xthingml" nsPrefix="thingML">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="thingML" nsURI="xthingml" nsPrefix="thingML">
   <eClassifiers xsi:type="ecore:EClass" name="DynamicInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicCompositeStates"
-        upperBound="-1" eType="#//DynamicCompositeState" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="executionFrame" lowerBound="1"
-        eType="#//Frame" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Instance"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="activeFrame" lowerBound="1"
-        eType="#//Frame"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicPorts" upperBound="-1"
-        eType="#//DynamicPort" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicProperties" upperBound="-1"
-        eType="#//DynamicVariable" containment="true">
-      <eAnnotations source="aspect"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicCompositeStates" upperBound="-1" eType="//DynamicCompositeState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executionFrame" lowerBound="1" eType="//Frame" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//Instance"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activeFrame" lowerBound="1" eType="//Frame"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicPorts" upperBound="-1" eType="//DynamicPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicProperties" upperBound="-1" eType="//DynamicVariable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
-      <eAnnotations source="aspect"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NullValue" eSuperTypes="//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="aspect"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayValue" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" unique="false"
-        upperBound="-1" eType="#//Value">
-      <eAnnotations source="aspect"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" unique="false" upperBound="-1" eType="//Value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProxyValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//Expression"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProxyValue" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Expression">
-      <eAnnotations source="aspect"/>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayProxyValue" eSuperTypes="#//ProxyValue">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arrayProxyEntries" upperBound="-1"
-        eType="#//ArrayProxyEntry" containment="true">
-      <eAnnotations source="aspect"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayProxyValue" eSuperTypes="//ProxyValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arrayProxyEntries" upperBound="-1" eType="//ArrayProxyEntry" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayProxyEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="indexExpression" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Expression">
-      <eAnnotations source="aspect"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indexExpression" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//Expression"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value">
-      <eAnnotations source="aspect"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Value"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicCompositeState">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeState" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//CompositeState"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeState" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//CompositeState"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//State"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Frame">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="childFrame" eType="#//Frame"
-        containment="true" eOpposite="#//Frame/parentFrame"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFrame" eType="#//Frame"
-        eOpposite="#//Frame/childFrame"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rootContext" lowerBound="1"
-        eType="#//Context" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="topContext" lowerBound="1"
-        eType="#//Context"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue" eType="#//Value"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childFrame" eType="//Frame" containment="true" eOpposite="//Frame/parentFrame"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFrame" eType="//Frame" eOpposite="//Frame/childFrame"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootContext" lowerBound="1" eType="//Context" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topContext" lowerBound="1" eType="//Context"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue" eType="//Value" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Context">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="childContext" eType="#//Context"
-        containment="true" eOpposite="#//Context/parentContext"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentContext" eType="#//Context"
-        eOpposite="#//Context/childContext"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicVariables" upperBound="-1"
-        eType="#//DynamicVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childContext" eType="//Context" containment="true" eOpposite="//Context/parentContext"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentContext" eType="//Context" eOpposite="//Context/childContext"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicVariables" upperBound="-1" eType="//DynamicVariable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicVariable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Variable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value"
-        containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//Variable"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//Value" containment="true">
       <eAnnotations source="aspect"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="//Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicPort">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="port" lowerBound="1" eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Port"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="receivedMessages" upperBound="-1"
-        eType="#//DynamicMessage" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connectedPorts" upperBound="-1"
-        eType="#//DynamicPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//Port"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receivedMessages" upperBound="-1" eType="//DynamicMessage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectedPorts" upperBound="-1" eType="//DynamicPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicMessage">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="message" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/thingml/model/generated/ThingML.ecore#//Message"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//Value" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" lowerBound="1">
+      <eType xsi:type="ecore:EClass" href="../../../plugin/thingml/model/generated/ThingML.ecore#//Message"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//Value" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

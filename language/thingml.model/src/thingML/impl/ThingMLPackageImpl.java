@@ -846,46 +846,6 @@ public class ThingMLPackageImpl extends EPackageImpl implements ThingMLPackage {
 	protected void createAspectAnnotations() {
 		String source = "aspect";	
 		addAnnotation
-		  (getDynamicInstance_DynamicProperties(), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (getIntegerValue_Value(), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (getStringValue_Value(), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (getArrayValue_Values(), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (getProxyValue_Expression(), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (getArrayProxyValue_ArrayProxyEntries(), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (getArrayProxyEntry_IndexExpression(), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
-		  (getArrayProxyEntry_Value(), 
-		   source, 
-		   new String[] {
-		   });	
-		addAnnotation
 		  (getDynamicVariable_Value(), 
 		   source, 
 		   new String[] {

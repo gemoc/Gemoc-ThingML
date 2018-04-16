@@ -152,7 +152,9 @@ class AInstance {
 
 	def public void init() {
 		_self.running = true
-		_self.dynamicInstance = ThingMLFactory.eINSTANCE.createDynamicInstance()
+		val dynInstance = ThingMLFactory.eINSTANCE.createDynamicInstance()
+		_self.eResource.contents.add(dynInstance) // for GEMOC to be able to detect dynamic attributes
+		_self.dynamicInstance = dynInstance
 		_self.dynamicInstance.init(_self)
 		_self.initProperties(_self.type)
 		_self.initPropertyAssigns(_self.type)
